@@ -3,23 +3,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#05070c">
+<meta name="theme-color" content="#eceef4">
 <title>전화 중국어</title>
 <style>
 :root{
-  --bg:#05070c; --ink:#f5f5f7; --ink2:rgba(235,235,245,.62); --ink3:rgba(235,235,245,.34);
-  --red:#ff453a; --green:#30d158; --amber:#ffd60a; --blue:#64a6ff; --glass:.11; --edge:.16;
+  --bg:#eceef4; --ink:#12131a; --ink2:rgba(60,60,67,.68); --ink3:rgba(60,60,67,.48);
+  --red:#e5322a; --green:#1f8f3d; --amber:#8a5200; --blue:#0a58c8;
+  --line:rgba(16,18,28,.09); --glass:.62; --edge:.72;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 html,body{margin:0;padding:0;min-height:100%;}
-body{background:#05070c;color:var(--ink);
+body{background:var(--bg);color:var(--ink);
   font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Apple SD Gothic Neo","Pretendard",system-ui,sans-serif;
   -webkit-font-smoothing:antialiased;overflow-x:hidden;}
 .aurora{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0;}
-.aurora i{position:absolute;border-radius:50%;filter:blur(70px);display:block;}
-.b1{width:300px;height:300px;background:#c2261f;top:-70px;left:-70px;opacity:.5;}
-.b2{width:260px;height:260px;background:#1d4ed8;top:38%;right:-90px;opacity:.4;}
-.b3{width:300px;height:300px;background:#a16207;bottom:-90px;left:10%;opacity:.35;}
+.aurora i{position:absolute;border-radius:50%;filter:blur(64px);display:block;}
+.b1{width:330px;height:330px;background:#ff9a86;top:-85px;left:-75px;opacity:.6;}
+.b2{width:290px;height:290px;background:#93bcff;top:36%;right:-100px;opacity:.55;}
+.b3{width:330px;height:330px;background:#ffd694;bottom:-100px;left:6%;opacity:.55;}
 
 .screen{position:relative;z-index:1;max-width:520px;margin:0 auto;
   padding:calc(22px + env(safe-area-inset-top)) 18px calc(116px + env(safe-area-inset-bottom));}
@@ -32,12 +33,13 @@ body{background:#05070c;color:var(--ink);
 .title{margin:0;font-size:32px;line-height:1.1;font-weight:700;letter-spacing:-.022em;}
 .sub{margin:4px 0 0;font-size:14px;color:var(--ink2);line-height:1.45;}
 .ok{color:var(--green);}
-.foot{font-size:12px;color:var(--ink3);line-height:1.55;margin-top:12px;}
+.foot{font-size:12px;color:rgba(60,60,67,.62);line-height:1.55;margin-top:12px;}
 
 .glass{background:rgba(255,255,255,var(--glass));
-  -webkit-backdrop-filter:blur(34px) saturate(180%);backdrop-filter:blur(34px) saturate(180%);
+  -webkit-backdrop-filter:blur(30px) saturate(190%);backdrop-filter:blur(30px) saturate(190%);
   border:.5px solid rgba(255,255,255,var(--edge));
-  box-shadow:inset 0 .5px 0 rgba(255,255,255,.28),0 14px 40px rgba(0,0,0,.34);}
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 0 0 .5px rgba(16,18,28,.05),
+    0 10px 28px rgba(16,18,28,.09);}
 .card{border-radius:26px;padding:20px;margin-bottom:14px;}
 .center{text-align:center;}
 
@@ -45,11 +47,11 @@ body{background:#05070c;color:var(--ink);
 .hero-n{margin:0;font-size:44px;font-weight:700;letter-spacing:-.03em;line-height:1;}
 .hero-d{font-size:20px;color:var(--ink3);font-weight:600;}
 svg.ring{transform:rotate(-90deg);}
-.ring-bg{stroke:rgba(255,255,255,.12);}
+.ring-bg{stroke:rgba(16,18,28,.1);}
 .ring-fg{stroke:var(--red);transition:stroke-dashoffset .5s cubic-bezier(.4,0,.2,1);}
 .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;}
 .chip{font-size:13px;padding:6px 12px;border-radius:999px;
-  background:rgba(255,255,255,.09);border:.5px solid rgba(255,255,255,.14);}
+  background:rgba(255,255,255,.6);border:.5px solid var(--line);}
 
 .action{display:flex;align-items:center;justify-content:space-between;gap:14px;width:100%;
   text-align:left;cursor:pointer;color:inherit;font:inherit;transition:transform .18s cubic-bezier(.4,0,.2,1);}
@@ -63,24 +65,26 @@ svg.ring{transform:rotate(-90deg);}
   transform:rotate(45deg);flex:none;}
 .tick{width:20px;height:20px;border-radius:50%;background:var(--green);flex:none;position:relative;}
 .tick::after{content:"";position:absolute;top:5px;left:6px;width:5px;height:9px;
-  border-right:2px solid #05070c;border-bottom:2px solid #05070c;transform:rotate(42deg);}
+  border-right:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(42deg);}
 
 .sessions{display:flex;flex-direction:column;gap:10px;margin-top:18px;}
 .row{display:flex;align-items:center;gap:14px;padding:15px 18px;border-radius:20px;width:100%;
   text-align:left;color:inherit;font:inherit;cursor:pointer;}
-.row-n{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.1);
+.row-n{width:28px;height:28px;border-radius:50%;background:rgba(16,18,28,.06);
   display:grid;place-items:center;font-size:13px;font-weight:600;flex:none;}
 .row-body{flex:1;display:flex;flex-direction:column;gap:2px;min-width:0;}
 .row-t{font-size:15px;font-weight:500;font-family:"PingFang SC","Noto Sans SC",sans-serif;}
 
 .tabbar{position:fixed;z-index:4;left:50%;transform:translateX(-50%);
-  bottom:calc(18px + env(safe-area-inset-bottom));display:flex;gap:4px;padding:6px;border-radius:999px;}
+  bottom:calc(18px + env(safe-area-inset-bottom));display:flex;gap:4px;padding:6px;
+  border-radius:999px;width:max-content;}
 .tab{border:0;background:transparent;color:var(--ink2);font:inherit;font-size:14px;
-  padding:9px 20px;border-radius:999px;cursor:pointer;transition:all .2s;}
-.tab.sel{background:rgba(255,255,255,.16);color:var(--ink);font-weight:600;}
+  padding:9px 20px;border-radius:999px;cursor:pointer;transition:all .2s;
+  white-space:nowrap;flex:none;}
+.tab.sel{background:#fff;color:var(--ink);font-weight:600;box-shadow:0 1px 3px rgba(16,18,28,.14);}
 
 .dhead{display:flex;align-items:center;gap:12px;padding:6px 4px 20px;}
-.bar{flex:1;height:4px;border-radius:999px;background:rgba(255,255,255,.14);overflow:hidden;}
+.bar{flex:1;height:4px;border-radius:999px;background:rgba(16,18,28,.1);overflow:hidden;}
 .bar-fill{height:100%;background:var(--red);border-radius:999px;transition:width .35s cubic-bezier(.4,0,.2,1);}
 .count{font-size:13px;color:var(--ink2);font-variant-numeric:tabular-nums;}
 .ghost{border:0;background:transparent;color:var(--ink2);font:inherit;font-size:15px;cursor:pointer;padding:4px 2px;}
@@ -88,7 +92,7 @@ svg.ring{transform:rotate(-90deg);}
 
 .prompt{padding:24px 20px;text-align:center;}
 .wordchip{display:inline-block;margin:12px 0 0;padding:6px 13px;border-radius:999px;font-size:13px;
-  color:var(--ink2);background:rgba(255,255,255,.08);border:.5px solid rgba(255,255,255,.13);}
+  color:var(--ink2);background:rgba(255,255,255,.62);border:.5px solid var(--line);}
 .wc-h{font-family:"PingFang SC","Noto Sans SC",sans-serif;font-size:15px;color:var(--ink);font-weight:600;}
 .hanzi{margin:16px 0 8px;font-size:36px;font-weight:600;letter-spacing:.04em;line-height:1.3;
   font-family:"PingFang SC","Hiragino Sans GB","Noto Sans SC",sans-serif;}
@@ -96,32 +100,32 @@ svg.ring{transform:rotate(-90deg);}
 .hanzi.tiny{font-size:17px;margin:0;}
 .pinyin{margin:0 0 6px;font-size:15px;color:var(--ink2);letter-spacing:.02em;}
 .pinyin.tiny{font-size:13px;margin:2px 0 0;}
-.t1{color:#ff6b6b;}.t2{color:#ffd60a;}.t3{color:#30d158;}.t4{color:#64a6ff;}.t5{color:rgba(235,235,245,.45);}
-.hintline{margin:16px 0 0;font-size:14px;color:var(--amber);line-height:1.5;}
-.reveal{margin-top:14px;padding:14px;border-radius:18px;background:rgba(255,255,255,.07);
-  border:.5px solid rgba(255,255,255,.12);}
+.t1{color:#c8102e;}.t2{color:#8a6100;}.t3{color:#1a7f37;}.t4{color:#0a58c8;}.t5{color:rgba(60,60,67,.5);}
+.hintline{margin:16px 0 0;font-size:14px;color:var(--amber);line-height:1.5;font-weight:500;}
+.reveal{margin-top:14px;padding:14px;border-radius:18px;background:rgba(255,255,255,.62);
+  border:.5px solid var(--line);}
 
 .btnrow{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;}
-.pill{margin-top:16px;border:.5px solid rgba(255,255,255,.16);background:rgba(255,255,255,.09);
+.pill{margin-top:16px;border:.5px solid var(--line);background:rgba(255,255,255,.66);
   color:var(--ink);font:inherit;font-size:14px;padding:9px 18px;border-radius:999px;cursor:pointer;}
-.pill.solid{background:var(--red);border-color:transparent;font-weight:600;}
+.pill.solid{background:var(--red);border-color:transparent;color:#fff;font-weight:600;}
 .pill.danger{color:var(--red);}
 .wide-pill{display:block;width:100%;}
 
 .scores{display:flex;gap:10px;justify-content:center;margin:4px 0 2px;flex-wrap:wrap;}
-.sc{flex:1;min-width:62px;padding:12px 4px;border-radius:18px;background:rgba(255,255,255,.07);
-  border:.5px solid rgba(255,255,255,.12);}
+.sc{flex:1;min-width:62px;padding:12px 4px;border-radius:18px;background:rgba(255,255,255,.6);
+  border:.5px solid var(--line);}
 .sc b{display:block;font-size:22px;font-weight:700;letter-spacing:-.02em;line-height:1.1;}
 .sc span{display:block;font-size:11px;color:var(--ink2);margin-top:4px;}
 .sylrow{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin:18px 0 4px;}
 .syl{padding:9px 4px 7px;border-radius:14px;min-width:46px;
-  border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);}
+  border:1px solid var(--line);background:rgba(255,255,255,.55);}
 .syl .h{display:block;font-size:21px;font-weight:600;line-height:1.2;
   font-family:"PingFang SC","Noto Sans SC",sans-serif;}
 .syl .p{display:block;font-size:10px;color:var(--ink2);margin-top:3px;letter-spacing:.01em;}
-.syl.good{border-color:rgba(48,209,88,.45);background:rgba(48,209,88,.13);}
-.syl.mid{border-color:rgba(255,214,10,.45);background:rgba(255,214,10,.13);}
-.syl.bad{border-color:rgba(255,69,58,.5);background:rgba(255,69,58,.15);}
+.syl.good{border-color:rgba(31,143,61,.45);background:rgba(52,199,89,.17);}
+.syl.mid{border-color:rgba(160,110,0,.4);background:rgba(255,204,0,.22);}
+.syl.bad{border-color:rgba(229,50,42,.42);background:rgba(255,69,58,.14);}
 .weak{margin:14px 0 0;font-size:14px;color:var(--amber);line-height:1.55;}
 
 .verdict{text-align:center;padding:20px;}
@@ -131,24 +135,29 @@ svg.ring{transform:rotate(-90deg);}
 .fail .verdict-t{color:var(--red);}
 .heard{margin:8px 0 12px;font-size:14px;color:var(--ink2);}
 .tip{margin:12px 0 0;font-size:14px;color:var(--amber);line-height:1.5;}
-.err{margin:10px 4px;font-size:13px;color:var(--amber);text-align:center;line-height:1.5;}
+.err{margin:10px 4px;font-size:13px;color:#9a3d00;text-align:center;line-height:1.5;font-weight:500;}
 
 .controls{margin-top:22px;}
 .mic{width:100%;padding:19px;border-radius:22px;border:0;cursor:pointer;background:var(--red);
   color:#fff;font:inherit;font-size:17px;font-weight:600;letter-spacing:-.01em;
-  transition:transform .18s,background .2s;}
+  transition:transform .15s,background .2s,box-shadow .2s;
+  touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;}
 .mic:active{transform:scale(.98);}
-.mic.on{background:#8e1710;}
-.mic.next{background:rgba(255,255,255,.16);}
+.mic.hold{background:#b3231c;transform:scale(.985);
+  box-shadow:0 0 0 7px rgba(229,50,42,.18),0 0 0 15px rgba(229,50,42,.08);}
+.mic.next{background:rgba(255,255,255,.78);color:var(--ink);
+  border:.5px solid var(--line);box-shadow:0 2px 8px rgba(16,18,28,.08);}
 .mic[disabled]{opacity:.55;}
+.holdhint{margin:11px 0 0;text-align:center;font-size:12px;color:var(--ink3);line-height:1.5;}
+.hsec{font-variant-numeric:tabular-nums;}
 .pulse{display:inline-block;width:9px;height:9px;border-radius:50%;background:#fff;
   margin-right:9px;vertical-align:1px;animation:pl 1s ease-in-out infinite;}
 @keyframes pl{0%,100%{opacity:.25;transform:scale(.8);}50%{opacity:1;transform:scale(1.15);}}
 .type-row{display:flex;gap:8px;margin-top:12px;}
 .input{flex:1;padding:14px 16px;border-radius:16px;font:inherit;font-size:16px;
-  background:rgba(255,255,255,.08);border:.5px solid rgba(255,255,255,.16);color:var(--ink);}
+  background:rgba(255,255,255,.8);border:.5px solid var(--line);color:var(--ink);}
 .input.full{width:100%;margin-top:10px;}
-.input::placeholder{color:var(--ink3);}
+.input::placeholder{color:rgba(60,60,67,.42);}
 
 .slider{width:100%;margin-top:16px;accent-color:var(--red);}
 .ends{display:flex;justify-content:space-between;margin-top:4px;}
@@ -160,23 +169,24 @@ svg.ring{transform:rotate(-90deg);}
   transition:transform .2s cubic-bezier(.4,0,.2,1);display:block;}
 .toggle.on i{transform:translateX(21px);}
 
-.sheetwrap{position:fixed;inset:0;z-index:6;background:rgba(0,0,0,.5);display:flex;align-items:flex-end;}
+.sheetwrap{position:fixed;inset:0;z-index:6;background:rgba(16,18,28,.3);display:flex;align-items:flex-end;}
 .sheet{width:100%;max-width:520px;margin:0 auto;border-radius:28px 28px 0 0;
   padding:10px 18px calc(32px + env(safe-area-inset-bottom));max-height:80vh;overflow-y:auto;}
-.grabber{width:38px;height:5px;border-radius:999px;background:rgba(255,255,255,.28);margin:0 auto 16px;}
-.seg{display:flex;gap:4px;padding:4px;border-radius:14px;background:rgba(255,255,255,.08);margin-bottom:18px;}
+.grabber{width:38px;height:5px;border-radius:999px;background:rgba(16,18,28,.2);margin:0 auto 16px;}
+.seg{display:flex;gap:4px;padding:4px;border-radius:14px;background:rgba(16,18,28,.06);margin-bottom:18px;}
 .seg-b{flex:1;border:0;background:transparent;color:var(--ink2);font:inherit;font-size:14px;
   padding:9px;border-radius:11px;cursor:pointer;}
-.seg-b.on{background:rgba(255,255,255,.18);color:var(--ink);font-weight:600;}
+.seg-b.on{background:#fff;color:var(--ink);font-weight:600;box-shadow:0 1px 3px rgba(16,18,28,.14);}
 .weeks{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;}
-.wk{aspect-ratio:1;border:.5px solid rgba(255,255,255,.14);background:rgba(255,255,255,.07);
+.wk{aspect-ratio:1;border:.5px solid var(--line);background:rgba(255,255,255,.6);
   color:var(--ink);font:inherit;font-size:15px;border-radius:14px;cursor:pointer;}
-.wk.on{background:var(--red);border-color:transparent;font-weight:700;}
+.wk.on{background:var(--red);border-color:transparent;color:#fff;font-weight:700;}
 
 .spin{display:inline-block;width:15px;height:15px;border-radius:50%;vertical-align:-2px;
-  border:2px solid rgba(255,255,255,.25);border-top-color:#fff;animation:sp .7s linear infinite;margin-right:7px;}
+  border:2px solid rgba(16,18,28,.18);border-top-color:var(--ink);animation:sp .7s linear infinite;margin-right:7px;}
+.mic .spin{border-color:rgba(255,255,255,.42);border-top-color:#fff;}
 @keyframes sp{to{transform:rotate(360deg);}}
-button:focus-visible,input:focus-visible{outline:2px solid #6ea8ff;outline-offset:3px;}
+button:focus-visible,input:focus-visible{outline:2px solid var(--blue);outline-offset:3px;}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;}}
 </style>
 </head>
@@ -256,7 +266,7 @@ function speak(text, rate) {
 
 /* ===================== Azure 음성 ===================== */
 var SDK = window.SpeechSDK;
-var micOn = false, micErr = "";
+var micErr = "";
 
 function azureReady() { return !!(SDK && P.azKey && P.azRegion); }
 
@@ -278,68 +288,120 @@ function makeRecognizer(referenceText) {
   return rec;
 }
 
-function listen(referenceText) {
+/* --- 누르고 있는 동안만 녹음 (왓츠앱 음성메모 방식) --- */
+var HOLD = null;
+var micState = "idle";          /* idle | hold | busy */
+var holdTicker = null, holdT0 = 0;
+var MIN_HOLD = 400;             /* 이보다 짧게 누르면 무시 */
+
+function parseResult(result, referenceText) {
+  var out = { text: result.text || "", pa: null };
+  if (referenceText) {
+    try {
+      var pr = SDK.PronunciationAssessmentResult.fromResult(result);
+      var raw = null;
+      try {
+        raw = JSON.parse(result.properties.getProperty(
+          SDK.PropertyId.SpeechServiceResponse_JsonResult));
+      } catch (e) {}
+      out.pa = {
+        accuracy: Math.round(pr.accuracyScore || 0),
+        fluency: Math.round(pr.fluencyScore || 0),
+        completeness: Math.round(pr.completenessScore || 0),
+        pron: Math.round(pr.pronunciationScore || 0),
+        prosody: (pr.prosodyScore != null && !isNaN(pr.prosodyScore)) ? Math.round(pr.prosodyScore) : null,
+        syllables: extractSyllables(raw)
+      };
+    } catch (e) { /* 채점만 실패 — 전사는 살린다 */ }
+  }
+  return out;
+}
+
+function azErr(d) {
+  if (/401|403|Forbidden|Unauthorized|subscription/i.test(d)) return "Azure 키 또는 지역이 올바르지 않습니다.";
+  if (/permission|NotAllowed|denied|NotFound/i.test(d)) return "마이크 권한이 거부되었습니다. 사파리 설정에서 마이크를 허용하세요.";
+  if (/1006|connection|websocket|network/i.test(d)) return "Azure에 연결하지 못했습니다. 키와 지역을 확인하세요.";
+  return d ? "Azure 오류 · " + String(d).slice(0, 140) : "인식이 중단되었습니다.";
+}
+
+function holdBegin(referenceText) {
   return new Promise(function (resolve, reject) {
     if (!SDK) return reject({ msg: "음성 라이브러리를 불러오지 못했습니다. 새로고침 해보세요." });
     if (!P.azKey || !P.azRegion) return reject({ msg: "설정에서 Azure 키와 지역을 넣어주세요." });
+
     var rec;
     try { rec = makeRecognizer(referenceText); }
-    catch (e) { return reject({ msg: "마이크를 시작하지 못했습니다. " + (e && e.message ? e.message : "") }); }
+    catch (e) { return reject({ msg: "마이크를 시작하지 못했습니다." }); }
 
-    var done = false;
-    function finish(fn, arg) {
-      if (done) return;
-      done = true;
+    var st = { rec: rec, ref: referenceText, got: [], settled: false,
+               ready: false, wantStop: false, timer: null, resolve: resolve, reject: reject };
+    HOLD = st;
+
+    st.settle = function (fn, arg) {
+      if (st.settled) return;
+      st.settled = true;
+      clearTimeout(st.timer);
       try { rec.close(); } catch (e) {}
+      if (HOLD === st) HOLD = null;
       fn(arg);
-    }
-
-    rec.canceled = function (_s, e) {
-      var d = "";
-      try { d = e.errorDetails || ""; } catch (x) {}
-      var msg = "인식이 중단되었습니다.";
-      if (/401|403|Forbidden|Unauthorized|subscription/i.test(d)) msg = "Azure 키 또는 지역이 올바르지 않습니다.";
-      else if (/permission|NotAllowed|denied|NotFoundError/i.test(d)) msg = "마이크 권한이 거부되었습니다. 사파리 주소창의 ぬ 아이콘에서 마이크를 허용하세요.";
-      else if (/1006|connection|websocket|network/i.test(d)) msg = "Azure에 연결하지 못했습니다. 키와 지역을 확인하세요.";
-      else if (d) msg = "Azure 오류 · " + d.slice(0, 140);
-      finish(reject, { msg: msg });
     };
 
-    rec.recognizeOnceAsync(function (result) {
+    rec.recognized = function (_s, e) {
       try {
-        if (result.reason === SDK.ResultReason.NoMatch)
-          return finish(reject, { msg: "소리를 알아듣지 못했습니다. 조금 더 크게 말해보세요." });
-        if (result.reason !== SDK.ResultReason.RecognizedSpeech)
-          return finish(reject, { msg: "인식에 실패했습니다. 다시 시도하세요." });
+        if (e.result && e.result.reason === SDK.ResultReason.RecognizedSpeech && e.result.text)
+          st.got.push(parseResult(e.result, referenceText));
+      } catch (x) {}
+    };
+    rec.canceled = function (_s, e) {
+      var d = ""; try { d = e.errorDetails || ""; } catch (x) {}
+      st.settle(st.reject, { msg: azErr(d) });
+    };
+    rec.sessionStopped = function () { holdFinish(st); };
 
-        var out = { text: result.text || "", pa: null };
-        if (referenceText) {
-          try {
-            var pr = SDK.PronunciationAssessmentResult.fromResult(result);
-            var raw = null;
-            try {
-              raw = JSON.parse(result.properties.getProperty(
-                SDK.PropertyId.SpeechServiceResponse_JsonResult));
-            } catch (e) {}
-            out.pa = {
-              accuracy: Math.round(pr.accuracyScore || 0),
-              fluency: Math.round(pr.fluencyScore || 0),
-              completeness: Math.round(pr.completenessScore || 0),
-              pron: Math.round(pr.pronunciationScore || 0),
-              prosody: (pr.prosodyScore != null && !isNaN(pr.prosodyScore)) ? Math.round(pr.prosodyScore) : null,
-              syllables: extractSyllables(raw)
-            };
-          } catch (e) { /* 채점만 실패 — 전사는 살린다 */ }
-        }
-        finish(resolve, out);
-      } catch (e) {
-        finish(reject, { msg: "결과를 읽지 못했습니다." });
-      }
+    rec.startContinuousRecognitionAsync(function () {
+      st.ready = true;
+      if (st.wantStop) holdEnd();
     }, function () {
-      finish(reject, { msg: "마이크를 열지 못했습니다. 권한을 확인하세요." });
+      st.settle(st.reject, { msg: "마이크를 열지 못했습니다. 권한을 확인하세요." });
     });
   });
 }
+
+function holdFinish(st) {
+  if (!st || st.settled) return;
+  if (!st.got.length)
+    return st.settle(st.reject, { msg: "소리를 알아듣지 못했습니다. 버튼을 누른 채로 또박또박 말해보세요." });
+  var text = st.got.map(function (x) { return x.text; }).join("");
+  var pa = null;
+  for (var i = 0; i < st.got.length; i++) if (st.got[i].pa) { pa = st.got[i].pa; break; }
+  st.settle(st.resolve, { text: text, pa: pa });
+}
+
+function holdEnd() {
+  var st = HOLD;
+  if (!st || st.settled) return;
+  if (!st.ready) { st.wantStop = true; return; }
+  try {
+    st.rec.stopContinuousRecognitionAsync(function () {
+      st.timer = setTimeout(function () { holdFinish(st); }, 700);
+    }, function () { holdFinish(st); });
+  } catch (e) { holdFinish(st); }
+}
+
+function holdAbort(msg) {
+  var st = HOLD;
+  if (!st || st.settled) return;
+  st.settle(st.reject, { msg: msg || "" });
+}
+
+function startTicker() {
+  stopTicker();
+  holdTicker = setInterval(function () {
+    var el = document.getElementById("hsec");
+    if (el) el.textContent = ((Date.now() - holdT0) / 1000).toFixed(1) + "초";
+  }, 100);
+}
+function stopTicker() { if (holdTicker) clearInterval(holdTicker); holdTicker = null; }
 
 function extractSyllables(raw) {
   try {
@@ -467,21 +529,43 @@ function finishSession() {
   S.sess = null; S.tab = "home"; render();
 }
 
-async function warmupListen() {
+function applyWarmup(r) {
   var s = S.sess, it = s.items[s.idx];
-  micOn = true; micErr = ""; render();
+  s.said = r.text; s.pa = r.pa;
+  var sc = r.pa ? r.pa.pron : null;
+  s.result = sc == null ? "close" : sc >= 80 ? "pass" : sc >= 60 ? "close" : "fail";
+  if (s.result === "pass") delete P.missed[it.tag];
+  else P.missed[it.tag] = { zh: it.zh, pinyin: it.pinyin, ko: it.ko, tag: it.tag };
+  persist(); render();
+}
+
+async function micPress(mode) {
+  if (micState !== "idle" || !S.sess) return;
+  var ref = mode === "warmup" ? S.sess.items[S.sess.idx].zh : null;
+  micState = "hold"; micErr = ""; holdT0 = Date.now();
+  render(); startTicker();
   try {
-    var r = await listen(it.zh);
-    micOn = false;
-    s.said = r.text; s.pa = r.pa;
-    var sc = r.pa ? r.pa.pron : null;
-    s.result = sc == null ? "close" : sc >= 80 ? "pass" : sc >= 60 ? "close" : "fail";
-    if (s.result === "pass") delete P.missed[it.tag];
-    else P.missed[it.tag] = { zh: it.zh, pinyin: it.pinyin, ko: it.ko, tag: it.tag };
-    persist(); render();
+    var r = await holdBegin(ref);
+    stopTicker(); micState = "idle";
+    if (mode === "warmup") applyWarmup(r);
+    else if (!r.text) { micErr = "아무 말도 인식되지 않았습니다."; render(); }
+    else { S.sess.turn++; talkStep(r.text); }
   } catch (e) {
-    micOn = false; micErr = e.msg || "인식에 실패했습니다."; render();
+    stopTicker(); micState = "idle";
+    micErr = (e && e.msg) || "인식에 실패했습니다.";
+    render();
   }
+}
+
+function micRelease() {
+  if (micState !== "hold") return;
+  stopTicker();
+  if (Date.now() - holdT0 < MIN_HOLD) {
+    holdAbort("조금 더 길게 누른 채로 말해주세요.");
+    return;
+  }
+  micState = "busy"; render();
+  holdEnd();
 }
 
 function gradeTyped(text) {
@@ -553,18 +637,6 @@ async function talkStep(userSaid) {
   }
 }
 
-async function talkListen() {
-  micOn = true; micErr = ""; render();
-  try {
-    var r = await listen(null);
-    micOn = false;
-    if (!r.text) { micErr = "아무 말도 인식되지 않았습니다."; return render(); }
-    S.sess.turn++; talkStep(r.text);
-  } catch (e) {
-    micOn = false; micErr = e.msg || "인식에 실패했습니다."; render();
-  }
-}
-
 function proceedTalk() {
   var s = S.sess;
   if (s.turn >= 8) return finishSession();
@@ -573,10 +645,22 @@ function proceedTalk() {
 }
 
 /* ===================== 화면 ===================== */
-function micBlock(label, action) {
+function micBlock(label, mode) {
+  var body, hint;
+  if (micState === "hold") {
+    body = '<span class="pulse"></span><span id="hsec" class="hsec">0.0초</span>';
+    hint = "손을 떼면 " + (mode === "warmup" ? "채점합니다" : "보냅니다");
+  } else if (micState === "busy") {
+    body = '<span class="spin"></span>' + (mode === "warmup" ? "채점 중" : "알아듣는 중");
+    hint = "";
+  } else {
+    body = esc(label);
+    hint = "버튼을 누른 채로 말하세요";
+  }
   var h = '<div class="controls">'
-    + '<button class="mic ' + (micOn ? "on" : "") + '" data-a="' + action + '"' + (micOn ? " disabled" : "") + ">"
-    + (micOn ? '<span class="pulse"></span>듣는 중…' : esc(label)) + "</button>";
+    + '<button class="mic ' + (micState === "hold" ? "hold" : "") + '" data-hold="' + mode + '"'
+    + (micState === "busy" ? " disabled" : "") + ">" + body + "</button>";
+  if (hint) h += '<p class="holdhint">' + hint + "</p>";
   if (micErr) h += '<p class="err">' + esc(micErr) + "</p>";
   h += '<div class="type-row"><input class="input" id="typed" placeholder="직접 입력" aria-label="답 입력">'
     + '<button class="pill solid" data-a="typed">확인</button></div></div>';
@@ -647,7 +731,7 @@ function warmupHTML() {
       + '<div class="controls"><button class="mic next" data-a="nextw">'
       + (s.idx + 1 < s.items.length ? "다음" : (P.gmKey ? "대화 시작" : "회차 마치기")) + "</button></div>";
   } else {
-    h += micBlock("눌러서 말하기", "wlisten");
+    h += micBlock("꾹 눌러서 말하기", "warmup");
   }
   return h + "</div>";
 }
@@ -697,7 +781,7 @@ function talkHTML() {
   if (s.err) h += '<p class="err">' + esc(s.err) + "</p>";
 
   h += s.stage === "ask"
-    ? micBlock("눌러서 답하기", "tlisten")
+    ? micBlock("꾹 눌러서 답하기", "talk")
     : '<div class="controls"><button class="mic next" data-a="proceed">'
       + (s.turn >= 8 ? "회차 마치기" : "다음 질문") + "</button></div>";
   return h + "</div>";
@@ -821,8 +905,8 @@ function sheetHTML() {
 }
 
 function render() {
-  document.documentElement.style.setProperty("--glass", 0.05 + (P.tint / 100) * 0.13);
-  document.documentElement.style.setProperty("--edge", 0.10 + (P.tint / 100) * 0.14);
+  document.documentElement.style.setProperty("--glass", 0.40 + (P.tint / 100) * 0.45);
+  document.documentElement.style.setProperty("--edge", 0.55 + (P.tint / 100) * 0.35);
   var h;
   if (S.busy) {
     h = '<div class="screen"><div class="glass card center"><p class="action-t">'
@@ -856,9 +940,10 @@ document.addEventListener("click", function (ev) {
   if (a === "ph") { S.ph = +t.getAttribute("data-i"); S.wk = 0; return render(); }
   if (a === "wk") { S.wk = +t.getAttribute("data-i"); S.sheet = false; return render(); }
   if (a === "start") return startSession(+t.getAttribute("data-si"));
-  if (a === "exit") { S.sess = null; micErr = ""; return render(); }
-  if (a === "wlisten") return warmupListen();
-  if (a === "tlisten") return talkListen();
+  if (a === "exit") {
+    holdAbort(""); stopTicker(); micState = "idle";
+    S.sess = null; micErr = ""; return render();
+  }
   if (a === "retry") { S.sess.result = null; S.sess.pa = null; S.sess.said = ""; micErr = ""; return render(); }
   if (a === "nextw") return nextWarmup();
   if (a === "reveal") { S.sess.reveal = true; speak(S.sess.cur.example); return render(); }
@@ -889,6 +974,17 @@ document.addEventListener("click", function (ev) {
   }
 });
 
+/* 누르고 있는 동안만 녹음 */
+document.addEventListener("pointerdown", function (ev) {
+  var t = ev.target.closest("[data-hold]");
+  if (!t || t.disabled) return;
+  ev.preventDefault();
+  micPress(t.getAttribute("data-hold"));
+});
+window.addEventListener("pointerup", micRelease);
+window.addEventListener("pointercancel", micRelease);
+window.addEventListener("blur", micRelease);
+
 document.addEventListener("keydown", function (ev) {
   if (ev.key === "Enter" && ev.target.id === "typed") {
     ev.preventDefault();
@@ -901,8 +997,8 @@ document.addEventListener("keydown", function (ev) {
 document.addEventListener("input", function (ev) {
   if (ev.target.id === "tint") {
     P.tint = +ev.target.value; persist();
-    document.documentElement.style.setProperty("--glass", 0.05 + (P.tint / 100) * 0.13);
-    document.documentElement.style.setProperty("--edge", 0.10 + (P.tint / 100) * 0.14);
+    document.documentElement.style.setProperty("--glass", 0.40 + (P.tint / 100) * 0.45);
+    document.documentElement.style.setProperty("--edge", 0.55 + (P.tint / 100) * 0.35);
   }
 });
 
