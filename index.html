@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#05070c">
+<title>전화 중국어</title>
+<style>
+:root{
+  --bg:#05070c; --ink:#f5f5f7; --ink2:rgba(235,235,245,.62); --ink3:rgba(235,235,245,.34);
+  --red:#ff453a; --green:#30d158; --amber:#ffd60a; --blue:#64a6ff; --glass:.11; --edge:.16;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;min-height:100%;}
+body{background:#05070c;color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Apple SD Gothic Neo","Pretendard",system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;}
+.aurora{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0;}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);display:block;}
+.b1{width:300px;height:300px;background:#c2261f;top:-70px;left:-70px;opacity:.5;}
+.b2{width:260px;height:260px;background:#1d4ed8;top:38%;right:-90px;opacity:.4;}
+.b3{width:300px;height:300px;background:#a16207;bottom:-90px;left:10%;opacity:.35;}
+
+.screen{position:relative;z-index:1;max-width:520px;margin:0 auto;
+  padding:calc(22px + env(safe-area-inset-top)) 18px calc(116px + env(safe-area-inset-bottom));}
+.head{padding:14px 4px 18px;}
+.kicker{margin:0 0 6px;font-size:13px;color:var(--ink2);}
+.picker{border:0;background:transparent;font:inherit;font-size:13px;color:var(--ink2);cursor:pointer;
+  display:inline-flex;align-items:center;gap:6px;padding:0;}
+.caret{width:6px;height:6px;border-right:1.5px solid var(--ink3);border-bottom:1.5px solid var(--ink3);
+  transform:rotate(45deg) translateY(-2px);display:block;}
+.title{margin:0;font-size:32px;line-height:1.1;font-weight:700;letter-spacing:-.022em;}
+.sub{margin:4px 0 0;font-size:14px;color:var(--ink2);line-height:1.45;}
+.ok{color:var(--green);}
+.foot{font-size:12px;color:var(--ink3);line-height:1.55;margin-top:12px;}
+
+.glass{background:rgba(255,255,255,var(--glass));
+  -webkit-backdrop-filter:blur(34px) saturate(180%);backdrop-filter:blur(34px) saturate(180%);
+  border:.5px solid rgba(255,255,255,var(--edge));
+  box-shadow:inset 0 .5px 0 rgba(255,255,255,.28),0 14px 40px rgba(0,0,0,.34);}
+.card{border-radius:26px;padding:20px;margin-bottom:14px;}
+.center{text-align:center;}
+
+.hero-row{display:flex;align-items:center;justify-content:space-between;gap:16px;}
+.hero-n{margin:0;font-size:44px;font-weight:700;letter-spacing:-.03em;line-height:1;}
+.hero-d{font-size:20px;color:var(--ink3);font-weight:600;}
+svg.ring{transform:rotate(-90deg);}
+.ring-bg{stroke:rgba(255,255,255,.12);}
+.ring-fg{stroke:var(--red);transition:stroke-dashoffset .5s cubic-bezier(.4,0,.2,1);}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;}
+.chip{font-size:13px;padding:6px 12px;border-radius:999px;
+  background:rgba(255,255,255,.09);border:.5px solid rgba(255,255,255,.14);}
+
+.action{display:flex;align-items:center;justify-content:space-between;gap:14px;width:100%;
+  text-align:left;cursor:pointer;color:inherit;font:inherit;transition:transform .18s cubic-bezier(.4,0,.2,1);}
+.action:active{transform:scale(.975);}
+.action-t{margin:0;font-size:18px;font-weight:600;letter-spacing:-.01em;}
+.action.quiet .action-t{font-size:16px;}
+.play{width:44px;height:44px;border-radius:50%;background:var(--red);flex:none;position:relative;}
+.play::after{content:"";position:absolute;top:50%;left:52%;transform:translate(-50%,-50%);
+  border-left:13px solid #fff;border-top:8px solid transparent;border-bottom:8px solid transparent;}
+.arrow{width:9px;height:9px;border-right:2px solid var(--ink3);border-top:2px solid var(--ink3);
+  transform:rotate(45deg);flex:none;}
+.tick{width:20px;height:20px;border-radius:50%;background:var(--green);flex:none;position:relative;}
+.tick::after{content:"";position:absolute;top:5px;left:6px;width:5px;height:9px;
+  border-right:2px solid #05070c;border-bottom:2px solid #05070c;transform:rotate(42deg);}
+
+.sessions{display:flex;flex-direction:column;gap:10px;margin-top:18px;}
+.row{display:flex;align-items:center;gap:14px;padding:15px 18px;border-radius:20px;width:100%;
+  text-align:left;color:inherit;font:inherit;cursor:pointer;}
+.row-n{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.1);
+  display:grid;place-items:center;font-size:13px;font-weight:600;flex:none;}
+.row-body{flex:1;display:flex;flex-direction:column;gap:2px;min-width:0;}
+.row-t{font-size:15px;font-weight:500;font-family:"PingFang SC","Noto Sans SC",sans-serif;}
+
+.tabbar{position:fixed;z-index:4;left:50%;transform:translateX(-50%);
+  bottom:calc(18px + env(safe-area-inset-bottom));display:flex;gap:4px;padding:6px;border-radius:999px;}
+.tab{border:0;background:transparent;color:var(--ink2);font:inherit;font-size:14px;
+  padding:9px 20px;border-radius:999px;cursor:pointer;transition:all .2s;}
+.tab.sel{background:rgba(255,255,255,.16);color:var(--ink);font-weight:600;}
+
+.dhead{display:flex;align-items:center;gap:12px;padding:6px 4px 20px;}
+.bar{flex:1;height:4px;border-radius:999px;background:rgba(255,255,255,.14);overflow:hidden;}
+.bar-fill{height:100%;background:var(--red);border-radius:999px;transition:width .35s cubic-bezier(.4,0,.2,1);}
+.count{font-size:13px;color:var(--ink2);font-variant-numeric:tabular-nums;}
+.ghost{border:0;background:transparent;color:var(--ink2);font:inherit;font-size:15px;cursor:pointer;padding:4px 2px;}
+.ghost.wide{display:block;width:100%;text-align:center;padding:12px;margin-top:10px;}
+
+.prompt{padding:24px 20px;text-align:center;}
+.wordchip{display:inline-block;margin:12px 0 0;padding:6px 13px;border-radius:999px;font-size:13px;
+  color:var(--ink2);background:rgba(255,255,255,.08);border:.5px solid rgba(255,255,255,.13);}
+.wc-h{font-family:"PingFang SC","Noto Sans SC",sans-serif;font-size:15px;color:var(--ink);font-weight:600;}
+.hanzi{margin:16px 0 8px;font-size:36px;font-weight:600;letter-spacing:.04em;line-height:1.3;
+  font-family:"PingFang SC","Hiragino Sans GB","Noto Sans SC",sans-serif;}
+.hanzi.small{font-size:26px;margin:10px 0 6px;}
+.hanzi.tiny{font-size:17px;margin:0;}
+.pinyin{margin:0 0 6px;font-size:15px;color:var(--ink2);letter-spacing:.02em;}
+.pinyin.tiny{font-size:13px;margin:2px 0 0;}
+.t1{color:#ff6b6b;}.t2{color:#ffd60a;}.t3{color:#30d158;}.t4{color:#64a6ff;}.t5{color:rgba(235,235,245,.45);}
+.hintline{margin:16px 0 0;font-size:14px;color:var(--amber);line-height:1.5;}
+.reveal{margin-top:14px;padding:14px;border-radius:18px;background:rgba(255,255,255,.07);
+  border:.5px solid rgba(255,255,255,.12);}
+
+.btnrow{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;}
+.pill{margin-top:16px;border:.5px solid rgba(255,255,255,.16);background:rgba(255,255,255,.09);
+  color:var(--ink);font:inherit;font-size:14px;padding:9px 18px;border-radius:999px;cursor:pointer;}
+.pill.solid{background:var(--red);border-color:transparent;font-weight:600;}
+.pill.danger{color:var(--red);}
+.wide-pill{display:block;width:100%;}
+
+.scores{display:flex;gap:10px;justify-content:center;margin:4px 0 2px;flex-wrap:wrap;}
+.sc{flex:1;min-width:62px;padding:12px 4px;border-radius:18px;background:rgba(255,255,255,.07);
+  border:.5px solid rgba(255,255,255,.12);}
+.sc b{display:block;font-size:22px;font-weight:700;letter-spacing:-.02em;line-height:1.1;}
+.sc span{display:block;font-size:11px;color:var(--ink2);margin-top:4px;}
+.sylrow{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin:18px 0 4px;}
+.syl{padding:9px 4px 7px;border-radius:14px;min-width:46px;
+  border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);}
+.syl .h{display:block;font-size:21px;font-weight:600;line-height:1.2;
+  font-family:"PingFang SC","Noto Sans SC",sans-serif;}
+.syl .p{display:block;font-size:10px;color:var(--ink2);margin-top:3px;letter-spacing:.01em;}
+.syl.good{border-color:rgba(48,209,88,.45);background:rgba(48,209,88,.13);}
+.syl.mid{border-color:rgba(255,214,10,.45);background:rgba(255,214,10,.13);}
+.syl.bad{border-color:rgba(255,69,58,.5);background:rgba(255,69,58,.15);}
+.weak{margin:14px 0 0;font-size:14px;color:var(--amber);line-height:1.55;}
+
+.verdict{text-align:center;padding:20px;}
+.verdict-t{margin:0;font-size:19px;font-weight:600;}
+.pass .verdict-t{color:var(--green);}
+.close .verdict-t{color:var(--amber);}
+.fail .verdict-t{color:var(--red);}
+.heard{margin:8px 0 12px;font-size:14px;color:var(--ink2);}
+.tip{margin:12px 0 0;font-size:14px;color:var(--amber);line-height:1.5;}
+.err{margin:10px 4px;font-size:13px;color:var(--amber);text-align:center;line-height:1.5;}
+
+.controls{margin-top:22px;}
+.mic{width:100%;padding:19px;border-radius:22px;border:0;cursor:pointer;background:var(--red);
+  color:#fff;font:inherit;font-size:17px;font-weight:600;letter-spacing:-.01em;
+  transition:transform .18s,background .2s;}
+.mic:active{transform:scale(.98);}
+.mic.on{background:#8e1710;}
+.mic.next{background:rgba(255,255,255,.16);}
+.mic[disabled]{opacity:.55;}
+.pulse{display:inline-block;width:9px;height:9px;border-radius:50%;background:#fff;
+  margin-right:9px;vertical-align:1px;animation:pl 1s ease-in-out infinite;}
+@keyframes pl{0%,100%{opacity:.25;transform:scale(.8);}50%{opacity:1;transform:scale(1.15);}}
+.type-row{display:flex;gap:8px;margin-top:12px;}
+.input{flex:1;padding:14px 16px;border-radius:16px;font:inherit;font-size:16px;
+  background:rgba(255,255,255,.08);border:.5px solid rgba(255,255,255,.16);color:var(--ink);}
+.input.full{width:100%;margin-top:10px;}
+.input::placeholder{color:var(--ink3);}
+
+.slider{width:100%;margin-top:16px;accent-color:var(--red);}
+.ends{display:flex;justify-content:space-between;margin-top:4px;}
+.legend{display:flex;gap:14px;margin-top:14px;font-size:17px;}
+.toggle{margin-top:16px;width:52px;height:31px;border-radius:999px;border:0;cursor:pointer;
+  background:rgba(255,255,255,.16);position:relative;transition:background .2s;}
+.toggle.on{background:var(--green);}
+.toggle i{position:absolute;top:2px;left:2px;width:27px;height:27px;border-radius:50%;background:#fff;
+  transition:transform .2s cubic-bezier(.4,0,.2,1);display:block;}
+.toggle.on i{transform:translateX(21px);}
+
+.sheetwrap{position:fixed;inset:0;z-index:6;background:rgba(0,0,0,.5);display:flex;align-items:flex-end;}
+.sheet{width:100%;max-width:520px;margin:0 auto;border-radius:28px 28px 0 0;
+  padding:10px 18px calc(32px + env(safe-area-inset-bottom));max-height:80vh;overflow-y:auto;}
+.grabber{width:38px;height:5px;border-radius:999px;background:rgba(255,255,255,.28);margin:0 auto 16px;}
+.seg{display:flex;gap:4px;padding:4px;border-radius:14px;background:rgba(255,255,255,.08);margin-bottom:18px;}
+.seg-b{flex:1;border:0;background:transparent;color:var(--ink2);font:inherit;font-size:14px;
+  padding:9px;border-radius:11px;cursor:pointer;}
+.seg-b.on{background:rgba(255,255,255,.18);color:var(--ink);font-weight:600;}
+.weeks{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;}
+.wk{aspect-ratio:1;border:.5px solid rgba(255,255,255,.14);background:rgba(255,255,255,.07);
+  color:var(--ink);font:inherit;font-size:15px;border-radius:14px;cursor:pointer;}
+.wk.on{background:var(--red);border-color:transparent;font-weight:700;}
+
+.spin{display:inline-block;width:15px;height:15px;border-radius:50%;vertical-align:-2px;
+  border:2px solid rgba(255,255,255,.25);border-top-color:#fff;animation:sp .7s linear infinite;margin-right:7px;}
+@keyframes sp{to{transform:rotate(360deg);}}
+button:focus-visible,input:focus-visible{outline:2px solid #6ea8ff;outline-offset:3px;}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;}}
+</style>
+</head>
+<body>
+<div class="aurora" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
+<div id="app"><div class="screen"><div class="glass card"><p class="sub"><span class="spin"></span>불러오는 중</p></div></div></div>
+
+<script src="./speech-sdk.js"></script>
+<script>
+"use strict";
+
+/* ===================== 저장 ===================== */
+var PK = "ct:v4";
+var saved = (function () {
+  try { return JSON.parse(localStorage.getItem(PK)) || {}; } catch (e) { return {}; }
+})();
+var P = {
+  azKey: saved.azKey || "",
+  azRegion: saved.azRegion || "koreacentral",
+  gmKey: saved.gmKey || "",
+  gmModel: saved.gmModel || "gemini-3.6-flash",
+  words: saved.words || {},
+  missed: saved.missed || {},
+  log: saved.log || [],
+  gen: saved.gen || {},
+  tint: typeof saved.tint === "number" ? saved.tint : 42,
+  tone: saved.tone !== false
+};
+function persist() { try { localStorage.setItem(PK, JSON.stringify(P)); } catch (e) {} }
+
+var CURRICULUM = null;
+var S = { tab: "home", ph: 0, wk: 0, sheet: false, toast: "", sess: null, busy: "" };
+
+/* ===================== 유틸 ===================== */
+function esc(s) {
+  return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+  });
+}
+var TONES = ["āēīōūǖĀĒĪŌŪǕ", "áéíóúǘÁÉÍÓÚǗ", "ǎěǐǒǔǚǍĚǏǑǓǙ", "àèìòùǜÀÈÌÒÙǛ"];
+function toneOf(syl) {
+  for (var t = 0; t < 4; t++) for (var i = 0; i < syl.length; i++)
+    if (TONES[t].indexOf(syl[i]) > -1) return t + 1;
+  return 5;
+}
+var TONE_KO = { 1: "1성", 2: "2성", 3: "3성", 4: "4성", 5: "경성" };
+function pinyinHTML(text, cls) {
+  if (!text) return "";
+  var body = P.tone
+    ? String(text).split(/(\s+)/).map(function (c) {
+        return /^\s+$/.test(c) ? c : '<span class="t' + toneOf(c) + '">' + esc(c) + "</span>";
+      }).join("")
+    : esc(text);
+  return '<p class="pinyin ' + (cls || "") + '">' + body + "</p>";
+}
+function ringHTML(v) {
+  var s = 76, r = (s - 9) / 2, c = 2 * Math.PI * r;
+  return '<svg class="ring" width="' + s + '" height="' + s + '">'
+    + '<circle cx="' + s / 2 + '" cy="' + s / 2 + '" r="' + r + '" class="ring-bg" stroke-width="7" fill="none"/>'
+    + '<circle cx="' + s / 2 + '" cy="' + s / 2 + '" r="' + r + '" class="ring-fg" stroke-width="7" fill="none"'
+    + ' stroke-linecap="round" stroke-dasharray="' + c + '" stroke-dashoffset="' + c * (1 - v) + '"/></svg>';
+}
+function hanziChars(s) { return String(s || "").replace(/[^一-鿿]/g, "").split(""); }
+function toast(m) { S.toast = m; render(); setTimeout(function () { S.toast = ""; render(); }, 5000); }
+
+/* ===================== TTS ===================== */
+function speak(text, rate) {
+  if (!window.speechSynthesis || !text) return;
+  window.speechSynthesis.cancel();
+  var u = new SpeechSynthesisUtterance(text);
+  u.lang = "zh-CN"; u.rate = rate || 0.85;
+  var vs = window.speechSynthesis.getVoices();
+  for (var i = 0; i < vs.length; i++)
+    if ((vs[i].lang || "").toLowerCase().indexOf("zh") === 0) { u.voice = vs[i]; break; }
+  window.speechSynthesis.speak(u);
+}
+
+/* ===================== Azure 음성 ===================== */
+var SDK = window.SpeechSDK;
+var micOn = false, micErr = "";
+
+function azureReady() { return !!(SDK && P.azKey && P.azRegion); }
+
+function makeRecognizer(referenceText) {
+  var cfg = SDK.SpeechConfig.fromSubscription(P.azKey, P.azRegion);
+  cfg.speechRecognitionLanguage = "zh-CN";
+  var audio = SDK.AudioConfig.fromDefaultMicrophoneInput();
+  var rec = new SDK.SpeechRecognizer(cfg, audio);
+  if (referenceText) {
+    var pa = new SDK.PronunciationAssessmentConfig(
+      referenceText,
+      SDK.PronunciationAssessmentGradingSystem.HundredMark,
+      SDK.PronunciationAssessmentGranularity.Phoneme,
+      false
+    );
+    try { pa.enableProsodyAssessment = true; } catch (e) {}
+    pa.applyTo(rec);
+  }
+  return rec;
+}
+
+function listen(referenceText) {
+  return new Promise(function (resolve, reject) {
+    if (!SDK) return reject({ msg: "음성 라이브러리를 불러오지 못했습니다. 새로고침 해보세요." });
+    if (!P.azKey || !P.azRegion) return reject({ msg: "설정에서 Azure 키와 지역을 넣어주세요." });
+    var rec;
+    try { rec = makeRecognizer(referenceText); }
+    catch (e) { return reject({ msg: "마이크를 시작하지 못했습니다. " + (e && e.message ? e.message : "") }); }
+
+    var done = false;
+    function finish(fn, arg) {
+      if (done) return;
+      done = true;
+      try { rec.close(); } catch (e) {}
+      fn(arg);
+    }
+
+    rec.canceled = function (_s, e) {
+      var d = "";
+      try { d = e.errorDetails || ""; } catch (x) {}
+      var msg = "인식이 중단되었습니다.";
+      if (/401|403|Forbidden|Unauthorized|subscription/i.test(d)) msg = "Azure 키 또는 지역이 올바르지 않습니다.";
+      else if (/permission|NotAllowed|denied|NotFoundError/i.test(d)) msg = "마이크 권한이 거부되었습니다. 사파리 주소창의 ぬ 아이콘에서 마이크를 허용하세요.";
+      else if (/1006|connection|websocket|network/i.test(d)) msg = "Azure에 연결하지 못했습니다. 키와 지역을 확인하세요.";
+      else if (d) msg = "Azure 오류 · " + d.slice(0, 140);
+      finish(reject, { msg: msg });
+    };
+
+    rec.recognizeOnceAsync(function (result) {
+      try {
+        if (result.reason === SDK.ResultReason.NoMatch)
+          return finish(reject, { msg: "소리를 알아듣지 못했습니다. 조금 더 크게 말해보세요." });
+        if (result.reason !== SDK.ResultReason.RecognizedSpeech)
+          return finish(reject, { msg: "인식에 실패했습니다. 다시 시도하세요." });
+
+        var out = { text: result.text || "", pa: null };
+        if (referenceText) {
+          try {
+            var pr = SDK.PronunciationAssessmentResult.fromResult(result);
+            var raw = null;
+            try {
+              raw = JSON.parse(result.properties.getProperty(
+                SDK.PropertyId.SpeechServiceResponse_JsonResult));
+            } catch (e) {}
+            out.pa = {
+              accuracy: Math.round(pr.accuracyScore || 0),
+              fluency: Math.round(pr.fluencyScore || 0),
+              completeness: Math.round(pr.completenessScore || 0),
+              pron: Math.round(pr.pronunciationScore || 0),
+              prosody: (pr.prosodyScore != null && !isNaN(pr.prosodyScore)) ? Math.round(pr.prosodyScore) : null,
+              syllables: extractSyllables(raw)
+            };
+          } catch (e) { /* 채점만 실패 — 전사는 살린다 */ }
+        }
+        finish(resolve, out);
+      } catch (e) {
+        finish(reject, { msg: "결과를 읽지 못했습니다." });
+      }
+    }, function () {
+      finish(reject, { msg: "마이크를 열지 못했습니다. 권한을 확인하세요." });
+    });
+  });
+}
+
+function extractSyllables(raw) {
+  try {
+    var best = raw && raw.NBest && raw.NBest[0];
+    if (!best || !best.Words) return [];
+    var out = [];
+    best.Words.forEach(function (w) {
+      var wScore = (w.PronunciationAssessment || {}).AccuracyScore;
+      var syls = w.Syllables || [];
+      if (!syls.length) {
+        out.push({ label: w.Word || "", score: wScore == null ? null : Math.round(wScore) });
+        return;
+      }
+      syls.forEach(function (s) {
+        var sc = (s.PronunciationAssessment || {}).AccuracyScore;
+        out.push({
+          label: s.Syllable || "",
+          score: sc == null ? (wScore == null ? null : Math.round(wScore)) : Math.round(sc)
+        });
+      });
+    });
+    return out;
+  } catch (e) { return []; }
+}
+
+/* ===================== Gemini ===================== */
+var GM = "https://generativelanguage.googleapis.com/v1beta/models";
+
+async function gemini(prompt) {
+  if (!P.gmKey) throw { msg: "설정에서 Gemini 키를 넣어주세요." };
+  var res = await fetch(GM + "/" + P.gmModel + ":generateContent?key=" + encodeURIComponent(P.gmKey), {
+    method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      contents: [{ role: "user", parts: [{ text: prompt }] }],
+      generationConfig: { responseMimeType: "application/json" }
+    })
+  });
+  if (!res.ok) {
+    var body = await res.text();
+    if (res.status === 400 && body.indexOf("API_KEY") > -1) throw { msg: "Gemini 키가 올바르지 않습니다." };
+    if (res.status === 429) throw { msg: "Gemini 호출 한도를 넘었습니다. 잠시 뒤 다시 시도하세요." };
+    if (res.status === 404) throw { msg: "모델 이름을 확인하세요 — " + P.gmModel };
+    throw { msg: "Gemini 오류 " + res.status };
+  }
+  var data = await res.json();
+  var parts = (((data.candidates || [])[0] || {}).content || {}).parts || [];
+  var text = parts.map(function (p) { return p.text || ""; }).join("").replace(/```json|```/g, "").trim();
+  return JSON.parse(text);
+}
+
+/* ===================== 커리큘럼 ===================== */
+function phase() { return CURRICULUM.phases[S.ph]; }
+function week() { return phase().weeks[S.wk]; }
+function wkey(si, h) { return S.ph + ":" + week().week + ":" + si + ":" + h; }
+
+function sessionVocab(si) {
+  return week().sessions[si].target_vocab.map(function (v) {
+    return { hanzi: v.hanzi, pinyin: v.pinyin, en: v.en || "", ex: v.example || null };
+  });
+}
+
+async function ensureSentences(si) {
+  var vs = sessionVocab(si);
+  var todo = vs.filter(function (v) { return !P.words[wkey(si, v.hanzi)]; });
+  var pool = (todo.length ? todo : vs).slice(0, 5);
+  var ck = S.ph + ":" + week().week + ":" + si;
+  var cache = P.gen[ck] || {};
+
+  var need = pool.filter(function (v) { return !v.ex && !cache[v.hanzi]; });
+  if (need.length) {
+    var listing = need.map(function (v) {
+      return "- " + v.hanzi + " (" + v.pinyin + ") " + v.en;
+    }).join("\n");
+    var res = await gemini(
+      "한국인 중국어 초급 학습자를 위한 예문을 만듭니다. 아래 각 단어마다 예문 한 개씩.\n\n" + listing
+      + "\n\n규칙\n- 길이 4~10자. 초급자가 한 호흡에 말할 수 있어야 합니다.\n"
+      + "- 해당 단어 외에는 HSK 3급 이하 어휘만.\n"
+      + "- 교과서 예문이 아니라 실제 대화에서 쓰는 문장으로. 식당, 회사, 약속, 쇼핑, 전화 상황 중심.\n"
+      + "- zh 에 문장부호를 넣지 말 것. pinyin 은 성조부호 포함, 단어 단위 띄어쓰기.\n"
+      + "- ko 는 한국어로 자연스러운 구어체.\n\n"
+      + 'JSON 배열만 출력하세요. 예: [{"hanzi":"的","zh":"这是我的手机","pinyin":"zhè shì wǒ de shǒujī","ko":"이건 제 휴대폰이에요"}]'
+    );
+    (res || []).forEach(function (r) { if (r && r.hanzi && r.zh) cache[r.hanzi] = r; });
+    P.gen[ck] = cache; persist();
+  }
+
+  var out = [];
+  pool.forEach(function (v) {
+    var e = v.ex || cache[v.hanzi];
+    if (e && e.zh) out.push({
+      word: v.hanzi, wordPinyin: v.pinyin, wordKo: v.en,
+      zh: e.zh, pinyin: e.pinyin, ko: e.ko,
+      tag: wkey(si, v.hanzi), key: wkey(si, v.hanzi)
+    });
+  });
+  return out;
+}
+
+/* ===================== 회차 ===================== */
+async function startSession(si) {
+  S.busy = "예문을 준비하는 중"; render();
+  var fresh;
+  try { fresh = await ensureSentences(si); }
+  catch (e) { S.busy = ""; return toast(e.msg || "예문을 만들지 못했습니다."); }
+  if (!fresh.length) { S.busy = ""; return toast("예문을 만들지 못했습니다."); }
+
+  var carry = P.log.slice(-20).sort(function () { return Math.random() - 0.5; }).slice(0, 2);
+  S.sess = {
+    si: si, fresh: fresh, items: carry.concat(fresh), idx: 0,
+    part: "warmup", said: "", pa: null, result: null, stage: "ask",
+    turn: 0, history: [], cur: null, last: null, reveal: false, err: ""
+  };
+  S.busy = ""; micErr = ""; render();
+  setTimeout(function () { speak(S.sess.items[0].zh); }, 400);
+}
+
+function finishSession() {
+  var s = S.sess;
+  if (s) s.fresh.forEach(function (f) {
+    P.words[f.key] = true;
+    if (!P.log.some(function (l) { return l.zh === f.zh; }))
+      P.log.push({ zh: f.zh, pinyin: f.pinyin, ko: f.ko, tag: f.tag });
+  });
+  P.log = P.log.slice(-60); persist();
+  S.sess = null; S.tab = "home"; render();
+}
+
+async function warmupListen() {
+  var s = S.sess, it = s.items[s.idx];
+  micOn = true; micErr = ""; render();
+  try {
+    var r = await listen(it.zh);
+    micOn = false;
+    s.said = r.text; s.pa = r.pa;
+    var sc = r.pa ? r.pa.pron : null;
+    s.result = sc == null ? "close" : sc >= 80 ? "pass" : sc >= 60 ? "close" : "fail";
+    if (s.result === "pass") delete P.missed[it.tag];
+    else P.missed[it.tag] = { zh: it.zh, pinyin: it.pinyin, ko: it.ko, tag: it.tag };
+    persist(); render();
+  } catch (e) {
+    micOn = false; micErr = e.msg || "인식에 실패했습니다."; render();
+  }
+}
+
+function gradeTyped(text) {
+  var s = S.sess, it = s.items[s.idx];
+  var a = text.replace(/[\s，。？！、,.?!]/g, "");
+  var b = it.zh.replace(/[\s，。？！、,.?!]/g, "");
+  s.said = text; s.pa = null;
+  s.result = a === b ? "pass" : "fail";
+  if (s.result === "pass") delete P.missed[it.tag];
+  else P.missed[it.tag] = { zh: it.zh, pinyin: it.pinyin, ko: it.ko, tag: it.tag };
+  persist(); render();
+}
+
+function nextWarmup() {
+  var s = S.sess;
+  if (s.idx + 1 < s.items.length) {
+    s.idx++; s.said = ""; s.pa = null; s.result = null; micErr = ""; render();
+    setTimeout(function () { speak(s.items[s.idx].zh); }, 350);
+  } else if (P.gmKey) {
+    s.part = "talk"; s.stage = "load"; render(); talkStep(null);
+  } else finishSession();
+}
+
+/* ---- 2부 ---- */
+function talkPrompt(userSaid) {
+  var s = S.sess;
+  var vocab = s.fresh.map(function (f) { return f.word + "(" + f.wordPinyin + ")"; }).join(", ");
+  var sents = s.fresh.map(function (f) { return f.zh + " — " + f.ko; }).join("\n");
+  var convo = s.history.length
+    ? s.history.map(function (h) { return (h.r === "t" ? "튜터: " : "학습자: ") + h.zh; }).join("\n")
+    : "(아직 없음)";
+  var p = "당신은 한국인 초급 중국어 학습자와 전화로 짧게 대화하는 중국어 튜터입니다.\n\n"
+    + "학습자는 아주 짧은 문장만 말할 수 있습니다. 한 번에 한 가지만 물으세요.\n"
+    + "이번 회차 목표 어휘: " + vocab + "\n방금 연습한 문장:\n" + sents + "\n\n"
+    + "지금까지의 대화:\n" + convo + "\n\n";
+  if (userSaid) {
+    p += "학습자의 방금 답(음성인식 결과): " + userSaid + "\n\n"
+      + "먼저 이 답을 평가하세요.\n"
+      + "- verdict: 의미가 통하면 good, 통하지만 어색하면 partial, 질문과 무관하거나 알아들을 수 없으면 off.\n"
+      + "- 문법이 완벽하지 않아도 의미가 통하면 good 으로 봅니다. 너그럽게 보세요.\n"
+      + "- tip: partial 이나 off 일 때만 한국어 한 줄, 30자 이내. 어순 문제면 그것부터. good 이면 빈 문자열.\n"
+      + "- reply/replyPinyin/replyKo: 학습자 답에 대한 자연스러운 맞장구 한 문장, 6~10자.\n\n";
+  } else {
+    p += "대화를 여는 첫 질문을 만드세요. verdict, tip, reply, replyPinyin, replyKo 는 모두 빈 문자열로 두세요.\n\n";
+  }
+  p += "그다음 질문을 하나 만드세요.\n"
+    + "- question/questionPinyin/questionKo: 6~12자의 짧은 질문. 목표 어휘와 위 문장의 표현 범위 안에서.\n"
+    + "- hint: 어떤 내용으로 답하면 되는지 한국어 안내. 예: \"어디에 가는지 장소를 말해보세요\". 정답을 그대로 주지 말 것.\n"
+    + "- example/examplePinyin/exampleKo: 모범 답 하나. 학습자가 막혔을 때 보여줄 용도.\n\n"
+    + "중국어에 문장부호를 넣지 마세요. 아래 키를 모두 가진 JSON 객체 하나만 출력하세요.\n"
+    + '{"verdict":"","tip":"","reply":"","replyPinyin":"","replyKo":"","question":"","questionPinyin":"","questionKo":"","hint":"","example":"","examplePinyin":"","exampleKo":""}';
+  return p;
+}
+
+async function talkStep(userSaid) {
+  var s = S.sess;
+  s.stage = "load"; s.err = ""; render();
+  try {
+    var r = await gemini(talkPrompt(userSaid));
+    if (userSaid) s.history.push({ r: "u", zh: userSaid });
+    if (r.reply) s.history.push({ r: "t", zh: r.reply });
+    s.history.push({ r: "t", zh: r.question });
+    s.last = userSaid ? r : null; s.cur = r; s.reveal = false; s.said = userSaid || "";
+    s.stage = userSaid ? "result" : "ask"; render();
+    if (!userSaid) setTimeout(function () { speak(r.question); }, 350);
+  } catch (e) {
+    s.err = e.msg || "연결에 문제가 있습니다.";
+    s.stage = s.cur ? "ask" : "err"; render();
+  }
+}
+
+async function talkListen() {
+  micOn = true; micErr = ""; render();
+  try {
+    var r = await listen(null);
+    micOn = false;
+    if (!r.text) { micErr = "아무 말도 인식되지 않았습니다."; return render(); }
+    S.sess.turn++; talkStep(r.text);
+  } catch (e) {
+    micOn = false; micErr = e.msg || "인식에 실패했습니다."; render();
+  }
+}
+
+function proceedTalk() {
+  var s = S.sess;
+  if (s.turn >= 8) return finishSession();
+  s.stage = "ask"; s.last = null; micErr = ""; render();
+  setTimeout(function () { speak(s.cur.question); }, 200);
+}
+
+/* ===================== 화면 ===================== */
+function micBlock(label, action) {
+  var h = '<div class="controls">'
+    + '<button class="mic ' + (micOn ? "on" : "") + '" data-a="' + action + '"' + (micOn ? " disabled" : "") + ">"
+    + (micOn ? '<span class="pulse"></span>듣는 중…' : esc(label)) + "</button>";
+  if (micErr) h += '<p class="err">' + esc(micErr) + "</p>";
+  h += '<div class="type-row"><input class="input" id="typed" placeholder="직접 입력" aria-label="답 입력">'
+    + '<button class="pill solid" data-a="typed">확인</button></div></div>';
+  return h;
+}
+
+function scoreCls(n) { return n == null ? "" : n >= 80 ? "good" : n >= 60 ? "mid" : "bad"; }
+
+function paHTML(it, pa) {
+  if (!pa) return "";
+  var h = '<div class="scores">'
+    + '<div class="sc"><b>' + pa.pron + "</b><span>종합</span></div>"
+    + '<div class="sc"><b>' + pa.accuracy + "</b><span>정확도</span></div>"
+    + '<div class="sc"><b>' + pa.fluency + "</b><span>유창성</span></div>"
+    + (pa.prosody != null ? '<div class="sc"><b>' + pa.prosody + "</b><span>억양</span></div>" : "")
+    + "</div>";
+
+  var chars = hanziChars(it.zh);
+  var syl = pa.syllables || [];
+  if (syl.length) {
+    var aligned = syl.length === chars.length;
+    h += '<div class="sylrow">';
+    syl.forEach(function (s, i) {
+      var label = aligned ? chars[i] : (s.label || "?");
+      h += '<div class="syl ' + scoreCls(s.score) + '"><span class="h">' + esc(label) + "</span>"
+        + '<span class="p">' + (s.score == null ? "—" : s.score) + "</span></div>";
+    });
+    h += "</div>";
+
+    var pin = String(it.pinyin || "").split(/\s+/);
+    var weak = [];
+    syl.forEach(function (s, i) {
+      if (s.score != null && s.score < 70) {
+        var ch = aligned ? chars[i] : (s.label || "");
+        var tone = (aligned && pin.length === chars.length) ? TONE_KO[toneOf(pin[i])] : null;
+        weak.push(ch + (tone ? "(" + tone + ")" : ""));
+      }
+    });
+    if (weak.length)
+      h += '<p class="weak">약한 음절 · ' + esc(weak.join(", "))
+        + " — 이 부분만 다시 듣고 따라 해보세요.</p>";
+  }
+  return h;
+}
+
+function warmupHTML() {
+  var s = S.sess, it = s.items[s.idx];
+  var h = '<div class="screen"><header class="dhead">'
+    + '<button class="ghost" data-a="exit">종료</button>'
+    + '<div class="bar"><div class="bar-fill" style="width:' + ((s.idx + 1) / s.items.length) * 100 + '%"></div></div>'
+    + '<span class="count">1부 ' + (s.idx + 1) + "/" + s.items.length + "</span></header>"
+    + '<div class="glass card prompt"><p class="kicker">듣고 따라 말하기</p>'
+    + (it.word ? '<p class="wordchip">오늘 단어 · <span class="wc-h">' + esc(it.word) + "</span> "
+        + esc(it.wordPinyin) + "</p>" : "")
+    + '<p class="hanzi">' + esc(it.zh) + "</p>" + pinyinHTML(it.pinyin)
+    + '<p class="sub">' + esc(it.ko) + "</p>"
+    + '<div class="btnrow"><button class="pill" data-a="say" data-t="' + esc(it.zh) + '">다시 듣기</button>'
+    + '<button class="pill" data-a="slow" data-t="' + esc(it.zh) + '">느리게</button></div></div>';
+
+  if (s.result) {
+    h += '<div class="glass card verdict ' + s.result + '"><p class="verdict-t">'
+      + (s.result === "pass" ? "좋아요" : s.result === "close" ? "조금 더" : "다시 해볼까요") + "</p>"
+      + '<p class="heard">들린 문장 · ' + esc(s.said || "—") + "</p>"
+      + paHTML(it, s.pa)
+      + '<div class="btnrow"><button class="pill" data-a="say" data-t="' + esc(it.zh) + '">정답 듣기</button>'
+      + '<button class="pill" data-a="slow" data-t="' + esc(it.zh) + '">느리게</button>'
+      + '<button class="pill" data-a="retry">다시 말하기</button></div></div>'
+      + '<div class="controls"><button class="mic next" data-a="nextw">'
+      + (s.idx + 1 < s.items.length ? "다음" : (P.gmKey ? "대화 시작" : "회차 마치기")) + "</button></div>";
+  } else {
+    h += micBlock("눌러서 말하기", "wlisten");
+  }
+  return h + "</div>";
+}
+
+function talkHTML() {
+  var s = S.sess;
+  var h = '<div class="screen"><header class="dhead">'
+    + '<button class="ghost" data-a="exit">종료</button>'
+    + '<div class="bar"><div class="bar-fill" style="width:' + (Math.min(s.turn, 8) / 8) * 100 + '%"></div></div>'
+    + '<span class="count">2부 ' + Math.min(s.turn + 1, 8) + "/8</span></header>";
+
+  if (s.stage === "err")
+    return h + '<div class="glass card"><p class="action-t">대화를 이어가지 못했습니다</p>'
+      + '<p class="sub">' + esc(s.err) + "</p>"
+      + '<button class="pill" data-a="exit">돌아가기</button></div></div>';
+
+  if (s.stage === "load")
+    return h + '<div class="glass card center"><p class="sub"><span class="spin"></span>생각하는 중</p></div></div>';
+
+  if (s.stage === "result" && s.last) {
+    var v = s.last.verdict === "good" ? "pass" : s.last.verdict === "partial" ? "close" : "fail";
+    h += '<div class="glass card verdict ' + v + '"><p class="verdict-t">'
+      + (v === "pass" ? "잘 통했어요" : v === "close" ? "통하지만 어색해요" : "다시 해볼까요") + "</p>"
+      + '<p class="heard">내가 한 말 · ' + esc(s.said || "—") + "</p>"
+      + (s.last.tip ? '<p class="tip">' + esc(s.last.tip) + "</p>" : "")
+      + (s.last.reply ? '<p class="hanzi small">' + esc(s.last.reply) + "</p>"
+          + pinyinHTML(s.last.replyPinyin) + '<p class="sub">' + esc(s.last.replyKo) + "</p>" : "")
+      + "</div>";
+  }
+
+  var c = s.cur;
+  h += '<div class="glass card prompt"><p class="kicker">'
+    + (s.stage === "result" ? "다음 질문" : "질문") + "</p>"
+    + '<p class="hanzi small">' + esc(c.question) + "</p>" + pinyinHTML(c.questionPinyin)
+    + '<p class="sub">' + esc(c.questionKo) + "</p>"
+    + '<div class="btnrow"><button class="pill" data-a="say" data-t="' + esc(c.question) + '">다시 듣기</button>'
+    + '<button class="pill" data-a="slow" data-t="' + esc(c.question) + '">느리게</button></div>';
+  if (s.stage === "ask") {
+    h += '<p class="hintline">' + esc(c.hint) + "</p>";
+    h += s.reveal
+      ? '<div class="reveal"><p class="hanzi small">' + esc(c.example) + "</p>"
+        + pinyinHTML(c.examplePinyin) + '<p class="sub">' + esc(c.exampleKo) + "</p>"
+        + '<p class="foot">이대로 따라 말해도 됩니다.</p></div>'
+      : '<button class="ghost wide" data-a="reveal">모르겠어요</button>';
+  }
+  h += "</div>";
+  if (s.err) h += '<p class="err">' + esc(s.err) + "</p>";
+
+  h += s.stage === "ask"
+    ? micBlock("눌러서 답하기", "tlisten")
+    : '<div class="controls"><button class="mic next" data-a="proceed">'
+      + (s.turn >= 8 ? "회차 마치기" : "다음 질문") + "</button></div>";
+  return h + "</div>";
+}
+
+function homeHTML() {
+  var w = week(), total = 0, done = 0;
+  w.sessions.forEach(function (sess, si) {
+    sess.target_vocab.forEach(function (v) { total++; if (P.words[wkey(si, v.hanzi)]) done++; });
+  });
+  var missed = Object.keys(P.missed).length;
+  var nextSi = -1;
+  for (var i = 0; i < w.sessions.length; i++)
+    if (w.sessions[i].target_vocab.some(function (v) { return !P.words[wkey(i, v.hanzi)]; })) { nextSi = i; break; }
+
+  var h = '<div class="screen"><header class="head">'
+    + '<button class="picker" data-a="sheet">' + (S.ph === 0 ? "1–3급 활성화" : "4급") + " · " + w.week
+    + '주차<i class="caret"></i></button><h1 class="title">오늘의 통화</h1></header>'
+    + '<section class="glass card"><div class="hero-row"><div>'
+    + '<p class="hero-n">' + done + '<span class="hero-d">/' + total + "</span></p>"
+    + '<p class="sub">이번 주 어휘</p></div>' + ringHTML(total ? done / total : 0) + "</div>"
+    + '<div class="chips">' + (w.grammar || []).map(function (g) {
+        return '<span class="chip">' + esc(g.point) + "</span>"; }).join("") + "</div>";
+  if (!azureReady()) h += '<p class="foot">설정에서 Azure 키를 넣으면 발음·성조 채점이 켜집니다.</p>';
+  if (!P.gmKey) h += '<p class="foot">Gemini 키가 없어 예문 생성과 2부 대화가 잠겨 있습니다.</p>';
+  h += "</section>";
+
+  if (nextSi > -1) {
+    h += '<button class="glass card action" data-a="start" data-si="' + nextSi + '"><div>'
+      + '<p class="action-t">' + (nextSi + 1) + "회차 시작</p>"
+      + '<p class="sub">1부 발음 채점 → 2부 대화 8턴</p></div><span class="play"></span></button>';
+  } else {
+    h += '<div class="glass card"><p class="action-t">이번 주 완료</p>'
+      + '<p class="sub">주차를 넘겨 다음 어휘로 이어가세요.</p></div>';
+  }
+  if (missed)
+    h += '<button class="glass card action quiet" data-a="tab" data-tab="review"><div>'
+      + '<p class="action-t">복습 ' + missed + "문장</p>"
+      + '<p class="sub">발음 점수가 낮았던 문장</p></div><span class="arrow"></span></button>';
+
+  h += '<div class="sessions">';
+  w.sessions.forEach(function (sess, si) {
+    var d = sess.target_vocab.filter(function (v) { return P.words[wkey(si, v.hanzi)]; }).length;
+    h += '<button class="row glass" data-a="start" data-si="' + si + '">'
+      + '<span class="row-n">' + (si + 1) + '</span><span class="row-body">'
+      + '<span class="row-t">' + esc(sess.target_vocab.slice(0, 5).map(function (v) { return v.hanzi; }).join(" · ")) + "</span>"
+      + '<span class="sub">' + d + "/" + sess.target_vocab.length + " 어휘</span></span>"
+      + (d === sess.target_vocab.length ? '<span class="tick"></span>' : '<span class="arrow"></span>') + "</button>";
+  });
+  return h + "</div></div>";
+}
+
+function reviewHTML() {
+  var keys = Object.keys(P.missed);
+  var h = '<div class="screen"><header class="head"><p class="kicker">복습</p>'
+    + '<h1 class="title">약했던 문장</h1></header>';
+  if (!keys.length)
+    return h + '<div class="glass card"><p class="action-t">비어 있습니다</p>'
+      + '<p class="sub">회차를 진행하면 점수가 낮았던 문장이 여기 모입니다.</p></div></div>';
+  h += '<button class="glass card action" data-a="revdrill"><div>'
+    + '<p class="action-t">' + keys.length + "문장 다시 연습</p>"
+    + '<p class="sub">80점을 넘으면 목록에서 사라집니다</p></div><span class="play"></span></button><div class="sessions">';
+  keys.forEach(function (k) {
+    var i = P.missed[k];
+    h += '<button class="row glass" data-a="say" data-t="' + esc(i.zh) + '"><span class="row-body">'
+      + '<span class="hanzi tiny">' + esc(i.zh) + "</span>" + pinyinHTML(i.pinyin, "tiny")
+      + '<span class="sub">' + esc(i.ko) + "</span></span></button>";
+  });
+  return h + "</div></div>";
+}
+
+function settingsHTML() {
+  return '<div class="screen"><header class="head"><p class="kicker">설정</p>'
+    + '<h1 class="title">연결</h1></header>'
+
+    + '<div class="glass card"><p class="action-t">Azure 음성</p>'
+    + '<p class="sub">발음·성조 채점과, 대화에서 내 말을 알아듣는 데 씁니다.</p>'
+    + '<input class="input full" type="text" id="azKey" value="' + esc(P.azKey) + '" '
+    + 'placeholder="구독 키" aria-label="Azure 키" autocapitalize="off" autocorrect="off" spellcheck="false">'
+    + '<input class="input full" type="text" id="azRegion" value="' + esc(P.azRegion) + '" '
+    + 'placeholder="지역 (예: koreacentral)" aria-label="Azure 지역" autocapitalize="off" autocorrect="off" spellcheck="false">'
+    + '<button class="pill solid wide-pill" data-a="savekeys">저장</button>'
+    + '<p class="foot">Azure 포털에서 Speech 리소스를 만들면 키와 지역이 나옵니다. '
+    + '무료 등급 F0 은 월 5시간까지 무료입니다.</p></div>'
+
+    + '<div class="glass card"><p class="action-t">Gemini</p>'
+    + '<p class="sub">예문 생성과 2부 대화에 씁니다.</p>'
+    + '<input class="input full" type="text" id="gmKey" value="' + esc(P.gmKey) + '" '
+    + 'placeholder="AIza…" aria-label="Gemini 키" autocapitalize="off" autocorrect="off" spellcheck="false">'
+    + '<input class="input full" type="text" id="gmModel" value="' + esc(P.gmModel) + '" '
+    + 'placeholder="gemini-3.6-flash" aria-label="모델" autocapitalize="off" autocorrect="off" spellcheck="false">'
+    + '<button class="pill solid wide-pill" data-a="savekeys">저장</button></div>'
+
+    + '<div class="glass card"><p class="action-t">성조 색</p>'
+    + '<p class="sub">1성 빨강, 2성 노랑, 3성 초록, 4성 파랑, 경성 회색.</p>'
+    + '<div class="legend"><span class="t1">mā</span><span class="t2">má</span>'
+    + '<span class="t3">mǎ</span><span class="t4">mà</span><span class="t5">ma</span></div>'
+    + '<button class="toggle ' + (P.tone ? "on" : "") + '" data-a="tone"><i></i></button></div>'
+
+    + '<div class="glass card"><p class="action-t">유리 농도</p>'
+    + '<input class="slider" type="range" min="0" max="100" value="' + P.tint + '" id="tint">'
+    + '<div class="ends"><span class="sub">맑게</span><span class="sub">짙게</span></div></div>'
+
+    + '<div class="glass card"><p class="action-t">데이터</p>'
+    + '<p class="sub">진도, 복습 목록, 생성된 예문을 지웁니다. 키는 남습니다.</p>'
+    + '<button class="pill danger" data-a="reset">초기화</button></div></div>';
+}
+
+function sheetHTML() {
+  var h = '<div class="sheetwrap" data-a="closesheet"><div class="sheet glass" data-stop="1">'
+    + '<div class="grabber"></div><div class="seg">';
+  CURRICULUM.phases.forEach(function (p, i) {
+    h += '<button class="seg-b ' + (i === S.ph ? "on" : "") + '" data-a="ph" data-i="' + i + '">'
+      + (i === 0 ? "1–3급 활성화" : "4급") + "</button>";
+  });
+  h += '</div><div class="weeks">';
+  phase().weeks.forEach(function (w, i) {
+    h += '<button class="wk ' + (i === S.wk ? "on" : "") + '" data-a="wk" data-i="' + i + '">' + w.week + "</button>";
+  });
+  return h + "</div></div></div>";
+}
+
+function render() {
+  document.documentElement.style.setProperty("--glass", 0.05 + (P.tint / 100) * 0.13);
+  document.documentElement.style.setProperty("--edge", 0.10 + (P.tint / 100) * 0.14);
+  var h;
+  if (S.busy) {
+    h = '<div class="screen"><div class="glass card center"><p class="action-t">'
+      + '<span class="spin"></span>' + esc(S.busy) + "</p>"
+      + '<p class="sub">이 회차에서 한 번만 만들고 저장합니다.</p></div></div>';
+  } else if (S.sess) {
+    h = S.sess.part === "warmup" ? warmupHTML() : talkHTML();
+  } else {
+    h = S.tab === "home" ? homeHTML() : S.tab === "review" ? reviewHTML() : settingsHTML();
+    if (S.toast) h += '<p class="err">' + esc(S.toast) + "</p>";
+    if (S.sheet) h += sheetHTML();
+    h += '<nav class="tabbar glass">'
+      + [["home", "홈"], ["review", "복습"], ["settings", "설정"]].map(function (t) {
+          return '<button class="tab ' + (S.tab === t[0] ? "sel" : "") + '" data-a="tab" data-tab="' + t[0] + '">'
+            + t[1] + "</button>"; }).join("") + "</nav>";
+  }
+  document.getElementById("app").innerHTML = h;
+}
+
+/* ===================== 이벤트 ===================== */
+document.addEventListener("click", function (ev) {
+  var t = ev.target.closest("[data-a]");
+  if (!t) return;
+  var a = t.getAttribute("data-a");
+
+  if (a === "say") return speak(t.getAttribute("data-t"));
+  if (a === "slow") return speak(t.getAttribute("data-t"), 0.55);
+  if (a === "tab") { S.tab = t.getAttribute("data-tab"); return render(); }
+  if (a === "sheet") { S.sheet = true; return render(); }
+  if (a === "closesheet") { if (!ev.target.closest("[data-stop]")) { S.sheet = false; render(); } return; }
+  if (a === "ph") { S.ph = +t.getAttribute("data-i"); S.wk = 0; return render(); }
+  if (a === "wk") { S.wk = +t.getAttribute("data-i"); S.sheet = false; return render(); }
+  if (a === "start") return startSession(+t.getAttribute("data-si"));
+  if (a === "exit") { S.sess = null; micErr = ""; return render(); }
+  if (a === "wlisten") return warmupListen();
+  if (a === "tlisten") return talkListen();
+  if (a === "retry") { S.sess.result = null; S.sess.pa = null; S.sess.said = ""; micErr = ""; return render(); }
+  if (a === "nextw") return nextWarmup();
+  if (a === "reveal") { S.sess.reveal = true; speak(S.sess.cur.example); return render(); }
+  if (a === "proceed") return proceedTalk();
+  if (a === "tone") { P.tone = !P.tone; persist(); return render(); }
+  if (a === "reset") { P.words = {}; P.missed = {}; P.log = []; P.gen = {}; persist(); return render(); }
+
+  if (a === "savekeys") {
+    var g = function (id) { var el = document.getElementById(id); return el ? el.value.trim() : ""; };
+    P.azKey = g("azKey"); P.azRegion = g("azRegion") || "koreacentral";
+    P.gmKey = g("gmKey"); P.gmModel = g("gmModel") || "gemini-3.6-flash";
+    persist(); return toast("저장했습니다.");
+  }
+  if (a === "revdrill") {
+    var list = Object.keys(P.missed).map(function (k) { return P.missed[k]; });
+    S.sess = { si: -1, fresh: [], items: list, idx: 0, part: "warmup", said: "", pa: null,
+      result: null, stage: "ask", turn: 0, history: [], cur: null, last: null, reveal: false, err: "" };
+    micErr = ""; render();
+    setTimeout(function () { speak(list[0].zh); }, 350);
+    return;
+  }
+  if (a === "typed") {
+    var box = document.getElementById("typed");
+    var v = box && box.value.trim();
+    if (!v || !S.sess) return;
+    if (S.sess.part === "warmup") gradeTyped(v);
+    else { S.sess.turn++; talkStep(v); }
+  }
+});
+
+document.addEventListener("keydown", function (ev) {
+  if (ev.key === "Enter" && ev.target.id === "typed") {
+    ev.preventDefault();
+    var v = ev.target.value.trim();
+    if (!v || !S.sess) return;
+    if (S.sess.part === "warmup") gradeTyped(v);
+    else { S.sess.turn++; talkStep(v); }
+  }
+});
+document.addEventListener("input", function (ev) {
+  if (ev.target.id === "tint") {
+    P.tint = +ev.target.value; persist();
+    document.documentElement.style.setProperty("--glass", 0.05 + (P.tint / 100) * 0.13);
+    document.documentElement.style.setProperty("--edge", 0.10 + (P.tint / 100) * 0.14);
+  }
+});
+
+/* ===================== 시작 ===================== */
+if (window.speechSynthesis) {
+  window.speechSynthesis.getVoices();
+  window.speechSynthesis.onvoiceschanged = function () { window.speechSynthesis.getVoices(); };
+}
+
+Promise.all(["./data/hsk1-3_curriculum.json", "./data/hsk4_curriculum.json"].map(function (f) {
+  return fetch(f).then(function (r) {
+    if (!r.ok) throw new Error(f + " 를 찾을 수 없습니다");
+    return r.json();
+  });
+})).then(function (phases) {
+  CURRICULUM = { phases: phases };
+  render();
+}).catch(function (e) {
+  document.getElementById("app").innerHTML =
+    '<div class="screen"><div class="glass card"><p class="action-t">데이터를 불러오지 못했습니다</p>'
+    + '<p class="sub">' + esc(e.message) + "</p>"
+    + '<p class="foot">index.html 과 같은 폴더에 data/ 가 있어야 합니다. '
+    + "파일을 직접 열지 말고 주소로 접속하세요.</p></div></div>";
+});
+</script>
+</body>
+</html>
