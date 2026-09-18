@@ -1,0 +1,5366 @@
+{
+  "meta": {
+    "title": "HSK1-3 활성화 커리큘럼 (12주)",
+    "purpose": "신규 암기가 아니라 이미 아는 단어를 발화로 끌어내는 단계.",
+    "source_vocab": "공식 HSK 2.0 (2012년 대강) 어휘표, 급수별 빈도순",
+    "ordering": "급수 순 → 급수 안에서 빈도순",
+    "sessions_per_week": 3,
+    "example_field": "각 어휘의 example은 {zh, pinyin, ko} 예문. null이면 prepare_examples.py로 채울 것.",
+    "note": "ko 필드는 비어 있음. en을 참고해 일괄 번역하거나 예문의 ko만 써도 무방.",
+    "next": "hsk4_curriculum.json (24주)"
+  },
+  "weeks": [
+    {
+      "week": 1,
+      "grammar": [
+        {
+          "point": "是 / 有 / 在",
+          "note": "존재·소유·소재 구분. 他是学生 / 我有钱 / 书在桌子上。"
+        },
+        {
+          "point": "的",
+          "note": "소유와 수식. 我的书 / 很好吃的菜。"
+        }
+      ],
+      "vocab_count": 51,
+      "sessions": [
+        {
+          "session": 1,
+          "target_vocab": [
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "hsk_level": 1,
+              "en": "indicates possession, like adding 's to a noun",
+              "ko": "",
+              "example": {
+                "zh": "这是我的手机",
+                "pinyin": "zhè shì wǒ de shǒujī",
+                "ko": "이건 제 휴대폰이에요"
+              }
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "hsk_level": 1,
+              "en": "I; me",
+              "ko": "",
+              "example": {
+                "zh": "我叫李民",
+                "pinyin": "wǒ jiào Lǐ Mín",
+                "ko": "저는 이민이라고 해요"
+              }
+            },
+            {
+              "hanzi": "你",
+              "pinyin": "nǐ",
+              "hsk_level": 1,
+              "en": "you (singular)",
+              "ko": "",
+              "example": {
+                "zh": "你好吗",
+                "pinyin": "nǐ hǎo ma",
+                "ko": "잘 지내요?"
+              }
+            },
+            {
+              "hanzi": "是",
+              "pinyin": "shì",
+              "hsk_level": 1,
+              "en": "be; is; are; am",
+              "ko": "",
+              "example": {
+                "zh": "他是我朋友",
+                "pinyin": "tā shì wǒ péngyou",
+                "ko": "그는 제 친구예요"
+              }
+            },
+            {
+              "hanzi": "了",
+              "pinyin": "le",
+              "hsk_level": 1,
+              "en": "indicates a completed or finished action",
+              "ko": "",
+              "example": {
+                "zh": "我吃饭了",
+                "pinyin": "wǒ chī fàn le",
+                "ko": "저 밥 먹었어요"
+              }
+            },
+            {
+              "hanzi": "不",
+              "pinyin": "bù",
+              "hsk_level": 1,
+              "en": "no; not",
+              "ko": "",
+              "example": {
+                "zh": "我不知道",
+                "pinyin": "wǒ bù zhīdào",
+                "ko": "저는 몰라요"
+              }
+            },
+            {
+              "hanzi": "在",
+              "pinyin": "zài",
+              "hsk_level": 1,
+              "en": "at; on; in; indicates an action in progress",
+              "ko": "",
+              "example": {
+                "zh": "我在公司",
+                "pinyin": "wǒ zài gōngsī",
+                "ko": "저 회사에 있어요"
+              }
+            },
+            {
+              "hanzi": "他",
+              "pinyin": "tā",
+              "hsk_level": 1,
+              "en": "he; him",
+              "ko": "",
+              "example": {
+                "zh": "他去上班了",
+                "pinyin": "tā qù shàngbān le",
+                "ko": "그는 출근했어요"
+              }
+            },
+            {
+              "hanzi": "我们",
+              "pinyin": "wǒmen",
+              "hsk_level": 1,
+              "en": "we; us",
+              "ko": "",
+              "example": {
+                "zh": "我们走吧",
+                "pinyin": "wǒmen zǒu ba",
+                "ko": "우리 가요"
+              }
+            },
+            {
+              "hanzi": "好",
+              "pinyin": "hǎo",
+              "hsk_level": 1,
+              "en": "good",
+              "ko": "",
+              "example": {
+                "zh": "今天天气很好",
+                "pinyin": "jīntiān tiānqì hěn hǎo",
+                "ko": "오늘 날씨 좋아요"
+              }
+            },
+            {
+              "hanzi": "有",
+              "pinyin": "yǒu",
+              "hsk_level": 1,
+              "en": "have",
+              "ko": "",
+              "example": {
+                "zh": "我有两个孩子",
+                "pinyin": "wǒ yǒu liǎng ge háizi",
+                "ko": "저는 아이가 둘 있어요"
+              }
+            },
+            {
+              "hanzi": "这",
+              "pinyin": "zhè",
+              "hsk_level": 1,
+              "en": "this",
+              "ko": "",
+              "example": {
+                "zh": "这个多少钱",
+                "pinyin": "zhège duōshao qián",
+                "ko": "이거 얼마예요?"
+              }
+            },
+            {
+              "hanzi": "会",
+              "pinyin": "huì",
+              "hsk_level": 1,
+              "en": "know how to",
+              "ko": "",
+              "example": {
+                "zh": "我会说一点儿汉语",
+                "pinyin": "wǒ huì shuō yìdiǎnr Hànyǔ",
+                "ko": "중국어 조금 할 줄 알아요"
+              }
+            },
+            {
+              "hanzi": "吗",
+              "pinyin": "ma",
+              "hsk_level": 1,
+              "en": "indicates a yes/no question (added to a statement)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "什么",
+              "pinyin": "shénme",
+              "hsk_level": 1,
+              "en": "what? (replaces the noun to turn a statement into a question)",
+              "ko": "",
+              "example": {
+                "zh": "这是什么",
+                "pinyin": "zhè shì shénme",
+                "ko": "이게 뭐예요?"
+              }
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "hsk_level": 1,
+              "en": "speak",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "她",
+              "pinyin": "tā",
+              "hsk_level": 1,
+              "en": "she",
+              "ko": "",
+              "example": {
+                "zh": "她是我姐姐",
+                "pinyin": "tā shì wǒ jiějie",
+                "ko": "그 사람은 제 언니예요"
+              }
+            }
+          ]
+        },
+        {
+          "session": 2,
+          "target_vocab": [
+            {
+              "hanzi": "想",
+              "pinyin": "xiǎng",
+              "hsk_level": 1,
+              "en": "think; believe; suppose; would like to",
+              "ko": "",
+              "example": {
+                "zh": "我想休息一下",
+                "pinyin": "wǒ xiǎng xiūxi yíxià",
+                "ko": "좀 쉬고 싶어요"
+              }
+            },
+            {
+              "hanzi": "一",
+              "pinyin": "yī",
+              "hsk_level": 1,
+              "en": "one; once; a",
+              "ko": "",
+              "example": {
+                "zh": "我们一起吃饭吧",
+                "pinyin": "wǒmen yìqǐ chī fàn ba",
+                "ko": "같이 밥 먹어요"
+              }
+            },
+            {
+              "hanzi": "很",
+              "pinyin": "hěn",
+              "hsk_level": 1,
+              "en": "very; quite",
+              "ko": "",
+              "example": {
+                "zh": "今天很累",
+                "pinyin": "jīntiān hěn lèi",
+                "ko": "오늘 너무 피곤해요"
+              }
+            },
+            {
+              "hanzi": "人",
+              "pinyin": "rén",
+              "hsk_level": 1,
+              "en": "person; man; people",
+              "ko": "",
+              "example": {
+                "zh": "这里人太多了",
+                "pinyin": "zhèlǐ rén tài duō le",
+                "ko": "여기 사람이 너무 많아요"
+              }
+            },
+            {
+              "hanzi": "那",
+              "pinyin": "nà",
+              "hsk_level": 1,
+              "en": "that; then",
+              "ko": "",
+              "example": {
+                "zh": "那我们明天见",
+                "pinyin": "nà wǒmen míngtiān jiàn",
+                "ko": "그럼 내일 봐요"
+              }
+            },
+            {
+              "hanzi": "来",
+              "pinyin": "lái",
+              "hsk_level": 1,
+              "en": "come; arrive; ever since; next",
+              "ko": "",
+              "example": {
+                "zh": "你来一下",
+                "pinyin": "nǐ lái yíxià",
+                "ko": "잠깐 와 봐요"
+              }
+            },
+            {
+              "hanzi": "都",
+              "pinyin": "dōu",
+              "hsk_level": 1,
+              "en": "all; both",
+              "ko": "",
+              "example": {
+                "zh": "大家都来了",
+                "pinyin": "dàjiā dōu lái le",
+                "ko": "다들 왔어요"
+              }
+            },
+            {
+              "hanzi": "个",
+              "pinyin": "ge",
+              "hsk_level": 1,
+              "en": "general measure word",
+              "ko": "",
+              "example": {
+                "zh": "给我一个",
+                "pinyin": "gěi wǒ yí ge",
+                "ko": "하나 주세요"
+              }
+            },
+            {
+              "hanzi": "能",
+              "pinyin": "néng",
+              "hsk_level": 1,
+              "en": "can; be able",
+              "ko": "",
+              "example": {
+                "zh": "你能帮我吗",
+                "pinyin": "nǐ néng bāng wǒ ma",
+                "ko": "좀 도와줄 수 있어요?"
+              }
+            },
+            {
+              "hanzi": "去",
+              "pinyin": "qù",
+              "hsk_level": 1,
+              "en": "go; to leave",
+              "ko": "",
+              "example": {
+                "zh": "你去哪儿",
+                "pinyin": "nǐ qù nǎr",
+                "ko": "어디 가세요?"
+              }
+            },
+            {
+              "hanzi": "和",
+              "pinyin": "hé",
+              "hsk_level": 1,
+              "en": "and; with",
+              "ko": "",
+              "example": {
+                "zh": "我和朋友一起去",
+                "pinyin": "wǒ hé péngyou yìqǐ qù",
+                "ko": "친구랑 같이 가요"
+              }
+            },
+            {
+              "hanzi": "做",
+              "pinyin": "zuò",
+              "hsk_level": 1,
+              "en": "do; make",
+              "ko": "",
+              "example": {
+                "zh": "你在做什么",
+                "pinyin": "nǐ zài zuò shénme",
+                "ko": "뭐 하고 있어요?"
+              }
+            },
+            {
+              "hanzi": "上",
+              "pinyin": "shàng",
+              "hsk_level": 1,
+              "en": "above; up",
+              "ko": "",
+              "example": {
+                "zh": "书在桌子上",
+                "pinyin": "shū zài zhuōzi shàng",
+                "ko": "책은 책상 위에 있어요"
+              }
+            },
+            {
+              "hanzi": "没有",
+              "pinyin": "méiyǒu",
+              "hsk_level": 1,
+              "en": "not have; there is not",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "看",
+              "pinyin": "kàn",
+              "hsk_level": 1,
+              "en": "see; look at; to watch",
+              "ko": "",
+              "example": {
+                "zh": "我在看电视",
+                "pinyin": "wǒ zài kàn diànshì",
+                "ko": "저 TV 보고 있어요"
+              }
+            },
+            {
+              "hanzi": "怎么",
+              "pinyin": "zěnme",
+              "hsk_level": 1,
+              "en": "how?",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "现在",
+              "pinyin": "xiànzài",
+              "hsk_level": 1,
+              "en": "now",
+              "ko": "",
+              "example": null
+            }
+          ]
+        },
+        {
+          "session": 3,
+          "target_vocab": [
+            {
+              "hanzi": "点",
+              "pinyin": "diǎn",
+              "hsk_level": 1,
+              "en": "a dot; a little; o'clock",
+              "ko": "",
+              "example": {
+                "zh": "我们几点见",
+                "pinyin": "wǒmen jǐ diǎn jiàn",
+                "ko": "우리 몇 시에 만나요?"
+              }
+            },
+            {
+              "hanzi": "呢",
+              "pinyin": "ne",
+              "hsk_level": 1,
+              "en": "indicates a question; how about...?;",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "太",
+              "pinyin": "tài",
+              "hsk_level": 1,
+              "en": "too (much)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "里",
+              "pinyin": "lǐ",
+              "hsk_level": 1,
+              "en": "inside; Chinese mile (~.5 km)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "听",
+              "pinyin": "tīng",
+              "hsk_level": 1,
+              "en": "listen; hear",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "谁",
+              "pinyin": "shéi",
+              "hsk_level": 1,
+              "en": "who",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "多",
+              "pinyin": "duō",
+              "hsk_level": 1,
+              "en": "many",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "时候",
+              "pinyin": "shíhou",
+              "hsk_level": 1,
+              "en": "time",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "下",
+              "pinyin": "xià",
+              "hsk_level": 1,
+              "en": "fall; below",
+              "ko": "",
+              "example": {
+                "zh": "我下班了",
+                "pinyin": "wǒ xiàbān le",
+                "ko": "저 퇴근했어요"
+              }
+            },
+            {
+              "hanzi": "谢谢",
+              "pinyin": "xièxie",
+              "hsk_level": 1,
+              "en": "thank you",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "先生",
+              "pinyin": "xiānsheng",
+              "hsk_level": 1,
+              "en": "Mr.; Sir",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "喜欢",
+              "pinyin": "xǐhuan",
+              "hsk_level": 1,
+              "en": "to like",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "大",
+              "pinyin": "dà, dài",
+              "hsk_level": 1,
+              "en": "big; large",
+              "ko": "",
+              "example": {
+                "zh": "这件太大了",
+                "pinyin": "zhè jiàn tài dà le",
+                "ko": "이거 너무 커요"
+              }
+            },
+            {
+              "hanzi": "东西",
+              "pinyin": "dōngxi",
+              "hsk_level": 1,
+              "en": "things; stuff",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "小",
+              "pinyin": "xiǎo",
+              "hsk_level": 1,
+              "en": "small; young",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "叫",
+              "pinyin": "jiào",
+              "hsk_level": 1,
+              "en": "to be called",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "爱",
+              "pinyin": "ài",
+              "hsk_level": 1,
+              "en": "love",
+              "ko": "",
+              "example": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "week": 2,
+      "grammar": [
+        {
+          "point": "吗 / 呢 / 吧",
+          "note": "어기조사 구분. 你去吗？/ 你呢？/ 走吧。"
+        },
+        {
+          "point": "의문대명사",
+          "note": "谁 / 什么 / 哪儿 / 怎么 / 为什么. 평서문 어순 그대로."
+        }
+      ],
+      "vocab_count": 51,
+      "sessions": [
+        {
+          "session": 1,
+          "target_vocab": [
+            {
+              "hanzi": "年",
+              "pinyin": "nián",
+              "hsk_level": 1,
+              "en": "year",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "请",
+              "pinyin": "qǐng",
+              "hsk_level": 1,
+              "en": "please; invite; to treat someone to something",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "回",
+              "pinyin": "huí",
+              "hsk_level": 1,
+              "en": "to return; to reply; to go back",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "工作",
+              "pinyin": "gōngzuò",
+              "hsk_level": 1,
+              "en": "work; a job",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "钱",
+              "pinyin": "qián",
+              "hsk_level": 1,
+              "en": "money; coin",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "吃",
+              "pinyin": "chī",
+              "hsk_level": 1,
+              "en": "eat",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "开",
+              "pinyin": "kāi",
+              "hsk_level": 1,
+              "en": "to open; to start; to operate (a vehicle)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "家",
+              "pinyin": "jiā",
+              "hsk_level": 1,
+              "en": "family; home",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "哪",
+              "pinyin": "nǎa",
+              "hsk_level": 1,
+              "en": "which; how",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "朋友",
+              "pinyin": "péngyou",
+              "hsk_level": 1,
+              "en": "friend",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "妈妈",
+              "pinyin": "māma",
+              "hsk_level": 1,
+              "en": "mom; mum",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "今天",
+              "pinyin": "jīntiān",
+              "hsk_level": 1,
+              "en": "today",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "几",
+              "pinyin": "jǐ",
+              "hsk_level": 1,
+              "en": "how many; several; a few",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "爸爸",
+              "pinyin": "bàba",
+              "hsk_level": 1,
+              "en": "Dad",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "些",
+              "pinyin": "xiē",
+              "hsk_level": 1,
+              "en": "some; few; several",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "怎么样",
+              "pinyin": "zěnmeyàng",
+              "hsk_level": 1,
+              "en": "how about?; how is/was it?",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "对不起",
+              "pinyin": "duìbuqǐ",
+              "hsk_level": 1,
+              "en": "sorry",
+              "ko": "",
+              "example": null
+            }
+          ]
+        },
+        {
+          "session": 2,
+          "target_vocab": [
+            {
+              "hanzi": "住",
+              "pinyin": "zhù",
+              "hsk_level": 1,
+              "en": "to live; reside; to stop",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "三",
+              "pinyin": "sān",
+              "hsk_level": 1,
+              "en": "three",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "高兴",
+              "pinyin": "gāoxìng",
+              "hsk_level": 1,
+              "en": "happy; glad",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "买",
+              "pinyin": "mǎi",
+              "hsk_level": 1,
+              "en": "to buy",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "医生",
+              "pinyin": "yīshēng",
+              "hsk_level": 1,
+              "en": "doctor",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "哪儿",
+              "pinyin": "nǎr",
+              "hsk_level": 1,
+              "en": "where? (Beijing accent)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "字",
+              "pinyin": "zì",
+              "hsk_level": 1,
+              "en": "letter; character",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "名字",
+              "pinyin": "míngzi",
+              "hsk_level": 1,
+              "en": "name",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "认识",
+              "pinyin": "rènshi",
+              "hsk_level": 1,
+              "en": "recognize; know (a person)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "坐",
+              "pinyin": "zuò",
+              "hsk_level": 1,
+              "en": "sit",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "喝",
+              "pinyin": "hē",
+              "hsk_level": 1,
+              "en": "to drink",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "写",
+              "pinyin": "xiě",
+              "hsk_level": 1,
+              "en": "to write; to compose",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "月",
+              "pinyin": "yuè",
+              "hsk_level": 1,
+              "en": "moon; month; flesh (radical)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "号",
+              "pinyin": "hào",
+              "hsk_level": 1,
+              "en": "number; day of a month",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "狗",
+              "pinyin": "gǒu",
+              "hsk_level": 1,
+              "en": "dog",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "岁",
+              "pinyin": "suì",
+              "hsk_level": 1,
+              "en": "years old; age",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "看见",
+              "pinyin": "kànjiàn",
+              "hsk_level": 1,
+              "en": "see; catch sight of",
+              "ko": "",
+              "example": null
+            }
+          ]
+        },
+        {
+          "session": 3,
+          "target_vocab": [
+            {
+              "hanzi": "打电话",
+              "pinyin": "dǎ diànhuà",
+              "hsk_level": 1,
+              "en": "make a phone call",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "喂",
+              "pinyin": "wèi",
+              "hsk_level": 1,
+              "en": "hello (on the phone)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "儿子",
+              "pinyin": "érzi",
+              "hsk_level": 1,
+              "en": "son",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "漂亮",
+              "pinyin": "piàoliang",
+              "hsk_level": 1,
+              "en": "pretty; beautiful",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "分钟",
+              "pinyin": "fēnzhōng",
+              "hsk_level": 1,
+              "en": "minute; (measure word for time)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "再见",
+              "pinyin": "zàijiàn",
+              "hsk_level": 1,
+              "en": "goodbye; see you later",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "本",
+              "pinyin": "běn",
+              "hsk_level": 1,
+              "en": "measure word for books",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "明天",
+              "pinyin": "míngtiān",
+              "hsk_level": 1,
+              "en": "tomorrow",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "少",
+              "pinyin": "shǎo",
+              "hsk_level": 1,
+              "en": "few; little",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "多少",
+              "pinyin": "duōshao",
+              "hsk_level": 1,
+              "en": "how much?; how many?",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "块",
+              "pinyin": "kuài",
+              "hsk_level": 1,
+              "en": "lump; piece; sum of money",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "女儿",
+              "pinyin": "nǚ'ér",
+              "hsk_level": 1,
+              "en": "daughter",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "小姐",
+              "pinyin": "xiǎojie",
+              "hsk_level": 1,
+              "en": "young lady; miss; Ms.",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "衣服",
+              "pinyin": "yīfu",
+              "hsk_level": 1,
+              "en": "clothes",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "水",
+              "pinyin": "shuǐ",
+              "hsk_level": 1,
+              "en": "water",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "学校",
+              "pinyin": "xuéxiào",
+              "hsk_level": 1,
+              "en": "school",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "电影",
+              "pinyin": "diànyǐng",
+              "hsk_level": 1,
+              "en": "movie; film",
+              "ko": "",
+              "example": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "week": 3,
+      "grammar": [
+        {
+          "point": "양사",
+          "note": "个/本/张/件/杯/位. 一杯咖啡 / 两件衣服。"
+        },
+        {
+          "point": "几 / 多少",
+          "note": "几는 10 미만 예상, 多少는 제한 없음."
+        }
+      ],
+      "vocab_count": 51,
+      "sessions": [
+        {
+          "session": 1,
+          "target_vocab": [
+            {
+              "hanzi": "书",
+              "pinyin": "shū",
+              "hsk_level": 1,
+              "en": "book; letter",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "四",
+              "pinyin": "sì",
+              "hsk_level": 1,
+              "en": "four",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "五",
+              "pinyin": "wǔ",
+              "hsk_level": 1,
+              "en": "five",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "医院",
+              "pinyin": "yīyuàn",
+              "hsk_level": 1,
+              "en": "hospital",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "没关系",
+              "pinyin": "méi guānxi",
+              "hsk_level": 1,
+              "en": "it doesn't matter; never mind",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "飞机",
+              "pinyin": "fēijī",
+              "hsk_level": 1,
+              "en": "airplane",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "二",
+              "pinyin": "èr",
+              "hsk_level": 1,
+              "en": "two",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "电视",
+              "pinyin": "diànshì",
+              "hsk_level": 1,
+              "en": "television; TV",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "读",
+              "pinyin": "dú",
+              "hsk_level": 1,
+              "en": "to read; to study",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "后面",
+              "pinyin": "hòumian",
+              "hsk_level": 1,
+              "en": "back; behind",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "昨天",
+              "pinyin": "zuótiān",
+              "hsk_level": 1,
+              "en": "yesterday",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "睡觉",
+              "pinyin": "shuì jiào",
+              "hsk_level": 1,
+              "en": "to sleep; go to bed",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "六",
+              "pinyin": "liù",
+              "hsk_level": 1,
+              "en": "six",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "老师",
+              "pinyin": "lǎoshī",
+              "hsk_level": 1,
+              "en": "teacher",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "星期",
+              "pinyin": "xīngqī",
+              "hsk_level": 1,
+              "en": "week",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "十",
+              "pinyin": "shí",
+              "hsk_level": 1,
+              "en": "ten",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "猫",
+              "pinyin": "māo",
+              "hsk_level": 1,
+              "en": "cat",
+              "ko": "",
+              "example": null
+            }
+          ]
+        },
+        {
+          "session": 2,
+          "target_vocab": [
+            {
+              "hanzi": "电脑",
+              "pinyin": "diànnǎo",
+              "hsk_level": 1,
+              "en": "computer",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "热",
+              "pinyin": "rè",
+              "hsk_level": 1,
+              "en": "heat; hot",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "学生",
+              "pinyin": "xuésheng",
+              "hsk_level": 1,
+              "en": "student",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "下午",
+              "pinyin": "xiàwǔ",
+              "hsk_level": 1,
+              "en": "afternoon",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "学习",
+              "pinyin": "xuéxí",
+              "hsk_level": 1,
+              "en": "learn; to study",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "冷",
+              "pinyin": "lěng",
+              "hsk_level": 1,
+              "en": "cold",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "不客气",
+              "pinyin": "bú kèqi",
+              "hsk_level": 1,
+              "en": "you're welcome; don't be polite",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "前面",
+              "pinyin": "qiánmiàn",
+              "hsk_level": 1,
+              "en": "in front",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "八",
+              "pinyin": "bā",
+              "hsk_level": 1,
+              "en": "eight",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "中国",
+              "pinyin": "Zhōngguó",
+              "hsk_level": 1,
+              "en": "China",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "七",
+              "pinyin": "qī",
+              "hsk_level": 1,
+              "en": "seven",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "菜",
+              "pinyin": "cài",
+              "hsk_level": 1,
+              "en": "dish (type of food); vegetables",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "桌子",
+              "pinyin": "zhuōzi",
+              "hsk_level": 1,
+              "en": "table; desk",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "出租车",
+              "pinyin": "chūzūchē",
+              "hsk_level": 1,
+              "en": "taxi; cab",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "天气",
+              "pinyin": "tiānqì",
+              "hsk_level": 1,
+              "en": "weather",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "茶",
+              "pinyin": "chá",
+              "hsk_level": 1,
+              "en": "tea",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "九",
+              "pinyin": "jiǔ",
+              "hsk_level": 1,
+              "en": "nine",
+              "ko": "",
+              "example": null
+            }
+          ]
+        },
+        {
+          "session": 3,
+          "target_vocab": [
+            {
+              "hanzi": "商店",
+              "pinyin": "shāngdiàn",
+              "hsk_level": 1,
+              "en": "shop; store",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "椅子",
+              "pinyin": "yǐzi",
+              "hsk_level": 1,
+              "en": "chair",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "同学",
+              "pinyin": "tóngxué",
+              "hsk_level": 1,
+              "en": "fellow student; schoolmate",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "一点儿",
+              "pinyin": "yìdiǎnr",
+              "hsk_level": 1,
+              "en": "a bit; a few",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "苹果",
+              "pinyin": "píngguǒ",
+              "hsk_level": 1,
+              "en": "apple",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "饭店",
+              "pinyin": "fàndiàn",
+              "hsk_level": 1,
+              "en": "restaurant; hotel",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "中午",
+              "pinyin": "zhōngwǔ",
+              "hsk_level": 1,
+              "en": "noon; midday",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "上午",
+              "pinyin": "shàngwǔ",
+              "hsk_level": 1,
+              "en": "late morning (before noon)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "水果",
+              "pinyin": "shuǐguǒ",
+              "hsk_level": 1,
+              "en": "fruit",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "杯子",
+              "pinyin": "bēizi",
+              "hsk_level": 1,
+              "en": "cup; glass",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "下雨",
+              "pinyin": "xiàyǔ",
+              "hsk_level": 1,
+              "en": "to rain",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "米饭",
+              "pinyin": "mǐfàn",
+              "hsk_level": 1,
+              "en": "(cooked) rice",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "北京",
+              "pinyin": "Běijīng",
+              "hsk_level": 1,
+              "en": "Beijing",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "汉语",
+              "pinyin": "Hànyǔ",
+              "hsk_level": 1,
+              "en": "Chinese language",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "就",
+              "pinyin": "jiù",
+              "hsk_level": 2,
+              "en": "then; at once; just; only; with regard to",
+              "ko": "",
+              "example": {
+                "zh": "我马上就来",
+                "pinyin": "wǒ mǎshàng jiù lái",
+                "ko": "금방 갈게요"
+              }
+            },
+            {
+              "hanzi": "要",
+              "pinyin": "yào, yāo",
+              "hsk_level": 2,
+              "en": "to want; to need; will/shall; important | demand; request",
+              "ko": "",
+              "example": {
+                "zh": "我要一杯咖啡",
+                "pinyin": "wǒ yào yì bēi kāfēi",
+                "ko": "커피 한 잔 주세요"
+              }
+            },
+            {
+              "hanzi": "知道",
+              "pinyin": "zhīdao",
+              "hsk_level": 2,
+              "en": "know; be aware of",
+              "ko": "",
+              "example": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "week": 4,
+      "grammar": [
+        {
+          "point": "기본 어순",
+          "note": "주어 + 시간 + 장소 + 동사 + 목적어. 我明天在家看书。"
+        },
+        {
+          "point": "在 / 从 / 到",
+          "note": "장소·기점·도착점 전치사."
+        }
+      ],
+      "vocab_count": 51,
+      "sessions": [
+        {
+          "session": 1,
+          "target_vocab": [
+            {
+              "hanzi": "吧",
+              "pinyin": "ba, bā",
+              "hsk_level": 2,
+              "en": "particle indicating polite suggestion; | onomatopoeia | bar (serving drinks, providing internet access, etc.)",
+              "ko": "",
+              "example": {
+                "zh": "你先说吧",
+                "pinyin": "nǐ xiān shuō ba",
+                "ko": "먼저 말씀하세요"
+              }
+            },
+            {
+              "hanzi": "到",
+              "pinyin": "dào",
+              "hsk_level": 2,
+              "en": "arrive (at a place); until (a time)",
+              "ko": "",
+              "example": {
+                "zh": "我到家了",
+                "pinyin": "wǒ dào jiā le",
+                "ko": "저 집에 도착했어요"
+              }
+            },
+            {
+              "hanzi": "对",
+              "pinyin": "duì",
+              "hsk_level": 2,
+              "en": "correct; a pair; to face; be opposite; to; towards",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "也",
+              "pinyin": "yě",
+              "hsk_level": 2,
+              "en": "also; too",
+              "ko": "",
+              "example": {
+                "zh": "我也想去",
+                "pinyin": "wǒ yě xiǎng qù",
+                "ko": "저도 가고 싶어요"
+              }
+            },
+            {
+              "hanzi": "还",
+              "pinyin": "hái, huán",
+              "hsk_level": 2,
+              "en": "still; yet; in addition; even | repay; to return",
+              "ko": "",
+              "example": {
+                "zh": "我还没吃饭",
+                "pinyin": "wǒ hái méi chī fàn",
+                "ko": "저 아직 밥 안 먹었어요"
+              }
+            },
+            {
+              "hanzi": "让",
+              "pinyin": "ràng",
+              "hsk_level": 2,
+              "en": "ask; let; yield",
+              "ko": "",
+              "example": {
+                "zh": "让我想想",
+                "pinyin": "ràng wǒ xiǎngxiang",
+                "ko": "생각 좀 해볼게요"
+              }
+            },
+            {
+              "hanzi": "给",
+              "pinyin": "gěi, jǐ",
+              "hsk_level": 2,
+              "en": "to give; to grant; (passive particle) | provide",
+              "ko": "",
+              "example": {
+                "zh": "给我打电话",
+                "pinyin": "gěi wǒ dǎ diànhuà",
+                "ko": "저한테 전화 주세요"
+              }
+            },
+            {
+              "hanzi": "过",
+              "pinyin": "guò",
+              "hsk_level": 2,
+              "en": "to pass; to cross; go over; (indicates a past experience)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "得",
+              "pinyin": "dé, děi, de",
+              "hsk_level": 2,
+              "en": "obtain | must | (complement particle)",
+              "ko": "",
+              "example": {
+                "zh": "他说得很快",
+                "pinyin": "tā shuō de hěn kuài",
+                "ko": "그는 말이 빨라요"
+              }
+            },
+            {
+              "hanzi": "真",
+              "pinyin": "zhēn",
+              "hsk_level": 2,
+              "en": "real; true; genuine",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "着",
+              "pinyin": "zhe, zháo, zhuó",
+              "hsk_level": 2,
+              "en": "-ing (indicating action in progress) | to touch; to feel | to wear; apply",
+              "ko": "",
+              "example": {
+                "zh": "门开着呢",
+                "pinyin": "mén kāi zhe ne",
+                "ko": "문 열려 있어요"
+              }
+            },
+            {
+              "hanzi": "可以",
+              "pinyin": "kěyǐ",
+              "hsk_level": 2,
+              "en": "can; may; possible; okay",
+              "ko": "",
+              "example": {
+                "zh": "可以用一下吗",
+                "pinyin": "kěyǐ yòng yíxià ma",
+                "ko": "좀 써도 될까요?"
+              }
+            },
+            {
+              "hanzi": "别",
+              "pinyin": "bié, biè",
+              "hsk_level": 2,
+              "en": "don't do something; don't | depart; | other; difference; distinguish",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "走",
+              "pinyin": "zǒu",
+              "hsk_level": 2,
+              "en": "to walk; to go; to move (Kangxi radical 156)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "告诉",
+              "pinyin": "gàosu",
+              "hsk_level": 2,
+              "en": "to tell; inform",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "因为",
+              "pinyin": "yīnwèi",
+              "hsk_level": 2,
+              "en": "because",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "再",
+              "pinyin": "zài",
+              "hsk_level": 2,
+              "en": "again; once more",
+              "ko": "",
+              "example": null
+            }
+          ]
+        },
+        {
+          "session": 2,
+          "target_vocab": [
+            {
+              "hanzi": "快",
+              "pinyin": "kuài",
+              "hsk_level": 2,
+              "en": "fast; quick; swift",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "但是",
+              "pinyin": "dànshì",
+              "hsk_level": 2,
+              "en": "but; however",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "已经",
+              "pinyin": "yǐjing",
+              "hsk_level": 2,
+              "en": "already",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "为什么",
+              "pinyin": "wèishénme",
+              "hsk_level": 2,
+              "en": "why?; for what reason?",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "觉得",
+              "pinyin": "juéde",
+              "hsk_level": 2,
+              "en": "feel; think",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "它",
+              "pinyin": "tā",
+              "hsk_level": 2,
+              "en": "it",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "从",
+              "pinyin": "cóng",
+              "hsk_level": 2,
+              "en": "from; obey; observe",
+              "ko": "",
+              "example": {
+                "zh": "我从韩国来",
+                "pinyin": "wǒ cóng Hánguó lái",
+                "ko": "저는 한국에서 왔어요"
+              }
+            },
+            {
+              "hanzi": "找",
+              "pinyin": "zhǎo",
+              "hsk_level": 2,
+              "en": "try to find; look for; seek; to give change",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "最",
+              "pinyin": "zuì",
+              "hsk_level": 2,
+              "en": "the most; -est; (indicator for superlative)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "可能",
+              "pinyin": "kěnéng",
+              "hsk_level": 2,
+              "en": "possible; maybe",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "次",
+              "pinyin": "cì",
+              "hsk_level": 2,
+              "en": "(mw for number of times of occurrence); nth; order",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "出",
+              "pinyin": "chū",
+              "hsk_level": 2,
+              "en": "go out; occur",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "孩子",
+              "pinyin": "háizi",
+              "hsk_level": 2,
+              "en": "child; children; son or daughter",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "所以",
+              "pinyin": "suǒyǐ",
+              "hsk_level": 2,
+              "en": "so; therefore; as a result",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "两",
+              "pinyin": "liǎng",
+              "hsk_level": 2,
+              "en": "two; 2; both; (unit of weight equal to 50 grams)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "错",
+              "pinyin": "cuò",
+              "hsk_level": 2,
+              "en": "mistake; error; blunder; miss an opportunity",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "等",
+              "pinyin": "děng",
+              "hsk_level": 2,
+              "en": "to wait; rank; equal; etc.",
+              "ko": "",
+              "example": null
+            }
+          ]
+        },
+        {
+          "session": 3,
+          "target_vocab": [
+            {
+              "hanzi": "题",
+              "pinyin": "tí",
+              "hsk_level": 2,
+              "en": "topic; subject; question on a test or assignment",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "问",
+              "pinyin": "wèn",
+              "hsk_level": 2,
+              "en": "ask; inquire",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "问题",
+              "pinyin": "wèntí",
+              "hsk_level": 2,
+              "en": "question; problem",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "一起",
+              "pinyin": "yìqǐ",
+              "hsk_level": 2,
+              "en": "together; in the same place",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "开始",
+              "pinyin": "kāishǐ",
+              "hsk_level": 2,
+              "en": "begin; to start; beginning",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "时间",
+              "pinyin": "shíjiān",
+              "hsk_level": 2,
+              "en": "time; period",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "事情",
+              "pinyin": "shìqing",
+              "hsk_level": 2,
+              "en": "matter; affair; thing; business",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "一下",
+              "pinyin": "yíxià",
+              "hsk_level": 2,
+              "en": "a little bit/while; one time; once",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "非常",
+              "pinyin": "fēicháng",
+              "hsk_level": 2,
+              "en": "extremely; extraordinary; very",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "希望",
+              "pinyin": "xīwàng",
+              "hsk_level": 2,
+              "en": "to hope; wish for; to desire",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "准备",
+              "pinyin": "zhǔnbèi",
+              "hsk_level": 2,
+              "en": "prepare; get ready",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "比",
+              "pinyin": "bǐ",
+              "hsk_level": 2,
+              "en": "compare; (indicates comparison) (Kangxi radical 81); to gesticulate as one talks",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "件",
+              "pinyin": "jiàn",
+              "hsk_level": 2,
+              "en": "(mw for things, clothes, and items)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "意思",
+              "pinyin": "yìsi",
+              "hsk_level": 2,
+              "en": "meaning; idea; opinion",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "第一",
+              "pinyin": "dìyī",
+              "hsk_level": 2,
+              "en": "first; number 1",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "进",
+              "pinyin": "jìn",
+              "hsk_level": 2,
+              "en": "enter; come in",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "大家",
+              "pinyin": "dàjiā",
+              "hsk_level": 2,
+              "en": "everyone",
+              "ko": "",
+              "example": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "week": 5,
+      "grammar": [
+        {
+          "point": "형용사술어문",
+          "note": "很/非常/太…了. 今天很热。是 안 씀."
+        },
+        {
+          "point": "不 / 没",
+          "note": "不은 의지·습관·미래, 没는 완료 부정."
+        }
+      ],
+      "vocab_count": 51,
+      "sessions": [
+        {
+          "session": 1,
+          "target_vocab": [
+            {
+              "hanzi": "新",
+              "pinyin": "xīn",
+              "hsk_level": 2,
+              "en": "new; Xinjiang autonomous region (abbreviation)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "您",
+              "pinyin": "nín",
+              "hsk_level": 2,
+              "en": "you (polite)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "穿",
+              "pinyin": "chuān",
+              "hsk_level": 2,
+              "en": "to wear; put on; penetrate",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "送",
+              "pinyin": "sòng",
+              "hsk_level": 2,
+              "en": "deliver; to carry; to give; send",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "玩",
+              "pinyin": "wán",
+              "hsk_level": 2,
+              "en": "to play; have a good time; visit; enjoy",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "长",
+              "pinyin": "cháng, zhǎng",
+              "hsk_level": 2,
+              "en": "long; length | grow; chief (Kangxi radical 168)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "小时",
+              "pinyin": "xiǎoshí",
+              "hsk_level": 2,
+              "en": "hour",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "完",
+              "pinyin": "wán",
+              "hsk_level": 2,
+              "en": "to finish; be over; complete",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "每",
+              "pinyin": "měi",
+              "hsk_level": 2,
+              "en": "each; every",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "公司",
+              "pinyin": "gōngsī",
+              "hsk_level": 2,
+              "en": "company; corporation",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "帮助",
+              "pinyin": "bāngzhù",
+              "hsk_level": 2,
+              "en": "help; assist; aid",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "晚上",
+              "pinyin": "wǎnshang",
+              "hsk_level": 2,
+              "en": "evening; night",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "说话",
+              "pinyin": "shuōhuà",
+              "hsk_level": 2,
+              "en": "to talk; speak",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "门",
+              "pinyin": "mén",
+              "hsk_level": 2,
+              "en": "door; opening; gate (Kangxi radical 169)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "女",
+              "pinyin": "nǚ",
+              "hsk_level": 2,
+              "en": "woman; female (Kangxi radical 38)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "忙",
+              "pinyin": "máng",
+              "hsk_level": 2,
+              "en": "busy",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "卖",
+              "pinyin": "mài",
+              "hsk_level": 2,
+              "en": "to sell",
+              "ko": "",
+              "example": null
+            }
+          ]
+        },
+        {
+          "session": 2,
+          "target_vocab": [
+            {
+              "hanzi": "高",
+              "pinyin": "gāo",
+              "hsk_level": 2,
+              "en": "high; tall (Kangxi radical 189)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "房间",
+              "pinyin": "fángjiān",
+              "hsk_level": 2,
+              "en": "room",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "路",
+              "pinyin": "lù",
+              "hsk_level": 2,
+              "en": "road; path; journey; route",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "懂",
+              "pinyin": "dǒng",
+              "hsk_level": 2,
+              "en": "understand; know",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "正在",
+              "pinyin": "zhèngzài",
+              "hsk_level": 2,
+              "en": "in the process of (doing something); currently",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "笑",
+              "pinyin": "xiào",
+              "hsk_level": 2,
+              "en": "to laugh; to smile",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "远",
+              "pinyin": "yuǎn",
+              "hsk_level": 2,
+              "en": "far; distant; remote",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "妻子",
+              "pinyin": "qīzi",
+              "hsk_level": 2,
+              "en": "wife",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "丈夫",
+              "pinyin": "zhàngfu",
+              "hsk_level": 2,
+              "en": "husband; man",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "离",
+              "pinyin": "lí",
+              "hsk_level": 2,
+              "en": "leave; depart; go away; apart from",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "往",
+              "pinyin": "wǎng",
+              "hsk_level": 2,
+              "en": "to go (in a direction); towards; in the past",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "男",
+              "pinyin": "nán",
+              "hsk_level": 2,
+              "en": "male",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "眼睛",
+              "pinyin": "yǎnjing",
+              "hsk_level": 2,
+              "en": "eye",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "快乐",
+              "pinyin": "kuàilè",
+              "hsk_level": 2,
+              "en": "happy",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "虽然",
+              "pinyin": "suīrán",
+              "hsk_level": 2,
+              "en": "although; even though",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "早上",
+              "pinyin": "zǎoshang",
+              "hsk_level": 2,
+              "en": "(early) morning",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "药",
+              "pinyin": "yào",
+              "hsk_level": 2,
+              "en": "medicine; drug; cure; chemical",
+              "ko": "",
+              "example": null
+            }
+          ]
+        },
+        {
+          "session": 3,
+          "target_vocab": [
+            {
+              "hanzi": "身体",
+              "pinyin": "shēntǐ",
+              "hsk_level": 2,
+              "en": "health; (human) body",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "黑",
+              "pinyin": "hēi",
+              "hsk_level": 2,
+              "en": "black; dark (Kangxi radical 203); Heilongjiang province (abbreviation)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "咖啡",
+              "pinyin": "kāfēi",
+              "hsk_level": 2,
+              "en": "coffee",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "日",
+              "pinyin": "rì",
+              "hsk_level": 2,
+              "en": "sun; day; date; time (Kangxi radical 72)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "休息",
+              "pinyin": "xiūxi",
+              "hsk_level": 2,
+              "en": "to rest; take a break",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "外",
+              "pinyin": "wài",
+              "hsk_level": 2,
+              "en": "outer; outside; in addition; foreign",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "生日",
+              "pinyin": "shēngrì",
+              "hsk_level": 2,
+              "en": "birthday",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "哥哥",
+              "pinyin": "gēge",
+              "hsk_level": 2,
+              "en": "older brother",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "票",
+              "pinyin": "piào",
+              "hsk_level": 2,
+              "en": "ticket; bank note; a vote",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "手机",
+              "pinyin": "shǒujī",
+              "hsk_level": 2,
+              "en": "mobile (cell) phone",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "洗",
+              "pinyin": "xǐ",
+              "hsk_level": 2,
+              "en": "to wash; bathe",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "跳舞",
+              "pinyin": "tiào wǔ",
+              "hsk_level": 2,
+              "en": "to dance",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "弟弟",
+              "pinyin": "dìdi",
+              "hsk_level": 2,
+              "en": "younger brother",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "妹妹",
+              "pinyin": "mèimei",
+              "hsk_level": 2,
+              "en": "younger sister",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "红",
+              "pinyin": "hóng",
+              "hsk_level": 2,
+              "en": "red; symbol of success; bonus; popular",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "慢",
+              "pinyin": "màn",
+              "hsk_level": 2,
+              "en": "slow",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "近",
+              "pinyin": "jìn",
+              "hsk_level": 2,
+              "en": "near; close (to)",
+              "ko": "",
+              "example": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "week": 6,
+      "grammar": [
+        {
+          "point": "연동문",
+          "note": "동작 순서대로. 我去商店买东西。"
+        },
+        {
+          "point": "조동사",
+          "note": "会/能/可以/想/要 구분. 会는 습득, 能은 능력·상황."
+        }
+      ],
+      "vocab_count": 51,
+      "sessions": [
+        {
+          "session": 1,
+          "target_vocab": [
+            {
+              "hanzi": "白",
+              "pinyin": "bái, bó",
+              "hsk_level": 2,
+              "en": "white; snowy; pure; bright; empty (Kangxi radical 106)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "姐姐",
+              "pinyin": "jiějie",
+              "hsk_level": 2,
+              "en": "older sister",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "介绍",
+              "pinyin": "jièshào",
+              "hsk_level": 2,
+              "en": "to introduce; recommend; introduction",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "鱼",
+              "pinyin": "yú",
+              "hsk_level": 2,
+              "en": "fish (Kangxi radical 195)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "累",
+              "pinyin": "lèi, lěi, léi",
+              "hsk_level": 2,
+              "en": "tired | accumulate; implicate | rope; bind together",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "课",
+              "pinyin": "kè",
+              "hsk_level": 2,
+              "en": "class; subject; lesson; course",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "上班",
+              "pinyin": "shàng bān",
+              "hsk_level": 2,
+              "en": "go to work; be on duty",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "旁边",
+              "pinyin": "pángbiān",
+              "hsk_level": 2,
+              "en": "side, beside",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "运动",
+              "pinyin": "yùndòng",
+              "hsk_level": 2,
+              "en": "(physical) exercise; movement; sports; campaign",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "去年",
+              "pinyin": "qùnián",
+              "hsk_level": 2,
+              "en": "last year",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "报纸",
+              "pinyin": "bàozhǐ",
+              "hsk_level": 2,
+              "en": "newspaper",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "颜色",
+              "pinyin": "yánsè",
+              "hsk_level": 2,
+              "en": "color",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "机场",
+              "pinyin": "jīchǎng",
+              "hsk_level": 2,
+              "en": "airport; airfield",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "唱歌",
+              "pinyin": "chànggē",
+              "hsk_level": 2,
+              "en": "sing (a song)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "千",
+              "pinyin": "qiān",
+              "hsk_level": 2,
+              "en": "one thousand",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "好吃",
+              "pinyin": "hǎochī",
+              "hsk_level": 2,
+              "en": "tasty",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "考试",
+              "pinyin": "kǎoshì",
+              "hsk_level": 2,
+              "en": "test; exam; to give or take a test",
+              "ko": "",
+              "example": null
+            }
+          ]
+        },
+        {
+          "session": 2,
+          "target_vocab": [
+            {
+              "hanzi": "左边",
+              "pinyin": "zuǒbian",
+              "hsk_level": 2,
+              "en": "the left side; the left",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "姓",
+              "pinyin": "xìng",
+              "hsk_level": 2,
+              "en": "surname; family name",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "百",
+              "pinyin": "bǎi",
+              "hsk_level": 2,
+              "en": "hundred",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "雪",
+              "pinyin": "xuě",
+              "hsk_level": 2,
+              "en": "snow",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "贵",
+              "pinyin": "guì",
+              "hsk_level": 2,
+              "en": "expensive; noble; honorable; Guizhou province (abbreviation)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "生病",
+              "pinyin": "shēng bìng",
+              "hsk_level": 2,
+              "en": "get sick; fall ill",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "游泳",
+              "pinyin": "yóuyǒng",
+              "hsk_level": 2,
+              "en": "to swim",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "牛奶",
+              "pinyin": "niúnǎi",
+              "hsk_level": 2,
+              "en": "cow's milk",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "右边",
+              "pinyin": "yòubian",
+              "hsk_level": 2,
+              "en": "the right (as opposed to left) side",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "便宜",
+              "pinyin": "piányi",
+              "hsk_level": 2,
+              "en": "cheap",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "公共汽车",
+              "pinyin": "gōnggòng qìchē",
+              "hsk_level": 2,
+              "en": "(public) bus",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "起床",
+              "pinyin": "qǐ chuáng",
+              "hsk_level": 2,
+              "en": "get out of bed",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "打篮球",
+              "pinyin": "dǎ lánqiú",
+              "hsk_level": 2,
+              "en": "play basketball",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "鸡蛋",
+              "pinyin": "jīdàn",
+              "hsk_level": 2,
+              "en": "(chicken) egg",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "踢足球",
+              "pinyin": "tīzúqiú",
+              "hsk_level": 2,
+              "en": "to play football/soccer",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "零",
+              "pinyin": "líng",
+              "hsk_level": 2,
+              "en": "zero; remnant",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "手表",
+              "pinyin": "shǒubiǎo",
+              "hsk_level": 2,
+              "en": "wristwatch",
+              "ko": "",
+              "example": null
+            }
+          ]
+        },
+        {
+          "session": 3,
+          "target_vocab": [
+            {
+              "hanzi": "旅游",
+              "pinyin": "lǚyóu",
+              "hsk_level": 2,
+              "en": "trip; journey; tour",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "服务员",
+              "pinyin": "fúwùyuán",
+              "hsk_level": 2,
+              "en": "waiter/waitress; server; attendant",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "宾馆",
+              "pinyin": "bīnguǎn",
+              "hsk_level": 2,
+              "en": "guesthouse; hotel",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "教室",
+              "pinyin": "jiàoshì",
+              "hsk_level": 2,
+              "en": "classroom",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "跑步",
+              "pinyin": "pǎo bù",
+              "hsk_level": 2,
+              "en": "to run; to jog",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "阴",
+              "pinyin": "yīn",
+              "hsk_level": 2,
+              "en": "cloudy (weather); yin (the negative principle of Yin and Yang); secret; the moon; negative; shade",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "面条",
+              "pinyin": "miàntiáo",
+              "hsk_level": 2,
+              "en": "noodles",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "铅笔",
+              "pinyin": "qiānbǐ",
+              "hsk_level": 2,
+              "en": "pencil",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "火车站",
+              "pinyin": "huǒchēzhàn",
+              "hsk_level": 2,
+              "en": "train station",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "西瓜",
+              "pinyin": "xīguā",
+              "hsk_level": 2,
+              "en": "watermelon",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "羊肉",
+              "pinyin": "yángròu",
+              "hsk_level": 2,
+              "en": "mutton; lamb",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "晴",
+              "pinyin": "qíng",
+              "hsk_level": 2,
+              "en": "clear; fine (as of weather)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "啊",
+              "pinyin": "ā, á, ǎ, à, a",
+              "hsk_level": 3,
+              "en": "ah; (particle showing elation, doubt, puzzled surprise, or approval)",
+              "ko": "",
+              "example": {
+                "zh": "真的啊",
+                "pinyin": "zhēn de a",
+                "ko": "정말요?"
+              }
+            },
+            {
+              "hanzi": "把",
+              "pinyin": "bǎ, bà",
+              "hsk_level": 3,
+              "en": "(mw for things with handles); (pretransitive particle); to hold | a grip; a handle; stem (of plants)",
+              "ko": "",
+              "example": {
+                "zh": "把门关上",
+                "pinyin": "bǎ mén guān shàng",
+                "ko": "문 좀 닫아 주세요"
+              }
+            },
+            {
+              "hanzi": "如果",
+              "pinyin": "rúguǒ",
+              "hsk_level": 3,
+              "en": "if; in the event that",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "只",
+              "pinyin": "zhǐ, zhī",
+              "hsk_level": 3,
+              "en": "only; merely; just; but | (mw for birds and certain animals)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "被",
+              "pinyin": "bèi",
+              "hsk_level": 3,
+              "en": "by (indicates passive voice sentences); a quilt/blanket",
+              "ko": "",
+              "example": {
+                "zh": "我的手机被偷了",
+                "pinyin": "wǒ de shǒujī bèi tōu le",
+                "ko": "제 휴대폰을 도둑맞았어요"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "week": 7,
+      "grammar": [
+        {
+          "point": "了 완료",
+          "note": "동작 완료. 我吃了饭。"
+        },
+        {
+          "point": "没(有) 부정",
+          "note": "了를 뺀다. 我没吃饭。"
+        }
+      ],
+      "vocab_count": 51,
+      "sessions": [
+        {
+          "session": 1,
+          "target_vocab": [
+            {
+              "hanzi": "跟",
+              "pinyin": "gēn",
+              "hsk_level": 3,
+              "en": "to follow; go with; heel",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "自己",
+              "pinyin": "zìjǐ",
+              "hsk_level": 3,
+              "en": "oneself; self",
+              "ko": "",
+              "example": {
+                "zh": "我自己去就行",
+                "pinyin": "wǒ zìjǐ qù jiù xíng",
+                "ko": "저 혼자 가면 돼요"
+              }
+            },
+            {
+              "hanzi": "用",
+              "pinyin": "yòng",
+              "hsk_level": 3,
+              "en": "to use (Kangxi radical 101)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "像",
+              "pinyin": "xiàng",
+              "hsk_level": 3,
+              "en": "be like; resemble; appearance; appear",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "为",
+              "pinyin": "wéi, wèi",
+              "hsk_level": 3,
+              "en": "to act (as); become; to mean | for; because of; to; for the sake of",
+              "ko": "",
+              "example": {
+                "zh": "为什么不去",
+                "pinyin": "wèishénme bú qù",
+                "ko": "왜 안 가요?"
+              }
+            },
+            {
+              "hanzi": "需要",
+              "pinyin": "xūyào",
+              "hsk_level": 3,
+              "en": "to need; to want; to demand",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "应该",
+              "pinyin": "yīnggāi",
+              "hsk_level": 3,
+              "en": "should; ought to; must",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "起来",
+              "pinyin": "qǐ lai",
+              "hsk_level": 3,
+              "en": "(beginning or continuing an action); to rise; get up (from bed)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "才",
+              "pinyin": "cái",
+              "hsk_level": 3,
+              "en": "ability; talent; just now; not until",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "又",
+              "pinyin": "yòu",
+              "hsk_level": 3,
+              "en": "(once) again; also; both (Kangxi radical 29)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "拿",
+              "pinyin": "ná",
+              "hsk_level": 3,
+              "en": "carry in your hand; seize; to catch",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "更",
+              "pinyin": "gèng, gēng",
+              "hsk_level": 3,
+              "en": "more; even more | change; watch (e.g. of a sentry or guard)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "带",
+              "pinyin": "dài",
+              "hsk_level": 3,
+              "en": "band; belt; ribbon; carry; bring; take along; bring up (kids)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "然后",
+              "pinyin": "ránhòu",
+              "hsk_level": 3,
+              "en": "then; afterwards",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "一样",
+              "pinyin": "yíyàng",
+              "hsk_level": 3,
+              "en": "the same; alike; equal to",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "当然",
+              "pinyin": "dāngrán",
+              "hsk_level": 3,
+              "en": "of course; naturally",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "相信",
+              "pinyin": "xiāngxìn",
+              "hsk_level": 3,
+              "en": "believe (sb.); be convinced of",
+              "ko": "",
+              "example": null
+            }
+          ]
+        },
+        {
+          "session": 2,
+          "target_vocab": [
+            {
+              "hanzi": "认为",
+              "pinyin": "rènwéi",
+              "hsk_level": 3,
+              "en": "believe; think that",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "明白",
+              "pinyin": "míngbai",
+              "hsk_level": 3,
+              "en": "clear; obvious; understand; explicit",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "一直",
+              "pinyin": "yìzhí",
+              "hsk_level": 3,
+              "en": "always; all along; straight (in a straight line)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "地",
+              "pinyin": "dì, de",
+              "hsk_level": 3,
+              "en": "earth; ground | (adverbial particle)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "地方",
+              "pinyin": "dìfang",
+              "hsk_level": 3,
+              "en": "place; space; room; part, (fāng: local; regional)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "离开",
+              "pinyin": "líkāi",
+              "hsk_level": 3,
+              "en": "leave; depart",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "一定",
+              "pinyin": "yídìng",
+              "hsk_level": 3,
+              "en": "surely; certainly; necessarily; definite",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "还是",
+              "pinyin": "háishi",
+              "hsk_level": 3,
+              "en": "or; still; nevertheless; had better",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "发",
+              "pinyin": "fā, fà",
+              "hsk_level": 3,
+              "en": "send out; to issue; to show (one's feelings) | hair",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "发现",
+              "pinyin": "fāxiàn",
+              "hsk_level": 3,
+              "en": "discover; to find",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "而且",
+              "pinyin": "érqiě",
+              "hsk_level": 3,
+              "en": "moreover; in addition; as well as",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "必须",
+              "pinyin": "bìxū",
+              "hsk_level": 3,
+              "en": "must; have to",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "放",
+              "pinyin": "fàng",
+              "hsk_level": 3,
+              "en": "put; to place; to release; to free",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "为了",
+              "pinyin": "wèile",
+              "hsk_level": 3,
+              "en": "in order to; for the sake of; for the purpose of",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "向",
+              "pinyin": "xiàng",
+              "hsk_level": 3,
+              "en": "direction; towards; to turn; to face",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "老",
+              "pinyin": "lǎo",
+              "hsk_level": 3,
+              "en": "old; aged; tough; often (Kangxi radical 125)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "位",
+              "pinyin": "wèi",
+              "hsk_level": 3,
+              "en": "position; location; (polite mw for people)",
+              "ko": "",
+              "example": null
+            }
+          ]
+        },
+        {
+          "session": 3,
+          "target_vocab": [
+            {
+              "hanzi": "先",
+              "pinyin": "xiān",
+              "hsk_level": 3,
+              "en": "first; early; before",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "种",
+              "pinyin": "zhǒng, zhòng",
+              "hsk_level": 3,
+              "en": "type; breed; race; seed | to plant",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "最后",
+              "pinyin": "zuìhòu",
+              "hsk_level": 3,
+              "en": "last; final; ultimately",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "其他",
+              "pinyin": "qítā",
+              "hsk_level": 3,
+              "en": "other; else",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "记得",
+              "pinyin": "jìde",
+              "hsk_level": 3,
+              "en": "remember",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "或者",
+              "pinyin": "huòzhě",
+              "hsk_level": 3,
+              "en": "or; possible; maybe; perhaps",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "过去",
+              "pinyin": "guòqù",
+              "hsk_level": 3,
+              "en": "in the past; formerly",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "担心",
+              "pinyin": "dānxīn",
+              "hsk_level": 3,
+              "en": "to worry; feel anxious",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "条",
+              "pinyin": "tiáo",
+              "hsk_level": 3,
+              "en": "strip; (mw for long thin objects); item",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "以前",
+              "pinyin": "yǐqián",
+              "hsk_level": 3,
+              "en": "before; formerly; previous",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "世界",
+              "pinyin": "shìjiè",
+              "hsk_level": 3,
+              "en": "world",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "重要",
+              "pinyin": "zhòngyào",
+              "hsk_level": 3,
+              "en": "important; significant; major",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "别人",
+              "pinyin": "biéren",
+              "hsk_level": 3,
+              "en": "other people; others",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "机会",
+              "pinyin": "jīhuì",
+              "hsk_level": 3,
+              "en": "opportunity; chance; occasion",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "张",
+              "pinyin": "zhāng",
+              "hsk_level": 3,
+              "en": "(mw for flat objects); to spread out; (common surname)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "接",
+              "pinyin": "jiē",
+              "hsk_level": 3,
+              "en": "connect; to meet; to pick up (somebody); to receive",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "比赛",
+              "pinyin": "bǐsài",
+              "hsk_level": 3,
+              "en": "(sports) match; competition",
+              "ko": "",
+              "example": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "week": 8,
+      "grammar": [
+        {
+          "point": "正在 / 在 / 呢",
+          "note": "진행. 他在看电视呢。"
+        },
+        {
+          "point": "着 기초",
+          "note": "상태 지속. 门开着。"
+        }
+      ],
+      "vocab_count": 51,
+      "sessions": [
+        {
+          "session": 1,
+          "target_vocab": [
+            {
+              "hanzi": "关",
+              "pinyin": "guān",
+              "hsk_level": 3,
+              "en": "to close; shut; concern; relationship; turn off; mountain pass",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "关系",
+              "pinyin": "guānxi",
+              "hsk_level": 3,
+              "en": "relation; to concern",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "马",
+              "pinyin": "mǎ",
+              "hsk_level": 3,
+              "en": "horse (Kangxi radical 187)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "马上",
+              "pinyin": "mǎshàng",
+              "hsk_level": 3,
+              "en": "at once; immediately; right away",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "决定",
+              "pinyin": "juédìng",
+              "hsk_level": 3,
+              "en": "decide; resolve",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "关于",
+              "pinyin": "guānyú",
+              "hsk_level": 3,
+              "en": "about; regarding; concerning",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "难",
+              "pinyin": "nán, nàn",
+              "hsk_level": 3,
+              "en": "difficult | trouble; to blame",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "了解",
+              "pinyin": "liǎojiě",
+              "hsk_level": 3,
+              "en": "comprehend; understand; know; find out",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "站",
+              "pinyin": "zhàn",
+              "hsk_level": 3,
+              "en": "stand; a station; be on one's feet; service center",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "结束",
+              "pinyin": "jiéshù",
+              "hsk_level": 3,
+              "en": "to end; to finish; conclude",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "清楚",
+              "pinyin": "qīngchu",
+              "hsk_level": 3,
+              "en": "clear; distinct; be clear about",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "愿意",
+              "pinyin": "yuànyì",
+              "hsk_level": 3,
+              "en": "be willing; want to; be ready",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "花",
+              "pinyin": "huā",
+              "hsk_level": 3,
+              "en": "flower; blossom; spend money; cost",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "照片",
+              "pinyin": "zhàopiàn",
+              "hsk_level": 3,
+              "en": "picture; photograph",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "欢迎",
+              "pinyin": "huānyíng",
+              "hsk_level": 3,
+              "en": "to welcome; greet",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "总是",
+              "pinyin": "zǒngshì",
+              "hsk_level": 3,
+              "en": "always; eventually",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "嘴",
+              "pinyin": "zuǐ",
+              "hsk_level": 3,
+              "en": "mouth",
+              "ko": "",
+              "example": null
+            }
+          ]
+        },
+        {
+          "session": 2,
+          "target_vocab": [
+            {
+              "hanzi": "参加",
+              "pinyin": "cānjiā",
+              "hsk_level": 3,
+              "en": "participate; join; take part in",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "办法",
+              "pinyin": "bànfǎ",
+              "hsk_level": 3,
+              "en": "method; way (of doing something)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "选择",
+              "pinyin": "xuǎnzé",
+              "hsk_level": 3,
+              "en": "select; to pick; choose",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "坏",
+              "pinyin": "huài",
+              "hsk_level": 3,
+              "en": "bad; broken",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "打算",
+              "pinyin": "dǎsuàn",
+              "hsk_level": 3,
+              "en": "to plan; intend",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "试",
+              "pinyin": "shì",
+              "hsk_level": 3,
+              "en": "to try; to test; examination",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "特别",
+              "pinyin": "tèbié",
+              "hsk_level": 3,
+              "en": "special; especially; particular",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "注意",
+              "pinyin": "zhùyì",
+              "hsk_level": 3,
+              "en": "pay attention to; take notice of; be careful",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "其实",
+              "pinyin": "qíshí",
+              "hsk_level": 3,
+              "en": "actually; in fact",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "小心",
+              "pinyin": "xiǎoxīn",
+              "hsk_level": 3,
+              "en": "be careful",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "久",
+              "pinyin": "jiǔ",
+              "hsk_level": 3,
+              "en": "long (time)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "只有",
+              "pinyin": "zhǐyǒu",
+              "hsk_level": 3,
+              "en": "only",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "讲",
+              "pinyin": "jiǎng",
+              "hsk_level": 3,
+              "en": "to talk; to lecture; to explain; a speech",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "故事",
+              "pinyin": "gùshi",
+              "hsk_level": 3,
+              "en": "story; tale",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "换",
+              "pinyin": "huàn",
+              "hsk_level": 3,
+              "en": "change; to exchange; to barter; to trade",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "结婚",
+              "pinyin": "jiéhūn",
+              "hsk_level": 3,
+              "en": "get married",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "段",
+              "pinyin": "duàn",
+              "hsk_level": 3,
+              "en": "paragraph; segment; section",
+              "ko": "",
+              "example": null
+            }
+          ]
+        },
+        {
+          "session": 3,
+          "target_vocab": [
+            {
+              "hanzi": "努力",
+              "pinyin": "nǔlì",
+              "hsk_level": 3,
+              "en": "to work hard; to strive",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "害怕",
+              "pinyin": "hàipà",
+              "hsk_level": 3,
+              "en": "afraid of; to fear",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "刚才",
+              "pinyin": "gāngcái",
+              "hsk_level": 3,
+              "en": "just now; a moment ago",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "节目",
+              "pinyin": "jiémù",
+              "hsk_level": 3,
+              "en": "program; item (on a program)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "辆",
+              "pinyin": "liàng",
+              "hsk_level": 3,
+              "en": "(mw for vehicles)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "万",
+              "pinyin": "wàn",
+              "hsk_level": 3,
+              "en": "ten thousand",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "解决",
+              "pinyin": "jiějué",
+              "hsk_level": 3,
+              "en": "settle (a dispute); resolve; solve",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "办公室",
+              "pinyin": "bàngōngshì",
+              "hsk_level": 3,
+              "en": "office",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "奇怪",
+              "pinyin": "qíguài",
+              "hsk_level": 3,
+              "en": "strange; odd",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "同意",
+              "pinyin": "tóngyì",
+              "hsk_level": 3,
+              "en": "agree; to consent; approve",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "游戏",
+              "pinyin": "yóuxì",
+              "hsk_level": 3,
+              "en": "game; play; recreation",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "帮忙",
+              "pinyin": "bāngmáng",
+              "hsk_level": 3,
+              "en": "to help",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "国家",
+              "pinyin": "guójiā",
+              "hsk_level": 3,
+              "en": "country; state; nation",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "最近",
+              "pinyin": "zuìjìn",
+              "hsk_level": 3,
+              "en": "recently; lately; these days",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "声音",
+              "pinyin": "shēngyīn",
+              "hsk_level": 3,
+              "en": "sound; voice",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "可爱",
+              "pinyin": "kě'ài",
+              "hsk_level": 3,
+              "en": "cute; lovely",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "分",
+              "pinyin": "fēn, fèn",
+              "hsk_level": 3,
+              "en": "divide; part; minute; cent | component; share; ingredient",
+              "ko": "",
+              "example": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "week": 9,
+      "grammar": [
+        {
+          "point": "过 경험",
+          "note": "我去过中国。"
+        },
+        {
+          "point": "还没…呢",
+          "note": "아직 안 함. 我还没吃呢。"
+        }
+      ],
+      "vocab_count": 51,
+      "sessions": [
+        {
+          "session": 1,
+          "target_vocab": [
+            {
+              "hanzi": "完成",
+              "pinyin": "wánchéng",
+              "hsk_level": 3,
+              "en": "to complete; accomplish; to fulfill",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "半",
+              "pinyin": "bàn",
+              "hsk_level": 3,
+              "en": "half; semi-; incomplete",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "要求",
+              "pinyin": "yāoqiú",
+              "hsk_level": 3,
+              "en": "to request; to demand; requirement",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "除了",
+              "pinyin": "chúle",
+              "hsk_level": 3,
+              "en": "besides; except for; aside from; in addition to",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "容易",
+              "pinyin": "róngyì",
+              "hsk_level": 3,
+              "en": "easy; likely; liable (to)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "教",
+              "pinyin": "jiāo, jiào",
+              "hsk_level": 3,
+              "en": "teach; instruct | religion; teaching",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "脸",
+              "pinyin": "liǎn",
+              "hsk_level": 3,
+              "en": "face",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "简单",
+              "pinyin": "jiǎndān",
+              "hsk_level": 3,
+              "en": "simple; not complicated",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "检查",
+              "pinyin": "jiǎnchá",
+              "hsk_level": 3,
+              "en": "to check; examine; inspect",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "音乐",
+              "pinyin": "yīnyuè",
+              "hsk_level": 3,
+              "en": "music",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "越",
+              "pinyin": "yuè",
+              "hsk_level": 3,
+              "en": "even more; the more; exceed",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "照顾",
+              "pinyin": "zhàogu",
+              "hsk_level": 3,
+              "en": "take care of; look after; give consideration",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "聪明",
+              "pinyin": "cōngming",
+              "hsk_level": 3,
+              "en": "intelligent; clever; bright; smart",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "甜",
+              "pinyin": "tián",
+              "hsk_level": 3,
+              "en": "sweet",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "突然",
+              "pinyin": "tūrán",
+              "hsk_level": 3,
+              "en": "sudden; abrupt",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "终于",
+              "pinyin": "zhōngyú",
+              "hsk_level": 3,
+              "en": "at last; in the end; finally",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "船",
+              "pinyin": "chuán",
+              "hsk_level": 3,
+              "en": "a boat; vessel; ship",
+              "ko": "",
+              "example": null
+            }
+          ]
+        },
+        {
+          "session": 2,
+          "target_vocab": [
+            {
+              "hanzi": "口",
+              "pinyin": "kǒu",
+              "hsk_level": 3,
+              "en": "mouth (Kangxi radical 30)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "回答",
+              "pinyin": "huídá",
+              "hsk_level": 3,
+              "en": "to reply; to answer",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "礼物",
+              "pinyin": "lǐwù",
+              "hsk_level": 3,
+              "en": "gift; present",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "头发",
+              "pinyin": "tóufa",
+              "hsk_level": 3,
+              "en": "hair (on the head)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "关心",
+              "pinyin": "guānxīn",
+              "hsk_level": 3,
+              "en": "concerned about/with",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "脚",
+              "pinyin": "jiǎo",
+              "hsk_level": 3,
+              "en": "foot (body part)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "生气",
+              "pinyin": "shēngqì",
+              "hsk_level": 3,
+              "en": "angry; mad",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "哭",
+              "pinyin": "kū",
+              "hsk_level": 3,
+              "en": "cry; weep",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "画",
+              "pinyin": "huà",
+              "hsk_level": 3,
+              "en": "draw; picture; painting",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "年轻",
+              "pinyin": "niánqīng",
+              "hsk_level": 3,
+              "en": "young",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "包",
+              "pinyin": "bāo",
+              "hsk_level": 3,
+              "en": "to cover; to wrap; to hold; include; (mw for containers, packages, etc.)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "腿",
+              "pinyin": "tuǐ",
+              "hsk_level": 3,
+              "en": "leg",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "忘记",
+              "pinyin": "wàngjì",
+              "hsk_level": 3,
+              "en": "forget",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "搬",
+              "pinyin": "bān",
+              "hsk_level": 3,
+              "en": "to move; to transport",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "楼",
+              "pinyin": "lóu",
+              "hsk_level": 3,
+              "en": "story; floor; (multi-story) building",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "遇到",
+              "pinyin": "yùdào",
+              "hsk_level": 3,
+              "en": "to meet; run into; come across",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "新闻",
+              "pinyin": "xīnwén",
+              "hsk_level": 3,
+              "en": "news",
+              "ko": "",
+              "example": null
+            }
+          ]
+        },
+        {
+          "session": 3,
+          "target_vocab": [
+            {
+              "hanzi": "比较",
+              "pinyin": "bǐjiào",
+              "hsk_level": 3,
+              "en": "compare; contrast; relatively",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "双",
+              "pinyin": "shuāng",
+              "hsk_level": 3,
+              "en": "two; double; (mw for pairs)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "见面",
+              "pinyin": "jiànmiàn",
+              "hsk_level": 3,
+              "en": "meet/see somebody (face to face); meeting",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "经常",
+              "pinyin": "jīngcháng",
+              "hsk_level": 3,
+              "en": "often; frequently; daily",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "城市",
+              "pinyin": "chéngshì",
+              "hsk_level": 3,
+              "en": "city or town",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "一会儿",
+              "pinyin": "yíhuìr",
+              "hsk_level": 3,
+              "en": "a while; a moment",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "附近",
+              "pinyin": "fùjìn",
+              "hsk_level": 3,
+              "en": "(in the) vicinity; nearby; neighboring",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "借",
+              "pinyin": "jiè",
+              "hsk_level": 3,
+              "en": "lend; borrow; excuse",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "影响",
+              "pinyin": "yǐngxiǎng",
+              "hsk_level": 3,
+              "en": "influence; affect; effect",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "认真",
+              "pinyin": "rènzhēn",
+              "hsk_level": 3,
+              "en": "serious; earnest; take seriously",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "米",
+              "pinyin": "mǐ",
+              "hsk_level": 3,
+              "en": "rice; meter (Kangxi radical 119)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "差",
+              "pinyin": "chà, chā, chāi, cī",
+              "hsk_level": 3,
+              "en": "differ from; fall short of; poor; inferior | difference | to dispatch",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "银行",
+              "pinyin": "yínháng",
+              "hsk_level": 3,
+              "en": "bank",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "安静",
+              "pinyin": "ānjìng",
+              "hsk_level": 3,
+              "en": "quiet; peaceful; calm",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "多么",
+              "pinyin": "duōme",
+              "hsk_level": 3,
+              "en": "how (wonderful, etc.); what (a great idea)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "饿",
+              "pinyin": "è",
+              "hsk_level": 3,
+              "en": "hungry",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "根据",
+              "pinyin": "gēnjù",
+              "hsk_level": 3,
+              "en": "according to; based on; basis",
+              "ko": "",
+              "example": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "week": 10,
+      "grammar": [
+        {
+          "point": "比 비교 기초",
+          "note": "A比B + 형용사. 今天比昨天热。"
+        },
+        {
+          "point": "跟…一样",
+          "note": "동등 비교. 我跟他一样大。"
+        }
+      ],
+      "vocab_count": 51,
+      "sessions": [
+        {
+          "session": 1,
+          "target_vocab": [
+            {
+              "hanzi": "几乎",
+              "pinyin": "jīhū",
+              "hsk_level": 3,
+              "en": "almost",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "后来",
+              "pinyin": "hòulái",
+              "hsk_level": 3,
+              "en": "afterwards; after; later",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "动物",
+              "pinyin": "dòngwù",
+              "hsk_level": 3,
+              "en": "animal",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "西",
+              "pinyin": "xī",
+              "hsk_level": 3,
+              "en": "West (Kangxi radical 146)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "一边",
+              "pinyin": "yìbiān",
+              "hsk_level": 3,
+              "en": "one side; on the one hand; at the same time",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "舒服",
+              "pinyin": "shūfu",
+              "hsk_level": 3,
+              "en": "comfortable; feeling well",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "一般",
+              "pinyin": "yìbān",
+              "hsk_level": 3,
+              "en": "general; ordinary; common; same",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "叔叔",
+              "pinyin": "shūshu",
+              "hsk_level": 3,
+              "en": "(informal) father's younger brother; uncle",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "疼",
+              "pinyin": "téng",
+              "hsk_level": 3,
+              "en": "ache; sore; (it) hurts; love fondly",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "迟到",
+              "pinyin": "chídào",
+              "hsk_level": 3,
+              "en": "arrive late",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "历史",
+              "pinyin": "lìshǐ",
+              "hsk_level": 3,
+              "en": "history",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "啤酒",
+              "pinyin": "píjiǔ",
+              "hsk_level": 3,
+              "en": "beer",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "短",
+              "pinyin": "duǎn",
+              "hsk_level": 3,
+              "en": "short (in length, duration, or height); lack",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "经过",
+              "pinyin": "jīngguò",
+              "hsk_level": 3,
+              "en": "to pass; go through; as a result of",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "周末",
+              "pinyin": "zhōumò",
+              "hsk_level": 3,
+              "en": "weekend",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "班",
+              "pinyin": "bān",
+              "hsk_level": 3,
+              "en": "team; class; squad",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "习惯",
+              "pinyin": "xíguàn",
+              "hsk_level": 3,
+              "en": "habit; be accustomed to; usual practice",
+              "ko": "",
+              "example": null
+            }
+          ]
+        },
+        {
+          "session": 2,
+          "target_vocab": [
+            {
+              "hanzi": "公园",
+              "pinyin": "gōngyuán",
+              "hsk_level": 3,
+              "en": "public park",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "干净",
+              "pinyin": "gānjìng",
+              "hsk_level": 3,
+              "en": "clean; neat and tidy",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "鸟",
+              "pinyin": "niǎo",
+              "hsk_level": 3,
+              "en": "bird (Kangxi radical 196)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "健康",
+              "pinyin": "jiànkāng",
+              "hsk_level": 3,
+              "en": "health; healthy",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "树",
+              "pinyin": "shù",
+              "hsk_level": 3,
+              "en": "tree",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "蛋糕",
+              "pinyin": "dàngāo",
+              "hsk_level": 3,
+              "en": "cake",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "元",
+              "pinyin": "yuán",
+              "hsk_level": 3,
+              "en": "Chinese monetary unit; dollar; first; principal",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "客人",
+              "pinyin": "kèrén",
+              "hsk_level": 3,
+              "en": "guest; customer",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "会议",
+              "pinyin": "huìyì",
+              "hsk_level": 3,
+              "en": "meeting; conference",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "奶奶",
+              "pinyin": "nǎinai",
+              "hsk_level": 3,
+              "en": "grandma; (informal) paternal grandmother",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "裤子",
+              "pinyin": "kùzi",
+              "hsk_level": 3,
+              "en": "pants; trousers",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "邻居",
+              "pinyin": "línjū",
+              "hsk_level": 3,
+              "en": "neighbor",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "经理",
+              "pinyin": "jīnglǐ",
+              "hsk_level": 3,
+              "en": "manager; director",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "层",
+              "pinyin": "céng",
+              "hsk_level": 3,
+              "en": "(mw for layers, floors of buildings)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "灯",
+              "pinyin": "dēng",
+              "hsk_level": 3,
+              "en": "lamp; light",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "练习",
+              "pinyin": "liànxí",
+              "hsk_level": 3,
+              "en": "practice; exercise",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "爷爷",
+              "pinyin": "yéye",
+              "hsk_level": 3,
+              "en": "(informal) father's father; paternal grandfather",
+              "ko": "",
+              "example": null
+            }
+          ]
+        },
+        {
+          "session": 3,
+          "target_vocab": [
+            {
+              "hanzi": "蓝",
+              "pinyin": "lán",
+              "hsk_level": 3,
+              "en": "blue",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "难过",
+              "pinyin": "nánguò",
+              "hsk_level": 3,
+              "en": "be grieved; be sad; have a hard time",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "中间",
+              "pinyin": "zhōngjiān",
+              "hsk_level": 3,
+              "en": "center; middle; between; among",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "帽子",
+              "pinyin": "màozi",
+              "hsk_level": 3,
+              "en": "hat; cap",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "司机",
+              "pinyin": "sījī",
+              "hsk_level": 3,
+              "en": "driver; chauffeur",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "旧",
+              "pinyin": "jiù",
+              "hsk_level": 3,
+              "en": "old; past; used",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "满意",
+              "pinyin": "mǎnyì",
+              "hsk_level": 3,
+              "en": "satisfied; pleased",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "骑",
+              "pinyin": "qí",
+              "hsk_level": 3,
+              "en": "to ride (an animal or bike); to sit astride",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "太阳",
+              "pinyin": "tàiyáng",
+              "hsk_level": 3,
+              "en": "the sun",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "极",
+              "pinyin": "jí",
+              "hsk_level": 3,
+              "en": "an extreme; pole; very",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "主要",
+              "pinyin": "zhǔyào",
+              "hsk_level": 3,
+              "en": "main; principal; major",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "同事",
+              "pinyin": "tóngshì",
+              "hsk_level": 3,
+              "en": "colleague; co-worker",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "鼻子",
+              "pinyin": "bízi",
+              "hsk_level": 3,
+              "en": "nose",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "角",
+              "pinyin": "jiǎo, jué",
+              "hsk_level": 3,
+              "en": "horn; angle; unit of money (1/10 yuan); corner (Kangxi radical 148) | role (theater)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "变化",
+              "pinyin": "biànhuà",
+              "hsk_level": 3,
+              "en": "change",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "东",
+              "pinyin": "dōng",
+              "hsk_level": 3,
+              "en": "East",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "年级",
+              "pinyin": "niánjí",
+              "hsk_level": 3,
+              "en": "grade; year (in school)",
+              "ko": "",
+              "example": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "week": 11,
+      "grammar": [
+        {
+          "point": "결과보어 기초",
+          "note": "完/好/到/见. 吃完了 / 看见了。"
+        },
+        {
+          "point": "정도보어 기초",
+          "note": "V得 + 형용사. 他跑得很快。"
+        }
+      ],
+      "vocab_count": 51,
+      "sessions": [
+        {
+          "session": 1,
+          "target_vocab": [
+            {
+              "hanzi": "环境",
+              "pinyin": "huánjìng",
+              "hsk_level": 3,
+              "en": "environment; surroundings",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "胖",
+              "pinyin": "pàng",
+              "hsk_level": 3,
+              "en": "fat; plump",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "地图",
+              "pinyin": "dìtú",
+              "hsk_level": 3,
+              "en": "map",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "面包",
+              "pinyin": "miànbāo",
+              "hsk_level": 3,
+              "en": "bread",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "电子邮件",
+              "pinyin": "diànzǐ yóujiàn",
+              "hsk_level": 3,
+              "en": "email",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "耳朵",
+              "pinyin": "ěrduo",
+              "hsk_level": 3,
+              "en": "ear",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "裙子",
+              "pinyin": "qúnzi",
+              "hsk_level": 3,
+              "en": "skirt",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "新鲜",
+              "pinyin": "xīnxiān",
+              "hsk_level": 3,
+              "en": "fresh (experience, food, etc.); new; novel",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "放心",
+              "pinyin": "fàng xīn",
+              "hsk_level": 3,
+              "en": "relax; feel relieved; rest assured",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "聊天",
+              "pinyin": "liáotiān",
+              "hsk_level": 3,
+              "en": "to chat",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "南",
+              "pinyin": "nán",
+              "hsk_level": 3,
+              "en": "South",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "热情",
+              "pinyin": "rèqíng",
+              "hsk_level": 3,
+              "en": "cordial; warm; enthusiastic",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "信用卡",
+              "pinyin": "xìnyòngkǎ",
+              "hsk_level": 3,
+              "en": "credit card",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "电梯",
+              "pinyin": "diàntī",
+              "hsk_level": 3,
+              "en": "elevator",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "方便",
+              "pinyin": "fāngbiàn",
+              "hsk_level": 3,
+              "en": "convenient",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "洗手间",
+              "pinyin": "xǐshǒujiān",
+              "hsk_level": 3,
+              "en": "toilet; lavatory; washroom",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "洗澡",
+              "pinyin": "xǐzǎo",
+              "hsk_level": 3,
+              "en": "bathe; take a bath or shower; bath or shower",
+              "ko": "",
+              "example": null
+            }
+          ]
+        },
+        {
+          "session": 2,
+          "target_vocab": [
+            {
+              "hanzi": "饮料",
+              "pinyin": "yǐnliào",
+              "hsk_level": 3,
+              "en": "beverage; drink",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "校长",
+              "pinyin": "xiàozhǎng",
+              "hsk_level": 3,
+              "en": "principal (of school, college or university); president; headmaster",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "水平",
+              "pinyin": "shuǐpíng",
+              "hsk_level": 3,
+              "en": "level; standard; horizontal",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "作业",
+              "pinyin": "zuòyè",
+              "hsk_level": 3,
+              "en": "school assignment; homework; task",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "衬衫",
+              "pinyin": "chènshān",
+              "hsk_level": 3,
+              "en": "shirt; blouse",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "成绩",
+              "pinyin": "chéngjì",
+              "hsk_level": 3,
+              "en": "achievement; success; results (of work or study)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "碗",
+              "pinyin": "wǎn",
+              "hsk_level": 3,
+              "en": "bowl; cup",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "阿姨",
+              "pinyin": "āyí",
+              "hsk_level": 3,
+              "en": "auntie; step-mother; mother's younger sister",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "图书馆",
+              "pinyin": "túshūguǎn",
+              "hsk_level": 3,
+              "en": "library",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "文化",
+              "pinyin": "wénhuà",
+              "hsk_level": 3,
+              "en": "culture; civilization",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "绿",
+              "pinyin": "lǜ",
+              "hsk_level": 3,
+              "en": "green",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "打扫",
+              "pinyin": "dǎsǎo",
+              "hsk_level": 3,
+              "en": "to clean; to sweep",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "草",
+              "pinyin": "cǎo",
+              "hsk_level": 3,
+              "en": "grass; straw; draft (of a document)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "冰箱",
+              "pinyin": "bīngxiāng",
+              "hsk_level": 3,
+              "en": "refrigerator",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "数学",
+              "pinyin": "shùxué",
+              "hsk_level": 3,
+              "en": "mathematics",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "自行车",
+              "pinyin": "zìxíngchē",
+              "hsk_level": 3,
+              "en": "bike; bicycle",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "着急",
+              "pinyin": "zháojí",
+              "hsk_level": 3,
+              "en": "to worry; feel anxious",
+              "ko": "",
+              "example": null
+            }
+          ]
+        },
+        {
+          "session": 3,
+          "target_vocab": [
+            {
+              "hanzi": "瘦",
+              "pinyin": "shòu",
+              "hsk_level": 3,
+              "en": "thin; tight; lean",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "提高",
+              "pinyin": "tígāo",
+              "hsk_level": 3,
+              "en": "to raise; heighten; improve",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "起飞",
+              "pinyin": "qǐfēi",
+              "hsk_level": 3,
+              "en": "take off (in an airplane); liftoff",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "矮",
+              "pinyin": "ǎi",
+              "hsk_level": 3,
+              "en": "short; low",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "地铁",
+              "pinyin": "dìtiě",
+              "hsk_level": 3,
+              "en": "subway",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "体育",
+              "pinyin": "tǐyù",
+              "hsk_level": 3,
+              "en": "physical training; sports",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "刻",
+              "pinyin": "kè",
+              "hsk_level": 3,
+              "en": "quarter (hour); (mw for short time intervals); carve; to cut",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "护照",
+              "pinyin": "hùzhào",
+              "hsk_level": 3,
+              "en": "passport",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "节日",
+              "pinyin": "jiérì",
+              "hsk_level": 3,
+              "en": "holiday; festival",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "盘子",
+              "pinyin": "pánzi",
+              "hsk_level": 3,
+              "en": "plate; dish; tray",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "一共",
+              "pinyin": "yígòng",
+              "hsk_level": 3,
+              "en": "altogether; in total",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "瓶子",
+              "pinyin": "píngzi",
+              "hsk_level": 3,
+              "en": "bottle",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "街道",
+              "pinyin": "jiēdào",
+              "hsk_level": 3,
+              "en": "street",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "锻炼",
+              "pinyin": "duànliàn",
+              "hsk_level": 3,
+              "en": "to exercise; work out; toughen; to temper",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "感冒",
+              "pinyin": "gǎnmào",
+              "hsk_level": 3,
+              "en": "catch cold; (common) cold",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "爱好",
+              "pinyin": "àihào",
+              "hsk_level": 3,
+              "en": "hobby; fond of; to like; interest",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "超市",
+              "pinyin": "chāoshì",
+              "hsk_level": 3,
+              "en": "supermarket",
+              "ko": "",
+              "example": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "week": 12,
+      "grammar": [
+        {
+          "point": "把자문 맛보기",
+          "note": "把 + 목적어 + 동사 + 了/结果. 把门关上。"
+        },
+        {
+          "point": "기초 접속",
+          "note": "因为…所以… / 虽然…但是…"
+        }
+      ],
+      "vocab_count": 37,
+      "sessions": [
+        {
+          "session": 1,
+          "target_vocab": [
+            {
+              "hanzi": "月亮",
+              "pinyin": "yuèliang",
+              "hsk_level": 3,
+              "en": "the moon",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "饱",
+              "pinyin": "bǎo",
+              "hsk_level": 3,
+              "en": "eat until full; satisfied",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "有名",
+              "pinyin": "yǒumíng",
+              "hsk_level": 3,
+              "en": "famous; well-known",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "香蕉",
+              "pinyin": "xiāngjiāo",
+              "hsk_level": 3,
+              "en": "banana",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "笔记本",
+              "pinyin": "bǐjìběn",
+              "hsk_level": 3,
+              "en": "notebook",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "夏",
+              "pinyin": "xià",
+              "hsk_level": 3,
+              "en": "summer",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "菜单",
+              "pinyin": "càidān",
+              "hsk_level": 3,
+              "en": "menu",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "北方",
+              "pinyin": "běifāng",
+              "hsk_level": 3,
+              "en": "north; the northern part of the country",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "上网",
+              "pinyin": "shàngwǎng",
+              "hsk_level": 3,
+              "en": "to surf the web; to go online",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "季节",
+              "pinyin": "jìjié",
+              "hsk_level": 3,
+              "en": "season; time; period",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "渴",
+              "pinyin": "kě",
+              "hsk_level": 3,
+              "en": "thirsty",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "发烧",
+              "pinyin": "fāshāo",
+              "hsk_level": 3,
+              "en": "have a fever",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "不但",
+              "pinyin": "búdàn",
+              "hsk_level": 3,
+              "en": "not only",
+              "ko": "",
+              "example": null
+            }
+          ]
+        },
+        {
+          "session": 2,
+          "target_vocab": [
+            {
+              "hanzi": "空调",
+              "pinyin": "kōngtiáo",
+              "hsk_level": 3,
+              "en": "air conditioning",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "照相机",
+              "pinyin": "zhàoxiàngjī",
+              "hsk_level": 3,
+              "en": "camera",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "春",
+              "pinyin": "chūn",
+              "hsk_level": 3,
+              "en": "spring (season); joyful",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "伞",
+              "pinyin": "sǎn",
+              "hsk_level": 3,
+              "en": "umbrella; parasol",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "公斤",
+              "pinyin": "gōngjīn",
+              "hsk_level": 3,
+              "en": "kilogram",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "个子",
+              "pinyin": "gèzi",
+              "hsk_level": 3,
+              "en": "height; stature; build",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "熊猫",
+              "pinyin": "xióngmāo",
+              "hsk_level": 3,
+              "en": "panda",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "刷牙",
+              "pinyin": "shuāyá",
+              "hsk_level": 3,
+              "en": "brush one's teeth",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "复习",
+              "pinyin": "fùxí",
+              "hsk_level": 3,
+              "en": "revise; to review",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "冬",
+              "pinyin": "dōng",
+              "hsk_level": 3,
+              "en": "winter",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "请假",
+              "pinyin": "qǐng jià",
+              "hsk_level": 3,
+              "en": "to ask for time off",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "中文",
+              "pinyin": "Zhōngwén",
+              "hsk_level": 3,
+              "en": "Chinese (language)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "秋",
+              "pinyin": "qiū",
+              "hsk_level": 3,
+              "en": "autumn; fall; harvest time",
+              "ko": "",
+              "example": null
+            }
+          ]
+        },
+        {
+          "session": 3,
+          "target_vocab": [
+            {
+              "hanzi": "句子",
+              "pinyin": "jùzi",
+              "hsk_level": 3,
+              "en": "sentence",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "行李箱",
+              "pinyin": "xínglǐxiāng",
+              "hsk_level": 3,
+              "en": "trunk; suitcase",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "筷子",
+              "pinyin": "kuàizi",
+              "hsk_level": 3,
+              "en": "chopsticks",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "皮鞋",
+              "pinyin": "píxié",
+              "hsk_level": 3,
+              "en": "leather shoes",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "爬山",
+              "pinyin": "páshān",
+              "hsk_level": 3,
+              "en": "mountain climbing",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "黑板",
+              "pinyin": "hēibǎn",
+              "hsk_level": 3,
+              "en": "blackboard",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "感兴趣",
+              "pinyin": "gǎn xìngqù",
+              "hsk_level": 3,
+              "en": "be interested in",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "词典",
+              "pinyin": "cídiǎn",
+              "hsk_level": 3,
+              "en": "dictionary",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "留学",
+              "pinyin": "liú xué",
+              "hsk_level": 3,
+              "en": "study abroad",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "刮风",
+              "pinyin": "guāfēng",
+              "hsk_level": 3,
+              "en": "windy; to blow (wind)",
+              "ko": "",
+              "example": null
+            },
+            {
+              "hanzi": "黄河",
+              "pinyin": "huánghé",
+              "hsk_level": 3,
+              "en": "Yellow River",
+              "ko": "",
+              "example": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
