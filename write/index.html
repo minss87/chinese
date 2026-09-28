@@ -299,7 +299,8 @@ function isDark() {
 }
 
 function makePad(canvas, ghost, ch) {
-  var pad = { cv: canvas, ctx: canvas.getContext("2d", { desynchronized: true, alpha: true }),
+  /* desynchronized 는 iOS 사파리에서 칸이 까맣게 되어 쓰지 않는다 */
+  var pad = { cv: canvas, ctx: canvas.getContext("2d", { alpha: true }),
     strokes: [], cur: null, ghost: ghost, ch: ch, size: 0, dpr: 1, rect: null,
     bg: document.createElement("canvas") };
 
