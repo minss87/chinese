@@ -150,35 +150,33 @@ body{margin:0;background:var(--bg);color:var(--ink);
   .rotate{display:flex;position:fixed;inset:0;z-index:9;background:var(--bg);
     align-items:center;justify-content:center;text-align:center;padding:40px;font-size:17px;color:var(--ink2);}
 }
-@media (prefers-color-scheme:dark){
-  :root{
+:root[data-theme="dark"]{
     --bg:#0e1013; --ink:#ffffff; --ink2:rgba(240,240,248,.82); --ink3:rgba(240,240,248,.6);
     --red:#ff6b60; --line:rgba(255,255,255,.16); --glass:.5; --edge:.12;
     --grid:rgba(255,130,120,.5); --stroke:#ffffff; --modelink:#ffffff;
   }
-  .aurora{opacity:.5;}
-  .aurora .b1{background:#5c2433;}
-  .aurora .b2{background:#16304f;}
-  .aurora .b3{background:#4a3814;}
-  .stage{background:rgba(20,22,28,.86);}
-  .glass{background:rgba(20,22,28,.72);border-color:rgba(255,255,255,.09);
+[data-theme="dark"] .aurora{opacity:.5;}
+[data-theme="dark"] .aurora .b1{background:#5c2433;}
+[data-theme="dark"] .aurora .b2{background:#16304f;}
+[data-theme="dark"] .aurora .b3{background:#4a3814;}
+[data-theme="dark"] .stage{background:rgba(20,22,28,.86);}
+[data-theme="dark"] .glass{background:rgba(20,22,28,.72);border-color:rgba(255,255,255,.09);
     box-shadow:0 1px 2px rgba(0,0,0,.35),0 12px 34px rgba(0,0,0,.4);}
-  .seg,.modes{background:rgba(255,255,255,.08);}
-  .seg-b.on,.mode.on{background:rgba(255,255,255,.18);color:var(--ink);box-shadow:none;}
-  .ep,.opt,.pill,.rerow{background:rgba(255,255,255,.06);color:var(--ink);}
-  .cell{background:rgba(255,255,255,.05);}
-  .mode[disabled]{color:rgba(235,235,245,.28);}
-  .cell{border-color:rgba(255,255,255,.14);}
-  .cell.model{background:rgba(255,255,255,.04);}
-  .ep.weak{background:rgba(255,90,79,.2);border-color:rgba(255,90,79,.32);}
-  .ep.on,.ep.weak.on{background:var(--red);color:#1a0d0c;}
-  .pill.solid{color:#1a0d0c;}
-  .reveal{background:rgba(255,255,255,.06);}
-  .opt.right{background:rgba(52,199,89,.24);border-color:rgba(52,199,89,.5);}
-  .opt.wrong{background:rgba(255,90,79,.24);border-color:rgba(255,90,79,.5);}
-  .sc.hard,.hardrow b{background:rgba(255,214,10,.3);}
-  .sent.hide .sc-h{text-shadow:0 0 22px rgba(255,255,255,.45);}
-}
+[data-theme="dark"] .seg, [data-theme="dark"] .modes{background:rgba(255,255,255,.08);}
+[data-theme="dark"] .seg-b.on, [data-theme="dark"] .mode.on{background:rgba(255,255,255,.18);color:var(--ink);box-shadow:none;}
+[data-theme="dark"] .ep, [data-theme="dark"] .opt, [data-theme="dark"] .pill, [data-theme="dark"] .rerow{background:rgba(255,255,255,.06);color:var(--ink);}
+[data-theme="dark"] .cell{background:rgba(255,255,255,.05);}
+[data-theme="dark"] .mode[disabled]{color:rgba(235,235,245,.28);}
+[data-theme="dark"] .cell{border-color:rgba(255,255,255,.14);}
+[data-theme="dark"] .cell.model{background:rgba(255,255,255,.04);}
+[data-theme="dark"] .ep.weak{background:rgba(255,90,79,.2);border-color:rgba(255,90,79,.32);}
+[data-theme="dark"] .ep.on, [data-theme="dark"] .ep.weak.on{background:var(--red);color:#1a0d0c;}
+[data-theme="dark"] .pill.solid{color:#1a0d0c;}
+[data-theme="dark"] .reveal{background:rgba(255,255,255,.06);}
+[data-theme="dark"] .opt.right{background:rgba(52,199,89,.24);border-color:rgba(52,199,89,.5);}
+[data-theme="dark"] .opt.wrong{background:rgba(255,90,79,.24);border-color:rgba(255,90,79,.5);}
+[data-theme="dark"] .sc.hard, [data-theme="dark"] .hardrow b{background:rgba(255,214,10,.3);}
+[data-theme="dark"] .sent.hide .sc-h{text-shadow:0 0 22px rgba(255,255,255,.45);}
 </style>
 </head>
 <body>
@@ -208,9 +206,12 @@ var W = {
   hard: saved.hard || {},              /* 형광펜으로 표시한 글자 */
   stroke: saved.stroke || {},          /* 획순 통과한 글자 */
   dict: saved.dict || {},              /* 받아쓰기 결과 */
-  flash: saved.flash !== false         /* 문제마다 무작위로 2.5초 플래시 */
+  flash: saved.flash !== false,        /* 문제마다 무작위로 2.5초 플래시 */
+  theme: saved.theme || "auto"         /* auto | light | dark */
 };
 function save() { try { localStorage.setItem(WK, JSON.stringify(W)); } catch (e) {} }
+applyThemeSoon();
+function applyThemeSoon() { try { applyTheme(); } catch (e) {} }
 
 /* 회화앱에서 약했던 문장 → 약한 글자 */
 function talkData() {
@@ -294,8 +295,20 @@ var GHOST = [0.34, 0.17, 0];           /* 칸마다 옅어지는 본보기 */
 var pads = [];                         /* 연습 칸 객체 */
 var penSeen = false;                   /* 펜을 한 번이라도 쓰면 손가락 입력은 무시 */
 
-function isDark() {
+function sysDark() {
   return !!(window.matchMedia && window.matchMedia("(prefers-color-scheme:dark)").matches);
+}
+function isDark() {
+  return document.documentElement.getAttribute("data-theme") === "dark";
+}
+/* 캔버스 색은 CSS 변수를 읽지 않고 직접 정한다 — 기기에 따라 값이 비는 경우가 있다 */
+var INK = { light: { pen: "#1a1c22", model: "#12131a", grid: "rgba(229,50,42,.38)" },
+            dark:  { pen: "#ffffff", model: "#ffffff", grid: "rgba(255,140,130,.55)" } };
+function ink(k) { return INK[isDark() ? "dark" : "light"][k]; }
+function applyTheme() {
+  var m = W.theme || "auto";
+  var dark = m === "dark" || (m === "auto" && sysDark());
+  document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
 }
 
 function makePad(canvas, ghost, ch) {
@@ -311,7 +324,7 @@ function makePad(canvas, ghost, ch) {
     c.setTransform(d, 0, 0, d, 0, 0);
     c.clearRect(0, 0, s, s);
     c.save();
-    c.strokeStyle = cssv("--grid") || "#e5322a";
+    c.strokeStyle = ink("grid");
     c.lineWidth = 1; c.setLineDash([5, 6]);
     c.beginPath();
     c.moveTo(s / 2, 4); c.lineTo(s / 2, s - 4);
@@ -323,7 +336,7 @@ function makePad(canvas, ghost, ch) {
     if (pad.ghost > 0 && pad.ch) {
       c.save();
       c.globalAlpha = Math.min(1, pad.ghost * (isDark() ? 1.6 : 1));
-      c.fillStyle = cssv("--modelink") || "#12131a";
+      c.fillStyle = ink("model");
       c.font = Math.round(s * 0.76) + 'px "Kaiti SC","STKaiti","Kai","PingFang SC","Noto Serif CJK SC",serif';
       c.textAlign = "center"; c.textBaseline = "middle";
       c.fillText(pad.ch, s / 2, s / 2 + s * 0.02);
@@ -366,7 +379,7 @@ function makePad(canvas, ghost, ch) {
   };
   pad.redraw = function () {
     var c = pad.ctx, s = pad.size;
-    pad.ink = cssv("--stroke") || "#1a1c22";
+    pad.ink = ink("pen");
     c.clearRect(0, 0, s, s);
     c.drawImage(pad.bg, 0, 0, s, s);
     pad.strokes.forEach(pad.line);
@@ -401,7 +414,7 @@ function makePad(canvas, ghost, ch) {
     ev.preventDefault();
     canvas.setPointerCapture(ev.pointerId);
     pad.rect = canvas.getBoundingClientRect();
-    pad.ink = cssv("--stroke") || "#1a1c22";
+    pad.ink = ink("pen");
     var p = pt(ev); p.w = width(ev, null, p);
     if (ev.pointerType === "eraser" || ev.buttons === 32) {
       pad.cur = { pts: [p], erase: true };
@@ -811,7 +824,7 @@ function buildStroke() {
 
   var box = host.getBoundingClientRect();
   var size = Math.max(150, Math.floor(Math.min((box.width - 40) / 2, box.height - 26)));
-  var ink = cssv("--stroke") || "#1a1c22";
+  var pen = ink("pen");
   var made = [];
   ["demo", "quiz"].forEach(function (kind, i) {
     var wrap = document.createElement("div");
@@ -828,7 +841,7 @@ function buildStroke() {
   });
 
   var common = { width: size, height: size, padding: Math.round(size * 0.06),
-    strokeColor: ink, radicalColor: "#e5322a", drawingColor: ink,
+    strokeColor: pen, radicalColor: isDark() ? "#ff6b60" : "#e5322a", drawingColor: pen,
     strokeAnimationSpeed: 1, delayBetweenStrokes: 220,
     charDataLoader: function (c, onLoad) { onLoad(charData(c)); } };
 
@@ -1004,6 +1017,8 @@ function mainHTML() {
         .map(function (m) {
           return '<button class="mode ' + (S.mode === m[0] ? "on" : "") + '" data-a="mode" data-m="'
             + m[0] + '">' + m[1] + "</button>"; }).join("") + "</div>"
+    + '<button class="pill" data-a="theme">'
+    + (W.theme === "dark" ? "어둡게" : W.theme === "light" ? "밝게" : "테마 자동") + "</button>"
     + '<button class="pill" data-a="onlynew">'
     + (W.onlyNew ? (read ? "안 푼 문장만" : "안 쓴 글자만") : (read ? "전체 문장" : "전체 글자")) + "</button></div>";
 
@@ -1132,6 +1147,10 @@ document.addEventListener("click", function (ev) {
   if (a === "totext") { S.rd = "text"; return render(); }
   if (a === "newchars") { S.newOpen = !S.newOpen; return render(); }
   if (a === "readagain") { loadRead(); return render(); }
+  if (a === "theme") {
+    W.theme = W.theme === "auto" ? "light" : W.theme === "light" ? "dark" : "auto";
+    save(); applyTheme(); return render();
+  }
   if (a === "onlynew") { W.onlyNew = !W.onlyNew; save(); loadList(); return render(); }
   if (a === "undo") { for (var i = pads.length - 1; i >= 0; i--) if (!pads[i].empty()) { pads[i].undo(); break; } return onDraw(); }
   if (a === "clear") { pads.forEach(function (p) { p.clear(); }); return onDraw(); }
@@ -1147,7 +1166,7 @@ document.addEventListener("click", function (ev) {
 window.addEventListener("resize", function () { if (S.ready) buildCells(); });
 if (window.matchMedia) {
   var mq = window.matchMedia("(prefers-color-scheme:dark)");
-  var onScheme = function () { if (S.ready) render(); };
+  var onScheme = function () { applyTheme(); if (S.ready) render(); };
   if (mq.addEventListener) mq.addEventListener("change", onScheme);
   else if (mq.addListener) mq.addListener(onScheme);
 }
