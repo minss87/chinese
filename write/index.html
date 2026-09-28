@@ -32,9 +32,15 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;overflow:hidden;}
 body{margin:0;background:var(--bg);color:var(--ink);letter-spacing:-.011em;
+  -webkit-user-select:none;user-select:none;-webkit-touch-callout:none;
   font:15px/1.5 "Pretendard",-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
   -webkit-font-smoothing:antialiased;overscroll-behavior:none;}
 .zh{font-family:"HandZh","PingFang SC","Noto Sans CJK SC",serif;}
+/* 펜슬 입력을 사파리가 가로채지 못하게 — 선택·돋보기·확대를 전부 끈다 */
+button{touch-action:manipulation;}
+input,textarea{-webkit-user-select:text;user-select:text;touch-action:manipulation;}
+.epbar{touch-action:pan-x;}
+.chips,.slist,.textwrap,.relist{touch-action:pan-y;}
 #app{height:100%;display:flex;flex-direction:column;}
 .cap{font-size:10px;letter-spacing:.15em;text-transform:uppercase;font-weight:700;color:var(--ink3);}
 .muted,.hintline{font-size:13px;color:var(--ink3);}
@@ -134,21 +140,20 @@ body{margin:0;background:var(--bg);color:var(--ink);letter-spacing:-.011em;
 .pill.solid[disabled]{background:var(--hair2);color:var(--ink3);}
 
 /* 쓰는 칸 */
-.cellwrap-row{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;container-type:size;}
+.cellwrap-row{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;}
 .cells{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;
-  height:min(100cqh,100cqw);width:min(100cqh,100cqw);
   background:var(--sheet);border:1px solid var(--hair);border-radius:8px;overflow:hidden;}
 .cellwrap{position:relative;display:grid;place-items:center;min-width:0;min-height:0;}
 .cellwrap:nth-child(-n+2){border-bottom:1px solid var(--hair);}
 .cellwrap:nth-child(odd){border-right:1px solid var(--hair);}
-.cell{display:block;touch-action:none;background:transparent;}
+.cell{display:block;touch-action:none;background:transparent;-webkit-user-select:none;user-select:none;}
 .tagline{position:absolute;top:9px;left:12px;font-size:9.5px;letter-spacing:.14em;
   text-transform:uppercase;color:var(--ink3);font-weight:700;}
 .erasing .cell,.erasing .note{cursor:cell;}
 
 /* 획순 */
-.hwrow{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;gap:22px;container-type:size;}
-.hwcell{height:min(100cqh,46cqw);width:min(100cqh,46cqw);position:relative;overflow:hidden;
+.hwrow{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;gap:22px;}
+.hwcell{position:relative;overflow:hidden;flex:none;
   background:var(--sheet);border:1px solid var(--hair);border-radius:8px;
   background-image:
     repeating-linear-gradient(to bottom, var(--gridline) 0 5px, transparent 5px 11px),
@@ -532,11 +537,19 @@ function makePad(canvas, ghost, ch, opt) {
     return { x: ev.clientX - r.left, y: ev.clientY - r.top };
   }
 
+  /* 사파리의 손글씨 인식(Scribble)·선택·돋보기·더블탭 확대가 펜슬 획을 가로채지 못하게
+     터치 이벤트의 기본 동작을 막는다. 포인터 이벤트는 그대로 들어온다 */
+  ["touchstart", "touchmove", "touchend"].forEach(function (t) {
+    canvas.addEventListener(t, function (e) { if (e.cancelable) e.preventDefault(); }, { passive: false });
+  });
+
   canvas.addEventListener("pointerdown", function (ev) {
     if (ev.pointerType === "pen") penSeen = true;
     if (penSeen && ev.pointerType === "touch") return;      /* 손바닥·손가락 무시 */
     ev.preventDefault();
-    canvas.setPointerCapture(ev.pointerId);
+    if (pad.cur) end();                                     /* 놓친 pointerup 이 있으면 먼저 마무리 */
+    pad.pid = ev.pointerId;
+    try { canvas.setPointerCapture(ev.pointerId); } catch (e) {}
     pad.rect = canvas.getBoundingClientRect();
     pad.ink = ink("pen");
     var p = pt(ev); p.w = width(ev, null, p);
@@ -550,9 +563,11 @@ function makePad(canvas, ghost, ch, opt) {
   }, { passive: false });
 
   canvas.addEventListener("pointermove", function (ev) {
-    if (!pad.cur || (penSeen && ev.pointerType === "touch")) return;
+    if (!pad.cur || ev.pointerId !== pad.pid) return;
     ev.preventDefault();
-    var list = (ev.getCoalescedEvents && ev.getCoalescedEvents()) || [ev];
+    /* 사파리는 캡처 중에 빈 배열을 돌려줄 때가 있다 — 비면 이벤트 자체를 쓴다 */
+    var list = ev.getCoalescedEvents ? ev.getCoalescedEvents() : null;
+    if (!list || !list.length) list = [ev];
     if (pad.cur.erase) {
       var q = pt(ev);
       if (!eraseAt(q)) pad.redraw();
@@ -578,9 +593,10 @@ function makePad(canvas, ghost, ch, opt) {
     else pad.strokes.push(st);
     onDraw(pad);
   }
-  canvas.addEventListener("pointerup", end);
-  canvas.addEventListener("pointercancel", end);
-  canvas.addEventListener("pointerleave", function () { if (pad.cur) end(); });
+  function endIf(ev) { if (ev.pointerId === pad.pid) end(); }
+  canvas.addEventListener("pointerup", endIf);
+  canvas.addEventListener("pointercancel", endIf);
+  canvas.addEventListener("lostpointercapture", endIf);
   return pad;
 }
 
@@ -949,7 +965,7 @@ function buildStroke() {
   if (!data) return;
 
   var box = host.getBoundingClientRect();
-  if (box.width < 60 || box.height < 60) { setTimeout(reflow, 220); return; }
+  if (box.width < 60 || box.height < 60) { setTimeout(function () { reflow(true); }, 220); return; }
   var size = Math.floor(Math.min(box.height, (box.width - 22) / 2));
   var ink = ink_model();
   ["demo", "quiz"].forEach(function (kind, i) {
@@ -1043,7 +1059,7 @@ function buildDictCells() {
   pads = [];
   host.innerHTML = "";
   var box = host.getBoundingClientRect();
-  if (box.width < 60 || box.height < 60) { setTimeout(reflow, 220); return; }
+  if (box.width < 60 || box.height < 60) { setTimeout(function () { reflow(true); }, 220); return; }
   /* 공책이 작업 영역을 꽉 채우도록 줄 수와 줄 높이를 화면에 맞춘다 */
   var lines = Math.max(3, Math.min(5, Math.round(box.height / 150)));
   var lineH = Math.floor(box.height / lines);
@@ -1450,9 +1466,11 @@ function buildCells() {
   var it = S.list[S.idx];
   pads = [];
   host.innerHTML = "";
-  var box = host.getBoundingClientRect();
-  if (box.width < 60 || box.height < 60) { setTimeout(reflow, 220); return; }
-  var size = Math.floor(Math.min(box.width, box.height) / 2) - 1;
+  var row = host.parentNode.getBoundingClientRect();
+  if (row.width < 60 || row.height < 60) { setTimeout(function () { reflow(true); }, 220); return; }
+  var side = Math.floor(Math.min(row.width, row.height));
+  host.style.width = side + "px"; host.style.height = side + "px";
+  var size = Math.floor(side / 2) - 1;
   for (var i = 0; i < REPS + 1; i++) {
     var wrap = document.createElement("div");
     wrap.className = "cellwrap";
@@ -1474,6 +1492,7 @@ function buildCells() {
 }
 
 function render() {
+  lastVW = window.innerWidth; lastVH = window.innerHeight;
   if (S.mode !== "stroke") killWriters();
   document.body.classList.toggle("erasing", !!S.erase);
   document.getElementById("app").innerHTML = mainHTML();
@@ -1584,9 +1603,12 @@ if (window.FontFace) {
   } catch (e) {}
 }
 /* 세로↔가로 전환 때 칸 크기를 다시 잡는다 — 쓴 획은 유지한다 */
-var reflowT = null;
-function reflow() {
+var reflowT = null, lastVW = 0, lastVH = 0;
+function reflow(force) {
   if (!S.ready) return;
+  var vw = window.innerWidth, vh = window.innerHeight;
+  if (force !== true && vw === lastVW && vh === lastVH && el("cells") && el("cells").children.length) return;
+  lastVW = vw; lastVH = vh;
   clearTimeout(reflowT);
   reflowT = setTimeout(function () {
     if (pads.some(function (p) { return p.cur; })) return;   /* 쓰는 중이면 미룬다 */
@@ -1599,9 +1621,8 @@ function reflow() {
     else if (S.mode === "dict") buildDictCells();
   }, 160);
 }
-window.addEventListener("resize", reflow);
-window.addEventListener("orientationchange", function () { reflow(); setTimeout(reflow, 500); });
-if (window.visualViewport) window.visualViewport.addEventListener("resize", reflow);
+window.addEventListener("resize", function () { reflow(); });
+window.addEventListener("orientationchange", function () { reflow(true); setTimeout(function () { reflow(true); }, 500); });
 if (window.matchMedia) {
   var mq = window.matchMedia("(prefers-color-scheme:dark)");
   var onScheme = function () { applyTheme(); if (S.ready) render(); };
@@ -1609,6 +1630,15 @@ if (window.matchMedia) {
   else if (mq.addListener) mq.addListener(onScheme);
 }
 document.addEventListener("gesturestart", function (e) { e.preventDefault(); });
+document.addEventListener("gesturechange", function (e) { e.preventDefault(); });
+/* 목록(글자 트랙·문장 목록·화 선택·지문) 밖에서는 끌기·핀치를 막는다 */
+var SCROLLERS = ".chips,.slist,.epbar,.textwrap,.relist,.keybox";
+document.addEventListener("touchmove", function (ev) {
+  if (!ev.cancelable) return;
+  if (ev.touches.length > 1) return ev.preventDefault();
+  if (ev.target.closest && ev.target.closest(SCROLLERS)) return;
+  ev.preventDefault();
+}, { passive: false });
 
 /* 애플펜슬의 더블탭·스퀴즈는 웹에서 받을 수 없다.
    대신 쓰는 칸을 두 손가락으로 톡 치면 펜↔지우개가 바뀐다 */
