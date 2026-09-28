@@ -8,6 +8,7 @@
 <meta name="apple-mobile-web-app-title" content="한자 쓰기">
 <title>한자 쓰기 · 金老师의 베이징 일기</title>
 <style>
+
 :root{
   --bg:#eceef4; --ink:#12131a; --ink2:rgba(60,60,67,.68); --ink3:rgba(60,60,67,.48);
   --red:#e5322a; --line:rgba(16,18,28,.1); --glass:.58; --edge:.7;
@@ -121,6 +122,16 @@ body{margin:0;background:var(--bg);color:var(--ink);
   background-size:100% 100%,100% 100%;}
 .hwcell svg{display:block;}
 .dictcells{flex-direction:column;gap:0;align-items:stretch;justify-content:flex-start;}
+.erasing .cell,.erasing .note{cursor:cell;}
+.cellwrap-row{flex:1;min-height:0;display:flex;align-items:stretch;gap:14px;}
+.cellwrap-row .cells{flex:1;min-width:0;}
+.tools{flex:none;align-self:center;display:flex;flex-direction:column;gap:6px;
+  padding:6px;border-radius:20px;}
+.tool{width:52px;height:52px;border:0;border-radius:15px;background:transparent;color:var(--ink2);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;}
+.tool svg{width:26px;height:26px;}
+.tool.on{background:var(--red);color:#fff;box-shadow:0 2px 8px rgba(229,50,42,.3);}
+.tool:active{transform:scale(.94);}
 .note{display:block;border-radius:18px;touch-action:none;
   background:rgba(255,255,255,.66);border:.5px solid rgba(16,18,28,.1);}
 .answer{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;padding:12px 16px;border-radius:18px;
@@ -187,6 +198,7 @@ body{margin:0;background:var(--bg);color:var(--ink);
 [data-theme="dark"] .cell{background:rgba(255,255,255,.05);}
 [data-theme="dark"] .note{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12);}
 [data-theme="dark"] .answer{background:rgba(255,255,255,.06);}
+[data-theme="dark"] .tool.on{color:#1a0d0c;}
 [data-theme="dark"] .mode[disabled]{color:rgba(235,235,245,.28);}
 [data-theme="dark"] .cell{border-color:rgba(255,255,255,.14);}
 [data-theme="dark"] .cell.model{background:rgba(255,255,255,.04);}
@@ -265,7 +277,7 @@ var CUR = null, RT = {};                        /* 커리큘럼 */
 var S = { mode: "trace", list: [], idx: 0, rep: 0, weak: false, hard: false, ready: false,
   qs: [], picked: -1, shown: true, marks: [], t0: 0, rd: "text", text: null, newOpen: false,
   reveal: false, qmiss: 0, outline: true, keep: null, spokeIdx: -1, grade: null, keyOpen: false,
-  overlay: false };
+  overlay: false, erase: false, showKo: false };
 
 function phase() { return CUR.phases[W.ph]; }
 function week() { return phase().weeks[W.wk]; }
@@ -436,6 +448,28 @@ function makePad(canvas, ghost, ch, opt) {
     c.lineTo(b.x, b.y);
     c.stroke();
   }
+  /* 지우개: 닿은 획만 지운다 */
+  function eraseAt(p) {
+    var r = (pad.note ? pad.lineH : pad.size) * 0.13;
+    var before = pad.strokes.length;
+    var left = pad.strokes.filter(function (st) {
+      return !st.pts.some(function (q) { return Math.hypot(q.x - p.x, q.y - p.y) < r + q.w / 2; });
+    });
+    if (left.length !== before) {
+      if (pad.strokes === S.dstrokes) { S.dstrokes = left; pad.strokes = left; }
+      else pad.strokes = left;
+      pad.redraw();
+      return true;
+    }
+    return false;
+  }
+  pad.eraseRing = function (p) {
+    var c = pad.ctx, r = (pad.note ? pad.lineH : pad.size) * 0.13;
+    c.save();
+    c.strokeStyle = isDark() ? "rgba(255,255,255,.45)" : "rgba(16,18,28,.35)";
+    c.lineWidth = 1.5; c.beginPath(); c.arc(p.x, p.y, r, 0, 6.2832); c.stroke();
+    c.restore();
+  };
   function dot(p) {
     var c = pad.ctx;
     c.beginPath(); c.fillStyle = pad.ink;
@@ -485,8 +519,9 @@ function makePad(canvas, ghost, ch, opt) {
     pad.rect = canvas.getBoundingClientRect();
     pad.ink = ink("pen");
     var p = pt(ev); p.w = width(ev, null, p);
-    if (ev.pointerType === "eraser" || ev.buttons === 32) {
+    if (S.erase || ev.pointerType === "eraser" || ev.buttons === 32) {
       pad.cur = { pts: [p], erase: true };
+      eraseAt(p); pad.eraseRing(p);
       return;
     }
     pad.cur = { pts: [p], erase: false };
@@ -497,6 +532,12 @@ function makePad(canvas, ghost, ch, opt) {
     if (!pad.cur || (penSeen && ev.pointerType === "touch")) return;
     ev.preventDefault();
     var list = (ev.getCoalescedEvents && ev.getCoalescedEvents()) || [ev];
+    if (pad.cur.erase) {
+      var q = pt(ev);
+      if (!eraseAt(q)) pad.redraw();
+      pad.eraseRing(q);
+      return;
+    }
     var pts = pad.cur.pts;
     for (var i = 0; i < list.length; i++) {
       var e = list[i], p = pt(e), prev = pts[pts.length - 1];
@@ -510,9 +551,10 @@ function makePad(canvas, ghost, ch, opt) {
 
   function end() {
     if (!pad.cur) return;
-    var erase = pad.cur.erase;
-    if (erase) { pad.strokes = []; pad.cur = null; pad.redraw(); }
-    else { pad.strokes.push(pad.cur); pad.cur = null; }
+    var st = pad.cur;
+    pad.cur = null;
+    if (st.erase) pad.redraw();
+    else pad.strokes.push(st);
     onDraw(pad);
   }
   canvas.addEventListener("pointerup", end);
@@ -1006,9 +1048,9 @@ function buildDictCells() {
 function dictHTML(it) {
   var h = '<div class="stage glass">'
     + '<div class="headrow"><span class="qkind">받아쓰기</span>'
-    + '<span class="gloss">' + (S.reveal ? esc(it.ko) : "") + "</span>"
+    + '<span class="gloss">' + ((S.reveal || S.showKo) ? esc(koBody(it.ko)) : "") + "</span>"
     + '<span class="dots">' + (S.idx + 1) + " / " + S.list.length + "</span></div>"
-    + '<div class="cells dictcells" id="cells"></div>';
+    + '<div class="cellwrap-row"><div class="cells dictcells" id="cells"></div>' + toolsHTML() + "</div>";
   if (S.reveal)
     h += '<div class="answer"><span class="ans-zh">' + esc(it.zh) + "</span>"
       + '<span class="ans-py">' + esc(it.pinyin) + "</span></div>";
@@ -1016,7 +1058,8 @@ function dictHTML(it) {
   h += '<div class="footrow"><span class="hintline"></span>'
     + '<button class="pill" data-a="say" data-t="' + esc(it.zh) + '">다시 듣기</button>'
     + '<button class="pill" data-a="slow" data-t="' + esc(it.zh) + '">느리게</button>'
-    + '<button class="pill" data-a="dclear">지우기</button>';
+    + '<button class="pill' + (S.showKo ? " solid" : "") + '" data-a="dko">뜻 보기</button>'
+    + '<button class="pill" data-a="dclear">모두 지우기</button>';
   if (S.reveal)
     h += '<button class="pill' + (S.overlay ? " solid" : "") + '" data-a="doverlay">본보기 겹치기</button>'
       + '<button class="pill" data-a="dgrade">글씨 채점</button>'
@@ -1028,7 +1071,7 @@ function dictHTML(it) {
 
 function dictMark(score) {
   var it = S.list[S.idx];
-  S.dstrokes = []; S.overlay = false; S.grade = null;
+  S.dstrokes = []; S.overlay = false; S.grade = null; S.erase = false; S.showKo = false;
   W.dict["d:" + it.zh] = { s: score, last: Date.now() };
   save();
   if (S.idx + 1 < S.list.length) { S.idx++; S.reveal = false; render(); }
@@ -1215,6 +1258,18 @@ function sideHTML() {
   return h;
 }
 
+var PEN_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21l1-4.5L15.6 4.9a2 2 0 0 1 2.8 0l.7.7a2 2 0 0 1 0 2.8L7.5 20 3 21z" '
+  + 'fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>';
+var ERASER_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 19H20M4.6 15.6l6-6a2 2 0 0 1 2.8 0l4 4a2 2 0 0 1 0 2.8L15.4 19H9.4l-4.8-4.8a1 1 0 0 1 0-1.4z" '
+  + 'fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg>';
+
+function toolsHTML() {
+  return '<div class="tools glass">'
+    + '<button class="tool' + (S.erase ? "" : " on") + '" data-a="pen" aria-label="펜">' + PEN_SVG + "</button>"
+    + '<button class="tool' + (S.erase ? " on" : "") + '" data-a="eraser" aria-label="지우개">' + ERASER_SVG + "</button>"
+    + "</div>";
+}
+
 function mainHTML() {
   var read = S.mode === "read";
   var title = S.hard ? "읽기에서 표시한 글자"
@@ -1258,7 +1313,7 @@ function mainHTML() {
     + '<span class="py">' + esc(it.wordPinyin) + "</span>"
     + '<span class="gloss">' + esc(it.word) + (it.en ? " · " + esc(it.en) : "") + "</span>"
     + '<span class="dots">' + dots + "</span></div>"
-    + '<div class="cells" id="cells"></div>'
+    + '<div class="cellwrap-row"><div class="cells" id="cells"></div>' + toolsHTML() + "</div>"
     + '<div class="footrow"><span class="hintline"></span>'
     + '<button class="pill" data-a="undo">한 획 지우기</button>'
     + '<button class="pill" data-a="clear">모두 지우기</button>'
@@ -1297,6 +1352,7 @@ function buildCells() {
 function render() {
   if (S.mode !== "stroke") killWriters();
   document.querySelector(".side").innerHTML = sideHTML();
+  document.body.classList.toggle("erasing", !!S.erase);
   document.querySelector(".main").innerHTML = mainHTML();
   if (S.mode === "trace") buildCells();
   else if (S.mode === "stroke") buildStroke();
@@ -1357,6 +1413,9 @@ document.addEventListener("click", function (ev) {
   if (a === "hwclear") { return buildStroke(); }
   if (a === "dreveal") { S.reveal = true; return render(); }
   if (a === "doverlay") { S.overlay = !S.overlay; return render(); }
+  if (a === "dko") { S.showKo = !S.showKo; return render(); }
+  if (a === "pen") { if (!S.erase) return; S.erase = false; return render(); }
+  if (a === "eraser") { if (S.erase) return; S.erase = true; return render(); }
   if (a === "dgrade") return gradeSentence();
   if (a === "dmark") { return dictMark(+t.getAttribute("data-s")); }
   if (a === "dclear") { S.grade = null; S.dstrokes = []; return render(); }
@@ -1394,6 +1453,27 @@ if (window.matchMedia) {
   else if (mq.addListener) mq.addListener(onScheme);
 }
 document.addEventListener("gesturestart", function (e) { e.preventDefault(); });
+
+/* 애플펜슬의 더블탭·스퀴즈는 웹에서 받을 수 없다.
+   대신 쓰는 칸을 두 손가락으로 톡 치면 펜↔지우개가 바뀐다 */
+var twoTouch = 0;
+document.addEventListener("touchstart", function (ev) {
+  if (!ev.target.closest || !ev.target.closest(".cell,.note")) return;
+  if (ev.touches.length === 2) twoTouch = Date.now();
+}, { passive: true });
+document.addEventListener("touchend", function (ev) {
+  if (!twoTouch) return;
+  var quick = Date.now() - twoTouch < 400;
+  twoTouch = 0;
+  if (!quick || ev.touches.length) return;
+  if (S.mode !== "trace" && S.mode !== "dict") return;
+  S.erase = !S.erase; render();
+}, { passive: true });
+document.addEventListener("keydown", function (ev) {
+  if (ev.target && /input|textarea/i.test(ev.target.tagName)) return;
+  var k = ev.key.toLowerCase();
+  if (k === "e" && (S.mode === "trace" || S.mode === "dict")) { S.erase = !S.erase; render(); }
+});
 
 /* ===================== 시작 ===================== */
 Promise.all(["../data/hsk1-3_curriculum.json", "../data/hsk4_curriculum.json",
