@@ -6,6 +6,12 @@
 <meta name="theme-color" content="#eceef4">
 <title>전화 중국어</title>
 <style>
+@font-face{font-family:"Pretendard";font-style:normal;font-weight:100 500;font-display:swap;
+  src:url("./fonts/Pretendard-Regular.woff2") format("woff2");}
+@font-face{font-family:"Pretendard";font-style:normal;font-weight:600 900;font-display:swap;
+  src:url("./fonts/Pretendard-Bold.woff2") format("woff2");}
+
+
 :root{
   --bg:#eceef4; --ink:#12131a; --ink2:rgba(60,60,67,.68); --ink3:rgba(60,60,67,.48);
   --red:#e5322a; --green:#1f8f3d; --amber:#8a5200; --blue:#0a58c8;
@@ -14,7 +20,7 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 html,body{margin:0;padding:0;min-height:100%;}
 body{background:var(--bg);color:var(--ink);
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Apple SD Gothic Neo","Pretendard",system-ui,sans-serif;
+  font-family:"Pretendard",-apple-system,BlinkMacSystemFont,"SF Pro Text","Apple SD Gothic Neo",system-ui,sans-serif;
   -webkit-font-smoothing:antialiased;overflow-x:hidden;}
 .aurora{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0;}
 .aurora i{position:absolute;border-radius:50%;filter:blur(64px);display:block;}
