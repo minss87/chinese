@@ -1,0 +1,1148 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="한자 쓰기">
+<title>한자 쓰기 · 金老师의 베이징 일기</title>
+<style>
+:root{
+  --bg:#eceef4; --ink:#12131a; --ink2:rgba(60,60,67,.68); --ink3:rgba(60,60,67,.48);
+  --red:#e5322a; --line:rgba(16,18,28,.1); --glass:.58; --edge:.7;
+  --grid:rgba(229,50,42,.38); --model:rgba(16,18,28,.16);
+  --stroke:#1a1c22; --modelink:#12131a;
+}
+
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;overflow:hidden;}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.5 -apple-system,BlinkMacSystemFont,"SF Pro Text","Pretendard","Noto Sans KR",sans-serif;
+  -webkit-font-smoothing:antialiased;overscroll-behavior:none;}
+.aurora{position:fixed;inset:0;z-index:0;overflow:hidden;filter:blur(64px);opacity:.55;}
+.aurora i{position:absolute;display:block;border-radius:50%;}
+.aurora .b1{width:56vw;height:56vw;left:-14vw;top:-18vw;background:#ff9a8b;}
+.aurora .b2{width:48vw;height:48vw;right:-12vw;top:6vh;background:#8fb8ff;}
+.aurora .b3{width:52vw;height:52vw;left:22vw;bottom:-24vw;background:#ffd79a;}
+.glass{background:rgba(255,255,255,var(--glass));
+  border:.5px solid rgba(255,255,255,var(--edge));
+  box-shadow:0 1px 2px rgba(16,18,28,.04),0 10px 30px rgba(16,18,28,.07);
+  backdrop-filter:saturate(180%) blur(22px);-webkit-backdrop-filter:saturate(180%) blur(22px);}
+
+#app{position:relative;z-index:1;display:flex;height:100%;
+  padding:max(14px,env(safe-area-inset-top)) 16px 16px max(16px,env(safe-area-inset-left));gap:16px;}
+
+/* ---- 왼쪽 목록 ---- */
+.side{width:264px;flex:none;display:flex;flex-direction:column;border-radius:26px;padding:14px 12px;gap:10px;}
+.side h1{margin:2px 6px 0;font-size:19px;font-weight:700;letter-spacing:-.01em;}
+.side .sub{margin:0 6px;font-size:12.5px;color:var(--ink3);}
+.seg{display:flex;gap:4px;padding:4px;border-radius:14px;background:rgba(16,18,28,.06);}
+.seg-b{flex:1;border:0;background:transparent;color:var(--ink2);font:inherit;font-size:13.5px;
+  padding:8px;border-radius:11px;cursor:pointer;}
+.seg-b.on{background:#fff;color:var(--ink);font-weight:600;box-shadow:0 1px 3px rgba(16,18,28,.14);}
+.eps{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:6px;padding:2px;}
+.ep{display:flex;align-items:center;gap:10px;width:100%;text-align:left;border:.5px solid var(--line);
+  background:rgba(255,255,255,.55);color:var(--ink);font:inherit;font-size:14.5px;
+  border-radius:15px;padding:10px 12px;cursor:pointer;}
+.ep.on{background:var(--red);border-color:transparent;color:#fff;font-weight:600;}
+.ep.weak{background:rgba(229,50,42,.1);border-color:rgba(229,50,42,.25);}
+.ep.weak.on{background:var(--red);}
+.ep-n{flex:none;min-width:34px;font-size:12px;font-weight:700;color:var(--red);}
+.ep.on .ep-n,.ep.on .ep-c{color:rgba(255,255,255,.88);}
+.ep-t{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.ep-c{flex:none;font-size:11.5px;color:var(--ink3);}
+
+/* ---- 오른쪽 ---- */
+.main{flex:1;min-width:0;display:flex;flex-direction:column;gap:14px;}
+.bar{display:flex;align-items:center;gap:14px;border-radius:24px;padding:12px 18px;}
+.bar h2{margin:0;font-size:18px;font-weight:700;letter-spacing:-.01em;}
+.bar .sub{margin:2px 0 0;font-size:13px;color:var(--ink2);}
+.spacer{flex:1;}
+.modes{display:flex;gap:4px;padding:4px;border-radius:14px;background:rgba(16,18,28,.06);}
+.mode{border:0;background:transparent;color:var(--ink2);font:inherit;font-size:13.5px;
+  padding:8px 13px;border-radius:11px;cursor:pointer;white-space:nowrap;}
+.mode.on{background:#fff;color:var(--ink);font-weight:600;box-shadow:0 1px 3px rgba(16,18,28,.14);}
+.mode[disabled]{color:var(--ink3);cursor:default;}
+.pill{border:.5px solid var(--line);background:rgba(255,255,255,.7);color:var(--ink);font:inherit;
+  font-size:14px;padding:9px 16px;border-radius:999px;cursor:pointer;white-space:nowrap;}
+.pill:active{transform:scale(.97);}
+.pill.solid{background:var(--red);border-color:transparent;color:#fff;font-weight:600;}
+.pill[disabled]{opacity:.4;cursor:default;}
+
+.stage{flex:1;min-height:0;border-radius:28px;padding:18px;display:flex;flex-direction:column;gap:14px;}
+.headrow{display:flex;align-items:baseline;gap:12px;}
+.big{font-size:34px;font-weight:700;line-height:1;}
+.py{font-size:17px;color:var(--red);font-weight:600;}
+.gloss{font-size:13.5px;color:var(--ink3);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.cells{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;gap:16px;}
+.cellwrap{position:relative;flex:0 1 auto;}
+.cell{display:block;border-radius:18px;background:rgba(255,255,255,.72);
+  border:.5px solid rgba(16,18,28,.12);touch-action:none;}
+.cell.model{background:rgba(255,255,255,.5);}
+.tagline{position:absolute;left:0;right:0;bottom:-22px;text-align:center;font-size:12px;color:var(--ink3);}
+.footrow{display:flex;align-items:center;gap:10px;}
+.hintline{font-size:13.5px;color:var(--ink2);flex:1;}
+.dots{display:flex;gap:5px;align-items:center;}
+.dot{width:7px;height:7px;border-radius:50%;background:rgba(16,18,28,.16);}
+.dot.on{background:var(--red);}
+.qbody{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;}
+.sentwrap{display:flex;flex-direction:column;align-items:center;gap:12px;}
+.sent{margin:0;text-align:center;line-height:1.35;display:flex;flex-wrap:wrap;
+  justify-content:center;align-items:flex-end;gap:2px;}
+.sc{display:inline-flex;flex-direction:column;align-items:center;cursor:pointer;padding:0 2px;border-radius:8px;}
+.sc.on{background:rgba(229,50,42,.07);}
+.sc-py{font-size:17px;line-height:1.4;color:var(--red);font-weight:600;min-height:24px;}
+.sc-h{font-size:56px;font-weight:500;line-height:1.1;
+  font-family:"PingFang SC","Noto Sans CJK SC","Heiti SC",sans-serif;}
+.sent.hide .sc-h{color:transparent;text-shadow:0 0 22px rgba(16,18,28,.45);}
+.sc.hard{background:rgba(255,214,10,.45);}
+.sc.pn{cursor:default;padding:0;margin-left:-.12em;}
+.hwcell{position:relative;overflow:hidden;
+  background-image:
+    linear-gradient(to right, transparent calc(50% - .5px), var(--grid) calc(50% - .5px), var(--grid) calc(50% + .5px), transparent calc(50% + .5px)),
+    linear-gradient(to bottom, transparent calc(50% - .5px), var(--grid) calc(50% - .5px), var(--grid) calc(50% + .5px), transparent calc(50% + .5px));
+  background-size:100% 100%,100% 100%;}
+.hwcell svg{display:block;}
+.dictcells{flex-direction:column;gap:12px;}
+.dictrow{display:flex;gap:10px;justify-content:center;}
+.hintline.center{text-align:center;}
+.textwrap{flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:6px;padding:8px 6px;}
+.ttitle{margin:0 0 14px;text-align:center;}
+.ttitle .sc-h{font-size:34px;font-weight:700;}
+.tline{margin:0;text-align:center;}
+.tline .sc-h{font-size:30px;}
+.tline .sc-py,.ttitle .sc-py{min-height:0;font-size:0;}
+.nch{font-size:15px;}
+.nch b{font-size:21px;margin-right:6px;font-family:"PingFang SC","Noto Sans CJK SC",sans-serif;}
+.qkind{font-size:13px;font-weight:700;color:var(--red);padding:4px 10px;border-radius:999px;
+  background:rgba(229,50,42,.1);}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;max-width:860px;}
+.opt{border:.5px solid var(--line);background:rgba(255,255,255,.62);color:var(--ink);font:inherit;
+  font-size:17px;text-align:left;padding:15px 18px;border-radius:18px;cursor:pointer;line-height:1.4;}
+.opt:active{transform:scale(.99);}
+.opt.right{background:rgba(52,199,89,.16);border-color:rgba(52,199,89,.5);font-weight:600;}
+.opt.wrong{background:rgba(229,50,42,.14);border-color:rgba(229,50,42,.5);}
+.opt.dim{opacity:.45;}
+.reveal{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 16px;border-radius:18px;
+  background:rgba(255,255,255,.5);width:100%;max-width:860px;}
+.rv-k{font-size:17px;font-weight:600;}
+.rv-w{font-size:13px;color:var(--ink3);flex:1;}
+.hardrow{margin:0;font-size:15px;color:var(--ink2);text-align:center;}
+.hardrow b{font-size:22px;font-family:"PingFang SC","Noto Sans CJK SC",sans-serif;
+  background:rgba(255,214,10,.45);border-radius:6px;padding:2px 6px;}
+.rs-row{display:flex;gap:30px;justify-content:center;text-align:center;padding:6px 0 2px;}
+.rs-big{font-size:38px;font-weight:700;margin:0;letter-spacing:-.02em;}
+.relist{flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding:2px;}
+.rerow{display:flex;align-items:baseline;gap:12px;text-align:left;width:100%;cursor:pointer;
+  border:.5px solid var(--line);background:rgba(255,255,255,.55);border-radius:16px;padding:12px 16px;font:inherit;}
+.rr-h{font-size:24px;font-family:"PingFang SC","Noto Sans CJK SC",sans-serif;}
+.rr-p{font-size:14px;color:var(--red);}
+.rr-k{font-size:14px;color:var(--ink3);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;}
+.center p{margin:0;}
+.muted{color:var(--ink2);font-size:14.5px;}
+.rotate{display:none;}
+@media (orientation:portrait) and (max-width:900px){
+  .rotate{display:flex;position:fixed;inset:0;z-index:9;background:var(--bg);
+    align-items:center;justify-content:center;text-align:center;padding:40px;font-size:17px;color:var(--ink2);}
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#0e1013; --ink:#f3f4f8; --ink2:rgba(235,235,245,.64); --ink3:rgba(235,235,245,.42);
+    --red:#ff5a4f; --line:rgba(255,255,255,.13); --glass:.5; --edge:.12;
+    --grid:rgba(255,110,100,.4); --stroke:#f3f4f8; --modelink:#ffffff;
+  }
+  .aurora{opacity:.5;}
+  .aurora .b1{background:#5c2433;}
+  .aurora .b2{background:#16304f;}
+  .aurora .b3{background:#4a3814;}
+  .glass{background:rgba(20,22,28,.72);border-color:rgba(255,255,255,.09);
+    box-shadow:0 1px 2px rgba(0,0,0,.35),0 12px 34px rgba(0,0,0,.4);}
+  .seg,.modes{background:rgba(255,255,255,.08);}
+  .seg-b.on,.mode.on{background:rgba(255,255,255,.18);color:var(--ink);box-shadow:none;}
+  .ep,.opt,.pill,.rerow{background:rgba(255,255,255,.06);color:var(--ink);}
+  .cell{background:rgba(255,255,255,.05);}
+  .mode[disabled]{color:rgba(235,235,245,.28);}
+  .cell{border-color:rgba(255,255,255,.14);}
+  .cell.model{background:rgba(255,255,255,.04);}
+  .ep.weak{background:rgba(255,90,79,.2);border-color:rgba(255,90,79,.32);}
+  .ep.on,.ep.weak.on{background:var(--red);color:#1a0d0c;}
+  .pill.solid{color:#1a0d0c;}
+  .reveal{background:rgba(255,255,255,.06);}
+  .opt.right{background:rgba(52,199,89,.24);border-color:rgba(52,199,89,.5);}
+  .opt.wrong{background:rgba(255,90,79,.24);border-color:rgba(255,90,79,.5);}
+  .sc.hard,.hardrow b{background:rgba(255,214,10,.3);}
+  .sent.hide .sc-h{text-shadow:0 0 22px rgba(255,255,255,.45);}
+}
+</style>
+</head>
+<body>
+<div class="aurora" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
+<div id="app"><div class="side glass"><p class="sub">불러오는 중</p></div><div class="main"></div></div>
+<div class="rotate">가로로 돌려주세요</div>
+
+<script src="./hanzi-writer.min.js"></script>
+<script>
+"use strict";
+
+/* ===================== 저장 ===================== */
+var WK = "cw:v1";                      /* 쓰기 앱 전용 — 회화앱 진도와 분리 */
+var TALK_KEY = "ct:v4";                /* 회화앱 저장소 (같은 도메인이면 읽힌다) */
+var BUILD = "2026-09-27 w2";
+
+var saved = (function () {
+  try { return JSON.parse(localStorage.getItem(WK)) || {}; } catch (e) { return {}; }
+})();
+var W = {
+  chars: saved.chars || {},            /* {한자: {n: 따라쓴 횟수, last: 시각}} */
+  ph: typeof saved.ph === "number" ? saved.ph : 0,
+  wk: typeof saved.wk === "number" ? saved.wk : 0,
+  brush: saved.brush !== false,        /* 붓 느낌 */
+  onlyNew: saved.onlyNew !== false,    /* 아직 안 쓴 글자·안 읽은 문장만 */
+  read: saved.read || {},              /* {r:문장: {s:0 틀림/2 맞힘, n, last}} */
+  hard: saved.hard || {},              /* 형광펜으로 표시한 글자 */
+  stroke: saved.stroke || {},          /* 획순 통과한 글자 */
+  dict: saved.dict || {},              /* 받아쓰기 결과 */
+  flash: saved.flash !== false         /* 문제마다 무작위로 2.5초 플래시 */
+};
+function save() { try { localStorage.setItem(WK, JSON.stringify(W)); } catch (e) {} }
+
+/* 회화앱에서 약했던 문장 → 약한 글자 */
+function talkData() {
+  try { return JSON.parse(localStorage.getItem(TALK_KEY)) || null; } catch (e) { return null; }
+}
+function weakChars() {
+  var t = talkData(); if (!t) return [];
+  var seen = {}, out = [];
+  Object.keys(t.missed || {}).forEach(function (k) {
+    hanziChars((t.missed[k] || {}).zh).forEach(function (c) {
+      if (!seen[c]) { seen[c] = 1; out.push(c); }
+    });
+  });
+  return out;
+}
+
+/* ===================== 유틸 ===================== */
+function esc(s) {
+  return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+  });
+}
+function hanziChars(s) { return String(s || "").replace(/[^一-鿿]/g, "").split(""); }
+function el(id) { return document.getElementById(id); }
+function cssv(n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
+
+var CUR = null, RT = {};                        /* 커리큘럼 */
+var S = { mode: "trace", list: [], idx: 0, rep: 0, weak: false, hard: false, ready: false,
+  qs: [], picked: -1, shown: true, marks: [], t0: 0, rd: "text", text: null, newOpen: false,
+  reveal: false, qmiss: 0, outline: true, keep: null, spokeIdx: -1 };
+
+function phase() { return CUR.phases[W.ph]; }
+function week() { return phase().weeks[W.wk]; }
+function epNo(pi, w) { return pi === 0 ? w.week : CUR.phases[0].weeks.length + w.week; }
+
+/* 그 화에 나오는 한자 — 단어 순서대로, 중복 제거 */
+function epChars(w) {
+  var seen = {}, out = [];
+  w.sessions.forEach(function (sess) {
+    sess.target_vocab.forEach(function (v) {
+      hanziChars(v.hanzi).forEach(function (c) {
+        if (seen[c]) return;
+        seen[c] = 1;
+        out.push({ ch: c, word: v.hanzi, wordPinyin: v.pinyin, en: v.en || "",
+          ex: v.example || null });
+      });
+    });
+  });
+  return out;
+}
+function weakList() {
+  var want = {}, out = [];
+  weakChars().forEach(function (c) { want[c] = 1; });
+  if (!Object.keys(want).length) return out;
+  var seen = {};
+  CUR.phases.forEach(function (ph) {
+    ph.weeks.forEach(function (w) {
+      w.sessions.forEach(function (sess) {
+        sess.target_vocab.forEach(function (v) {
+          hanziChars(v.hanzi).forEach(function (c) {
+            if (!want[c] || seen[c]) return;
+            seen[c] = 1;
+            out.push({ ch: c, word: v.hanzi, wordPinyin: v.pinyin, en: v.en || "", ex: v.example || null });
+          });
+        });
+      });
+    });
+  });
+  return out;
+}
+function charDone(c) { return (W.chars[c] && W.chars[c].n) >= 3; }
+function epProgress(w) {
+  var cs = epChars(w), d = 0;
+  cs.forEach(function (c) { if (charDone(c.ch)) d++; });
+  return { done: d, total: cs.length };
+}
+
+/* ===================== 붓 ===================== */
+var REPS = 3;                          /* 연습 칸 수 */
+var GHOST = [0.34, 0.17, 0];           /* 칸마다 옅어지는 본보기 */
+var pads = [];                         /* 연습 칸 객체 */
+var penSeen = false;                   /* 펜을 한 번이라도 쓰면 손가락 입력은 무시 */
+
+function makePad(canvas, ghost, ch) {
+  var pad = { cv: canvas, ctx: canvas.getContext("2d"), strokes: [], cur: null,
+    ghost: ghost, ch: ch, size: 0, dpr: 1 };
+  pad.resize = function () {
+    var r = canvas.getBoundingClientRect();
+    pad.dpr = Math.min(3, window.devicePixelRatio || 1);
+    pad.size = r.width;
+    canvas.width = Math.round(r.width * pad.dpr);
+    canvas.height = Math.round(r.height * pad.dpr);
+    pad.ctx.setTransform(pad.dpr, 0, 0, pad.dpr, 0, 0);
+    pad.redraw();
+  };
+  pad.bg = function () {
+    var c = pad.ctx, s = pad.size;
+    c.clearRect(0, 0, s, s);
+    /* 田자 격자 */
+    c.save();
+    c.strokeStyle = cssv("--grid") || "#e5322a";
+    c.lineWidth = 1; c.setLineDash([5, 6]);
+    c.beginPath();
+    c.moveTo(s / 2, 4); c.lineTo(s / 2, s - 4);
+    c.moveTo(4, s / 2); c.lineTo(s - 4, s / 2);
+    c.moveTo(6, 6); c.lineTo(s - 6, s - 6);
+    c.moveTo(s - 6, 6); c.lineTo(6, s - 6);
+    c.stroke();
+    c.restore();
+    /* 본보기 글자 */
+    if (pad.ghost > 0 && pad.ch) {
+      c.save();
+      c.globalAlpha = pad.ghost;
+      c.fillStyle = cssv("--modelink") || "#12131a";
+      c.font = Math.round(s * 0.76) + 'px "Kaiti SC","STKaiti","Kai","PingFang SC","Noto Serif CJK SC",serif';
+      c.textAlign = "center"; c.textBaseline = "middle";
+      c.fillText(pad.ch, s / 2, s / 2 + s * 0.02);
+      c.restore();
+    }
+  };
+  pad.line = function (st) {
+    var c = pad.ctx, p = st.pts;
+    c.save();
+    c.strokeStyle = cssv("--stroke") || "#1a1c22"; c.lineCap = "round"; c.lineJoin = "round";
+    for (var i = 1; i < p.length; i++) {
+      c.beginPath();
+      c.lineWidth = (p[i - 1].w + p[i].w) / 2;
+      c.moveTo(p[i - 1].x, p[i - 1].y);
+      var mx = (p[i - 1].x + p[i].x) / 2, my = (p[i - 1].y + p[i].y) / 2;
+      c.quadraticCurveTo(p[i - 1].x, p[i - 1].y, mx, my);
+      c.lineTo(p[i].x, p[i].y);
+      c.stroke();
+    }
+    if (p.length === 1) {
+      c.beginPath(); c.fillStyle = cssv("--stroke") || "#1a1c22";
+      c.arc(p[0].x, p[0].y, p[0].w / 2, 0, 6.2832); c.fill();
+    }
+    c.restore();
+  };
+  pad.redraw = function () {
+    pad.bg();
+    pad.strokes.forEach(pad.line);
+    if (pad.cur) pad.line(pad.cur);
+  };
+  pad.clear = function () { pad.strokes = []; pad.cur = null; pad.redraw(); };
+  pad.undo = function () { pad.strokes.pop(); pad.redraw(); };
+  pad.empty = function () { return !pad.strokes.length; };
+
+  /* 굵기: 필압 우선, 없으면 속도로 */
+  function width(ev, prev, now) {
+    var base = pad.size * 0.055;
+    if (!W.brush) return base * 0.85;
+    var pr = (ev.pointerType === "pen" && ev.pressure > 0) ? ev.pressure : -1;
+    var f;
+    if (pr >= 0) f = 0.35 + pr * 1.15;
+    else {
+      var sp = prev ? Math.hypot(now.x - prev.x, now.y - prev.y) : 0;
+      f = 1.15 - Math.min(0.62, sp / (pad.size * 0.16));
+    }
+    return Math.max(base * 0.3, Math.min(base * 1.5, base * f));
+  }
+  function pt(ev) {
+    var r = canvas.getBoundingClientRect();
+    return { x: ev.clientX - r.left, y: ev.clientY - r.top };
+  }
+  canvas.addEventListener("pointerdown", function (ev) {
+    if (ev.pointerType === "pen") penSeen = true;
+    if (penSeen && ev.pointerType === "touch") return;      /* 손바닥·손가락 무시 */
+    ev.preventDefault();
+    canvas.setPointerCapture(ev.pointerId);
+    var p = pt(ev); p.w = width(ev, null, p);
+    pad.cur = { pts: [p], erase: ev.pointerType === "eraser" || ev.buttons === 32 };
+    pad.redraw();
+  });
+  canvas.addEventListener("pointermove", function (ev) {
+    if (!pad.cur || (penSeen && ev.pointerType === "touch")) return;
+    ev.preventDefault();
+    var list = ev.getCoalescedEvents ? ev.getCoalescedEvents() : [ev];
+    list.forEach(function (e) {
+      var p = pt(e), prev = pad.cur.pts[pad.cur.pts.length - 1];
+      if (prev && Math.hypot(p.x - prev.x, p.y - prev.y) < 0.7) return;
+      p.w = width(e, prev, p);
+      if (prev) p.w = prev.w + (p.w - prev.w) * 0.45;        /* 굵기 급변 완화 */
+      pad.cur.pts.push(p);
+    });
+    pad.redraw();
+    onDraw(pad);
+  });
+  function end(ev) {
+    if (!pad.cur) return;
+    if (pad.cur.erase) pad.strokes = [];
+    else pad.strokes.push(pad.cur);
+    pad.cur = null; pad.redraw(); onDraw(pad);
+  }
+  canvas.addEventListener("pointerup", end);
+  canvas.addEventListener("pointercancel", end);
+  canvas.addEventListener("pointerleave", function (ev) { if (pad.cur) end(ev); });
+  return pad;
+}
+
+function onDraw(pad) {
+  var b = el("nextbtn");
+  if (b) b.disabled = !pads.some(function (p) { return !p.empty(); });
+}
+
+/* ===================== 읽기 (해독) ===================== */
+var READ_N = 12;                       /* 한 세트 문제 수 */
+var FLASH_MS = 2500;
+var zhVoice = null;
+function pickVoice() {
+  var vs = (window.speechSynthesis && speechSynthesis.getVoices()) || [];
+  zhVoice = vs.filter(function (v) { return /^zh[-_]?(CN|Hans)?/i.test(v.lang); })[0] || null;
+}
+if (window.speechSynthesis) { pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
+function speak(text, rate) {
+  if (!window.speechSynthesis) return;
+  speechSynthesis.cancel();
+  var u = new SpeechSynthesisUtterance(text);
+  u.lang = "zh-CN"; u.rate = rate || 0.95;
+  if (zhVoice) u.voice = zhVoice;
+  speechSynthesis.speak(u);
+}
+
+function rkey(zh) { return "r:" + zh; }
+function readState(zh) { return W.read[rkey(zh)] || null; }
+function koTag(ko) { var m = /^\[([^\]]+)\]\s*/.exec(ko || ""); return m ? m[1] : "나"; }
+function koBody(ko) { return String(ko || "").replace(/^\[[^\]]+\]\s*/, ""); }
+function shuffle(a) { return a.slice().sort(function () { return Math.random() - 0.5; }); }
+
+/* 그 화의 예문 — 단어 순서대로 */
+function epSentences(w) {
+  var out = [], seen = {};
+  w.sessions.forEach(function (sess) {
+    sess.target_vocab.forEach(function (v) {
+      var e = v.example;
+      if (!e || !e.zh || seen[e.zh]) return;
+      seen[e.zh] = 1;
+      out.push({ zh: e.zh, pinyin: e.pinyin || "", ko: e.ko || "", word: v.hanzi });
+    });
+  });
+  return out;
+}
+/* 회화앱에서 발음이 낮았던 문장 그대로 */
+function weakSentences() {
+  var t = talkData(); if (!t) return [];
+  return Object.keys(t.missed || {}).map(function (k) {
+    var m = t.missed[k] || {};
+    return { zh: m.zh, pinyin: m.pinyin || "", ko: m.ko || "", word: "" };
+  }).filter(function (x) { return x.zh; });
+}
+function epStrokeProgress(w) {
+  var cs = epChars(w), d = 0;
+  cs.forEach(function (c) { if (strokeDone(c.ch)) d++; });
+  return { done: d, total: cs.length };
+}
+function epDictProgress(w) {
+  var t = passage(W.ph, w);
+  var ss = t ? t.lines : epSentences(w), d = 0;
+  ss.forEach(function (x) { if (dictDone(x.zh)) d++; });
+  return { done: d, total: ss.length };
+}
+function epReadProgress(w) {
+  var t = passage(W.ph, w);
+  var ss = t ? t.lines : epSentences(w), d = 0;
+  ss.forEach(function (x) { var r = readState(x.zh); if (r && r.s === 2) d++; });
+  return { done: d, total: ss.length };
+}
+
+/* ---- 문제 만들기 ---- */
+/* 뜻 고르기: 오답은 같은 화에서, 글자가 겹치는 문장을 우선 고른다 */
+function meanProblem(s, pool) {
+  var mine = koBody(s.ko);
+  var cand = pool.filter(function (x) { return x.zh !== s.zh && koBody(x.ko) !== mine; });
+  var mych = {};
+  hanziChars(s.zh).forEach(function (c) { mych[c] = 1; });
+  cand = shuffle(cand).sort(function (a, b) {
+    var sa = hanziChars(a.zh).filter(function (c) { return mych[c]; }).length;
+    var sb = hanziChars(b.zh).filter(function (c) { return mych[c]; }).length;
+    return sb - sa;
+  }).slice(0, 3);
+  if (cand.length < 3) return null;
+  var opts = shuffle([mine].concat(cand.map(function (x) { return koBody(x.ko); })));
+  return { kind: "mean", s: s, q: "이 문장은 무슨 뜻일까요", opts: opts, ans: opts.indexOf(mine) };
+}
+/* 누가 한 말일까: 화자 태그로 만든다 */
+function whoProblem(s, pool) {
+  var mine = koTag(s.ko), names = {};
+  pool.forEach(function (x) { names[koTag(x.ko)] = 1; });
+  var others = shuffle(Object.keys(names).filter(function (n) { return n !== mine; })).slice(0, 3);
+  if (others.length < 2) return null;
+  var opts = shuffle([mine].concat(others));
+  return { kind: "who", s: s, q: "누가 한 말일까요", opts: opts, ans: opts.indexOf(mine) };
+}
+
+function buildProblems(pool) {
+  /* 안 푼 문장 → 틀린 문장 → 맞힌 문장 순서 */
+  var fresh = [], bad = [], good = [];
+  pool.forEach(function (x) {
+    var r = readState(x.zh);
+    if (!r) fresh.push(x); else if (r.s < 2) bad.push(x); else good.push(x);
+  });
+  var order = shuffle(bad).concat(shuffle(fresh));
+  if (!W.onlyNew || order.length < READ_N) order = order.concat(shuffle(good));
+  var picked = order.slice(0, READ_N), out = [];
+  /* 화자 맞히기는 이름표가 붙은 문장으로 — 안 붙은 문장은 답이 늘 '나'라 쉬워진다 */
+  var tagged = picked.filter(function (x) { return /^\[/.test(x.ko || ""); });
+  var plain = picked.filter(function (x) { return !/^\[/.test(x.ko || ""); });
+  for (var i = 0; i < picked.length; i++) {
+    var want = (i % 3 === 2), s0 = null, p = null;
+    if (want && tagged.length) { s0 = tagged.shift(); p = whoProblem(s0, pool); }
+    if (!p) {
+      s0 = plain.length ? plain.shift() : tagged.shift();
+      if (!s0) break;
+      p = meanProblem(s0, pool) || whoProblem(s0, pool);
+    }
+    if (p) { p.flash = Math.random() < 0.35; out.push(p); }   /* 플래시는 무작위로 */
+  }
+  return out;
+}
+
+function passage(ph, w) { return RT[ph + ":" + w.week] || null; }
+function allPassages() {
+  var out = [];
+  CUR.phases.forEach(function (p, pi) {
+    p.weeks.forEach(function (w) { var t = passage(pi, w); if (t) out.push(t); });
+  });
+  return out;
+}
+/* 지문 문장으로 만든 뜻 고르기 + 마지막에 글 종류 고르기 */
+function textProblems(t) {
+  var pool = t.lines.map(function (l) {
+    return { zh: l.zh, pinyin: l.pinyin, ko: l.ko, word: "" }; });
+  var others = [];
+  allPassages().forEach(function (x) {
+    if (x !== t) x.lines.forEach(function (l) {
+      others.push({ zh: l.zh, pinyin: l.pinyin, ko: l.ko, word: "" }); });
+  });
+  var qs = [];
+  pool.forEach(function (sm) {
+    var p = meanProblem(sm, pool.concat(shuffle(others).slice(0, 40)));
+    if (p) qs.push(p);
+  });
+  var gs = {}, mine = t.genre;
+  allPassages().forEach(function (x) { if (x.genre !== mine) gs[x.genre] = 1; });
+  var others3 = shuffle(Object.keys(gs)).slice(0, 3);
+  if (others3.length === 3) {
+    var opts = shuffle([mine].concat(others3));
+    qs.push({ kind: "genre", s: { zh: t.title, pinyin: t.titlePinyin, ko: t.titleKo },
+      q: "이 글은 어떤 글일까요", opts: opts, ans: opts.indexOf(mine) });
+  }
+  qs.forEach(function (q) { q.flash = q.kind === "mean" && Math.random() < 0.35; });
+  return qs;
+}
+
+function loadRead() {
+  S.text = S.weak ? null : passage(W.ph, week());
+  S.rd = S.text ? "text" : "quiz";
+  S.newOpen = false;
+  var pool = S.weak ? weakSentences() : epSentences(week());
+  S.qs = S.text ? textProblems(S.text) : buildProblems(pool);
+  S.idx = S.qs.length ? 0 : -2;        /* -2 = 문제 없음, -1 = 결과 */
+  S.picked = -1; S.marks = [];
+  S.shown = !flashNow(); S.t0 = Date.now();
+  if (!S.shown) startFlash();
+}
+
+function flashNow() { var q = S.qs && S.qs[S.idx]; return !!(W.flash && q && q.flash); }
+var flashT = null;
+function startFlash() {
+  clearTimeout(flashT);
+  S.shown = true;
+  flashT = setTimeout(function () {
+    if (S.mode !== "read" || S.picked > -1) return;
+    S.shown = false; render();
+  }, FLASH_MS);
+}
+
+function answer(i) {
+  var q = S.qs[S.idx];
+  if (!q || S.picked > -1) return;
+  clearTimeout(flashT);
+  S.picked = i; S.shown = true;
+  var ok = i === q.ans;
+  var prev = readState(q.s.zh);
+  W.read[rkey(q.s.zh)] = { s: ok ? 2 : 0, last: Date.now(), n: ((prev && prev.n) || 0) + 1 };
+  S.marks.push({ zh: q.s.zh, ko: q.s.ko, pinyin: q.s.pinyin, ok: ok, kind: q.kind,
+    sec: Math.round((Date.now() - S.t0) / 1000) });
+  save(); render();
+  if (ok) speak(q.s.zh);
+}
+
+function nextQ() {
+  clearTimeout(flashT);
+  if (S.idx + 1 < S.qs.length) {
+    S.idx++; S.picked = -1; S.t0 = Date.now();
+    S.shown = !flashNow(); if (!S.shown) startFlash();
+  } else S.idx = -1;
+  render();
+}
+
+/* ---- 형광펜: 모든 문제 화면에서 글자를 눌러 표시한다 ---- */
+function markChar(c) {
+  if (!/[一-鿿]/.test(c)) return;
+  if (W.hard[c]) delete W.hard[c];
+  else W.hard[c] = { n: ((W.hard[c] && W.hard[c].n) || 0) + 1, last: Date.now() };
+  save(); render();
+}
+function hardList() {
+  var seen = {}, out = [];
+  var want = Object.keys(W.hard);
+  if (!want.length) return out;
+  want.forEach(function (c) { seen[c] = { ch: c, word: c, wordPinyin: "", en: "", ex: null }; });
+  CUR.phases.forEach(function (ph) {
+    ph.weeks.forEach(function (w) {
+      w.sessions.forEach(function (sess) {
+        sess.target_vocab.forEach(function (v) {
+          hanziChars(v.hanzi).forEach(function (c) {
+            if (seen[c] && !seen[c].wordPinyin)
+              seen[c] = { ch: c, word: v.hanzi, wordPinyin: v.pinyin, en: v.en || "", ex: v.example || null };
+          });
+        });
+      });
+    });
+  });
+  want.forEach(function (c) { out.push(seen[c]); });
+  return out;
+}
+
+/* ---- 화면 ---- */
+/* 문장. 글자를 누르면 형광펜, 정답 확인 뒤에는 병음이 함께 보인다 */
+function sentHTML(it, withPy) {
+  var hz = hanziChars(it.zh);
+  var toks = String(it.pinyin || "").split(/\s+/).filter(Boolean);
+  var aligned = toks.length === hz.length;
+  var hi = 0;
+  return String(it.zh).split("").map(function (c) {
+    if (!/[一-鿿]/.test(c))
+      return '<span class="sc pn"><span class="sc-py">&nbsp;</span>'
+        + '<span class="sc-h">' + esc(c) + "</span></span>";
+    var py = aligned ? toks[hi] : "";
+    hi++;
+    return '<span class="sc' + (W.hard[c] ? " hard" : "") + '" data-a="mark" data-c="' + esc(c) + '">'
+      + '<span class="sc-py">' + (withPy ? esc(py) : "&nbsp;") + "</span>"
+      + '<span class="sc-h">' + esc(c) + "</span></span>";
+  }).join("");
+}
+
+function textHTML() {
+  var t = S.text;
+  var h = '<div class="stage glass">'
+    + '<div class="headrow"><span class="qkind">' + esc(t.genre) + "</span>"
+    + '<span class="gloss"></span>'
+    + (t["new"] && t["new"].length
+        ? '<button class="pill" data-a="newchars">새 글자 ' + t["new"].length + "</button>" : "")
+    + "</div>"
+    + '<div class="textwrap"><p class="ttitle">' + sentHTML({ zh: t.title, pinyin: t.titlePinyin }, false) + "</p>"
+    + t.lines.map(function (l) {
+        return '<p class="tline">' + sentHTML(l, false) + "</p>"; }).join("")
+    + "</div>";
+  if (S.newOpen && t["new"] && t["new"].length)
+    h += '<div class="reveal">' + t["new"].map(function (n) {
+      return '<span class="nch"><b>' + esc(n.ch) + "</b>" + esc(n.py) + " · " + esc(n.ko) + "</span>";
+    }).join("") + "</div>";
+  return h + '<div class="footrow"><span class="hintline"></span>'
+    + '<button class="pill solid" data-a="toquiz">문제 풀기</button></div></div>';
+}
+
+function readHTML() {
+  if (S.rd === "text" && S.text) return textHTML();
+  if (S.idx === -2 || !S.qs || !S.qs.length)
+    return '<div class="stage glass"><div class="center"><p class="muted">'
+      + (S.weak ? "회화앱에서 약했던 문장이 아직 없습니다." : "이 화에는 읽을 문장이 없습니다.")
+      + "</p></div></div>";
+
+  if (S.idx < 0) return readDoneHTML();
+
+  var q = S.qs[S.idx], done = S.picked > -1;
+  var h = '<div class="stage glass">'
+    + '<div class="headrow"><span class="qkind">'
+    + (q.kind === "who" ? "누가 한 말일까" : q.kind === "genre" ? "글 종류" : "뜻 고르기") + "</span>"
+    + '<span class="gloss"></span>'
+    + '<span class="dots">' + (S.idx + 1) + " / " + S.qs.length + "</span></div>"
+    + '<div class="qbody"><div class="sentwrap"><p class="sent' + (S.shown ? "" : " hide") + '">'
+    + sentHTML(q.s, done) + "</p>"
+    + (S.shown ? "" : '<button class="pill" data-a="again">다시 보기</button>')
+    + "</div>";
+
+  h += '<div class="opts">' + q.opts.map(function (o, i) {
+    var cls = "opt";
+    if (done && i === q.ans) cls += " right";
+    else if (done && i === S.picked) cls += " wrong";
+    else if (done) cls += " dim";
+    return '<button class="' + cls + '" data-a="pick" data-i="' + i + '"' + (done ? " disabled" : "") + ">"
+      + esc(o) + "</button>";
+  }).join("") + "</div>";
+
+  if (done) {
+    h += '<div class="reveal"><span class="rv-k">' + esc(koBody(q.s.ko)) + "</span>"
+      + '<span class="rv-w">' + (q.kind === "who" ? esc(koTag(q.s.ko)) : "") + "</span>"
+      + '<button class="pill" data-a="say" data-t="' + esc(q.s.zh) + '">들어보기</button>'
+      + '<button class="pill" data-a="slow" data-t="' + esc(q.s.zh) + '">느리게</button></div>';
+  }
+  h += "</div>";
+
+  h += '<div class="footrow"><span class="hintline"></span>'
+    + '<button class="pill' + (W.flash ? " solid" : "") + '" data-a="flash">플래시</button>'
+    + '<button class="pill solid" data-a="nextq"' + (done ? "" : " disabled") + ">"
+    + (S.idx + 1 < S.qs.length ? "다음" : "결과 보기") + "</button></div></div>";
+  return h;
+}
+
+function readDoneHTML() {
+  var ok = S.marks.filter(function (m) { return m.ok; }).length;
+  var sec = S.marks.reduce(function (a, m) { return a + m.sec; }, 0);
+  var avg = S.marks.length ? (sec / S.marks.length).toFixed(1) : "0";
+  var miss = S.marks.filter(function (m) { return !m.ok; });
+  var hard = Object.keys(W.hard);
+  var h = '<div class="stage glass"><div class="rs-row">'
+    + '<div><p class="rs-big">' + ok + '<span class="muted">/' + S.marks.length + "</span></p>"
+    + '<p class="muted">맞힘</p></div>'
+    + '<div><p class="rs-big">' + avg + '<span class="muted">초</span></p>'
+    + '<p class="muted">문장당</p></div>'
+    + '<div><p class="rs-big">' + hard.length + "</p><p class=\"muted\">표시한 글자</p></div></div>";
+  if (miss.length) {
+    h += '<div class="relist">' + miss.map(function (m) {
+      return '<button class="rerow" data-a="say" data-t="' + esc(m.zh) + '">'
+        + '<span class="rr-h">' + esc(m.zh) + "</span>"
+        + '<span class="rr-p">' + esc(m.pinyin) + "</span>"
+        + '<span class="rr-k">' + esc(koBody(m.ko)) + "</span></button>"; }).join("") + "</div>";
+  } else {
+    h += '<div class="center"></div>';
+  }
+  if (hard.length)
+    h += '<p class="hardrow">표시한 글자 · <b>' + esc(hard.join(" ")) + "</b></p>";
+  return h + '<div class="footrow"><span class="hintline"></span>'
+    + (S.text ? '<button class="pill" data-a="totext">지문 다시 보기</button>' : "")
+    + (hard.length ? '<button class="pill" data-a="tohard">표시한 글자 쓰기</button>' : "")
+    + '<button class="pill solid" data-a="readagain">다음 세트</button></div></div>';
+}
+
+/* ===================== 획순 ===================== */
+var STROKES = null, strokesLoading = false;
+function ensureStrokes(after) {
+  if (STROKES) return after && after();
+  if (strokesLoading) return;
+  strokesLoading = true;
+  fetch("../data/strokes.json").then(function (r) { return r.json(); }).then(function (d) {
+    STROKES = d; strokesLoading = false; render();
+  }).catch(function () { strokesLoading = false; STROKES = {}; render(); });
+}
+function charData(c) { return (STROKES && STROKES[c]) ? { strokes: STROKES[c].s, medians: STROKES[c].m } : null; }
+function hasStroke(c) { return !!(STROKES && STROKES[c]); }
+function strokeDone(c) { return !!(W.stroke[c] && W.stroke[c].ok); }
+
+var HW = { demo: null, quiz: null };
+function killWriters() {
+  ["demo", "quiz"].forEach(function (k) {
+    if (HW[k]) { try { HW[k].cancelQuiz && HW[k].cancelQuiz(); } catch (e) {} HW[k] = null; }
+  });
+}
+
+function buildStroke() {
+  var host = el("cells"), it = S.list[S.idx];
+  if (!host || !it) return;
+  killWriters();
+  host.innerHTML = "";
+  if (!STROKES) { ensureStrokes(); return; }
+  var data = charData(it.ch);
+  if (!data) return;
+
+  var box = host.getBoundingClientRect();
+  var size = Math.max(150, Math.floor(Math.min((box.width - 40) / 2, box.height - 26)));
+  var ink = cssv("--stroke") || "#1a1c22";
+  var made = [];
+  ["demo", "quiz"].forEach(function (kind, i) {
+    var wrap = document.createElement("div");
+    wrap.className = "cellwrap";
+    var cell = document.createElement("div");
+    cell.className = "cell hwcell";
+    cell.id = "hw-" + kind;
+    cell.style.width = size + "px"; cell.style.height = size + "px";
+    var tag = document.createElement("span");
+    tag.className = "tagline";
+    tag.textContent = i === 0 ? "획순 보기" : "따라 쓰기";
+    wrap.appendChild(cell); wrap.appendChild(tag); host.appendChild(wrap);
+    made.push(cell.id);
+  });
+
+  var common = { width: size, height: size, padding: Math.round(size * 0.06),
+    strokeColor: ink, radicalColor: "#e5322a", drawingColor: ink,
+    strokeAnimationSpeed: 1, delayBetweenStrokes: 220,
+    charDataLoader: function (c, onLoad) { onLoad(charData(c)); } };
+
+  HW.demo = HanziWriter.create("hw-demo", it.ch, Object.assign({}, common, { showOutline: true }));
+  HW.demo.animateCharacter();
+  HW.quiz = HanziWriter.create("hw-quiz", it.ch, Object.assign({}, common, {
+    showCharacter: false, showOutline: S.outline !== false, showHintAfterMisses: 2,
+    highlightOnComplete: true, drawingWidth: Math.round(size * 0.05)
+  }));
+  S.qmiss = 0;
+  HW.quiz.quiz({
+    onMistake: function (d) { S.qmiss = d.totalMistakes; strokeStatus(d.strokesRemaining, false); },
+    onCorrectStroke: function (d) { strokeStatus(d.strokesRemaining, false); },
+    onComplete: function (d) {
+      var rec = W.stroke[it.ch] || (W.stroke[it.ch] = { ok: false, miss: 0, n: 0 });
+      rec.ok = true; rec.n++; rec.miss += d.totalMistakes; rec.last = Date.now();
+      save(); strokeStatus(0, true);
+    }
+  });
+  strokeStatus(data.strokes.length, false);
+}
+
+function strokeStatus(left, done) {
+  var n = el("hwstat");
+  if (!n) return;
+  n.textContent = done ? (S.qmiss ? "다 썼어요 · 틀린 획 " + S.qmiss : "한 번에 맞았어요")
+    : ("남은 획 " + left + (S.qmiss ? " · 틀림 " + S.qmiss : ""));
+  var b = el("nextbtn");
+  if (b && done) b.disabled = false;
+}
+
+function strokeHTML(it) {
+  var total = hasStroke(it.ch) ? charData(it.ch).strokes.length : 0;
+  var h = '<div class="stage glass">'
+    + '<div class="headrow"><span class="big">' + esc(it.ch) + "</span>"
+    + '<span class="py">' + esc(it.wordPinyin) + "</span>"
+    + '<span class="gloss">' + esc(it.word) + (it.en ? " · " + esc(it.en) : "") + "</span>"
+    + '<span class="dots" id="hwstat">' + (total ? "획 " + total : "") + "</span></div>"
+    + '<div class="cells" id="cells"></div>';
+  if (!STROKES) h += '<p class="hintline center">획순 데이터를 불러오는 중</p>';
+  else if (!hasStroke(it.ch)) h += '<p class="hintline center">이 글자는 획순 데이터가 없습니다</p>';
+  return h + '<div class="footrow"><span class="hintline"></span>'
+    + '<button class="pill" data-a="hwplay">다시 보기</button>'
+    + '<button class="pill" data-a="hwhint">힌트</button>'
+    + '<button class="pill" data-a="hwclear">다시 쓰기</button>'
+    + '<button class="pill" data-a="prev"' + (S.idx ? "" : " disabled") + '>이전 글자</button>'
+    + '<button class="pill solid" id="nextbtn" data-a="next"' + (strokeDone(it.ch) ? "" : " disabled") + ">"
+    + (S.idx + 1 < S.list.length ? "다음 글자" : "마치기") + "</button></div></div>";
+}
+
+/* ===================== 받아쓰기 ===================== */
+function dictSentences() {
+  var t = S.weak ? null : passage(W.ph, week());
+  if (t) return t.lines.map(function (l) { return { zh: l.zh, pinyin: l.pinyin, ko: l.ko }; });
+  return (S.weak ? weakSentences() : epSentences(week()))
+    .map(function (x) { return { zh: x.zh, pinyin: x.pinyin, ko: x.ko }; });
+}
+function dictDone(zh) { var r = W.dict["d:" + zh]; return !!(r && r.s === 2); }
+
+function loadDict() {
+  var all = dictSentences();
+  var todo = all.filter(function (x) { return !dictDone(x.zh); });
+  S.list = (W.onlyNew && todo.length) ? todo : all;
+  S.idx = 0; S.said = false; S.t0 = Date.now();
+}
+
+function buildDictCells() {
+  var host = el("cells"), it = S.list[S.idx];
+  if (!host || !it) return;
+  pads = [];
+  host.innerHTML = "";
+  var chars = hanziChars(it.zh);
+  var box = host.getBoundingClientRect();
+  var per = Math.min(chars.length, 10);
+  var rows = Math.ceil(chars.length / per);
+  var size = Math.floor(Math.min((box.width - 10 * (per - 1) - 6) / per, (box.height - 12 * rows) / rows));
+  size = Math.max(74, Math.min(size, 150));
+  var keep = S.keep || [];
+  var row = null;
+  chars.forEach(function (c, i) {
+    if (i % per === 0) {
+      row = document.createElement("div");
+      row.className = "dictrow";
+      host.appendChild(row);
+    }
+    var cv = document.createElement("canvas");
+    cv.className = "cell";
+    cv.style.width = size + "px"; cv.style.height = size + "px";
+    row.appendChild(cv);
+    var pad = makePad(cv, S.reveal ? 0.3 : 0, S.reveal ? c : "");
+    pad.resize();
+    if (keep[i]) { pad.strokes = keep[i]; pad.redraw(); }
+    pads.push(pad);
+  });
+  S.keep = null;
+  /* 문장이 바뀌면 한 번 읽어준다 */
+  if (!S.reveal && S.spokeIdx !== S.idx) { S.spokeIdx = S.idx; speak(it.zh); }
+}
+
+function dictHTML(it) {
+  var h = '<div class="stage glass">'
+    + '<div class="headrow"><span class="qkind">받아쓰기</span>'
+    + '<span class="gloss">' + (S.reveal ? esc(it.ko) : "") + "</span>"
+    + '<span class="dots">' + (S.idx + 1) + " / " + S.list.length + "</span></div>"
+    + '<div class="cells dictcells" id="cells"></div>';
+  if (S.reveal)
+    h += '<div class="reveal"><span class="rv-k">' + esc(it.zh) + "</span>"
+      + '<span class="rv-w">' + esc(it.pinyin) + "</span></div>";
+  h += '<div class="footrow"><span class="hintline"></span>'
+    + '<button class="pill" data-a="say" data-t="' + esc(it.zh) + '">다시 듣기</button>'
+    + '<button class="pill" data-a="slow" data-t="' + esc(it.zh) + '">느리게</button>'
+    + '<button class="pill" data-a="dclear">지우기</button>';
+  h += S.reveal
+    ? '<button class="pill" data-a="dmark" data-s="0">틀렸어요</button>'
+      + '<button class="pill solid" data-a="dmark" data-s="2">맞았어요</button>'
+    : '<button class="pill solid" data-a="dreveal">정답 보기</button>';
+  return h + "</div></div>";
+}
+
+function dictMark(score) {
+  var it = S.list[S.idx];
+  S.keep = null;
+  W.dict["d:" + it.zh] = { s: score, last: Date.now() };
+  save();
+  if (S.idx + 1 < S.list.length) { S.idx++; S.reveal = false; render(); }
+  else { S.idx = 0; S.reveal = false; render(); }
+}
+
+/* ===================== 화면 ===================== */
+function sideHTML() {
+  var weak = S.mode === "read" ? weakSentences() : weakList();
+  var h = '<h1>한자 쓰기</h1><p class="sub">金老师의 베이징 일기</p><div class="seg">'
+    + CUR.phases.map(function (p, i) {
+        return '<button class="seg-b ' + (i === W.ph ? "on" : "") + '" data-a="ph" data-i="' + i + '">'
+          + (i === 0 ? "1–3급" : "4급") + "</button>"; }).join("")
+    + '</div><div class="eps">';
+  if (S.mode === "trace" && Object.keys(W.hard).length)
+    h += '<button class="ep weak ' + (S.hard ? "on" : "") + '" data-a="hard">'
+      + '<span class="ep-n">표시</span><span class="ep-t">읽기에서 표시한 글자</span>'
+      + '<span class="ep-c">' + Object.keys(W.hard).length + "자</span></button>";
+  if (weak.length)
+    h += '<button class="ep weak ' + (S.weak ? "on" : "") + '" data-a="weak">'
+      + '<span class="ep-n">약점</span><span class="ep-t">회화앱에서 약했던 ' + (S.mode === "read" ? "문장" : "글자") + "</span>"
+      + '<span class="ep-c">' + weak.length + (S.mode === "read" ? "문장" : "자") + "</span></button>";
+  phase().weeks.forEach(function (w, i) {
+    var pr = S.mode === "read" ? epReadProgress(w)
+      : S.mode === "dict" ? epDictProgress(w)
+      : S.mode === "stroke" ? epStrokeProgress(w) : epProgress(w),
+      on = !S.weak && !S.hard && i === W.wk;
+    h += '<button class="ep ' + (on ? "on" : "") + '" data-a="wk" data-i="' + i + '">'
+      + '<span class="ep-n">' + epNo(W.ph, w) + "화</span>"
+      + '<span class="ep-t">' + esc(w.episode ? w.episode.title : w.week + "주차") + "</span>"
+      + '<span class="ep-c">' + pr.done + "/" + pr.total + "</span></button>";
+  });
+  return h + "</div>";
+}
+
+function mainHTML() {
+  var read = S.mode === "read";
+  var title = S.hard ? "읽기에서 표시한 글자"
+    : S.weak ? (read ? "회화앱에서 약했던 문장" : "회화앱에서 약했던 글자")
+    : (epNo(W.ph, week()) + "화 · " + (week().episode ? week().episode.title : week().week + "주차"));
+  var count = read
+    ? (S.qs && S.qs.length ? (S.idx < 0 ? "세트 마침" : (S.idx + 1) + " / " + S.qs.length + "문제") : "문장 없음")
+    : S.mode === "dict"
+      ? (S.list.length ? (S.idx + 1) + " / " + S.list.length + "문장" : "문장 없음")
+      : (S.list.length ? (S.idx + 1) + " / " + S.list.length + "자" : "글자 없음");
+  var h = '<div class="bar glass"><div><h2>' + esc(title) + "</h2>"
+    + '<p class="sub">' + count
+    + "</p></div>"
+    + '<div class="spacer"></div><div class="modes">'
+    + [["trace", "따라 쓰기"], ["stroke", "획순"], ["dict", "받아쓰기"], ["read", "읽기"]]
+        .map(function (m) {
+          return '<button class="mode ' + (S.mode === m[0] ? "on" : "") + '" data-a="mode" data-m="'
+            + m[0] + '">' + m[1] + "</button>"; }).join("") + "</div>"
+    + '<button class="pill" data-a="onlynew">'
+    + (W.onlyNew ? (read ? "안 푼 문장만" : "안 쓴 글자만") : (read ? "전체 문장" : "전체 글자")) + "</button></div>";
+
+  if (read) return h + readHTML();
+
+  var it = S.list[S.idx];
+  if (S.list.length && S.mode === "stroke") return h + strokeHTML(it);
+  if (S.list.length && S.mode === "dict") return h + dictHTML(it);
+  if (!S.list.length)
+    return h + '<div class="stage glass"><div class="center"><p class="muted">'
+      + (S.mode === "dict" ? "이 화에는 받아쓸 문장이 없습니다."
+         : S.hard ? "읽기에서 표시한 글자가 아직 없습니다."
+         : S.weak ? "회화앱에서 약했던 글자가 아직 없습니다." : "이 화에는 연습할 글자가 없습니다.")
+      + "</p></div></div>";
+
+  var dots = "";
+  for (var i = 0; i < REPS; i++) dots += '<span class="dot' + (i < S.rep ? " on" : "") + '"></span>';
+
+  h += '<div class="stage glass">'
+    + '<div class="headrow"><span class="big">' + esc(it.ch) + "</span>"
+    + '<span class="py">' + esc(it.wordPinyin) + "</span>"
+    + '<span class="gloss">' + esc(it.word) + (it.en ? " · " + esc(it.en) : "") + "</span>"
+    + '<span class="dots">' + dots + "</span></div>"
+    + '<div class="cells" id="cells"></div>'
+    + '<div class="footrow"><span class="hintline"></span>'
+    + '<button class="pill" data-a="undo">한 획 지우기</button>'
+    + '<button class="pill" data-a="clear">모두 지우기</button>'
+    + '<button class="pill" data-a="prev"' + (S.idx ? "" : " disabled") + '>이전 글자</button>'
+    + '<button class="pill solid" id="nextbtn" data-a="next" disabled>'
+    + (S.idx + 1 < S.list.length ? "다음 글자" : "마치기") + "</button></div></div>";
+  return h;
+}
+
+function buildCells() {
+  var host = el("cells");
+  if (!host) return;
+  var it = S.list[S.idx];
+  pads = [];
+  host.innerHTML = "";
+  var n = REPS + 1;
+  var box = host.getBoundingClientRect();
+  var size = Math.floor(Math.min((box.width - 16 * (n - 1) - 4) / n, box.height - 26));
+  size = Math.max(120, size);
+  for (var i = 0; i < n; i++) {
+    var wrap = document.createElement("div");
+    wrap.className = "cellwrap";
+    var cv = document.createElement("canvas");
+    cv.className = "cell" + (i === 0 ? " model" : "");
+    cv.style.width = size + "px"; cv.style.height = size + "px";
+    var tag = document.createElement("span");
+    tag.className = "tagline";
+    tag.textContent = i === 0 ? "본보기" : "";
+    wrap.appendChild(cv); wrap.appendChild(tag); host.appendChild(wrap);
+    var pad = makePad(cv, i === 0 ? 1 : GHOST[i - 1], it.ch);
+    pad.resize();
+    if (i > 0) pads.push(pad);
+  }
+}
+
+function render() {
+  if (S.mode !== "stroke") killWriters();
+  document.querySelector(".side").innerHTML = sideHTML();
+  document.querySelector(".main").innerHTML = mainHTML();
+  if (S.mode === "trace") buildCells();
+  else if (S.mode === "stroke") buildStroke();
+  else if (S.mode === "dict") buildDictCells();
+}
+
+function loadList() {
+  if (S.mode === "read") return loadRead();
+  if (S.mode === "dict") return loadDict();
+  var all = S.hard ? hardList() : S.weak ? weakList() : epChars(week());
+  if (S.mode === "stroke") {
+    ensureStrokes();
+    var withData = all.filter(function (c) { return !STROKES || hasStroke(c.ch); });
+    var left = withData.filter(function (c) { return !strokeDone(c.ch); });
+    S.list = (W.onlyNew && left.length) ? left : withData;
+    S.idx = 0; S.qmiss = 0;
+    return;
+  }
+  var fresh = all.filter(function (c) { return !charDone(c.ch); });
+  S.list = (W.onlyNew && fresh.length) ? fresh : all;
+  S.idx = 0; S.rep = 0;
+}
+
+function nextChar() {
+  var it = S.list[S.idx];
+  var rec = W.chars[it.ch] || (W.chars[it.ch] = { n: 0, last: 0 });
+  var drawn = pads.filter(function (p) { return !p.empty(); }).length;
+  rec.n += drawn; rec.last = Date.now();
+  save();
+  if (S.idx + 1 < S.list.length) { S.idx++; S.rep = 0; render(); }
+  else { S.idx = 0; S.rep = 0; render(); }
+}
+
+/* ===================== 이벤트 ===================== */
+document.addEventListener("click", function (ev) {
+  var t = ev.target.closest("[data-a]");
+  if (!t || t.disabled) return;
+  var a = t.getAttribute("data-a");
+  if (a === "ph") { W.ph = +t.getAttribute("data-i"); W.wk = 0; S.weak = false; S.hard = false;
+    save(); loadList(); return render(); }
+  if (a === "wk") { W.wk = +t.getAttribute("data-i"); S.weak = false; S.hard = false;
+    save(); loadList(); return render(); }
+  if (a === "weak") { S.weak = true; S.hard = false; loadList(); return render(); }
+  if (a === "hard") { S.hard = true; S.weak = false; S.mode = "trace"; loadList(); return render(); }
+  if (a === "tohard") { S.mode = "trace"; S.hard = true; S.weak = false; loadList(); return render(); }
+  if (a === "pick") return answer(+t.getAttribute("data-i"));
+  if (a === "nextq") return nextQ();
+  if (a === "again") { S.shown = true; render(); return startFlash(); }
+  if (a === "flash") { W.flash = !W.flash; save(); S.shown = true; clearTimeout(flashT); return render(); }
+  if (a === "mark") return markChar(t.getAttribute("data-c"));
+  if (a === "mode") { S.mode = t.getAttribute("data-m"); S.weak = false; S.hard = false;
+    loadList(); return render(); }
+  if (a === "say") return speak(t.getAttribute("data-t"));
+  if (a === "slow") return speak(t.getAttribute("data-t"), 0.6);
+  if (a === "hwplay") { if (HW.demo) HW.demo.animateCharacter(); return; }
+  if (a === "hwhint") { if (HW.demo) HW.demo.animateCharacter(); return; }
+  if (a === "hwclear") { return buildStroke(); }
+  if (a === "dreveal") { S.keep = pads.map(function (p) { return p.strokes; });
+    S.reveal = true; return render(); }
+  if (a === "dmark") { return dictMark(+t.getAttribute("data-s")); }
+  if (a === "dclear") { pads.forEach(function (p) { p.clear(); }); return; }
+  if (a === "toquiz") { S.rd = "quiz"; S.idx = S.qs.length ? 0 : -2; S.picked = -1; S.marks = [];
+    S.t0 = Date.now(); S.shown = !flashNow(); if (!S.shown) startFlash(); return render(); }
+  if (a === "totext") { S.rd = "text"; return render(); }
+  if (a === "newchars") { S.newOpen = !S.newOpen; return render(); }
+  if (a === "readagain") { loadRead(); return render(); }
+  if (a === "onlynew") { W.onlyNew = !W.onlyNew; save(); loadList(); return render(); }
+  if (a === "undo") { for (var i = pads.length - 1; i >= 0; i--) if (!pads[i].empty()) { pads[i].undo(); break; } return onDraw(); }
+  if (a === "clear") { pads.forEach(function (p) { p.clear(); }); return onDraw(); }
+  if (a === "prev") { if (S.idx) { S.idx--; S.rep = 0; S.qmiss = 0; S.reveal = false; render(); } return; }
+  if (a === "next") {
+    if (S.mode === "stroke") {
+      if (S.idx + 1 < S.list.length) { S.idx++; S.qmiss = 0; } else { S.idx = 0; S.qmiss = 0; }
+      return render();
+    }
+    return nextChar();
+  }
+});
+window.addEventListener("resize", function () { if (S.ready) buildCells(); });
+if (window.matchMedia) {
+  var mq = window.matchMedia("(prefers-color-scheme:dark)");
+  var onScheme = function () { if (S.ready) render(); };
+  if (mq.addEventListener) mq.addEventListener("change", onScheme);
+  else if (mq.addListener) mq.addListener(onScheme);
+}
+document.addEventListener("gesturestart", function (e) { e.preventDefault(); });
+
+/* ===================== 시작 ===================== */
+Promise.all(["../data/hsk1-3_curriculum.json", "../data/hsk4_curriculum.json",
+  "../data/reading_texts.json"].map(function (f) {
+  return fetch(f).then(function (r) {
+    if (!r.ok) throw new Error(f + " 를 찾을 수 없습니다");
+    return r.json();
+  });
+})).then(function (all) {
+  CUR = { phases: all.slice(0, 2) };
+  RT = all[2] || {};
+  if (W.ph >= CUR.phases.length) W.ph = 0;
+  if (W.wk >= phase().weeks.length) W.wk = 0;
+  S.ready = true;
+  loadList();
+  render();
+}).catch(function (e) {
+  document.querySelector(".main").innerHTML =
+    '<div class="stage glass"><div class="center"><p>데이터를 불러오지 못했습니다</p>'
+    + '<p class="muted">' + esc(e.message) + "</p>"
+    + '<p class="muted">회화앱의 data 폴더 옆, write/ 안에 두고 주소로 여세요.</p></div></div>';
+});
+</script>
+</body>
+</html>

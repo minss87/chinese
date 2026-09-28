@@ -1,0 +1,1752 @@
+{
+ "0:1": {
+  "genre": "학교 소개글",
+  "title": "北京第三中学简介",
+  "titlePinyin": "Běi jīng dì sān zhōng xué jiǎn jiè",
+  "titleKo": "베이징 제3중학교 소개",
+  "new": [
+   {
+    "ch": "约",
+    "py": "yuē",
+    "ko": "대략"
+   }
+  ],
+  "lines": [
+   {
+    "zh": "北京第三中学在北京东边，一九九八年开学。",
+    "pinyin": "Běi jīng dì sān zhōng xué zài Běi jīng dōng biān yī jiǔ jiǔ bā nián kāi xué",
+    "ko": "베이징 제3중학교는 베이징 동쪽에 있으며, 1998년에 개교했다."
+   },
+   {
+    "zh": "学校里有三个教学楼，还有一个大运动场。",
+    "pinyin": "xué xiào lǐ yǒu sān ge jiāo xué lóu hái yǒu yí ge dà yùn dòng chǎng",
+    "ko": "학교에는 교학동 세 개와 큰 운동장이 있다."
+   },
+   {
+    "zh": "现在学校有学生约一千二百人，老师九十多人。",
+    "pinyin": "xiàn zài xué xiào yǒu xué sheng yuē yì qiān èr bǎi rén lǎo shī jiǔ shí duō rén",
+    "ko": "현재 학생은 약 1,200명, 교사는 90여 명이다."
+   },
+   {
+    "zh": "每个班的学生不到四十个，老师可以照顾到每一个人。",
+    "pinyin": "měi ge bān de xué sheng bú dào sì shí ge lǎo shī kě yǐ zhào gu dào měi yí ge rén",
+    "ko": "학급당 학생은 40명이 안 되어, 교사가 한 사람 한 사람을 살필 수 있다."
+   },
+   {
+    "zh": "从今年开始，学校请了一位韩国老师上电脑课。",
+    "pinyin": "cóng jīn nián kāi shǐ xué xiào qǐng le yí wèi Hán guó lǎo shī shàng diàn nǎo kè",
+    "ko": "올해부터 학교는 한국인 교사를 초빙해 컴퓨터 수업을 맡겼다."
+   },
+   {
+    "zh": "学校希望学生学好汉语，也能了解别的国家。",
+    "pinyin": "xué xiào xī wàng xué sheng xué hǎo Hàn yǔ yě néng liǎo jiě bié de guó jiā",
+    "ko": "학교는 학생들이 중국어를 잘 배우고 다른 나라도 이해하기를 바란다."
+   }
+  ]
+ },
+ "0:2": {
+  "genre": "임대 안내문",
+  "title": "学校前面房子出租",
+  "titlePinyin": "xué xiào qián miàn fáng zi chū zū",
+  "titleKo": "학교 앞 주택 임대",
+  "new": [
+   {
+    "ch": "具",
+    "py": "jù",
+    "ko": "가구의 구"
+   }
+  ],
+  "lines": [
+   {
+    "zh": "房子在学校前面，走路三分钟就到。",
+    "pinyin": "fáng zi zài xué xiào qián miàn zǒu lù sān fēn zhōng jiù dào",
+    "ko": "집은 학교 앞에 있어 걸어서 3분이면 도착한다."
+   },
+   {
+    "zh": "房子有一个房间，还有做饭的地方，大小五十平米。",
+    "pinyin": "fáng zi yǒu yí ge fáng jiān hái yǒu zuò fàn de dì fang dà xiǎo wǔ shí píng mǐ",
+    "ko": "방 하나와 부엌 공간이 있으며, 크기는 50제곱미터이다."
+   },
+   {
+    "zh": "房间里有床、桌子和椅子，家具都是新的。",
+    "pinyin": "fáng jiān lǐ yǒu chuáng zhuō zi hé yǐ zi jiā jù dōu shì xīn de",
+    "ko": "방에는 침대, 책상, 의자가 있고 가구는 모두 새것이다."
+   },
+   {
+    "zh": "一个月三千块钱，不包水电。",
+    "pinyin": "yí ge yuè sān qiān kuài qián bù bāo shuǐ diàn",
+    "ko": "월 3,000위안이며, 수도와 전기는 포함되지 않는다."
+   },
+   {
+    "zh": "最少要住一年，先给三个月的钱。",
+    "pinyin": "zuì shǎo yào zhù yì nián xiān gěi sān ge yuè de qián",
+    "ko": "최소 1년을 거주해야 하며, 3개월분을 먼저 낸다."
+   },
+   {
+    "zh": "要看房子的人，请下午五点以后打电话。",
+    "pinyin": "yào kàn fáng zi de rén qǐng xià wǔ wǔ diǎn yǐ hòu dǎ diàn huà",
+    "ko": "집을 보려는 사람은 오후 5시 이후에 전화 바란다."
+   }
+  ]
+ },
+ "0:3": {
+  "genre": "공지문",
+  "title": "关于电脑课的通知",
+  "titlePinyin": "guān yú diàn nǎo kè de tōng zhī",
+  "titleKo": "컴퓨터 수업 공지",
+  "new": [
+   {
+    "ch": "通",
+    "py": "tōng",
+    "ko": "통하다"
+   }
+  ],
+  "lines": [
+   {
+    "zh": "本学期的电脑课从下星期一开始。",
+    "pinyin": "běn xué qī de diàn nǎo kè cóng xià xīng qī yī kāi shǐ",
+    "ko": "이번 학기 컴퓨터 수업은 다음 주 월요일부터 시작한다."
+   },
+   {
+    "zh": "上课时间是每星期三下午三点到四点。",
+    "pinyin": "shàng kè shí jiān shì měi xīng qī sān xià wǔ sān diǎn dào sì diǎn",
+    "ko": "수업 시간은 매주 수요일 오후 3시부터 4시까지이다."
+   },
+   {
+    "zh": "上课的地方在三楼电脑教室。",
+    "pinyin": "shàng kè de dì fang zài sān lóu diàn nǎo jiào shì",
+    "ko": "수업 장소는 3층 컴퓨터실이다."
+   },
+   {
+    "zh": "请同学们提前十分钟到教室，不要迟到。",
+    "pinyin": "qǐng tóng xué men tí qián shí fēn zhōng dào jiào shì bú yào chí dào",
+    "ko": "학생들은 10분 전까지 교실에 오고, 지각하지 않도록 한다."
+   },
+   {
+    "zh": "上课的时候不能吃东西，也不能玩游戏。",
+    "pinyin": "shàng kè de shí hou bù néng chī dōng xi yě bù néng wán yóu xì",
+    "ko": "수업 중에는 음식을 먹을 수 없고, 게임도 할 수 없다."
+   },
+   {
+    "zh": "有问题的同学可以到办公室找金老师。",
+    "pinyin": "yǒu wèn tí de tóng xué kě yǐ dào bàn gōng shì zhǎo Jīn lǎo shī",
+    "ko": "질문이 있는 학생은 사무실로 김 선생님을 찾아오면 된다."
+   }
+  ]
+ },
+ "0:4": {
+  "genre": "게임 소개글",
+  "title": "一个学生做的小游戏",
+  "titlePinyin": "yí ge xué sheng zuò de xiǎo yóu xì",
+  "titleKo": "한 학생이 만든 작은 게임",
+  "new": [],
+  "lines": [
+   {
+    "zh": "这个游戏是我们学校的一个学生自己做的。",
+    "pinyin": "zhè ge yóu xì shì wǒ men xué xiào de yí ge xué sheng zì jǐ zuò de",
+    "ko": "이 게임은 우리 학교 학생이 직접 만든 것이다."
+   },
+   {
+    "zh": "玩的人要用手机回答问题，答对了才能往前走。",
+    "pinyin": "wán de rén yào yòng shǒu jī huí dá wèn tí dá duì le cái néng wǎng qián zǒu",
+    "ko": "플레이어는 휴대폰으로 문제에 답해야 하며, 맞혀야 앞으로 갈 수 있다."
+   },
+   {
+    "zh": "问题都是汉语和数学的，从容易的到难的。",
+    "pinyin": "wèn tí dōu shì Hàn yǔ hé shù xué de cóng róng yì de dào nán de",
+    "ko": "문제는 모두 중국어와 수학이며, 쉬운 것에서 어려운 것 순이다."
+   },
+   {
+    "zh": "一次只要五分钟，休息的时候也能玩。",
+    "pinyin": "yí cì zhǐ yào wǔ fēn zhōng xiū xi de shí hou yě néng wán",
+    "ko": "한 번에 5분이면 되어 쉬는 시간에도 할 수 있다."
+   },
+   {
+    "zh": "老师看了以后，把这个游戏用在了电脑课上。",
+    "pinyin": "lǎo shī kàn le yǐ hòu bǎ zhè ge yóu xì yòng zài le diàn nǎo kè shàng",
+    "ko": "선생님은 이를 보고 컴퓨터 수업에 이 게임을 활용했다."
+   },
+   {
+    "zh": "学生说，这样学习比听课有意思。",
+    "pinyin": "xué sheng shuō zhè yàng xué xí bǐ tīng kè yǒu yì si",
+    "ko": "학생들은 이렇게 하는 것이 강의를 듣는 것보다 재미있다고 말한다."
+   }
+  ]
+ },
+ "0:5": {
+  "genre": "주간 일정표",
+  "title": "老师本周工作安排",
+  "titlePinyin": "lǎo shī běn zhōu gōng zuò ān pái",
+  "titleKo": "교사 주간 업무 일정",
+  "new": [
+   {
+    "ch": "排",
+    "py": "pái",
+    "ko": "배열하다"
+   }
+  ],
+  "lines": [
+   {
+    "zh": "星期一上午八点，老师们在二楼开会。",
+    "pinyin": "xīng qī yī shàng wǔ bā diǎn lǎo shī men zài èr lóu kāi huì",
+    "ko": "월요일 오전 8시, 교사들은 2층에서 회의한다."
+   },
+   {
+    "zh": "会上要说的是新学期的考试时间。",
+    "pinyin": "huì shàng yào shuō de shì xīn xué qī de kǎo shì shí jiān",
+    "ko": "회의에서 논의할 내용은 새 학기 시험 일정이다."
+   },
+   {
+    "zh": "星期二和星期四下午没有课，老师在办公室工作。",
+    "pinyin": "xīng qī èr hé xīng qī sì xià wǔ méi yǒu kè lǎo shī zài bàn gōng shì gōng zuò",
+    "ko": "화요일과 목요일 오후는 수업이 없으며, 교사는 사무실에서 근무한다."
+   },
+   {
+    "zh": "星期三下午三点，三年级在运动场上体育课。",
+    "pinyin": "xīng qī sān xià wǔ sān diǎn sān nián jí zài yùn dòng chǎng shàng tǐ yù kè",
+    "ko": "수요일 오후 3시, 3학년은 운동장에서 체육 수업을 한다."
+   },
+   {
+    "zh": "星期五下午四点以后，老师可以早一点回家。",
+    "pinyin": "xīng qī wǔ xià wǔ sì diǎn yǐ hòu lǎo shī kě yǐ zǎo yì diǎn huí jiā",
+    "ko": "금요일 오후 4시 이후에는 교사가 조금 일찍 퇴근할 수 있다."
+   },
+   {
+    "zh": "有事情不能来的老师，请提前告诉校长。",
+    "pinyin": "yǒu shì qing bù néng lái de lǎo shī qǐng tí qián gào su xiào zhǎng",
+    "ko": "사정이 있어 올 수 없는 교사는 미리 교장에게 알리기 바란다."
+   }
+  ]
+ },
+ "0:6": {
+  "genre": "시설 이용 안내",
+  "title": "运动场使用说明",
+  "titlePinyin": "yùn dòng chǎng shǐ yòng shuō míng",
+  "titleKo": "운동장 이용 안내",
+  "new": [
+   {
+    "ch": "使",
+    "py": "shǐ",
+    "ko": "사용하다"
+   }
+  ],
+  "lines": [
+   {
+    "zh": "运动场每天早上六点开门，晚上九点关门。",
+    "pinyin": "yùn dòng chǎng měi tiān zǎo shang liù diǎn kāi mén wǎn shang jiǔ diǎn guān mén",
+    "ko": "운동장은 매일 오전 6시에 열고 밤 9시에 닫는다."
+   },
+   {
+    "zh": "上课的时间里，运动场只给上体育课的班用。",
+    "pinyin": "shàng kè de shí jiān lǐ yùn dòng chǎng zhǐ gěi shàng tǐ yù kè de bān yòng",
+    "ko": "수업 시간에는 운동장을 체육 수업 학급만 사용할 수 있다."
+   },
+   {
+    "zh": "下课以后，学生和老师都可以在这里运动。",
+    "pinyin": "xià kè yǐ hòu xué sheng hé lǎo shī dōu kě yǐ zài zhè lǐ yùn dòng",
+    "ko": "방과 후에는 학생과 교사 모두 이곳에서 운동할 수 있다."
+   },
+   {
+    "zh": "下雨的时候，请不要在运动场上跑步。",
+    "pinyin": "xià yǔ de shí hou qǐng bú yào zài yùn dòng chǎng shàng pǎo bù",
+    "ko": "비가 올 때는 운동장에서 뛰지 않기 바란다."
+   },
+   {
+    "zh": "用完的球请放回旁边的房间里。",
+    "pinyin": "yòng wán de qiú qǐng fàng huí páng biān de fáng jiān lǐ",
+    "ko": "사용한 공은 옆방에 되돌려 놓기 바란다."
+   },
+   {
+    "zh": "有人不舒服的时候，请马上找体育老师。",
+    "pinyin": "yǒu rén bù shū fu de shí hou qǐng mǎ shàng zhǎo tǐ yù lǎo shī",
+    "ko": "몸이 불편한 사람이 있으면 즉시 체육 교사를 찾는다."
+   }
+  ]
+ },
+ "0:7": {
+  "genre": "모집 공고",
+  "title": "中学生电脑比赛报名",
+  "titlePinyin": "zhōng xué sheng diàn nǎo bǐ sài bào míng",
+  "titleKo": "중학생 컴퓨터 대회 참가 신청",
+  "new": [
+   {
+    "ch": "海",
+    "py": "hǎi",
+    "ko": "바다"
+   }
+  ],
+  "lines": [
+   {
+    "zh": "北京市今年的中学生电脑比赛现在开始报名。",
+    "pinyin": "Běi jīng shì jīn nián de zhōng xué sheng diàn nǎo bǐ sài xiàn zài kāi shǐ bào míng",
+    "ko": "베이징시 올해 중학생 컴퓨터 대회 참가 신청이 시작되었다."
+   },
+   {
+    "zh": "一年级到三年级的学生都可以参加。",
+    "pinyin": "yì nián jí dào sān nián jí de xué sheng dōu kě yǐ cān jiā",
+    "ko": "1학년부터 3학년까지 모두 참가할 수 있다."
+   },
+   {
+    "zh": "比赛分两次，第一次在网上做题，第二次在学校里做。",
+    "pinyin": "bǐ sài fēn liǎng cì dì yī cì zài wǎng shàng zuò tí dì èr cì zài xué xiào lǐ zuò",
+    "ko": "대회는 2차로 나뉘며, 1차는 온라인 문제 풀이, 2차는 학교에서 진행한다."
+   },
+   {
+    "zh": "参加的学生要自己做一个游戏或者别的东西。",
+    "pinyin": "cān jiā de xué sheng yào zì jǐ zuò yí ge yóu xì huò zhě bié de dōng xi",
+    "ko": "참가 학생은 게임이나 다른 작품을 직접 만들어야 한다."
+   },
+   {
+    "zh": "想参加的同学请在这个月十五号以前找老师。",
+    "pinyin": "xiǎng cān jiā de tóng xué qǐng zài zhè ge yuè shí wǔ hào yǐ qián zhǎo lǎo shī",
+    "ko": "참가를 원하는 학생은 이달 15일 전까지 교사를 찾기 바란다."
+   },
+   {
+    "zh": "第一名可以去上海，学校给买车票。",
+    "pinyin": "dì yī míng kě yǐ qù Shàng hǎi xué xiào gěi mǎi chē piào",
+    "ko": "1등은 상하이에 갈 수 있으며, 학교가 차표를 제공한다."
+   }
+  ]
+ },
+ "0:8": {
+  "genre": "이용 규칙",
+  "title": "电脑教室使用要求",
+  "titlePinyin": "diàn nǎo jiào shì shǐ yòng yāo qiú",
+  "titleKo": "컴퓨터실 사용 규칙",
+  "new": [
+   {
+    "ch": "使",
+    "py": "shǐ",
+    "ko": "사용하다"
+   }
+  ],
+  "lines": [
+   {
+    "zh": "电脑教室开门时间是早上八点到晚上八点。",
+    "pinyin": "diàn nǎo jiào shì kāi mén shí jiān shì zǎo shang bā diǎn dào wǎn shang bā diǎn",
+    "ko": "컴퓨터실 개방 시간은 오전 8시부터 밤 8시까지이다."
+   },
+   {
+    "zh": "晚上八点以后要用电脑的学生，必须先问老师。",
+    "pinyin": "wǎn shang bā diǎn yǐ hòu yào yòng diàn nǎo de xué sheng bì xū xiān wèn lǎo shī",
+    "ko": "밤 8시 이후 컴퓨터를 사용하려는 학생은 반드시 먼저 교사에게 문의해야 한다."
+   },
+   {
+    "zh": "进教室以前请把手洗干净，不要带水和饮料。",
+    "pinyin": "jìn jiào shì yǐ qián qǐng bǎ shǒu xǐ gān jìng bú yào dài shuǐ hé yǐn liào",
+    "ko": "입실 전에는 손을 깨끗이 씻고, 물과 음료는 가지고 오지 않는다."
+   },
+   {
+    "zh": "电脑坏了不要自己动，马上告诉老师。",
+    "pinyin": "diàn nǎo huài le bú yào zì jǐ dòng mǎ shàng gào su lǎo shī",
+    "ko": "컴퓨터가 고장 나면 직접 손대지 말고 즉시 교사에게 알린다."
+   },
+   {
+    "zh": "用完以后请关电脑，把椅子放回去。",
+    "pinyin": "yòng wán yǐ hòu qǐng guān diàn nǎo bǎ yǐ zi fàng huí qù",
+    "ko": "사용 후에는 컴퓨터를 끄고 의자를 제자리에 놓는다."
+   },
+   {
+    "zh": "最后走的人要关灯和关门。",
+    "pinyin": "zuì hòu zǒu de rén yào guān dēng hé guān mén",
+    "ko": "마지막에 나가는 사람은 소등하고 문을 닫는다."
+   }
+  ]
+ },
+ "0:9": {
+  "genre": "복약 안내",
+  "title": "感冒药服用说明",
+  "titlePinyin": "gǎn mào yào fú yòng shuō míng",
+  "titleKo": "감기약 복용 안내",
+  "new": [],
+  "lines": [
+   {
+    "zh": "本药用于感冒、发烧、头疼的时候。",
+    "pinyin": "běn yào yòng yú gǎn mào fā shāo tóu téng de shí hou",
+    "ko": "본 약은 감기, 발열, 두통 시에 사용한다."
+   },
+   {
+    "zh": "成人一天三次，一次一片，吃饭以后吃。",
+    "pinyin": "chéng rén yì tiān sān cì yí cì yí piàn chī fàn yǐ hòu chī",
+    "ko": "성인은 하루 세 번, 1회 1정, 식후에 복용한다."
+   },
+   {
+    "zh": "八岁以下的孩子不能吃这个药。",
+    "pinyin": "bā suì yǐ xià de hái zi bù néng chī zhè ge yào",
+    "ko": "8세 미만 아동은 본 약을 복용할 수 없다."
+   },
+   {
+    "zh": "吃药的时候要喝水，不要喝茶和牛奶。",
+    "pinyin": "chī yào de shí hou yào hē shuǐ bú yào hē chá hé niú nǎi",
+    "ko": "복약 시에는 물과 함께 복용하고, 차나 우유는 피한다."
+   },
+   {
+    "zh": "吃了以后可能会想睡觉，最好不要开车。",
+    "pinyin": "chī le yǐ hòu kě néng huì xiǎng shuì jiào zuì hǎo bú yào kāi chē",
+    "ko": "복용 후 졸릴 수 있으므로 운전은 삼가는 것이 좋다."
+   },
+   {
+    "zh": "吃了三天还不好的人，请到医院找大夫。",
+    "pinyin": "chī le sān tiān hái bù hǎo de rén qǐng dào yī yuàn zhǎo dà fū",
+    "ko": "3일간 복용 후에도 낫지 않으면 병원에서 진료를 받기 바란다."
+   }
+  ]
+ },
+ "0:10": {
+  "genre": "공원 안내",
+  "title": "东城公园游玩指南",
+  "titlePinyin": "dōng chéng gōng yuán yóu wán zhǐ nán",
+  "titleKo": "둥청 공원 이용 안내",
+  "new": [
+   {
+    "ch": "指",
+    "py": "zhǐ",
+    "ko": "가리키다"
+   },
+   {
+    "ch": "湖",
+    "py": "hú",
+    "ko": "호수"
+   }
+  ],
+  "lines": [
+   {
+    "zh": "东城公园在学校北边，坐公共汽车十分钟就到。",
+    "pinyin": "dōng chéng gōng yuán zài xué xiào běi biān zuò gōng gòng qì chē shí fēn zhōng jiù dào",
+    "ko": "둥청 공원은 학교 북쪽에 있으며, 버스로 10분이면 도착한다."
+   },
+   {
+    "zh": "公园从早上五点开到晚上十点，进去不要钱。",
+    "pinyin": "gōng yuán cóng zǎo shang wǔ diǎn kāi dào wǎn shang shí diǎn jìn qù bú yào qián",
+    "ko": "공원은 오전 5시부터 밤 10시까지 개방하며, 입장료는 없다."
+   },
+   {
+    "zh": "公园里有一个大湖，旁边可以喝咖啡。",
+    "pinyin": "gōng yuán lǐ yǒu yí ge dà hú páng biān kě yǐ hē kā fēi",
+    "ko": "공원에는 큰 호수가 있고, 그 옆에서 커피를 마실 수 있다."
+   },
+   {
+    "zh": "早上很多老人在公园里运动、跳舞或者写字。",
+    "pinyin": "zǎo shang hěn duō lǎo rén zài gōng yuán lǐ yùn dòng tiào wǔ huò zhě xiě zì",
+    "ko": "아침에는 많은 노인이 공원에서 운동하거나 춤추거나 글씨를 쓴다."
+   },
+   {
+    "zh": "周末孩子多，带孩子来的人请看好他们。",
+    "pinyin": "zhōu mò hái zi duō dài hái zi lái de rén qǐng kàn hǎo tā men",
+    "ko": "주말에는 아이가 많으니 동반한 보호자는 잘 살피기 바란다."
+   },
+   {
+    "zh": "请不要在草地上吃东西，走的时候把东西带走。",
+    "pinyin": "qǐng bú yào zài cǎo de shàng chī dōng xi zǒu de shí hou bǎ dōng xi dài zǒu",
+    "ko": "잔디밭에서 음식을 먹지 말고, 떠날 때 물건을 챙겨 가기 바란다."
+   }
+  ]
+ },
+ "0:11": {
+  "genre": "학교 소식",
+  "title": "电脑课以后，学生成绩变好了",
+  "titlePinyin": "diàn nǎo kè yǐ hòu xué sheng chéng jì biàn hǎo le",
+  "titleKo": "컴퓨터 수업 이후 학생 성적이 올랐다",
+  "new": [],
+  "lines": [
+   {
+    "zh": "从今年开始，我们学校每周上一次电脑课。",
+    "pinyin": "cóng jīn nián kāi shǐ wǒ men xué xiào měi zhōu shàng yí cì diàn nǎo kè",
+    "ko": "올해부터 우리 학교는 주 1회 컴퓨터 수업을 한다."
+   },
+   {
+    "zh": "半年以后，三年级学生的数学成绩比以前好了。",
+    "pinyin": "bàn nián yǐ hòu sān nián jí xué sheng de shù xué chéng jì bǐ yǐ qián hǎo le",
+    "ko": "반년 후 3학년 학생들의 수학 성적이 이전보다 올랐다."
+   },
+   {
+    "zh": "老师说，学生在电脑上做题，做错了也不怕。",
+    "pinyin": "lǎo shī shuō xué sheng zài diàn nǎo shàng zuò tí zuò cuò le yě bú pà",
+    "ko": "교사는 학생들이 컴퓨터로 문제를 풀면 틀려도 두려워하지 않는다고 말한다."
+   },
+   {
+    "zh": "以前不爱说话的学生，现在也愿意问问题了。",
+    "pinyin": "yǐ qián bú ài shuō huà de xué sheng xiàn zài yě yuàn yì wèn wèn tí le",
+    "ko": "이전에 말수가 적던 학생들도 이제 질문을 하려 한다."
+   },
+   {
+    "zh": "一个以前常常玩游戏的学生，现在自己做游戏。",
+    "pinyin": "yí ge yǐ qián cháng cháng wán yóu xì de xué sheng xiàn zài zì jǐ zuò yóu xì",
+    "ko": "예전에 게임을 자주 하던 한 학생은 이제 직접 게임을 만든다."
+   },
+   {
+    "zh": "校长说，下学期还要给学生买新电脑。",
+    "pinyin": "xiào zhǎng shuō xià xué qī hái yào gěi xué sheng mǎi xīn diàn nǎo",
+    "ko": "교장은 다음 학기에도 학생들에게 새 컴퓨터를 사 주겠다고 말했다."
+   }
+  ]
+ },
+ "0:12": {
+  "genre": "방학 공지",
+  "title": "关于放假的通知",
+  "titlePinyin": "guān yú fàng jià de tōng zhī",
+  "titleKo": "방학 안내",
+  "new": [
+   {
+    "ch": "通",
+    "py": "tōng",
+    "ko": "통하다"
+   },
+   {
+    "ch": "祝",
+    "py": "zhù",
+    "ko": "축원하다"
+   }
+  ],
+  "lines": [
+   {
+    "zh": "本学期的课到这个月二十号结束。",
+    "pinyin": "běn xué qī de kè dào zhè ge yuè èr shí hào jié shù",
+    "ko": "이번 학기 수업은 이달 20일에 종료된다."
+   },
+   {
+    "zh": "二十一号开始放假，下个学期三月一号开学。",
+    "pinyin": "èr shí yī hào kāi shǐ fàng jià xià ge xué qī sān yuè yī hào kāi xué",
+    "ko": "21일부터 방학이 시작되며, 다음 학기는 3월 1일에 개학한다."
+   },
+   {
+    "zh": "放假以前，请同学们把借的书还回图书馆。",
+    "pinyin": "fàng jià yǐ qián qǐng tóng xué men bǎ jiè de shū hái huí tú shū guǎn",
+    "ko": "방학 전에 빌린 책은 도서관에 반납하기 바란다."
+   },
+   {
+    "zh": "假期里学校每天有人，但是教室都不开。",
+    "pinyin": "jià qī lǐ xué xiào měi tiān yǒu rén dàn shì jiào shì dōu bù kāi",
+    "ko": "방학 중에도 학교에 당직자가 있으나 교실은 개방하지 않는다."
+   },
+   {
+    "zh": "回家的路上要小心，不要玩手机。",
+    "pinyin": "huí jiā de lù shàng yào xiǎo xīn bú yào wán shǒu jī",
+    "ko": "귀가 길에는 조심하고 휴대폰을 보지 않도록 한다."
+   },
+   {
+    "zh": "祝同学们假期快乐，开学的时候见。",
+    "pinyin": "zhù tóng xué men jià qī kuài lè kāi xué de shí hou jiàn",
+    "ko": "학생 여러분의 즐거운 방학을 기원하며, 개학 때 만나자."
+   }
+  ]
+ },
+ "1:1": {
+  "genre": "짧은 기사",
+  "title": "中学生骑车事故增多",
+  "titlePinyin": "zhōng xué sheng qí chē shì gù zēng duō",
+  "titleKo": "중학생 자전거 사고 증가",
+  "new": [
+   {
+    "ch": "统",
+    "py": "tǒng",
+    "ko": "통계의 통"
+   }
+  ],
+  "lines": [
+   {
+    "zh": "最近本市中学生骑自行车受伤的情况增多。",
+    "pinyin": "zuì jìn běn shì zhōng xué sheng qí zì xíng chē shòu shāng de qíng kuàng zēng duō",
+    "ko": "최근 본 시에서 자전거를 타다 다치는 중학생이 늘고 있다."
+   },
+   {
+    "zh": "据医院统计，上个月共有三十多名学生因此住院。",
+    "pinyin": "jù yī yuàn tǒng jì shàng ge yuè gòng yǒu sān shí duō míng xué sheng yīn cǐ zhù yuàn",
+    "ko": "병원 통계에 따르면 지난달 이로 인해 입원한 학생은 30여 명이다."
+   },
+   {
+    "zh": "大部分事故发生在早上七点到八点之间。",
+    "pinyin": "dà bù fen shì gù fā shēng zài zǎo shang qī diǎn dào bā diǎn zhī jiān",
+    "ko": "사고의 대부분은 오전 7시에서 8시 사이에 발생한다."
+   },
+   {
+    "zh": "学生为了不迟到，骑得太快，也常常不看红绿灯。",
+    "pinyin": "xué sheng wèi le bù chí dào qí de tài kuài yě cháng cháng bú kàn hóng lǜ dēng",
+    "ko": "학생들은 지각하지 않으려고 너무 빨리 달리며, 신호등도 자주 보지 않는다."
+   },
+   {
+    "zh": "专家提醒，家长应该让孩子提前十分钟出门。",
+    "pinyin": "zhuān jiā tí xǐng jiā zhǎng yīng gāi ràng hái zi tí qián shí fēn zhōng chū mén",
+    "ko": "전문가는 학부모가 아이를 10분 일찍 나서게 해야 한다고 당부한다."
+   },
+   {
+    "zh": "学校方面表示，下周起将开展交通安全教育。",
+    "pinyin": "xué xiào fāng miàn biǎo shì xià zhōu qǐ jiāng kāi zhǎn jiāo tōng ān quán jiào yù",
+    "ko": "학교 측은 다음 주부터 교통안전 교육을 실시하겠다고 밝혔다."
+   }
+  ]
+ },
+ "1:2": {
+  "genre": "분실 전단",
+  "title": "寻猫启事",
+  "titlePinyin": "xún māo qǐ shì",
+  "titleKo": "고양이를 찾습니다",
+  "new": [
+   {
+    "ch": "寻",
+    "py": "xún",
+    "ko": "찾다"
+   },
+   {
+    "ch": "启",
+    "py": "qǐ",
+    "ko": "알리다"
+   }
+  ],
+  "lines": [
+   {
+    "zh": "本人于昨天晚上八点左右丢失一只小猫。",
+    "pinyin": "běn rén yú zuó tiān wǎn shang bā diǎn zuǒ yòu diū shī yì zhī xiǎo māo",
+    "ko": "본인은 어제 저녁 8시경 새끼 고양이 한 마리를 잃어버렸습니다."
+   },
+   {
+    "zh": "丢失地点为学校对面的小区，五号楼附近。",
+    "pinyin": "diū shī dì diǎn wèi xué xiào duì miàn de xiǎo qū wǔ hào lóu fù jìn",
+    "ko": "분실 장소는 학교 맞은편 아파트 단지 5동 부근입니다."
+   },
+   {
+    "zh": "小猫约三个月大，全身黑白两色，左耳有一些黄毛。",
+    "pinyin": "xiǎo māo yuē sān ge yuè dà quán shēn hēi bái liǎng sè zuǒ ěr yǒu yì xiē huáng máo",
+    "ko": "고양이는 생후 3개월가량이며, 검고 흰 두 색에 왼쪽 귀에 노란 털이 조금 있습니다."
+   },
+   {
+    "zh": "它性格很活泼，见人不怕，听见响声会跑过来。",
+    "pinyin": "tā xìng gé hěn huó po jiàn rén bú pà tīng jiàn xiǎng shēng huì pǎo guò lái",
+    "ko": "성격이 활발하고 사람을 무서워하지 않으며, 소리가 나면 달려옵니다."
+   },
+   {
+    "zh": "如果您见过这只猫，请与本人联系，电话在下面。",
+    "pinyin": "rú guǒ nín jiàn guo zhè zhī māo qǐng yǔ běn rén lián xì diàn huà zài xià miàn",
+    "ko": "이 고양이를 보신 분은 본인에게 연락 바랍니다. 전화번호는 아래에 있습니다."
+   },
+   {
+    "zh": "找到的人，本人一定重谢。",
+    "pinyin": "zhǎo dào de rén běn rén yí dìng zhòng xiè",
+    "ko": "찾아 주신 분께는 반드시 사례하겠습니다."
+   }
+  ]
+ },
+ "1:3": {
+  "genre": "결과 공고",
+  "title": "电脑比赛第一轮结果通知",
+  "titlePinyin": "diàn nǎo bǐ sài dì yī lún jié guǒ tōng zhī",
+  "titleKo": "컴퓨터 대회 1차 결과 공고",
+  "new": [
+   {
+    "ch": "轮",
+    "py": "lún",
+    "ko": "회차"
+   }
+  ],
+  "lines": [
+   {
+    "zh": "本次比赛第一轮共有四百六十名学生参加。",
+    "pinyin": "běn cì bǐ sài dì yī lún gòng yǒu sì bǎi liù shí míng xué sheng cān jiā",
+    "ko": "이번 대회 1차에는 총 460명의 학생이 참가했다."
+   },
+   {
+    "zh": "经过老师们的打分，共有五十人进入第二轮。",
+    "pinyin": "jīng guò lǎo shī men de dǎ fēn gòng yǒu wǔ shí rén jìn rù dì èr lún",
+    "ko": "교사들의 채점을 거쳐 총 50명이 2차에 진출했다."
+   },
+   {
+    "zh": "名单已经放在学校网站上，请参加的同学自己查看。",
+    "pinyin": "míng dān yǐ jing fàng zài xué xiào wǎng zhàn shàng qǐng cān jiā de tóng xué zì jǐ chá kàn",
+    "ko": "명단은 이미 학교 홈페이지에 게시했으니 참가 학생은 직접 확인하기 바란다."
+   },
+   {
+    "zh": "第二轮比赛定于下月十号上午九点开始。",
+    "pinyin": "dì èr lún bǐ sài dìng yú xià yuè shí hào shàng wǔ jiǔ diǎn kāi shǐ",
+    "ko": "2차 대회는 다음 달 10일 오전 9시에 시작한다."
+   },
+   {
+    "zh": "参加的同学当天要带学生证和笔。",
+    "pinyin": "cān jiā de tóng xué dàng tiān yào dài xué sheng zhèng hé bǐ",
+    "ko": "참가 학생은 당일 학생증과 필기구를 지참해야 한다."
+   },
+   {
+    "zh": "对结果有疑问的，可以在三天内向老师提出。",
+    "pinyin": "duì jié guǒ yǒu yí wèn de kě yǐ zài sān tiān nèi xiàng lǎo shī tí chū",
+    "ko": "결과에 이의가 있는 경우 3일 이내에 교사에게 제기할 수 있다."
+   }
+  ]
+ },
+ "1:4": {
+  "genre": "조사 기사",
+  "title": "调查：年轻教师的休息时间越来越少",
+  "titlePinyin": "diào chá nián qīng jiāo shī de xiū xi shí jiān yuè lái yuè shǎo",
+  "titleKo": "조사: 젊은 교사의 휴식 시간이 갈수록 줄고 있다",
+  "new": [],
+  "lines": [
+   {
+    "zh": "本报对本市五百名年轻教师进行了调查。",
+    "pinyin": "běn bào duì běn shì wǔ bǎi míng nián qīng jiāo shī jìn xíng le diào chá",
+    "ko": "본지는 본 시의 젊은 교사 500명을 대상으로 조사를 실시했다."
+   },
+   {
+    "zh": "调查结果表明，超过一半的人每天工作十个小时以上。",
+    "pinyin": "diào chá jié guǒ biǎo míng chāo guò yí bàn de rén měi tiān gōng zuò shí ge xiǎo shí yǐ shàng",
+    "ko": "조사 결과 절반 이상이 하루 10시간 넘게 근무하는 것으로 나타났다."
+   },
+   {
+    "zh": "其中百分之四十的教师表示，周末也要加班。",
+    "pinyin": "qí zhōng bǎi fēn zhī sì shí de jiāo shī biǎo shì zhōu mò yě yào jiā bān",
+    "ko": "그중 40퍼센트의 교사는 주말에도 초과 근무를 한다고 답했다."
+   },
+   {
+    "zh": "他们最担心的是没有时间休息和锻炼身体。",
+    "pinyin": "tā men zuì dān xīn de shì méi yǒu shí jiān xiū xi hé duàn liàn shēn tǐ",
+    "ko": "이들이 가장 걱정하는 것은 쉬고 운동할 시간이 없다는 점이다."
+   },
+   {
+    "zh": "不少人说，工作太忙，连约会的机会也没有。",
+    "pinyin": "bù shǎo rén shuō gōng zuò tài máng lián yuē huì de jī huì yě méi yǒu",
+    "ko": "적지 않은 이들이 일이 너무 바빠 데이트할 기회조차 없다고 말한다."
+   },
+   {
+    "zh": "专家建议，学校应该减少教师的会议和材料工作。",
+    "pinyin": "zhuān jiā jiàn yì xué xiào yīng gāi jiǎn shǎo jiāo shī de huì yì hé cái liào gōng zuò",
+    "ko": "전문가는 학교가 교사의 회의와 서류 업무를 줄여야 한다고 제안한다."
+   }
+  ]
+ },
+ "1:5": {
+  "genre": "안내문",
+  "title": "失物招领处使用说明",
+  "titlePinyin": "shī wù zhāo lǐng chù shǐ yòng shuō míng",
+  "titleKo": "분실물 센터 이용 안내",
+  "new": [
+   {
+    "ch": "领",
+    "py": "lǐng",
+    "ko": "받다"
+   },
+   {
+    "ch": "捡",
+    "py": "jiǎn",
+    "ko": "줍다"
+   },
+   {
+    "ch": "品",
+    "py": "pǐn",
+    "ko": "물품의 품"
+   }
+  ],
+  "lines": [
+   {
+    "zh": "失物招领处在学校一楼，办公时间为工作日上午八点至下午五点。",
+    "pinyin": "shī wù zhāo lǐng chù zài xué xiào yì lóu bàn gōng shí jiān wèi gōng zuò rì shàng wǔ bā diǎn zhì xià wǔ wǔ diǎn",
+    "ko": "분실물 센터는 학교 1층에 있으며, 운영 시간은 평일 오전 8시부터 오후 5시까지이다."
+   },
+   {
+    "zh": "在学校内捡到东西的师生，请及时送到这里。",
+    "pinyin": "zài xué xiào nèi jiǎn dào dōng xi de shī shēng qǐng jí shí sòng dào zhè lǐ",
+    "ko": "교내에서 물건을 습득한 교직원과 학생은 신속히 이곳으로 가져오기 바란다."
+   },
+   {
+    "zh": "来领东西的人需要说明丢失的时间、地点和样子。",
+    "pinyin": "lái lǐng dōng xi de rén xū yào shuō míng diū shī de shí jiān dì diǎn hé yàng zi",
+    "ko": "물건을 찾으러 오는 사람은 분실 시각, 장소, 형태를 설명해야 한다."
+   },
+   {
+    "zh": "手机、钱包等重要物品，还需要出示学生证。",
+    "pinyin": "shǒu jī qián bāo děng zhòng yào wù pǐn hái xū yào chū shì xué sheng zhèng",
+    "ko": "휴대폰, 지갑 등 중요 물품은 학생증도 제시해야 한다."
+   },
+   {
+    "zh": "无人认领的物品将保存一个月。",
+    "pinyin": "wú rén rèn lǐng de wù pǐn jiāng bǎo cún yí ge yuè",
+    "ko": "주인이 나타나지 않은 물품은 한 달간 보관한다."
+   },
+   {
+    "zh": "一个月以后仍无人认领的，学校将一起处理。",
+    "pinyin": "yí ge yuè yǐ hòu réng wú rén rèn lǐng de xué xiào jiāng yì qǐ chǔ lǐ",
+    "ko": "한 달이 지나도 주인이 없으면 학교가 일괄 처리한다."
+   }
+  ]
+ },
+ "1:6": {
+  "genre": "학교 소식",
+  "title": "我校获赠二十台新电脑",
+  "titlePinyin": "wǒ xiào huò zèng èr shí tái xīn diàn nǎo",
+  "titleKo": "본교, 새 컴퓨터 20대 기증받아",
+  "new": [
+   {
+    "ch": "赠",
+    "py": "zèng",
+    "ko": "증정하다"
+   },
+   {
+    "ch": "装",
+    "py": "zhuāng",
+    "ko": "설치하다"
+   },
+   {
+    "ch": "编",
+    "py": "biān",
+    "ko": "엮다"
+   }
+  ],
+  "lines": [
+   {
+    "zh": "上周五，一家互联网公司向我校赠送了二十台电脑。",
+    "pinyin": "shàng zhōu wǔ yì jiā hù lián wǎng gōng sī xiàng wǒ xiào zèng sòng le èr shí tái diàn nǎo",
+    "ko": "지난 금요일, 한 인터넷 기업이 본교에 컴퓨터 20대를 기증했다."
+   },
+   {
+    "zh": "这些电脑已经全部安装在三楼的电脑教室。",
+    "pinyin": "zhè xiē diàn nǎo yǐ jing quán bù ān zhuāng zài sān lóu de diàn nǎo jiào shì",
+    "ko": "이 컴퓨터들은 모두 3층 컴퓨터실에 설치되었다."
+   },
+   {
+    "zh": "校长在活动上感谢了这家公司的支持。",
+    "pinyin": "xiào zhǎng zài huó dòng shàng gǎn xiè le zhè jiā gōng sī de zhī chí",
+    "ko": "교장은 행사에서 해당 기업의 지원에 감사를 표했다."
+   },
+   {
+    "zh": "该公司的负责人是本校毕业生，也是一名工程师。",
+    "pinyin": "gāi gōng sī de fù zé rén shì běn xiào bì yè shēng yě shì yì míng gōng chéng shī",
+    "ko": "해당 기업 담당자는 본교 졸업생이자 엔지니어이다."
+   },
+   {
+    "zh": "他表示，希望更多学生能够学习编程。",
+    "pinyin": "tā biǎo shì xī wàng gèng duō xué sheng néng gòu xué xí biān chéng",
+    "ko": "그는 더 많은 학생이 프로그래밍을 배울 수 있기를 바란다고 말했다."
+   },
+   {
+    "zh": "新学期开始后，电脑课的人数将从三十人增加到五十人。",
+    "pinyin": "xīn xué qī kāi shǐ hòu diàn nǎo kè de rén shù jiāng cóng sān shí rén zēng jiā dào wǔ shí rén",
+    "ko": "새 학기부터 컴퓨터 수업 정원은 30명에서 50명으로 늘어난다."
+   }
+  ]
+ },
+ "1:7": {
+  "genre": "동물병원 안내",
+  "title": "宠物打针注意事项",
+  "titlePinyin": "chǒng wù dǎ zhēn zhù yì shì xiàng",
+  "titleKo": "반려동물 예방접종 주의사항",
+  "new": [
+   {
+    "ch": "宠",
+    "py": "chǒng",
+    "ko": "귀여워하다"
+   },
+   {
+    "ch": "项",
+    "py": "xiàng",
+    "ko": "항목"
+   }
+  ],
+  "lines": [
+   {
+    "zh": "小猫满两个月以后就可以打第一针。",
+    "pinyin": "xiǎo māo mǎn liǎng ge yuè yǐ hòu jiù kě yǐ dǎ dì yī zhēn",
+    "ko": "고양이는 생후 2개월이 지나면 첫 접종을 할 수 있다."
+   },
+   {
+    "zh": "打针前三天，请注意观察它有没有生病。",
+    "pinyin": "dǎ zhēn qián sān tiān qǐng zhù yì guān chá tā yǒu méi yǒu shēng bìng",
+    "ko": "접종 3일 전부터 질병 여부를 관찰하기 바란다."
+   },
+   {
+    "zh": "打针当天不要给它洗澡，也不要带它出门。",
+    "pinyin": "dǎ zhēn dàng tiān bú yào gěi tā xǐ zǎo yě bú yào dài tā chū mén",
+    "ko": "접종 당일에는 목욕을 시키거나 외출시키지 않는다."
+   },
+   {
+    "zh": "打完针以后，请在医院等半个小时再走。",
+    "pinyin": "dǎ wán zhēn yǐ hòu qǐng zài yī yuàn děng bàn ge xiǎo shí zài zǒu",
+    "ko": "접종 후에는 병원에서 30분간 기다린 뒤 귀가하기 바란다."
+   },
+   {
+    "zh": "如果出现不吃东西、一直睡觉的情况，请马上联系我们。",
+    "pinyin": "rú guǒ chū xiàn bù chī dōng xi yì zhí shuì jiào de qíng kuàng qǐng mǎ shàng lián xì wǒ men",
+    "ko": "먹지 않거나 계속 잠만 자는 증상이 나타나면 즉시 연락 바란다."
+   },
+   {
+    "zh": "第二针要在一个月以后打，请按时来。",
+    "pinyin": "dì èr zhēn yào zài yí ge yuè yǐ hòu dǎ qǐng àn shí lái",
+    "ko": "2차 접종은 한 달 후이므로 기한에 맞춰 방문하기 바란다."
+   }
+  ]
+ },
+ "1:8": {
+  "genre": "학부모 안내문",
+  "title": "关于召开家长会的通知",
+  "titlePinyin": "guān yú zhào kāi jiā zhǎng huì de tōng zhī",
+  "titleKo": "학부모 회의 개최 안내",
+  "new": [
+   {
+    "ch": "召",
+    "py": "zhào",
+    "ko": "부르다"
+   },
+   {
+    "ch": "升",
+    "py": "shēng",
+    "ko": "오르다"
+   },
+   {
+    "ch": "独",
+    "py": "dú",
+    "ko": "홀로"
+   }
+  ],
+  "lines": [
+   {
+    "zh": "各位家长：本学期家长会定于本月二十日下午两点召开。",
+    "pinyin": "gè wèi jiā zhǎng běn xué qī jiā zhǎng huì dìng yú běn yuè èr shí rì xià wǔ liǎng diǎn zhào kāi",
+    "ko": "학부모님께: 이번 학기 학부모 회의를 이달 20일 오후 2시에 개최합니다."
+   },
+   {
+    "zh": "地点为各班教室，会议时间约一个半小时。",
+    "pinyin": "dì diǎn wèi gè bān jiào shì huì yì shí jiān yuē yí ge bàn xiǎo shí",
+    "ko": "장소는 각 학급 교실이며, 회의 시간은 약 1시간 30분입니다."
+   },
+   {
+    "zh": "会上老师将介绍本学期的学习情况和考试结果。",
+    "pinyin": "huì shàng lǎo shī jiāng jiè shào běn xué qī de xué xí qíng kuàng hé kǎo shì jié guǒ",
+    "ko": "회의에서 교사가 이번 학기 학습 상황과 시험 결과를 안내합니다."
+   },
+   {
+    "zh": "三年级的家长还可以了解升学方面的情况。",
+    "pinyin": "sān nián jí de jiā zhǎng hái kě yǐ liǎo jiě shēng xué fāng miàn de qíng kuàng",
+    "ko": "3학년 학부모는 진학 관련 사항도 확인할 수 있습니다."
+   },
+   {
+    "zh": "家长如有问题，可以在会后单独与老师交流。",
+    "pinyin": "jiā zhǎng rú yǒu wèn tí kě yǐ zài huì hòu dān dú yǔ lǎo shī jiāo liú",
+    "ko": "질문이 있는 학부모는 회의 후 개별적으로 교사와 상담할 수 있습니다."
+   },
+   {
+    "zh": "因工作不能参加的家长，请提前与班主任联系。",
+    "pinyin": "yīn gōng zuò bù néng cān jiā de jiā zhǎng qǐng tí qián yǔ bān zhǔ rèn lián xì",
+    "ko": "업무로 참석할 수 없는 학부모는 미리 담임교사에게 연락 바랍니다."
+   }
+  ]
+ },
+ "1:9": {
+  "genre": "행사 안내",
+  "title": "公开课听课安排",
+  "titlePinyin": "gōng kāi kè tīng kè ān pái",
+  "titleKo": "공개수업 참관 안내",
+  "new": [
+   {
+    "ch": "编",
+    "py": "biān",
+    "ko": "엮다"
+   },
+   {
+    "ch": "状",
+    "py": "zhuàng",
+    "ko": "상태의 상"
+   }
+  ],
+  "lines": [
+   {
+    "zh": "本周四上午，本校将举行信息课公开课。",
+    "pinyin": "běn zhōu sì shàng wǔ běn xiào jiāng jǔ xíng xìn xī kè gōng kāi kè",
+    "ko": "이번 주 목요일 오전, 본교에서 정보 과목 공개수업을 진행한다."
+   },
+   {
+    "zh": "市内五所中学的十五位老师将来听课。",
+    "pinyin": "shì nèi wǔ suǒ zhōng xué de shí wǔ wèi lǎo shī jiāng lái tīng kè",
+    "ko": "시내 5개 중학교의 교사 15명이 참관할 예정이다."
+   },
+   {
+    "zh": "公开课的题目是《用游戏学习编程》。",
+    "pinyin": "gōng kāi kè de tí mù shì yòng yóu xì xué xí biān chéng",
+    "ko": "공개수업의 주제는 「게임으로 배우는 프로그래밍」이다."
+   },
+   {
+    "zh": "听课的老师请于八点四十分以前到三楼电脑教室。",
+    "pinyin": "tīng kè de lǎo shī qǐng yú bā diǎn sì shí fēn yǐ qián dào sān lóu diàn nǎo jiào shì",
+    "ko": "참관 교사는 8시 40분까지 3층 컴퓨터실로 오기 바란다."
+   },
+   {
+    "zh": "上课期间请把手机关成安静的状态，不要走动。",
+    "pinyin": "shàng kè qī jiān qǐng bǎ shǒu jī guān chéng ān jìng de zhuàng tài bú yào zǒu dòng",
+    "ko": "수업 중에는 휴대폰을 무음으로 하고 이동을 삼가기 바란다."
+   },
+   {
+    "zh": "课后将在二楼会议室进行讨论，欢迎各位提出意见。",
+    "pinyin": "kè hòu jiāng zài èr lóu huì yì shì jìn xíng tǎo lùn huān yíng gè wèi tí chū yì jiàn",
+    "ko": "수업 후 2층 회의실에서 토의가 진행되며, 의견 제시를 환영한다."
+   }
+  ]
+ },
+ "1:10": {
+  "genre": "행사 안내",
+  "title": "学期末感谢会邀请",
+  "titlePinyin": "xué qī mò gǎn xiè huì yāo qǐng",
+  "titleKo": "학기말 감사회 초대",
+  "new": [
+   {
+    "ch": "括",
+    "py": "kuò",
+    "ko": "포함하다"
+   },
+   {
+    "ch": "代",
+    "py": "dài",
+    "ko": "대신하다"
+   }
+  ],
+  "lines": [
+   {
+    "zh": "为感谢老师一学期的辛苦，三年二班将举行一次小活动。",
+    "pinyin": "wèi gǎn xiè lǎo shī yì xué qī de xīn kǔ sān nián èr bān jiāng jǔ xíng yí cì xiǎo huó dòng",
+    "ko": "한 학기 동안 애쓰신 선생님께 감사드리고자 3학년 2반에서 소규모 행사를 엽니다."
+   },
+   {
+    "zh": "时间为本周五下午六点，地点在本班教室。",
+    "pinyin": "shí jiān wèi běn zhōu wǔ xià wǔ liù diǎn dì diǎn zài běn bān jiào shì",
+    "ko": "시간은 이번 주 금요일 오후 6시, 장소는 본 학급 교실입니다."
+   },
+   {
+    "zh": "活动内容包括学生表演、游戏和简单的点心。",
+    "pinyin": "huó dòng nèi róng bāo kuò xué sheng biǎo yǎn yóu xì hé jiǎn dān de diǎn xīn",
+    "ko": "행사 내용은 학생 공연, 게임, 간단한 다과입니다."
+   },
+   {
+    "zh": "请老师六点整准时到教室，不要提前进来。",
+    "pinyin": "qǐng lǎo shī liù diǎn zhěng zhǔn shí dào jiào shì bú yào tí qián jìn lái",
+    "ko": "선생님께서는 6시 정각에 교실로 오시고, 미리 들어오지 마시기 바랍니다."
+   },
+   {
+    "zh": "活动大约进行一个小时，结束后我们会打扫教室。",
+    "pinyin": "huó dòng dà yuē jìn xíng yí ge xiǎo shí jié shù hòu wǒ men huì dǎ sǎo jiào shì",
+    "ko": "행사는 약 1시간 진행되며, 종료 후 학생들이 교실을 정리합니다."
+   },
+   {
+    "zh": "学生代表：三年二班全体同学。",
+    "pinyin": "xué sheng dài biǎo sān nián èr bān quán tǐ tóng xué",
+    "ko": "학생 대표: 3학년 2반 일동."
+   }
+  ]
+ },
+ "1:11": {
+  "genre": "특강 안내",
+  "title": "大学教授来校讲座通知",
+  "titlePinyin": "dà xué jiào shòu lái xiào jiǎng zuò tōng zhī",
+  "titleKo": "대학 교수 초청 특강 안내",
+  "new": [
+   {
+    "ch": "编",
+    "py": "biān",
+    "ko": "엮다"
+   },
+   {
+    "ch": "括",
+    "py": "kuò",
+    "ko": "포함하다"
+   },
+   {
+    "ch": "限",
+    "py": "xiàn",
+    "ko": "한정하다"
+   }
+  ],
+  "lines": [
+   {
+    "zh": "本校邀请北京大学的一位教授来校讲座。",
+    "pinyin": "běn xiào yāo qǐng Běi jīng dà xué de yí wèi jiào shòu lái xiào jiǎng zuò",
+    "ko": "본교는 베이징대학 교수 한 분을 초청해 특강을 진행한다."
+   },
+   {
+    "zh": "讲座的题目是《中学生怎样学习编程》。",
+    "pinyin": "jiǎng zuò de tí mù shì zhōng xué sheng zěn yàng xué xí biān chéng",
+    "ko": "강연 주제는 「중학생은 프로그래밍을 어떻게 배울 것인가」이다."
+   },
+   {
+    "zh": "时间为下周二下午三点，地点在学校会议室。",
+    "pinyin": "shí jiān wèi xià zhōu èr xià wǔ sān diǎn dì diǎn zài xué xiào huì yì shì",
+    "ko": "시간은 다음 주 화요일 오후 3시, 장소는 학교 회의실이다."
+   },
+   {
+    "zh": "讲座内容包括大学的学习方法和将来的工作方向。",
+    "pinyin": "jiǎng zuò nèi róng bāo kuò dà xué de xué xí fāng fǎ hé jiāng lái de gōng zuò fāng xiàng",
+    "ko": "강연 내용은 대학의 학습 방법과 장래 진로를 포함한다."
+   },
+   {
+    "zh": "讲座后有二十分钟的提问时间，欢迎同学准备问题。",
+    "pinyin": "jiǎng zuò hòu yǒu èr shí fēn zhōng de tí wèn shí jiān huān yíng tóng xué zhǔn bèi wèn tí",
+    "ko": "강연 후 20분간 질의 시간이 있으니 학생들은 질문을 준비하기 바란다."
+   },
+   {
+    "zh": "座位有限，请有兴趣的同学提前报名。",
+    "pinyin": "zuò wèi yǒu xiàn qǐng yǒu xìng qù de tóng xué tí qián bào míng",
+    "ko": "좌석이 한정되어 있으니 관심 있는 학생은 미리 신청하기 바란다."
+   }
+  ]
+ },
+ "1:12": {
+  "genre": "직업 소개글",
+  "title": "记者是做什么的",
+  "titlePinyin": "jì zhě shì zuò shén me de",
+  "titleKo": "기자는 어떤 일을 하는가",
+  "new": [
+   {
+    "ch": "固",
+    "py": "gù",
+    "ko": "굳다"
+   },
+   {
+    "ch": "夜",
+    "py": "yè",
+    "ko": "밤"
+   }
+  ],
+  "lines": [
+   {
+    "zh": "记者的工作是把发生的事情告诉更多的人。",
+    "pinyin": "jì zhě de gōng zuò shì bǎ fā shēng de shì qing gào su gèng duō de rén",
+    "ko": "기자의 일은 일어난 일을 더 많은 사람에게 알리는 것이다."
+   },
+   {
+    "zh": "他们要去现场了解情况，还要跟很多人聊天。",
+    "pinyin": "tā men yào qù xiàn chǎng liǎo jiě qíng kuàng hái yào gēn hěn duō rén liáo tiān",
+    "ko": "기자는 현장에 가서 상황을 파악하고 많은 사람과 이야기를 나눈다."
+   },
+   {
+    "zh": "回来以后，记者要把材料整理成文章，速度要快。",
+    "pinyin": "huí lái yǐ hòu jì zhě yào bǎ cái liào zhěng lǐ chéng wén zhāng sù dù yào kuài",
+    "ko": "돌아온 뒤에는 자료를 정리해 기사로 쓰며, 속도가 빨라야 한다."
+   },
+   {
+    "zh": "做这个工作最重要的不是文章好，而是内容真实。",
+    "pinyin": "zuò zhè ge gōng zuò zuì zhòng yào de bú shì wén zhāng hǎo ér shì nèi róng zhēn shí",
+    "ko": "이 일에서 가장 중요한 것은 글솜씨가 아니라 내용의 진실성이다."
+   },
+   {
+    "zh": "记者的时间往往不固定，有时候半夜也要出门。",
+    "pinyin": "jì zhě de shí jiān wǎng wǎng bú gù dìng yǒu shí hou bàn yè yě yào chū mén",
+    "ko": "기자의 근무 시간은 일정하지 않아 한밤중에 나가야 할 때도 있다."
+   },
+   {
+    "zh": "如果你喜欢了解世界，也不怕辛苦，这个工作值得考虑。",
+    "pinyin": "rú guǒ nǐ xǐ huan liǎo jiě shì jiè yě bú pà xīn kǔ zhè ge gōng zuò zhí de kǎo lǜ",
+    "ko": "세상을 알아 가는 것을 좋아하고 고생을 두려워하지 않는다면 고려해 볼 만한 직업이다."
+   }
+  ]
+ },
+ "1:13": {
+  "genre": "주문 안내",
+  "title": "生日蛋糕预订须知",
+  "titlePinyin": "shēng rì dàn gāo yù dìng xū zhī",
+  "titleKo": "생일 케이크 예약 안내",
+  "new": [
+   {
+    "ch": "订",
+    "py": "dìng",
+    "ko": "예약하다"
+   },
+   {
+    "ch": "制",
+    "py": "zhì",
+    "ko": "만들다"
+   }
+  ],
+  "lines": [
+   {
+    "zh": "本店蛋糕全部当天制作，请提前一天预订。",
+    "pinyin": "běn diàn dàn gāo quán bù dàng tiān zhì zuò qǐng tí qián yì tiān yù dìng",
+    "ko": "본점의 케이크는 모두 당일 제작이므로 하루 전 예약 바랍니다."
+   },
+   {
+    "zh": "预订时请说明大小、口味和取货时间。",
+    "pinyin": "yù dìng shí qǐng shuō míng dà xiǎo kǒu wèi hé qǔ huò shí jiān",
+    "ko": "예약 시 크기, 맛, 수령 시간을 알려 주시기 바랍니다."
+   },
+   {
+    "zh": "需要在蛋糕上写字的，请把内容写清楚。",
+    "pinyin": "xū yào zài dàn gāo shàng xiě zì de qǐng bǎ nèi róng xiě qīng chu",
+    "ko": "케이크에 글자를 넣으실 경우 문구를 정확히 적어 주십시오."
+   },
+   {
+    "zh": "怕甜的客人可以选择少糖，价格不变。",
+    "pinyin": "pà tián de kè rén kě yǐ xuǎn zé shǎo táng jià gé bú biàn",
+    "ko": "단맛이 부담스러운 손님은 설탕을 줄일 수 있으며 가격은 동일합니다."
+   },
+   {
+    "zh": "蛋糕请在两小时内放入冰箱，不要放在太阳下。",
+    "pinyin": "dàn gāo qǐng zài liǎng xiǎo shí nèi fàng rù bīng xiāng bú yào fàng zài tài yáng xià",
+    "ko": "케이크는 2시간 이내에 냉장 보관하시고 직사광선을 피해 주십시오."
+   },
+   {
+    "zh": "取货当天如需改时间，请在中午以前打电话。",
+    "pinyin": "qǔ huò dàng tiān rú xū gǎi shí jiān qǐng zài zhōng wǔ yǐ qián dǎ diàn huà",
+    "ko": "수령 당일 시간 변경이 필요하면 정오 이전에 전화 바랍니다."
+   }
+  ]
+ },
+ "1:14": {
+  "genre": "영업 안내",
+  "title": "餐厅营业说明",
+  "titlePinyin": "cān tīng yíng yè shuō míng",
+  "titleKo": "레스토랑 이용 안내",
+  "new": [
+   {
+    "ch": "营",
+    "py": "yíng",
+    "ko": "운영하다"
+   },
+   {
+    "ch": "订",
+    "py": "dìng",
+    "ko": "예약하다"
+   },
+   {
+    "ch": "靠",
+    "py": "kào",
+    "ko": "기대다"
+   },
+   {
+    "ch": "括",
+    "py": "kuò",
+    "ko": "포함하다"
+   }
+  ],
+  "lines": [
+   {
+    "zh": "本餐厅营业时间为每天中午十一点到晚上九点。",
+    "pinyin": "běn cān tīng yíng yè shí jiān wèi měi tiān zhōng wǔ shí yī diǎn dào wǎn shang jiǔ diǎn",
+    "ko": "본 레스토랑의 영업시간은 매일 오전 11시부터 오후 9시까지입니다."
+   },
+   {
+    "zh": "晚上六点以后客人较多，建议提前打电话订座。",
+    "pinyin": "wǎn shang liù diǎn yǐ hòu kè rén jiào duō jiàn yì tí qián dǎ diàn huà dìng zuò",
+    "ko": "오후 6시 이후에는 손님이 많으므로 미리 전화로 예약하시기를 권합니다."
+   },
+   {
+    "zh": "靠窗的座位共有四个，只接受当天预订。",
+    "pinyin": "kào chuāng de zuò wèi gòng yǒu sì ge zhǐ jiē shòu dàng tiān yù dìng",
+    "ko": "창가 좌석은 총 4석이며 당일 예약만 받습니다."
+   },
+   {
+    "zh": "本店只收现金，不能使用手机付款。",
+    "pinyin": "běn diàn zhǐ shōu xiàn jīn bù néng shǐ yòng shǒu jī fù kuǎn",
+    "ko": "본점은 현금만 받으며 휴대폰 결제는 이용할 수 없습니다."
+   },
+   {
+    "zh": "十二岁以下的孩子可以选择儿童菜单。",
+    "pinyin": "shí èr suì yǐ xià de hái zi kě yǐ xuǎn zé ér tóng cài dān",
+    "ko": "12세 이하 어린이는 어린이 메뉴를 주문할 수 있습니다."
+   },
+   {
+    "zh": "菜单上的价格已经包括服务费。",
+    "pinyin": "cài dān shàng de jià gé yǐ jing bāo kuò fú wù fèi",
+    "ko": "메뉴판의 가격에는 봉사료가 포함되어 있습니다."
+   }
+  ]
+ },
+ "1:15": {
+  "genre": "동호회 모집",
+  "title": "教师羽毛球小组招人",
+  "titlePinyin": "jiāo shī yǔ máo qiú xiǎo zǔ zhāo rén",
+  "titleKo": "교사 배드민턴 동호회 회원 모집",
+  "new": [
+   {
+    "ch": "组",
+    "py": "zǔ",
+    "ko": "조·모임"
+   }
+  ],
+  "lines": [
+   {
+    "zh": "本校教师羽毛球小组现在招新成员。",
+    "pinyin": "běn xiào jiāo shī yǔ máo qiú xiǎo zǔ xiàn zài zhāo xīn chéng yuán",
+    "ko": "본교 교사 배드민턴 동호회에서 새 회원을 모집합니다."
+   },
+   {
+    "zh": "活动时间为每周二、周四下午六点到八点。",
+    "pinyin": "huó dòng shí jiān wèi měi zhōu èr zhōu sì xià wǔ liù diǎn dào bā diǎn",
+    "ko": "활동 시간은 매주 화요일과 목요일 오후 6시부터 8시까지입니다."
+   },
+   {
+    "zh": "地点在学校体育馆，球和场地由学校提供。",
+    "pinyin": "dì diǎn zài xué xiào tǐ yù guǎn qiú hé chǎng de yóu xué xiào tí gōng",
+    "ko": "장소는 학교 체육관이며, 공과 코트는 학교에서 제공합니다."
+   },
+   {
+    "zh": "没有基础的老师也可以参加，我们有人教。",
+    "pinyin": "méi yǒu jī chǔ de lǎo shī yě kě yǐ cān jiā wǒ men yǒu rén jiāo",
+    "ko": "기초가 없는 교사도 참가할 수 있으며, 가르쳐 줄 사람이 있습니다."
+   },
+   {
+    "zh": "每月交五十元，用于买球和饮料。",
+    "pinyin": "měi yuè jiāo wǔ shí yuán yòng yú mǎi qiú hé yǐn liào",
+    "ko": "월 50위안을 납부하며, 공과 음료 구입에 사용합니다."
+   },
+   {
+    "zh": "想参加的老师请在本周五以前告诉体育组。",
+    "pinyin": "xiǎng cān jiā de lǎo shī qǐng zài běn zhōu wǔ yǐ qián gào su tǐ yù zǔ",
+    "ko": "참가를 원하는 교사는 이번 주 금요일까지 체육부에 알려 주시기 바랍니다."
+   }
+  ]
+ },
+ "1:16": {
+  "genre": "생활 칼럼",
+  "title": "生气的时候，先别急着说话",
+  "titlePinyin": "shēng qì de shí hou xiān bié jí zhe shuō huà",
+  "titleKo": "화가 날 때는 먼저 말을 멈추라",
+  "new": [],
+  "lines": [
+   {
+    "zh": "人与人之间的误会，往往不是因为做错了事。",
+    "pinyin": "rén yǔ rén zhī jiān de wù huì wǎng wǎng bú shì yīn wèi zuò cuò le shì",
+    "ko": "사람 사이의 오해는 흔히 일을 잘못해서 생기는 것이 아니다."
+   },
+   {
+    "zh": "更多的时候，是因为话说得太快，或者根本没说。",
+    "pinyin": "gèng duō de shí hou shì yīn wèi huà shuō de tài kuài huò zhě gēn běn méi shuō",
+    "ko": "더 많은 경우 말이 너무 빨랐거나 아예 말하지 않았기 때문이다."
+   },
+   {
+    "zh": "心理专家建议，生气的时候先等十分钟再开口。",
+    "pinyin": "xīn lǐ zhuān jiā jiàn yì shēng qì de shí hou xiān děng shí fēn zhōng zài kāi kǒu",
+    "ko": "심리 전문가는 화가 날 때 10분을 기다린 뒤 입을 열라고 권한다."
+   },
+   {
+    "zh": "这十分钟可以让人冷静下来，想清楚对方的想法。",
+    "pinyin": "zhè shí fēn zhōng kě yǐ ràng rén lěng jìng xià lái xiǎng qīng chu duì fāng de xiǎng fǎ",
+    "ko": "이 10분은 마음을 가라앉히고 상대의 생각을 정리해 보게 한다."
+   },
+   {
+    "zh": "如果当面说不清楚，也可以先写下来。",
+    "pinyin": "rú guǒ dāng miàn shuō bù qīng chu yě kě yǐ xiān xiě xià lái",
+    "ko": "직접 말하기 어렵다면 먼저 글로 써 보는 것도 방법이다."
+   },
+   {
+    "zh": "多数误会只要说一句话就能解决，问题是谁先开口。",
+    "pinyin": "duō shù wù huì zhǐ yào shuō yí jù huà jiù néng jiě jué wèn tí shì shuí xiān kāi kǒu",
+    "ko": "대부분의 오해는 한마디면 풀린다. 문제는 누가 먼저 말을 꺼내느냐이다."
+   }
+  ]
+ },
+ "1:17": {
+  "genre": "지연 안내",
+  "title": "航班延误通知",
+  "titlePinyin": "háng bān yán wù tōng zhī",
+  "titleKo": "항공편 지연 안내",
+  "new": [
+   {
+    "ch": "延",
+    "py": "yán",
+    "ko": "늦추다"
+   },
+   {
+    "ch": "退",
+    "py": "tuì",
+    "ko": "물리다"
+   }
+  ],
+  "lines": [
+   {
+    "zh": "各位旅客：由北京飞往上海的航班因天气原因延误。",
+    "pinyin": "gè wèi lǚ kè yóu Běi jīng fēi wǎng Shàng hǎi de háng bān yīn tiān qì yuán yīn yán wù",
+    "ko": "승객 여러분: 베이징발 상하이행 항공편이 기상 사유로 지연되었습니다."
+   },
+   {
+    "zh": "原定起飞时间为下午两点，现在改为下午四点半。",
+    "pinyin": "yuán dìng qǐ fēi shí jiān wèi xià wǔ liǎng diǎn xiàn zài gǎi wèi xià wǔ sì diǎn bàn",
+    "ko": "당초 출발 시각은 오후 2시였으나 오후 4시 30분으로 변경되었습니다."
+   },
+   {
+    "zh": "请各位旅客在候机室等候，不要离开。",
+    "pinyin": "qǐng gè wèi lǚ kè zài hòu jī shì děng hòu bú yào lí kāi",
+    "ko": "승객 여러분께서는 대합실에서 대기하시고 자리를 떠나지 마시기 바랍니다."
+   },
+   {
+    "zh": "本公司将为旅客提供免费的面包和饮料。",
+    "pinyin": "běn gōng sī jiāng wèi lǚ kè tí gōng miǎn fèi de miàn bāo hé yǐn liào",
+    "ko": "당사는 승객께 무료로 빵과 음료를 제공합니다."
+   },
+   {
+    "zh": "需要改签或者退票的旅客，请到一号窗口办理。",
+    "pinyin": "xū yào gǎi qiān huò zhě tuì piào de lǚ kè qǐng dào yī hào chuāng kǒu bàn lǐ",
+    "ko": "일정 변경이나 환불이 필요한 승객은 1번 창구에서 처리하시기 바랍니다."
+   },
+   {
+    "zh": "给您带来不便，我们深表歉意。",
+    "pinyin": "gěi nín dài lái bú biàn wǒ men shēn biǎo qiàn yì",
+    "ko": "불편을 드려 깊이 사과드립니다."
+   }
+  ]
+ },
+ "1:18": {
+  "genre": "대회 보도",
+  "title": "我市中学生进入全国比赛决赛",
+  "titlePinyin": "wǒ shì zhōng xué sheng jìn rù quán guó bǐ sài jué sài",
+  "titleKo": "본 시 중학생, 전국 대회 결선 진출",
+  "new": [
+   {
+    "ch": "编",
+    "py": "biān",
+    "ko": "엮다"
+   },
+   {
+    "ch": "轮",
+    "py": "lún",
+    "ko": "회차"
+   },
+   {
+    "ch": "品",
+    "py": "pǐn",
+    "ko": "작품의 품"
+   },
+   {
+    "ch": "布",
+    "py": "bù",
+    "ko": "펴다"
+   }
+  ],
+  "lines": [
+   {
+    "zh": "上周末，全国中学生编程比赛第二轮在上海举行。",
+    "pinyin": "shàng zhōu mò quán guó zhōng xué sheng biān chéng bǐ sài dì èr lún zài Shàng hǎi jǔ xíng",
+    "ko": "지난 주말 전국 중학생 프로그래밍 대회 2차가 상하이에서 열렸다."
+   },
+   {
+    "zh": "来自各地的两百多名学生参加了这次比赛。",
+    "pinyin": "lái zì gè de de liǎng bǎi duō míng xué sheng cān jiā le zhè cì bǐ sài",
+    "ko": "각지에서 온 200여 명의 학생이 이번 대회에 참가했다."
+   },
+   {
+    "zh": "我市第三中学三年级学生进入了最后的决赛。",
+    "pinyin": "wǒ shì dì sān zhōng xué sān nián jí xué sheng jìn rù le zuì hòu de jué sài",
+    "ko": "본 시 제3중학교 3학년 학생이 최종 결선에 진출했다."
+   },
+   {
+    "zh": "这名学生的作品是一个帮助弟弟学习汉字的游戏。",
+    "pinyin": "zhè míng xué sheng de zuò pǐn shì yí ge bāng zhù dì di xué xí hàn zì de yóu xì",
+    "ko": "이 학생의 작품은 동생의 한자 학습을 돕는 게임이다."
+   },
+   {
+    "zh": "他表示，这个游戏是他花了半年时间做出来的。",
+    "pinyin": "tā biǎo shì zhè ge yóu xì shì tā huā le bàn nián shí jiān zuò chū lái de",
+    "ko": "그는 이 게임을 반년에 걸쳐 만들었다고 밝혔다."
+   },
+   {
+    "zh": "决赛将于下月在北京举行，结果预计月底公布。",
+    "pinyin": "jué sài jiāng yú xià yuè zài Běi jīng jǔ xíng jié guǒ yù jì yuè dǐ gōng bù",
+    "ko": "결선은 다음 달 베이징에서 열리며, 결과는 월말에 발표될 전망이다."
+   }
+  ]
+ },
+ "1:19": {
+  "genre": "관람 안내",
+  "title": "动物园参观须知",
+  "titlePinyin": "dòng wù yuán cān guān xū zhī",
+  "titleKo": "동물원 관람 안내",
+  "new": [
+   {
+    "ch": "凭",
+    "py": "píng",
+    "ko": "~에 근거하여"
+   },
+   {
+    "ch": "团",
+    "py": "tuán",
+    "ko": "단체"
+   },
+   {
+    "ch": "宠",
+    "py": "chǒng",
+    "ko": "반려"
+   },
+   {
+    "ch": "靠",
+    "py": "kào",
+    "ko": "가까이하다"
+   }
+  ],
+  "lines": [
+   {
+    "zh": "动物园每天上午八点半开门，下午五点停止入园。",
+    "pinyin": "dòng wù yuán měi tiān shàng wǔ bā diǎn bàn kāi mén xià wǔ wǔ diǎn tíng zhǐ rù yuán",
+    "ko": "동물원은 매일 오전 8시 30분에 개장하며, 오후 5시에 입장이 마감된다."
+   },
+   {
+    "zh": "学生团体请提前三天预约，凭学生证可以打折。",
+    "pinyin": "xué sheng tuán tǐ qǐng tí qián sān tiān yù yuē píng xué sheng zhèng kě yǐ dǎ zhé",
+    "ko": "학생 단체는 3일 전 예약 바라며, 학생증 제시 시 할인된다."
+   },
+   {
+    "zh": "园内共有五条参观路线，全部走完约需三个小时。",
+    "pinyin": "yuán nèi gòng yǒu wǔ tiáo cān guān lù xiàn quán bù zǒu wán yuē xū sān ge xiǎo shí",
+    "ko": "원내에는 관람 노선이 5개 있으며, 전부 돌면 약 3시간이 걸린다."
+   },
+   {
+    "zh": "请不要给动物喂东西，也不要大声说话。",
+    "pinyin": "qǐng bú yào gěi dòng wù wèi dōng xi yě bú yào dà shēng shuō huà",
+    "ko": "동물에게 먹이를 주지 말고 큰 소리로 떠들지도 마시기 바란다."
+   },
+   {
+    "zh": "带小孩的游客请看好孩子，不要让他们靠近动物。",
+    "pinyin": "dài xiǎo hái de yóu kè qǐng kàn hǎo hái zi bú yào ràng tā men kào jìn dòng wù",
+    "ko": "어린이 동반 관람객은 아이가 동물에게 가까이 가지 않도록 살피기 바란다."
+   },
+   {
+    "zh": "园内不能带宠物进入，可以寄存在门口。",
+    "pinyin": "yuán nèi bù néng dài chǒng wù jìn rù kě yǐ jì cún zài mén kǒu",
+    "ko": "원내에는 반려동물을 데리고 들어올 수 없으며, 입구에 맡길 수 있다."
+   }
+  ]
+ },
+ "1:20": {
+  "genre": "임대 공고",
+  "title": "房屋续租条件变更通知",
+  "titlePinyin": "fáng wū xù zū tiáo jiàn biàn gēng tōng zhī",
+  "titleKo": "임대 연장 조건 변경 안내",
+  "new": [
+   {
+    "ch": "屋",
+    "py": "wū",
+    "ko": "집"
+   },
+   {
+    "ch": "括",
+    "py": "kuò",
+    "ko": "포함하다"
+   }
+  ],
+  "lines": [
+   {
+    "zh": "各位租户：本楼房租从下个月起进行调整。",
+    "pinyin": "gè wèi zū hù běn lóu fáng zū cóng xià ge yuè qǐ jìn xíng tiáo zhěng",
+    "ko": "임차인 여러분께: 본 건물 임대료가 다음 달부터 조정됩니다."
+   },
+   {
+    "zh": "原来每月三千元，调整后为三千三百元。",
+    "pinyin": "yuán lái měi yuè sān qiān yuán tiáo zhěng hòu wèi sān qiān sān bǎi yuán",
+    "ko": "기존 월 3,000위안에서 조정 후 3,300위안이 됩니다."
+   },
+   {
+    "zh": "房东将为各房间更换新的家具，包括床和桌子。",
+    "pinyin": "fáng dōng jiāng wèi gè fáng jiān gēng huàn xīn de jiā jù bāo kuò chuáng hé zhuō zi",
+    "ko": "집주인이 각 방의 가구를 새것으로 교체하며, 침대와 책상을 포함합니다."
+   },
+   {
+    "zh": "换家具期间，租户的东西请提前收好。",
+    "pinyin": "huàn jiā jù qī jiān zū hù de dōng xi qǐng tí qián shōu hǎo",
+    "ko": "가구 교체 기간 동안 임차인의 물건은 미리 정리해 주시기 바랍니다."
+   },
+   {
+    "zh": "不打算续租的租户，请在本月底以前说明。",
+    "pinyin": "bù dǎ suàn xù zū de zū hù qǐng zài běn yuè dǐ yǐ qián shuō míng",
+    "ko": "연장하지 않으실 임차인은 이달 말까지 알려 주시기 바랍니다."
+   },
+   {
+    "zh": "续租满一年的，第十三个月可以免一半房租。",
+    "pinyin": "xù zū mǎn yì nián de dì shí sān ge yuè kě yǐ miǎn yí bàn fáng zū",
+    "ko": "1년 이상 연장하는 경우 13개월째 임대료를 절반 감면합니다."
+   }
+  ]
+ },
+ "1:21": {
+  "genre": "출장 안내",
+  "title": "教师出差期间工作安排",
+  "titlePinyin": "jiāo shī chū chāi qī jiān gōng zuò ān pái",
+  "titleKo": "교사 출장 기간 업무 안내",
+  "new": [
+   {
+    "ch": "组",
+    "py": "zǔ",
+    "ko": "부서"
+   },
+   {
+    "ch": "代",
+    "py": "dài",
+    "ko": "대신하다"
+   },
+   {
+    "ch": "统",
+    "py": "tǒng",
+    "ko": "통틀다"
+   }
+  ],
+  "lines": [
+   {
+    "zh": "体育组刘老师将于下周一至周五到外地出差。",
+    "pinyin": "tǐ yù zǔ Liú lǎo shī jiāng yú xià zhōu yī zhì zhōu wǔ dào wài de chū chāi",
+    "ko": "체육부 류 선생님이 다음 주 월요일부터 금요일까지 타지로 출장을 갑니다."
+   },
+   {
+    "zh": "出差期间，他的体育课由王老师代上。",
+    "pinyin": "chū chāi qī jiān tā de tǐ yù kè yóu Wáng lǎo shī dài shàng",
+    "ko": "출장 기간 동안 그의 체육 수업은 왕 선생님이 대신 맡습니다."
+   },
+   {
+    "zh": "下周三的比赛推迟到下下周同一时间。",
+    "pinyin": "xià zhōu sān de bǐ sài tuī chí dào xià xià zhōu tóng yì shí jiān",
+    "ko": "다음 주 수요일 경기는 다음다음 주 같은 시간으로 연기됩니다."
+   },
+   {
+    "zh": "学生如果有事，可以直接找班主任或者体育组。",
+    "pinyin": "xué sheng rú guǒ yǒu shì kě yǐ zhí jiē zhǎo bān zhǔ rèn huò zhě tǐ yù zǔ",
+    "ko": "학생은 용무가 있을 경우 담임교사나 체육부로 직접 문의하면 됩니다."
+   },
+   {
+    "zh": "需要刘老师签字的材料，请等他回来以后再交。",
+    "pinyin": "xū yào Liú lǎo shī qiān zì de cái liào qǐng děng tā huí lái yǐ hòu zài jiāo",
+    "ko": "류 선생님의 서명이 필요한 서류는 복귀 후에 제출하기 바랍니다."
+   },
+   {
+    "zh": "紧急情况可以发短信，他会在晚上统一回复。",
+    "pinyin": "jǐn jí qíng kuàng kě yǐ fā duǎn xìn tā huì zài wǎn shang tǒng yì huí fù",
+    "ko": "긴급한 경우 문자를 보내면 저녁에 일괄 답신합니다."
+   }
+  ]
+ },
+ "1:22": {
+  "genre": "행정 안내",
+  "title": "签证延期办理须知",
+  "titlePinyin": "qiān zhèng yán qī bàn lǐ xū zhī",
+  "titleKo": "비자 연장 신청 안내",
+  "new": [
+   {
+    "ch": "延",
+    "py": "yán",
+    "ko": "늦추다"
+   },
+   {
+    "ch": "补",
+    "py": "bǔ",
+    "ko": "보충하다"
+   }
+  ],
+  "lines": [
+   {
+    "zh": "外国人签证到期前三十天可以申请延期。",
+    "pinyin": "wài guó rén qiān zhèng dào qī qián sān shí tiān kě yǐ shēn qǐng yán qī",
+    "ko": "외국인은 비자 만료 30일 전부터 연장을 신청할 수 있습니다."
+   },
+   {
+    "zh": "申请人需要填写表格，并提交护照和照片。",
+    "pinyin": "shēn qǐng rén xū yào tián xiě biǎo gé bìng tí jiāo hù zhào hé zhào piàn",
+    "ko": "신청인은 서류를 작성하고 여권과 사진을 제출해야 합니다."
+   },
+   {
+    "zh": "表格上的姓名、性别和国籍必须与护照一样。",
+    "pinyin": "biǎo gé shàng de xìng míng xìng bié hé guó jí bì xū yǔ hù zhào yí yàng",
+    "ko": "서류의 이름, 성별, 국적은 여권과 동일해야 합니다."
+   },
+   {
+    "zh": "材料不合格的，工作人员会通知本人补交。",
+    "pinyin": "cái liào bù hé gé de gōng zuò rén yuán huì tōng zhī běn rén bǔ jiāo",
+    "ko": "서류가 요건에 맞지 않으면 담당자가 본인에게 보완 제출을 통지합니다."
+   },
+   {
+    "zh": "办理时间为工作日上午九点到下午五点。",
+    "pinyin": "bàn lǐ shí jiān wèi gōng zuò rì shàng wǔ jiǔ diǎn dào xià wǔ wǔ diǎn",
+    "ko": "처리 시간은 평일 오전 9시부터 오후 5시까지입니다."
+   },
+   {
+    "zh": "请按时办理，以免影响正常的学习和工作。",
+    "pinyin": "qǐng àn shí bàn lǐ yǐ miǎn yǐng xiǎng zhèng cháng de xué xí hé gōng zuò",
+    "ko": "학업과 업무에 지장이 없도록 기한 내에 처리하시기 바랍니다."
+   }
+  ]
+ },
+ "1:23": {
+  "genre": "채용 공고",
+  "title": "招聘信息教师",
+  "titlePinyin": "zhāo pìn xìn xī jiāo shī",
+  "titleKo": "정보 교사 채용 공고",
+  "new": [
+   {
+    "ch": "编",
+    "py": "biān",
+    "ko": "엮다"
+   }
+  ],
+  "lines": [
+   {
+    "zh": "本校因工作需要，现招聘信息课教师一名。",
+    "pinyin": "běn xiào yīn gōng zuò xū yào xiàn zhāo pìn xìn xī kè jiāo shī yì míng",
+    "ko": "본교는 업무상 필요에 따라 정보 과목 교사 1명을 채용합니다."
+   },
+   {
+    "zh": "应聘者需要有教师证，会使用普通话上课。",
+    "pinyin": "yìng pìn zhě xū yào yǒu jiāo shī zhèng huì shǐ yòng pǔ tōng huà shàng kè",
+    "ko": "지원자는 교원 자격증이 있어야 하며, 표준어로 수업할 수 있어야 합니다."
+   },
+   {
+    "zh": "有编程经验或者带过比赛的，我们优先考虑。",
+    "pinyin": "yǒu biān chéng jīng yàn huò zhě dài guò bǐ sài de wǒ men yōu xiān kǎo lǜ",
+    "ko": "프로그래밍 경험이 있거나 대회를 지도한 경험이 있으면 우대합니다."
+   },
+   {
+    "zh": "工作时间为周一至周五，每周十六节课。",
+    "pinyin": "gōng zuò shí jiān wèi zhōu yī zhì zhōu wǔ měi zhōu shí liù jié kè",
+    "ko": "근무는 월요일부터 금요일까지이며, 주당 16시간 수업입니다."
+   },
+   {
+    "zh": "报名时请提交个人材料和一份教学计划。",
+    "pinyin": "bào míng shí qǐng tí jiāo ge rén cái liào hé yí fèn jiāo xué jì huà",
+    "ko": "지원 시 개인 서류와 수업 계획서 1부를 제출하기 바랍니다."
+   },
+   {
+    "zh": "报名时间为本月十五日至三十日，面试另行通知。",
+    "pinyin": "bào míng shí jiān wèi běn yuè shí wǔ rì zhì sān shí rì miàn shì lìng xíng tōng zhī",
+    "ko": "접수 기간은 이달 15일부터 30일까지이며, 면접은 별도 통지합니다."
+   }
+  ]
+ },
+ "1:24": {
+  "genre": "관광 안내",
+  "title": "长城游览指南",
+  "titlePinyin": "Cháng chéng yóu lǎn zhǐ nán",
+  "titleKo": "만리장성 관람 안내",
+  "new": [
+   {
+    "ch": "览",
+    "py": "lǎn",
+    "ko": "둘러보다"
+   },
+   {
+    "ch": "缆",
+    "py": "lǎn",
+    "ko": "케이블"
+   },
+   {
+    "ch": "陡",
+    "py": "dǒu",
+    "ko": "가파르다"
+   }
+  ],
+  "lines": [
+   {
+    "zh": "长城是中国最有名的景点之一，每年游客超过千万。",
+    "pinyin": "Cháng chéng shì Zhōng guó zuì yǒu míng de jǐng diǎn zhī yì měi nián yóu kè chāo guò qiān wàn",
+    "ko": "만리장성은 중국에서 가장 유명한 명소 중 하나로, 연간 관광객이 1,000만 명을 넘는다."
+   },
+   {
+    "zh": "从北京市内坐车到这里，大约需要一个半小时。",
+    "pinyin": "cóng Běi jīng shì nèi zuò chē dào zhè lǐ dà yuē xū yào yí ge bàn xiǎo shí",
+    "ko": "베이징 시내에서 차로 약 1시간 30분이 걸린다."
+   },
+   {
+    "zh": "冬天风大气温低，建议穿厚衣服，戴帽子。",
+    "pinyin": "dōng tiān fēng dà qì wēn dī jiàn yì chuān hòu yī fu dài mào zi",
+    "ko": "겨울에는 바람이 강하고 기온이 낮으므로 두꺼운 옷과 모자를 권한다."
+   },
+   {
+    "zh": "上山的路比较陡，走不动的游客可以坐缆车。",
+    "pinyin": "shàng shān de lù bǐ jiào dǒu zǒu bú dòng de yóu kè kě yǐ zuò lǎn chē",
+    "ko": "오르막이 가파르므로 걷기 힘든 관광객은 케이블카를 이용할 수 있다."
+   },
+   {
+    "zh": "山上商店少，请提前准备矿泉水和一些吃的。",
+    "pinyin": "shān shàng shāng diàn shǎo qǐng tí qián zhǔn bèi kuàng quán shuǐ hé yì xiē chī de",
+    "ko": "산 위에는 상점이 적으니 생수와 먹을 것을 미리 준비하기 바란다."
+   },
+   {
+    "zh": "下午四点以后风更大，建议早上出发，中午下山。",
+    "pinyin": "xià wǔ sì diǎn yǐ hòu fēng gèng dà jiàn yì zǎo shang chū fā zhōng wǔ xià shān",
+    "ko": "오후 4시 이후에는 바람이 더 강해지므로 아침에 출발해 정오에 하산하기를 권한다."
+   }
+  ]
+ }
+}
