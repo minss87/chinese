@@ -124,7 +124,10 @@ svg{display:block;}
 .rbtn.hold{height:168px;border-radius:24px;touch-action:none;}
 .rbtn.hold small{font-size:10.5px;color:var(--ink3);line-height:1.3;text-align:center;}
 .rbtn.hold.on{background:var(--btnhold);border-color:var(--btnhold);color:var(--sheet);}
-.rbtn.hold.on small{color:var(--sheet);opacity:.7;}
+.rbtn.hold.on small{color:var(--sheet);opacity:.75;}
+.rbtn.hold.lock{background:var(--accent2);border-color:var(--accent2);color:#fff;}
+.rbtn.hold.lock small{color:#fff;opacity:.85;}
+.hwcell{touch-action:none;}
 .rgap{height:8px;flex:none;}
 .main{flex:1;min-width:0;display:flex;flex-direction:column;}
 .nav{width:136px;flex:none;display:flex;flex-direction:column;gap:10px;justify-content:flex-end;}
@@ -281,6 +284,9 @@ var W = {
   ph: typeof saved.ph === "number" ? saved.ph : 0,
   wk: typeof saved.wk === "number" ? saved.wk : 0,
   brush: saved.brush !== false,        /* 붓 느낌 */
+  pressure: typeof saved.pressure === "number" ? saved.pressure : 1,   /* 필압 0 끔 · 1 약하게 · 2 보통 */
+  input: saved.input || "auto",        /* auto 펜슬을 쓰면 손 무시 · pen 펜슬만 · all 손가락도 */
+  penSeen: saved.penSeen === true,     /* 이 기기에서 펜슬을 쓴 적이 있다 */
   onlyNew: saved.onlyNew !== false,    /* 아직 안 쓴 글자·안 읽은 문장만 */
   read: saved.read || {},              /* {r:문장: {s:0 틀림/2 맞힘, n, last}} */
   hard: saved.hard || {},              /* 형광펜으로 표시한 글자 */
@@ -376,7 +382,31 @@ function epProgress(w) {
 var REPS = 3;                          /* 연습 칸 수 */
 var GHOST = [0.34, 0.17, 0];           /* 칸마다 옅어지는 본보기 */
 var pads = [];                         /* 연습 칸 객체 */
-var penSeen = false;                   /* 펜을 한 번이라도 쓰면 손가락 입력은 무시 */
+/* ===================== 펜슬 / 손 구분 =====================
+   · 펜슬은 어디서나 쓰고 누를 수 있다
+   · 손가락은 쓰는 칸에서는 설정에 따라 막고(손바닥 방지), 버튼은 누를 수 있다
+   · 펜슬이 닿아 있거나 막 떨어진 순간의 손 입력은 손바닥으로 본다 */
+var penDown = 0, lastPen = 0, strokeLog = [];
+function penActive() { return penDown > 0 || Date.now() - lastPen < 260; }
+function bigContact(ev) { return (ev.width || 0) > 72 || (ev.height || 0) > 72; }
+function allowDraw(ev) {
+  if (ev.pointerType === "pen" || ev.pointerType === "mouse") return true;
+  if (bigContact(ev)) return false;
+  if (W.input === "pen") return false;
+  if (W.input === "all") return !penActive();
+  return !W.penSeen && !penActive();
+}
+document.addEventListener("pointerdown", function (ev) {
+  if (ev.pointerType !== "pen") return;
+  penDown++; lastPen = Date.now();
+  if (!W.penSeen) { W.penSeen = true; save(); }
+}, true);
+document.addEventListener("pointermove", function (ev) {
+  if (ev.pointerType === "pen" && ev.buttons) lastPen = Date.now();
+}, true);
+function penLift(ev) { if (ev.pointerType === "pen") { penDown = Math.max(0, penDown - 1); lastPen = Date.now(); } }
+document.addEventListener("pointerup", penLift, true);
+document.addEventListener("pointercancel", penLift, true);
 
 function sysDark() {
   return !!(window.matchMedia && window.matchMedia("(prefers-color-scheme:dark)").matches);
@@ -484,20 +514,42 @@ function makePad(canvas, ghost, ch, opt) {
     pad.redraw();
   };
 
-  function seg(a, b) {
+  /* 선 : 점과 점 사이 가운데를 잇는 2차 곡선 — 떨림 없이 매끄럽다 */
+  function mid(a, b) { return { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 }; }
+  function curve(from, ctrl, to, w) {
     var c = pad.ctx;
-    c.strokeStyle = pad.ink;
-    c.beginPath();
-    c.lineWidth = (a.w + b.w) / 2;
-    c.moveTo(a.x, a.y);
-    c.quadraticCurveTo(a.x, a.y, (a.x + b.x) / 2, (a.y + b.y) / 2);
-    c.lineTo(b.x, b.y);
+    c.strokeStyle = pad.ink; c.lineWidth = w;
+    c.beginPath(); c.moveTo(from.x, from.y);
+    c.quadraticCurveTo(ctrl.x, ctrl.y, to.x, to.y);
     c.stroke();
   }
+  /* 새 점 하나가 들어왔을 때 그 앞 구간만 그린다 */
+  function drawTail(pts) {
+    var n = pts.length;
+    if (n === 2) curve(pts[0], pts[0], mid(pts[0], pts[1]), (pts[0].w + pts[1].w) / 2);
+    else if (n > 2) curve(mid(pts[n - 3], pts[n - 2]), pts[n - 2], mid(pts[n - 2], pts[n - 1]), pts[n - 2].w);
+  }
+  function drawEnd(pts) {
+    var n = pts.length;
+    if (n > 1) curve(mid(pts[n - 2], pts[n - 1]), pts[n - 1], pts[n - 1], pts[n - 1].w);
+  }
+  function dot(p) {
+    var c = pad.ctx;
+    c.beginPath(); c.fillStyle = pad.ink;
+    c.arc(p.x, p.y, p.w / 2, 0, 6.2832); c.fill();
+  }
+  pad.line = function (st, open) {
+    var p = st.pts, n = p.length;
+    if (n === 1) return dot(p[0]);
+    curve(p[0], p[0], mid(p[0], p[1]), (p[0].w + p[1].w) / 2);
+    for (var i = 2; i < n; i++) curve(mid(p[i - 2], p[i - 1]), p[i - 1], mid(p[i - 1], p[i]), p[i - 1].w);
+    if (!open) curve(mid(p[n - 2], p[n - 1]), p[n - 1], p[n - 1], p[n - 1].w);
+  };
+
   /* 지우개: 닿은 획만 지운다 */
+  function eraseR() { return (pad.note ? pad.lineH : pad.size) * 0.065; }
   function eraseAt(p) {
-    var r = (pad.note ? pad.lineH : pad.size) * 0.13;
-    var before = pad.strokes.length;
+    var r = eraseR(), before = pad.strokes.length;
     var left = pad.strokes.filter(function (st) {
       return !st.pts.some(function (q) { return Math.hypot(q.x - p.x, q.y - p.y) < r + q.w / 2; });
     });
@@ -509,47 +561,41 @@ function makePad(canvas, ghost, ch, opt) {
     }
     return false;
   }
-  pad.eraseRing = function (p) {
-    var c = pad.ctx, r = (pad.note ? pad.lineH : pad.size) * 0.13;
-    c.save();
-    c.strokeStyle = isDark() ? "rgba(255,255,255,.45)" : "rgba(16,18,28,.35)";
-    c.lineWidth = 1.5; c.beginPath(); c.arc(p.x, p.y, r, 0, 6.2832); c.stroke();
-    c.restore();
-  };
-  function dot(p) {
+  pad.eraseRing = function (p, hover) {
     var c = pad.ctx;
-    c.beginPath(); c.fillStyle = pad.ink;
-    c.arc(p.x, p.y, p.w / 2, 0, 6.2832); c.fill();
-  }
-  pad.line = function (st) {
-    var p = st.pts;
-    if (p.length === 1) return dot(p[0]);
-    for (var i = 1; i < p.length; i++) seg(p[i - 1], p[i]);
+    c.save();
+    c.strokeStyle = isDark() ? "rgba(255,255,255,.5)" : "rgba(15,23,40,.4)";
+    c.lineWidth = 1.5;
+    if (hover) c.setLineDash([4, 4]);
+    c.beginPath(); c.arc(p.x, p.y, eraseR(), 0, 6.2832); c.stroke();
+    c.restore();
   };
   pad.redraw = function () {
     var c = pad.ctx, s = pad.size, h = pad.h || s;
     pad.ink = ink("pen");
     c.clearRect(0, 0, s, h);
     c.drawImage(pad.bg, 0, 0, s, h);
-    pad.strokes.forEach(pad.line);
-    if (pad.cur) pad.line(pad.cur);
+    pad.strokes.forEach(function (st) { pad.line(st); });
+    if (pad.cur && !pad.cur.erase) pad.line(pad.cur, true);
   };
-  pad.clear = function () { pad.strokes = []; pad.cur = null; pad.redraw(); };
+  pad.clear = function () { pad.strokes.length = 0; pad.cur = null; pad.redraw(); };
   pad.undo = function () { pad.strokes.pop(); pad.redraw(); };
   pad.empty = function () { return !pad.strokes.length; };
 
-  /* 굵기: 필압 우선, 없으면 속도로 */
-  function width(ev, prev, now) {
-    var base = pad.note ? pad.lineH * 0.055 : pad.size * 0.055;
-    if (!W.brush) return base * 0.85;
-    var pr = (ev.pointerType === "pen" && ev.pressure > 0) ? ev.pressure : -1;
-    var f;
-    if (pr >= 0) f = 0.35 + pr * 1.15;
-    else {
-      var sp = prev ? Math.hypot(now.x - prev.x, now.y - prev.y) : 0;
-      f = 1.15 - Math.min(0.62, sp / (pad.size * 0.16));
-    }
-    return Math.max(base * 0.3, Math.min(base * 1.5, base * f));
+  /* 굵기 — 필압은 좁은 범위에서만, 급하게 바뀌지 않게 */
+  function baseW() { return (pad.note ? pad.lineH : pad.size) * 0.052; }
+  function width(ev, prev) {
+    var base = baseW();
+    if (ev.pointerType !== "pen" || !W.pressure) return base;
+    var pr = ev.pressure;
+    if (!(pr > 0)) pr = prev ? prev.pr : 0.35;
+    var x = Math.min(1, Math.max(0, (pr - 0.05) / 0.65));
+    x = Math.pow(x, 0.85);
+    var span = W.pressure === 1 ? 0.26 : 0.5;              /* 약하게 ±13% · 보통 ±25% */
+    var target = base * (1 - span / 2 + span * x);
+    if (!prev) return target;
+    var d = (target - prev.w) * 0.3, lim = base * 0.04;    /* 한 점에 4% 넘게 못 바뀐다 */
+    return prev.w + Math.max(-lim, Math.min(lim, d));
   }
   /* 좌표 변환에 쓰는 사각형은 누를 때 한 번만 읽는다 — 매 점마다 읽으면 느려진다 */
   function pt(ev) {
@@ -564,18 +610,21 @@ function makePad(canvas, ghost, ch, opt) {
   });
 
   canvas.addEventListener("pointerdown", function (ev) {
-    if (ev.pointerType === "pen") penSeen = true;
-    if (penSeen && ev.pointerType === "touch") return;      /* 손바닥·손가락 무시 */
     ev.preventDefault();
+    if (!allowDraw(ev)) return;                             /* 손바닥 · 펜슬 전용일 때 손가락 */
     if (pad.cur) end();                                     /* 놓친 pointerup 이 있으면 먼저 마무리 */
     pad.pid = ev.pointerId;
     try { canvas.setPointerCapture(ev.pointerId); } catch (e) {}
     pad.rect = canvas.getBoundingClientRect();
     pad.ink = ink("pen");
-    var p = pt(ev); p.w = width(ev, null, p);
+    var p = pt(ev);
+    p.pr = ev.pressure > 0 ? ev.pressure : 0.35;
+    p.w = width(ev, null);
     if (S.erase || ev.pointerType === "eraser" || ev.buttons === 32) {
+      if (holdPid !== null) holdUsed = true;
       pad.cur = { pts: [p], erase: true };
-      eraseAt(p); pad.eraseRing(p);
+      if (!eraseAt(p)) pad.redraw();
+      pad.eraseRing(p);
       return;
     }
     pad.cur = { pts: [p], erase: false };
@@ -583,7 +632,15 @@ function makePad(canvas, ghost, ch, opt) {
   }, { passive: false });
 
   canvas.addEventListener("pointermove", function (ev) {
-    if (!pad.cur || ev.pointerId !== pad.pid) return;
+    /* 펜슬을 띄운 채 움직일 때(호버) : 지우개 범위를 미리 보여 준다 */
+    if (!pad.cur) {
+      if (ev.pointerType === "pen" && !ev.buttons && S.erase) {
+        pad.rect = pad.rect || canvas.getBoundingClientRect();
+        pad.redraw(); pad.eraseRing(pt(ev), true); pad.hovering = true;
+      }
+      return;
+    }
+    if (ev.pointerId !== pad.pid) return;
     ev.preventDefault();
     /* 사파리는 캡처 중에 빈 배열을 돌려줄 때가 있다 — 비면 이벤트 자체를 쓴다 */
     var list = ev.getCoalescedEvents ? ev.getCoalescedEvents() : null;
@@ -597,20 +654,26 @@ function makePad(canvas, ghost, ch, opt) {
     var pts = pad.cur.pts;
     for (var i = 0; i < list.length; i++) {
       var e = list[i], p = pt(e), prev = pts[pts.length - 1];
-      if (prev && Math.hypot(p.x - prev.x, p.y - prev.y) < 0.8) continue;
-      p.w = width(e, prev, p);
-      if (prev) p.w = prev.w + (p.w - prev.w) * 0.45;        /* 굵기 급변 완화 */
+      if (Math.hypot(p.x - prev.x, p.y - prev.y) < 0.7) continue;
+      p.pr = e.pressure > 0 ? prev.pr + (e.pressure - prev.pr) * 0.35 : prev.pr;
+      p.w = width({ pointerType: e.pointerType, pressure: p.pr }, prev);
       pts.push(p);
-      if (prev && !pad.cur.erase) seg(prev, p);              /* 새 선분만 그린다 */
+      drawTail(pts);                                        /* 새 구간만 그린다 */
     }
   }, { passive: false });
+
+  canvas.addEventListener("pointerleave", function (ev) {
+    if (pad.hovering && !pad.cur) { pad.hovering = false; pad.redraw(); }
+  });
 
   function end() {
     if (!pad.cur) return;
     var st = pad.cur;
     pad.cur = null;
-    if (st.erase) pad.redraw();
-    else pad.strokes.push(st);
+    if (st.erase) { pad.redraw(); return onDraw(pad); }
+    drawEnd(st.pts);
+    pad.strokes.push(st);
+    strokeLog.push(pad);                                  /* 되돌리기는 쓴 순서대로 */
     onDraw(pad);
   }
   function endIf(ev) { if (ev.pointerId === pad.pid) end(); }
@@ -998,8 +1061,50 @@ function buildStroke() {
     }
   });
   strokeStatus(data.strokes.length, false);
+  guardQuiz(el("hw-quiz"));
 }
 function ink_model() { return ink("model"); }
+
+/* 획순 따라 쓰기 : HanziWriter 는 터치의 첫 손가락(touches[0])을 따라가고, 어느 손가락이든 떼면 획을 끝낸다.
+   손바닥이 닿으면 망가지므로 터치 이벤트는 막고, 허용된 포인터(펜슬 등)만 마우스 이벤트로 바꿔 넘긴다 */
+function guardQuiz(host, tries) {
+  if (!host) return;
+  var svgEl = host.querySelector("svg");
+  if (!svgEl) { if ((tries || 0) < 20) setTimeout(function () { guardQuiz(host, (tries || 0) + 1); }, 40); return; }
+  if (host.dataset.guard) return;
+  host.dataset.guard = "1";
+  ["touchstart", "touchmove", "touchend", "touchcancel"].forEach(function (t) {
+    host.addEventListener(t, function (e) { e.stopPropagation(); if (e.cancelable) e.preventDefault(); },
+      { capture: true, passive: false });
+  });
+  var active = null;
+  function send(type, e, target) {
+    (target || svgEl).dispatchEvent(new MouseEvent(type, { bubbles: true, cancelable: true,
+      clientX: e.clientX, clientY: e.clientY, button: 0, buttons: type === "mouseup" ? 0 : 1 }));
+  }
+  host.addEventListener("pointerdown", function (ev) {
+    if (ev.pointerType === "mouse") return;               /* 마우스는 원래 경로로 */
+    ev.preventDefault();
+    if (active !== null || !allowDraw(ev)) return;
+    active = ev.pointerId;
+    try { host.setPointerCapture(ev.pointerId); } catch (e) {}
+    send("mousedown", ev);
+  });
+  host.addEventListener("pointermove", function (ev) {
+    if (ev.pointerId !== active) return;
+    var list = ev.getCoalescedEvents ? ev.getCoalescedEvents() : null;
+    if (!list || !list.length) list = [ev];
+    for (var i = 0; i < list.length; i++) send("mousemove", list[i]);
+  });
+  function up(ev) {
+    if (ev.pointerId !== active) return;
+    active = null;
+    send("mouseup", ev, document);
+  }
+  host.addEventListener("pointerup", up);
+  host.addEventListener("pointercancel", up);
+  host.addEventListener("lostpointercapture", up);
+}
 
 function strokeStatus(left, done) {
   var it = S.list[S.idx];
@@ -1342,8 +1447,8 @@ function headHTML() {
 /* ── 왼쪽 도구 레일 ── */
 function railHTML() {
   if (S.mode === "trace" || S.mode === "dict")
-    return '<button class="rbtn hold' + (S.erase ? " on" : "") + '" id="erasebtn">' + I.eraser
-      + "지우개<small>누르고 있는<br>동안만</small></button>"
+    return '<button class="rbtn hold' + (S.erase ? " on" : "") + (S.eraseLock ? " lock" : "") + '" id="erasebtn">' + I.eraser
+      + "지우개<small>" + eraseLabel() + "</small></button>"
       + '<span class="rgap"></span>'
       + '<button class="rbtn" data-a="undo">' + I.undo + "되돌리기</button>"
       + '<button class="rbtn" data-a="' + (S.mode === "dict" ? "dclear" : "clear") + '">' + I.trash + "모두 지우기</button>";
@@ -1408,6 +1513,14 @@ function overlayHTML() {
       + [["auto", "자동"], ["light", "밝게"], ["dark", "어둡게"]].map(function (o) {
           return '<button class="seg-b ' + ((W.theme || "auto") === o[0] ? "on" : "") + '" data-a="settheme" data-v="' + o[0] + '">' + o[1] + "</button>";
         }).join("") + "</div></div>"
+      + '<div class="setrow"><span class="cap">쓰는 칸 입력</span><div class="seg">'
+      + [["auto", "자동"], ["pen", "펜슬만"], ["all", "손가락도"]].map(function (o) {
+          return '<button class="seg-b ' + (W.input === o[0] ? "on" : "") + '" data-a="setinput" data-v="' + o[0] + '">' + o[1] + "</button>";
+        }).join("") + '</div><p class="foot">자동 · 펜슬을 쓰기 시작하면 손바닥과 손가락은 쓰는 칸에서 무시합니다.</p></div>'
+      + '<div class="setrow"><span class="cap">필압</span><div class="seg">'
+      + [[0, "끄기"], [1, "약하게"], [2, "보통"]].map(function (o) {
+          return '<button class="seg-b ' + (W.pressure === o[0] ? "on" : "") + '" data-a="setpress" data-v="' + o[0] + '">' + o[1] + "</button>";
+        }).join("") + "</div></div>"
       + '<div class="setrow"><span class="cap">연습할 것</span><div class="seg">'
       + '<button class="seg-b ' + (W.onlyNew ? "" : "on") + '" data-a="setnew" data-v="0">전체</button>'
       + '<button class="seg-b ' + (W.onlyNew ? "on" : "") + '" data-a="setnew" data-v="1">아직 안 한 것만</button></div></div>'
@@ -1451,7 +1564,7 @@ function buildCells() {
   var host = el("cells");
   if (!host) return;
   var it = S.list[S.idx];
-  pads = [];
+  pads = []; strokeLog = [];
   host.innerHTML = "";
   var row = host.parentNode.getBoundingClientRect();
   if (row.width < 60 || row.height < 60) { setTimeout(function () { reflow(true); }, 220); return; }
@@ -1485,26 +1598,41 @@ function toast(msg) {
   clearTimeout(toastT); toastT = setTimeout(function () { n.style.display = "none"; }, 1800);
 }
 
-/* ── 누르는 동안 지우개 : 화면을 다시 그리지 않고 상태만 바꾼다 ── */
-var holdPid = null, holdKey = false;
-function setErase(on) {
+/* ── 지우개 ──
+   손가락 : 누르고 있는 동안만 지우개. 짧게 톡 치면 고정 ↔ 해제
+   펜슬   : 톡 치면 고정 ↔ 해제 (펜슬 하나로는 누른 채 지울 수 없으니까)
+   화면을 다시 그리지 않고 상태만 바꾼다 — 쓰던 칸이 흔들리지 않는다 */
+var holdPid = null, holdKey = false, holdT0 = 0, holdUsed = false;
+S.eraseLock = false;
+function eraseOn() { return !!(S.eraseLock || holdPid !== null || holdKey); }
+function eraseLabel() { return S.eraseLock ? "고정됨<br>톡 치면 해제" : "누르는 동안<br>톡 치면 고정"; }
+function setErase() {
+  var on = eraseOn();
   S.erase = on;
   document.body.classList.toggle("erasing", on);
   var b = el("erasebtn");
-  if (b) b.classList.toggle("on", on);
+  if (b) {
+    b.classList.toggle("on", on);
+    b.classList.toggle("lock", !!S.eraseLock);
+    var sm = b.querySelector("small");
+    if (sm) sm.innerHTML = eraseLabel();
+  }
 }
 document.addEventListener("pointerdown", function (ev) {
   var b = ev.target.closest && ev.target.closest("#erasebtn");
   if (!b) return;
   ev.preventDefault();
-  holdPid = ev.pointerId;
+  if (ev.pointerType === "pen" || ev.pointerType === "mouse") { S.eraseLock = !S.eraseLock; return setErase(); }
+  if (bigContact(ev) || holdPid !== null) return;          /* 손바닥 · 이미 누르는 중 */
+  holdPid = ev.pointerId; holdT0 = Date.now(); holdUsed = false;
   try { b.setPointerCapture(ev.pointerId); } catch (e) {}
-  setErase(true);
+  setErase();
 }, { passive: false });
 function releaseHold(ev) {
   if (holdPid === null || ev.pointerId !== holdPid) return;
   holdPid = null;
-  if (!holdKey) setErase(false);
+  if (Date.now() - holdT0 < 280 && !holdUsed) S.eraseLock = !S.eraseLock;   /* 짧게 톡 → 고정 */
+  setErase();
 }
 document.addEventListener("pointerup", releaseHold);
 document.addEventListener("pointercancel", releaseHold);
@@ -1516,7 +1644,9 @@ document.addEventListener("contextmenu", function (ev) {
 function render() {
   lastVW = window.innerWidth; lastVH = window.innerHeight;
   if (S.mode !== "stroke") killWriters();
-  if (holdPid === null && !holdKey) S.erase = false;
+  var key = S.mode + "|" + W.ph + "|" + W.wk + "|" + S.idx + "|" + (S.weak ? 1 : 0) + (S.hard ? 1 : 0);
+  if (key !== S.lastKey) { S.lastKey = key; S.eraseLock = false; }
+  S.erase = eraseOn();
   document.body.classList.toggle("erasing", !!S.erase);
   document.getElementById("app").innerHTML = mainHTML();
   if (S.mode === "trace") buildCells();
@@ -1553,8 +1683,7 @@ function nextChar() {
 }
 
 /* ===================== 이벤트 ===================== */
-document.addEventListener("click", function (ev) {
-  var t = ev.target.closest("[data-a]");
+function act(t) {
   if (!t || t.disabled) return;
   var a = t.getAttribute("data-a");
   if (a === "ph") { W.ph = +t.getAttribute("data-i"); W.wk = 0; S.weak = false; S.hard = false;
@@ -1583,6 +1712,8 @@ document.addEventListener("click", function (ev) {
   if (a === "list") { S.listOpen = !S.listOpen; S.setOpen = false; return render(); }
   if (a === "closeov") { S.setOpen = false; S.listOpen = false; return render(); }
   if (a === "settheme") { W.theme = t.getAttribute("data-v"); save(); applyTheme(); return render(); }
+  if (a === "setinput") { W.input = t.getAttribute("data-v"); save(); return render(); }
+  if (a === "setpress") { W.pressure = +t.getAttribute("data-v"); save(); return render(); }
   if (a === "setnew") { W.onlyNew = t.getAttribute("data-v") === "1"; save(); loadList(); return render(); }
   if (a === "dgrade") return gradeSentence();
   if (a === "dmark") { return dictMark(+t.getAttribute("data-s")); }
@@ -1597,7 +1728,15 @@ document.addEventListener("click", function (ev) {
     save(); applyTheme(); return render();
   }
   if (a === "onlynew") { W.onlyNew = !W.onlyNew; save(); loadList(); return render(); }
-  if (a === "undo") { for (var i = pads.length - 1; i >= 0; i--) if (!pads[i].empty()) { pads[i].undo(); break; } return onDraw(); }
+  if (a === "undo") {
+    var done = false;
+    while (strokeLog.length && !done) {
+      var lp = strokeLog.pop();
+      if (pads.indexOf(lp) > -1 && !lp.empty()) { lp.undo(); done = true; }
+    }
+    if (!done) for (var i = pads.length - 1; i >= 0; i--) if (!pads[i].empty()) { pads[i].undo(); break; }
+    return onDraw();
+  }
   if (a === "clear") { S.grade = null; pads.forEach(function (p) { p.clear(); }); render(); return onDraw(); }
   if (a === "keypanel") { S.keyOpen = !S.keyOpen; return render(); }
   if (a === "savekey") {
@@ -1621,6 +1760,49 @@ document.addEventListener("click", function (ev) {
     }
     return nextChar();
   }
+}
+
+/* ── 누르기 판정 : 펜슬·손가락·마우스 모두 포인터 이벤트로 직접 판정한다 ──
+   · 펜슬 탭은 언제나 받는다 — 쓰다가 펜슬로 '다음', '되돌리기'를 눌러도 된다
+   · 손가락 탭은 펜슬이 닿아 있거나 막 뗀 순간 · 손바닥처럼 넓은 접촉 · 0.7초 넘는 누름이면 버린다
+   · 뒤따라오는 사파리의 click 은 무시한다 (화면이 바뀐 뒤 엉뚱한 버튼이 눌리는 것 방지) */
+function sig(t) {
+  return ["data-a", "data-i", "data-m", "data-v", "data-s", "data-c", "data-t"].map(function (k) {
+    return t.getAttribute(k) || ""; }).join("|");
+}
+var taps = {}, suppressClick = 0;
+document.addEventListener("pointerdown", function (ev) {
+  if (ev.pointerType === "pen")                          /* 펜슬이 닿으면 진행 중인 손가락 탭은 무효 */
+    for (var k in taps) if (taps[k].type === "touch") taps[k].pen = true;
+}, true);
+document.addEventListener("pointerdown", function (ev) {
+  var t = ev.target.closest && ev.target.closest("[data-a]");
+  if (!t) return;
+  if (ev.pointerType === "touch" && (penActive() || bigContact(ev))) return;
+  taps[ev.pointerId] = { sig: sig(t), x: ev.clientX, y: ev.clientY, t: Date.now(), type: ev.pointerType, pen: false };
+});
+document.addEventListener("pointermove", function (ev) {
+  var tp = taps[ev.pointerId];
+  if (tp && Math.hypot(ev.clientX - tp.x, ev.clientY - tp.y) > (tp.type === "pen" ? 18 : 12)) delete taps[ev.pointerId];
+});
+document.addEventListener("pointerup", function (ev) {
+  var tp = taps[ev.pointerId];
+  delete taps[ev.pointerId];
+  if (!tp) return;
+  if (tp.type === "touch" && (tp.pen || Date.now() - tp.t > 700)) return;
+  var over = document.elementFromPoint(ev.clientX, ev.clientY);
+  var t = over && over.closest("[data-a]");
+  if (!t || sig(t) !== tp.sig || t.disabled) return;
+  suppressClick = Date.now() + 700;
+  act(t);
+});
+document.addEventListener("pointercancel", function (ev) { delete taps[ev.pointerId]; });
+document.addEventListener("click", function (ev) {
+  var t = ev.target.closest && ev.target.closest("[data-a]");
+  if (!t) return;
+  ev.preventDefault();
+  if (Date.now() < suppressClick) return;
+  if (ev.detail === 0) act(t);                           /* 키보드 Enter · Space */
 });
 /* 받아쓰기 본보기에 쓰는 손글씨체(楷体)를 미리 불러온다 — 캔버스는 로드된 폰트만 쓴다 */
 if (window.FontFace) {
@@ -1641,8 +1823,10 @@ function reflow(force) {
     if (pads.some(function (p) { return p.cur; })) return;   /* 쓰는 중이면 미룬다 */
     if (S.mode === "trace") {
       var keep = pads.map(function (p) { return p.strokes; });
+      var order = strokeLog.map(function (p) { return pads.indexOf(p); });
       buildCells();
       pads.forEach(function (p, i) { if (keep[i] && keep[i].length) { p.strokes = keep[i]; p.redraw(); } });
+      strokeLog = order.filter(function (i) { return i > -1 && pads[i]; }).map(function (i) { return pads[i]; });
       onDraw();
     } else if (S.mode === "stroke") buildStroke();
     else if (S.mode === "dict") buildDictCells();
@@ -1670,10 +1854,10 @@ document.addEventListener("touchmove", function (ev) {
 /* 키보드를 붙였을 때 : E 를 누르고 있는 동안 지우개 */
 document.addEventListener("keydown", function (ev) {
   if (ev.target && /input|textarea/i.test(ev.target.tagName)) return;
-  if (ev.key.toLowerCase() === "e" && writes() && !ev.repeat) { holdKey = true; setErase(true); }
+  if (ev.key.toLowerCase() === "e" && writes() && !ev.repeat) { holdKey = true; setErase(); }
 });
 document.addEventListener("keyup", function (ev) {
-  if (ev.key.toLowerCase() === "e" && holdKey) { holdKey = false; if (holdPid === null) setErase(false); }
+  if (ev.key.toLowerCase() === "e" && holdKey) { holdKey = false; setErase(); }
 });
 
 /* ===================== 시작 ===================== */
