@@ -522,8 +522,12 @@ function penPoint(st, e, prev, base, count) {
    · 펜슬은 어디서나 쓰고 누를 수 있다
    · 손가락은 쓰는 칸에서는 설정에 따라 막고(손바닥 방지), 버튼은 누를 수 있다
    · 펜슬이 닿아 있거나 막 떨어진 순간의 손 입력은 손바닥으로 본다 */
-var penDown = 0, lastPen = 0, strokeLog = [];
-function penActive() { return penDown > 0 || Date.now() - lastPen < 260; }
+var penIds = {}, lastPen = 0, strokeLog = [];
+function penActive() {
+  var now = Date.now();
+  for (var k in penIds) { if (now - penIds[k] < 1500) return true; delete penIds[k]; }
+  return now - lastPen < 260;
+}
 function bigContact(ev) { return (ev.width || 0) > 72 || (ev.height || 0) > 72; }
 function allowDraw(ev) {
   if (ev.pointerType === "pen" || ev.pointerType === "mouse") return true;
@@ -534,13 +538,15 @@ function allowDraw(ev) {
 }
 document.addEventListener("pointerdown", function (ev) {
   if (ev.pointerType !== "pen") return;
-  penDown++; lastPen = Date.now();
+  penIds[ev.pointerId] = lastPen = Date.now();
   if (!W.penSeen) { W.penSeen = true; save(); }
 }, true);
 document.addEventListener("pointermove", function (ev) {
-  if (ev.pointerType === "pen" && ev.buttons) lastPen = Date.now();
+  if (ev.pointerType !== "pen") return;
+  if (ev.buttons) { lastPen = Date.now(); if (ev.pointerId in penIds) penIds[ev.pointerId] = lastPen; }
+  else if (ev.pointerId in penIds) delete penIds[ev.pointerId];      /* 호버 = 떨어져 있다 */
 }, true);
-function penLift(ev) { if (ev.pointerType === "pen") { penDown = Math.max(0, penDown - 1); lastPen = Date.now(); } }
+function penLift(ev) { if (ev.pointerType === "pen") { delete penIds[ev.pointerId]; lastPen = Date.now(); } }
 document.addEventListener("pointerup", penLift, true);
 document.addEventListener("pointercancel", penLift, true);
 
@@ -565,7 +571,9 @@ function makePad(canvas, ghost, ch, opt) {
   /* desynchronized 는 iOS 사파리에서 칸이 까맣게 되어 쓰지 않는다 */
   var pad = { cv: canvas, ctx: canvas.getContext("2d", { alpha: true }),
     strokes: [], cur: null, ghost: ghost, ch: ch, size: 0, dpr: 1, rect: null,
-    bg: document.createElement("canvas") };
+    bg: document.createElement("canvas"),
+    layer: document.createElement("canvas") };     /* 다 쓴 획을 모아 두는 층 */
+  pad.lc = pad.layer.getContext("2d");
 
   pad.note = opt.note === true;        /* 공책 줄 모드 */
   pad.h = 0;
@@ -642,10 +650,11 @@ function makePad(canvas, ghost, ch, opt) {
     pad.size = r.width;
     pad.h = r.height;
     if (pad.note) { pad.lineH = opt.lineH || 108; pad.margin = opt.margin || 58; }
-    canvas.width = Math.round(r.width * pad.dpr);
-    canvas.height = Math.round(r.height * pad.dpr);
+    canvas.width = pad.layer.width = Math.round(r.width * pad.dpr);
+    canvas.height = pad.layer.height = Math.round(r.height * pad.dpr);
     pad.ctx.setTransform(pad.dpr, 0, 0, pad.dpr, 0, 0);
-    pad.ctx.lineCap = "round"; pad.ctx.lineJoin = "round";
+    pad.lc.setTransform(pad.dpr, 0, 0, pad.dpr, 0, 0);
+    pad.ctx.lineCap = pad.lc.lineCap = "round"; pad.ctx.lineJoin = pad.lc.lineJoin = "round";
     paintBG();
     pad.redraw();
   };
@@ -660,7 +669,7 @@ function makePad(canvas, ghost, ch, opt) {
 
   /* 지우개: 닿은 획만 지운다 */
   function eraseR() { return (pad.note ? pad.lineH : pad.size) * 0.065; }
-  function eraseAt(p) {
+  function eraseAt(p, later) {
     var r = eraseR(), before = pad.strokes.length;
     var left = pad.strokes.filter(function (st) {
       return !st.pts.some(function (q) { return Math.hypot(q.x - p.x, q.y - p.y) < r + q.w / 2; });
@@ -668,7 +677,7 @@ function makePad(canvas, ghost, ch, opt) {
     if (left.length !== before) {
       if (pad.strokes === S.dstrokes) { S.dstrokes = left; pad.strokes = left; }
       else pad.strokes = left;
-      pad.redraw();
+      if (!later) pad.rebuild();                        /* 실제로 지웠을 때만 획을 다시 그린다 */
       return true;
     }
     return false;
@@ -682,14 +691,35 @@ function makePad(canvas, ghost, ch, opt) {
     c.beginPath(); c.arc(p.x, p.y, eraseR(), 0, 6.2832); c.stroke();
     c.restore();
   };
-  pad.redraw = function () {
-    var c = pad.ctx, s = pad.size, h = pad.h || s;
+  /* 층 다시 만들기 : 획이 바뀌었을 때만 (지우기·되돌리기·모두 지우기·크기 변경) */
+  pad.rebuild = function () {
+    var c = pad.lc, s = pad.size, h = pad.h || s;
     pad.ink = ink("pen");
     c.clearRect(0, 0, s, h);
-    c.drawImage(pad.bg, 0, 0, s, h);
-    pad.strokes.forEach(function (st) { pad.line(st); });
-    if (pad.cur && !pad.cur.erase) pad.line(pad.cur, true);
+    pad.strokes.forEach(function (st) { if (!st.pen) st.pen = "ball"; penAll(c, st, false, pad.ink); });
     c.globalAlpha = 1;
+  };
+  /* 화면 합치기 : 배경 + 획 층 — 그림 두 장을 붙이는 것뿐이라 가볍다 */
+  pad.show = function () {
+    var c = pad.ctx, s = pad.size, h = pad.h || s;
+    c.globalAlpha = 1;
+    c.clearRect(0, 0, s, h);
+    c.drawImage(pad.bg, 0, 0, s, h);
+    c.drawImage(pad.layer, 0, 0, s, h);
+    if (pad.cur && !pad.cur.erase) penAll(c, pad.cur, true, pad.ink);
+    c.globalAlpha = 1;
+  };
+  pad.redraw = function () { pad.rebuild(); pad.show(); };
+  /* 지우개 원 : 한 화면 주기에 한 번만 옮긴다 */
+  pad.ringAt = null; pad.ringHover = false; pad.raf = 0;
+  pad.ring = function (p, hover) {
+    pad.ringAt = p; pad.ringHover = !!hover;
+    if (pad.raf) return;
+    pad.raf = requestAnimationFrame(function () {
+      pad.raf = 0;
+      pad.show();
+      if (pad.ringAt) pad.eraseRing(pad.ringAt, pad.ringHover);
+    });
   };
   pad.clear = function () { pad.strokes.length = 0; pad.cur = null; pad.redraw(); };
   pad.undo = function () { pad.strokes.pop(); pad.redraw(); };
@@ -723,8 +753,8 @@ function makePad(canvas, ghost, ch, opt) {
       if (holdPid !== null) holdUsed = true;
       p.w = 1; p.a = 1;
       pad.cur = { pts: [p], erase: true };
-      if (!eraseAt(p)) pad.redraw();
-      pad.eraseRing(p);
+      eraseAt(p);
+      pad.ring(p, false);
       return;
     }
     var st = { pts: [p], erase: false, pen: penType(), seed: (Math.random() * 1e9) | 0 };
@@ -740,8 +770,8 @@ function makePad(canvas, ghost, ch, opt) {
     if (!pad.cur) {
       if (ev.pointerType === "pen" && !ev.buttons && S.erase) {
         pad.rect = pad.rect || canvas.getBoundingClientRect();
-        pad.redraw(); pad.eraseRing(pt(ev), true); pad.hovering = true;
-      }
+        pad.ring(pt(ev), true); pad.hovering = true;
+      } else if (pad.hovering) { pad.hovering = false; pad.ring(null); }
       return;
     }
     if (ev.pointerId !== pad.pid) return;
@@ -750,9 +780,10 @@ function makePad(canvas, ghost, ch, opt) {
     var list = ev.getCoalescedEvents ? ev.getCoalescedEvents() : null;
     if (!list || !list.length) list = [ev];
     if (pad.cur.erase) {
-      var q = pt(ev);
-      if (!eraseAt(q)) pad.redraw();
-      pad.eraseRing(q);
+      var gone = false;
+      for (var j = 0; j < list.length; j++) if (eraseAt(pt(list[j]), true)) gone = true;   /* 빠르게 문질러도 빠짐없이 */
+      if (gone) pad.rebuild();                              /* 여러 획을 지워도 한 번만 다시 그린다 */
+      pad.ring(pt(ev), false);
       return;
     }
     var pts = pad.cur.pts;
@@ -768,23 +799,22 @@ function makePad(canvas, ghost, ch, opt) {
   }, { passive: false });
 
   canvas.addEventListener("pointerleave", function (ev) {
-    if (pad.hovering && !pad.cur) { pad.hovering = false; pad.redraw(); }
+    if (pad.hovering && !pad.cur) { pad.hovering = false; pad.ring(null); }
   });
 
   function end() {
     if (!pad.cur) return;
     var st = pad.cur;
     pad.cur = null;
-    if (st.erase) { pad.redraw(); return onDraw(pad); }
+    if (st.erase) { pad.ring(null); return onDraw(pad); }
     if (st.pen === "brush" && st.pts.length > 3) {
       var n = st.pts.length, k = Math.min(6, n - 1);
       for (var i = 0; i < k; i++) st.pts[n - 1 - i].w *= 0.28 + 0.72 * (i / k);
-      pad.strokes.push(st);
-      pad.redraw();
-    } else {
-      drawEnd(st);
-      pad.strokes.push(st);
     }
+    pad.strokes.push(st);
+    penAll(pad.lc, st, false, pad.ink);                   /* 이 획만 층에 얹는다 */
+    pad.lc.globalAlpha = 1;
+    pad.show();
     strokeLog.push(pad);                                  /* 되돌리기는 쓴 순서대로 */
     onDraw(pad);
   }
@@ -1749,12 +1779,13 @@ function palHTML() {
     + '<div class="pp-ends"><span>가늘게</span><span>굵게</span></div>'
     + '<canvas class="pp-preview" id="pppreview"></canvas>';
 }
-function paintPal() {
+function paintPal(light) {
   if (!palEl) return;
   var t = penType(), v = penV(t);
   palEl.querySelectorAll(".pp-type").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-v") === t); });
   palEl.querySelectorAll(".pp-type canvas").forEach(function (cv) {
-    var tt = cv.getAttribute("data-pen"); paintSample(cv, tt, penV(tt), 0.2);
+    var tt = cv.getAttribute("data-pen");
+    if (!light || tt === t) paintSample(cv, tt, penV(tt), 0.2);
   });
   var wedge = el("ppwedge");
   if (wedge) {
@@ -1793,7 +1824,7 @@ function openPal() {
 }
 function closePal() {
   if (!palOpen) return;
-  palOpen = false;
+  palOpen = false; slideId = null; slideRect = null;
   if (palEl) palEl.classList.remove("open");
   paintPenBtn();
 }
@@ -1804,27 +1835,28 @@ document.addEventListener("pointerdown", function (ev) {
   closePal();
 }, true);
 /* 굵기 슬라이더 : 펜슬·손가락 모두 끌어서 조절 */
-var slideId = null;
+var slideId = null, slideRect = null, slideRaf = 0;
 function slideTo(ev) {
-  var s = el("ppslider"); if (!s) return;
-  var r = s.getBoundingClientRect(), pad = 20;
+  if (!palOpen || !slideRect) { slideId = null; return; }
+  var pad = 20, r = slideRect;
   var v = Math.max(0, Math.min(1, (ev.clientX - r.left - pad) / (r.width - 2 * pad)));
   if (!W.penW) W.penW = {};
   W.penW[penType()] = Math.round(v * 100) / 100;
-  paintPal();
+  if (!slideRaf) slideRaf = requestAnimationFrame(function () { slideRaf = 0; paintPal(true); });
 }
 document.addEventListener("pointerdown", function (ev) {
   var s = ev.target.closest && ev.target.closest("#ppslider");
   if (!s) return;
   ev.preventDefault();
   slideId = ev.pointerId;
+  slideRect = s.getBoundingClientRect();                 /* 끄는 동안 한 번만 잰다 */
   try { s.setPointerCapture(ev.pointerId); } catch (e) {}
   slideTo(ev);
 }, { passive: false });
 document.addEventListener("pointermove", function (ev) {
   if (ev.pointerId === slideId) { ev.preventDefault(); slideTo(ev); }
 }, { passive: false });
-function slideEnd(ev) { if (ev.pointerId === slideId) { slideId = null; save(); } }
+function slideEnd(ev) { if (ev.pointerId === slideId) { slideId = null; slideRect = null; save(); paintPal(); } }
 document.addEventListener("pointerup", slideEnd);
 document.addEventListener("pointercancel", slideEnd);
 
@@ -1853,7 +1885,8 @@ document.addEventListener("pointerdown", function (ev) {
   if (!b) return;
   ev.preventDefault();
   if (ev.pointerType === "pen" || ev.pointerType === "mouse") { S.eraseLock = !S.eraseLock; return setErase(); }
-  if (bigContact(ev) || holdPid !== null) return;          /* 손바닥 · 이미 누르는 중 */
+  if (bigContact(ev)) return;                               /* 손바닥 */
+  if (holdPid !== null && Date.now() - holdT0 < 8000) return; /* 이미 누르는 중 (8초 넘으면 놓친 것으로 본다) */
   holdPid = ev.pointerId; holdT0 = Date.now(); holdUsed = false;
   try { b.setPointerCapture(ev.pointerId); } catch (e) {}
   setErase();
