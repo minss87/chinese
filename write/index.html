@@ -249,11 +249,11 @@ svg{display:block;}
 .scrim{position:fixed;inset:0;background:rgba(15,23,40,.28);z-index:20;}
 .sheet{position:fixed;z-index:21;background:var(--sheet);border-radius:22px;box-shadow:0 20px 60px rgba(15,23,40,.25);
   display:flex;flex-direction:column;overflow:hidden;}
-.sheet.set{top:66px;right:18px;width:360px;}
+.sheet.set{top:66px;right:18px;width:360px;max-height:calc(100% - 84px);}
 .sheet.list{top:74px;right:18px;bottom:18px;width:430px;}
 .sheethead{display:flex;align-items:center;padding:14px 12px 10px 22px;border-bottom:1px solid var(--hair2);}
 .sheethead b{font-size:17px;flex:1;}
-.sheetbody{padding:16px 22px 22px;overflow-y:auto;display:flex;flex-direction:column;gap:18px;}
+.sheetbody{padding:16px 22px 22px;overflow-y:auto;flex:1;min-height:0;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;display:flex;flex-direction:column;gap:18px;}
 .setrow{display:flex;flex-direction:column;gap:8px;}
 .setrow .seg{margin:0;align-self:flex-start;}
 .setrow .seg-b{height:44px;padding:0 18px;font-size:15px;}
@@ -2207,7 +2207,8 @@ document.addEventListener("pointerdown", function (ev) {
   var t = ev.target.closest && ev.target.closest("[data-a]");
   if (!t) return;
   if (ev.pointerType === "touch" && penTouching()) return;
-  taps[ev.pointerId] = { sig: sig(t), x: ev.clientX, y: ev.clientY, t: Date.now(), type: ev.pointerType, pen: false, moved: 0 };
+  taps[ev.pointerId] = { sig: sig(t), x: ev.clientX, y: ev.clientY, t: Date.now(), type: ev.pointerType, pen: false, moved: 0,
+    scr: !!(t.closest(".sheetbody,.slist,.relist,.textwrap,.chips,.epbar")) };
 });
 document.addEventListener("pointermove", function (ev) {
   var tp = taps[ev.pointerId];
@@ -2230,6 +2231,7 @@ document.addEventListener("pointercancel", function (ev) {
   var tp = taps[ev.pointerId];
   delete taps[ev.pointerId];
   if (!tp || tp.moved > 6 || Date.now() - tp.t > maxTap(tp.sig)) return;
+  if (tp.scr) return;   /* 스크롤 영역 안 : 취소는 대개 스크롤 시작이다. 진짜 탭은 touchend 경로가 처리 */
   if (tp.type === "touch" && tp.pen) return;
   var over = document.elementFromPoint(tp.x, tp.y), t = over && over.closest("[data-a]");
   if (t && sig(t) === tp.sig && !t.disabled && !actedJustNow(tp.sig)) tapAct(t);
@@ -2305,7 +2307,7 @@ if (window.matchMedia) {
 document.addEventListener("gesturestart", function (e) { e.preventDefault(); });
 document.addEventListener("gesturechange", function (e) { e.preventDefault(); });
 /* 목록(글자 트랙·문장 목록·화 선택·지문) 밖에서는 끌기·핀치를 막는다 */
-var SCROLLERS = ".chips,.slist,.epbar,.textwrap,.relist,.keybox";
+var SCROLLERS = ".chips,.slist,.epbar,.textwrap,.relist,.keybox,.sheetbody";
 document.addEventListener("touchmove", function (ev) {
   if (!ev.cancelable) return;
   if (ev.touches.length > 1) return ev.preventDefault();
