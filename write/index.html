@@ -121,7 +121,27 @@ svg{display:block;}
   cursor:pointer;flex:none;}
 .rbtn svg{width:26px;height:26px;}
 .rbtn:active{transform:scale(.96);}
-.rbtn.hold{height:168px;border-radius:24px;touch-action:none;}
+.rbtn.hold{height:140px;border-radius:24px;touch-action:none;}
+.rbtn.penbtn{height:84px;gap:4px;}
+.rbtn.penbtn canvas{width:58px;height:30px;display:block;}
+.rbtn.penbtn.on{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset;}
+/* ── 펜 팔레트 ── */
+.penpal{position:fixed;z-index:25;width:352px;background:var(--sheet);border:1px solid var(--hair);border-radius:24px;
+  box-shadow:0 18px 50px rgba(15,23,40,.22);padding:16px 16px 18px;display:none;touch-action:none;}
+.penpal.open{display:block;}
+.pp-types{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.pp-type{height:104px;border:1px solid var(--hair);background:var(--btn);border-radius:18px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:8px;font:inherit;font-size:14px;color:var(--ink2);cursor:pointer;padding:0;}
+.pp-type canvas{width:78px;height:40px;display:block;}
+.pp-type.on{border-color:var(--accent);background:var(--pick);color:var(--accent);font-weight:700;box-shadow:0 0 0 1px var(--accent) inset;}
+.pp-row{display:flex;align-items:baseline;justify-content:space-between;margin:18px 4px 8px;}
+.pp-row b{font-size:14px;font-variant-numeric:tabular-nums;color:var(--ink2);font-weight:600;}
+.pp-slider{position:relative;height:60px;touch-action:none;cursor:pointer;}
+.pp-slider canvas{position:absolute;left:0;top:0;width:100%;height:100%;display:block;}
+.pp-thumb{position:absolute;top:50%;width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;background:var(--sheet);
+  border:2px solid var(--accent);box-shadow:0 2px 8px rgba(15,23,40,.25);pointer-events:none;}
+.pp-ends{display:flex;justify-content:space-between;font-size:11.5px;color:var(--ink3);margin:2px 4px 0;}
+.pp-preview{display:block;width:100%;height:92px;margin-top:14px;border-radius:14px;background:var(--bg);}
 .rbtn.hold small{font-size:10.5px;color:var(--ink3);line-height:1.3;text-align:center;}
 .rbtn.hold.on{background:var(--btnhold);border-color:var(--btnhold);color:var(--sheet);}
 .rbtn.hold.on small{color:var(--sheet);opacity:.75;}
@@ -287,6 +307,8 @@ var W = {
   pressure: typeof saved.pressure === "number" ? saved.pressure : 1,   /* 필압 0 끔 · 1 약하게 · 2 보통 */
   input: saved.input || "auto",        /* auto 펜슬을 쓰면 손 무시 · pen 펜슬만 · all 손가락도 */
   penSeen: saved.penSeen === true,     /* 이 기기에서 펜슬을 쓴 적이 있다 */
+  pen: saved.pen || "ball",            /* pencil 연필 · ball 볼펜 · brush 붓펜 */
+  penW: saved.penW || {},              /* 펜마다 굵기 0~1 */
   onlyNew: saved.onlyNew !== false,    /* 아직 안 쓴 글자·안 읽은 문장만 */
   read: saved.read || {},              /* {r:문장: {s:0 틀림/2 맞힘, n, last}} */
   hard: saved.hard || {},              /* 형광펜으로 표시한 글자 */
@@ -382,6 +404,120 @@ function epProgress(w) {
 var REPS = 3;                          /* 연습 칸 수 */
 var GHOST = [0.34, 0.17, 0];           /* 칸마다 옅어지는 본보기 */
 var pads = [];                         /* 연습 칸 객체 */
+/* ===================== 펜 종류 =====================
+   연필 : 흑연 입자를 흩뿌려 그린다. 필압은 진하기로
+   볼펜 : 고른 굵기. 필압은 아주 조금만
+   붓펜 : 필압으로 굵기가 크게 바뀌고, 시작과 끝이 가늘게 빠진다
+   획마다 펜 종류를 기억하므로 펜을 바꿔도 이미 쓴 획은 그대로다 */
+var PENS = {
+  pencil: { name: "연필", def: 0.30 },
+  ball:   { name: "볼펜", def: 0.35 },
+  brush:  { name: "붓펜", def: 0.55 }
+};
+var PEN_ORDER = ["pencil", "ball", "brush"];
+function penType() { return PENS[W.pen] ? W.pen : "ball"; }
+function penV(t) { var v = W.penW && W.penW[t]; return typeof v === "number" ? v : PENS[t].def; }
+function penBase(unit, t, v) {
+  return Math.max(1.4, unit * (0.008 + (v == null ? penV(t) : v) * 0.052));
+}
+/* 연필 입자가 다시 그려도 똑같이 나오도록 획마다 씨앗을 둔 난수 */
+function rng(seed) {
+  return function () {
+    seed = seed + 0x6D2B79F5 | 0;
+    var t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+function mid(a, b) { return { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 }; }
+function qpt(a, c, b, t) {
+  var u = 1 - t;
+  return { x: u * u * a.x + 2 * u * t * c.x + t * t * b.x, y: u * u * a.y + 2 * u * t * c.y + t * t * b.y };
+}
+/* 곡선 한 구간 : A 에서 C 를 거쳐 B 까지, 굵기 wa→wb, 진하기 aa→ab */
+function penSeg(ctx, st, A, C, B, wa, wb, aa, ab, k, ink) {
+  var len = Math.hypot(C.x - A.x, C.y - A.y) + Math.hypot(B.x - C.x, B.y - C.y);
+  if (st.pen === "brush") {
+    ctx.fillStyle = ink; ctx.globalAlpha = 1;
+    var step = Math.max(0.4, Math.min(wa, wb) * 0.16), n = Math.max(1, Math.ceil(len / step));
+    for (var i = 0; i <= n; i++) {
+      var t = i / n, p = qpt(A, C, B, t);
+      ctx.beginPath(); ctx.arc(p.x, p.y, (wa + (wb - wa) * t) / 2, 0, 6.2832); ctx.fill();
+    }
+    return;
+  }
+  if (st.pen === "pencil") {
+    var r = rng((st.seed || 1) + k * 7919), wm = (wa + wb) / 2;
+    var step2 = Math.max(0.5, wm * 0.2), n2 = Math.max(1, Math.ceil(len / step2));
+    var g = Math.max(5, Math.round(wm * 2.1));
+    ctx.fillStyle = ink;
+    for (var j = 0; j <= n2; j++) {
+      var tt = j / n2, q = qpt(A, C, B, tt), w2 = wa + (wb - wa) * tt, a2 = aa + (ab - aa) * tt;
+      for (var m = 0; m < g; m++) {
+        var rr = w2 / 2 * Math.sqrt(r()), an = r() * 6.2832;
+        ctx.globalAlpha = a2 * (0.3 + 0.7 * r());
+        ctx.fillRect(q.x + Math.cos(an) * rr - 0.65, q.y + Math.sin(an) * rr - 0.65, 1.3, 1.3);
+      }
+    }
+    ctx.globalAlpha = 1;
+    return;
+  }
+  ctx.strokeStyle = ink; ctx.globalAlpha = 1; ctx.lineWidth = (wa + wb) / 2;
+  ctx.lineCap = "round"; ctx.lineJoin = "round";
+  ctx.beginPath(); ctx.moveTo(A.x, A.y); ctx.quadraticCurveTo(C.x, C.y, B.x, B.y); ctx.stroke();
+}
+function av(a, b, k) { return (a[k] + b[k]) / 2; }
+/* 점이 n 개가 되었을 때 새로 생긴 구간 */
+function penStep(ctx, st, n, ink) {
+  var p = st.pts;
+  if (n === 2) penSeg(ctx, st, p[0], p[0], mid(p[0], p[1]), p[0].w, av(p[0], p[1], "w"), p[0].a, av(p[0], p[1], "a"), 1, ink);
+  else if (n > 2) penSeg(ctx, st, mid(p[n - 3], p[n - 2]), p[n - 2], mid(p[n - 2], p[n - 1]),
+    av(p[n - 3], p[n - 2], "w"), av(p[n - 2], p[n - 1], "w"), av(p[n - 3], p[n - 2], "a"), av(p[n - 2], p[n - 1], "a"), n - 1, ink);
+}
+function penEnd(ctx, st, ink) {
+  var p = st.pts, n = p.length;
+  if (n > 1) penSeg(ctx, st, mid(p[n - 2], p[n - 1]), p[n - 1], p[n - 1],
+    av(p[n - 2], p[n - 1], "w"), p[n - 1].w, av(p[n - 2], p[n - 1], "a"), p[n - 1].a, n, ink);
+}
+function penDot(ctx, st, p, ink) {
+  if (st.pen === "pencil") return penSeg(ctx, st, p, p, { x: p.x + 0.01, y: p.y }, p.w, p.w, p.a, p.a, 0, ink);
+  ctx.globalAlpha = 1; ctx.fillStyle = ink;
+  ctx.beginPath(); ctx.arc(p.x, p.y, p.w / 2, 0, 6.2832); ctx.fill();
+}
+function penAll(ctx, st, open, ink) {
+  var p = st.pts;
+  if (p.length === 1) return penDot(ctx, st, p[0], ink);
+  for (var i = 2; i <= p.length; i++) penStep(ctx, st, i, ink);
+  if (!open) penEnd(ctx, st, ink);
+}
+/* 한 점의 굵기와 진하기 — 펜마다 필압에 반응하는 방식이 다르다 */
+function penPoint(st, e, prev, base, count) {
+  var usePr = e.pointerType === "pen" && W.pressure > 0;
+  var pr = e.pressure > 0 ? e.pressure : (prev ? prev.pr : 0.35);
+  var x = Math.pow(Math.min(1, Math.max(0, (pr - 0.05) / 0.65)), 0.85);
+  var xs = 0.5 + (x - 0.5) * (W.pressure === 2 ? 1 : 0.6);    /* 약하게는 변화 폭을 줄인다 */
+  var w = base, a = 1, lim = 0.04;
+  if (st.pen === "ball") {
+    if (usePr) w = base * (0.9 + 0.2 * xs);
+  } else if (st.pen === "pencil") {
+    if (usePr) { w = base * (0.94 + 0.12 * xs); a = 0.3 + 0.65 * xs; } else a = 0.72;
+  } else {
+    lim = 0.1;
+    if (usePr) w = base * (0.3 + 1.3 * Math.pow(xs, 1.15));
+    else if (prev) {
+      var sp = Math.hypot(e.x - prev.x, e.y - prev.y);
+      w = base * (1.2 - Math.min(0.75, sp / (base * 2.5)));
+    }
+    if (count < 6) w *= 0.42 + 0.1 * count;                  /* 붓이 닿는 순간은 가늘게 */
+  }
+  if (prev) {
+    var d = (w - prev.w) * (st.pen === "brush" ? 0.5 : 0.3), L = base * lim;
+    w = prev.w + Math.max(-L, Math.min(L, d));
+    a = prev.a + (a - prev.a) * 0.35;
+  }
+  return { w: w, a: a, pr: pr };
+}
+
 /* ===================== 펜슬 / 손 구분 =====================
    · 펜슬은 어디서나 쓰고 누를 수 있다
    · 손가락은 쓰는 칸에서는 설정에 따라 막고(손바닥 방지), 버튼은 누를 수 있다
@@ -514,36 +650,12 @@ function makePad(canvas, ghost, ch, opt) {
     pad.redraw();
   };
 
-  /* 선 : 점과 점 사이 가운데를 잇는 2차 곡선 — 떨림 없이 매끄럽다 */
-  function mid(a, b) { return { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 }; }
-  function curve(from, ctrl, to, w) {
-    var c = pad.ctx;
-    c.strokeStyle = pad.ink; c.lineWidth = w;
-    c.beginPath(); c.moveTo(from.x, from.y);
-    c.quadraticCurveTo(ctrl.x, ctrl.y, to.x, to.y);
-    c.stroke();
-  }
-  /* 새 점 하나가 들어왔을 때 그 앞 구간만 그린다 */
-  function drawTail(pts) {
-    var n = pts.length;
-    if (n === 2) curve(pts[0], pts[0], mid(pts[0], pts[1]), (pts[0].w + pts[1].w) / 2);
-    else if (n > 2) curve(mid(pts[n - 3], pts[n - 2]), pts[n - 2], mid(pts[n - 2], pts[n - 1]), pts[n - 2].w);
-  }
-  function drawEnd(pts) {
-    var n = pts.length;
-    if (n > 1) curve(mid(pts[n - 2], pts[n - 1]), pts[n - 1], pts[n - 1], pts[n - 1].w);
-  }
-  function dot(p) {
-    var c = pad.ctx;
-    c.beginPath(); c.fillStyle = pad.ink;
-    c.arc(p.x, p.y, p.w / 2, 0, 6.2832); c.fill();
-  }
+  function drawTail(st) { penStep(pad.ctx, st, st.pts.length, pad.ink); }
+  function drawEnd(st) { penEnd(pad.ctx, st, pad.ink); }
+  function dot(st) { penDot(pad.ctx, st, st.pts[0], pad.ink); }
   pad.line = function (st, open) {
-    var p = st.pts, n = p.length;
-    if (n === 1) return dot(p[0]);
-    curve(p[0], p[0], mid(p[0], p[1]), (p[0].w + p[1].w) / 2);
-    for (var i = 2; i < n; i++) curve(mid(p[i - 2], p[i - 1]), p[i - 1], mid(p[i - 1], p[i]), p[i - 1].w);
-    if (!open) curve(mid(p[n - 2], p[n - 1]), p[n - 1], p[n - 1], p[n - 1].w);
+    if (!st.pen) st.pen = "ball";
+    penAll(pad.ctx, st, open, pad.ink);
   };
 
   /* 지우개: 닿은 획만 지운다 */
@@ -577,26 +689,13 @@ function makePad(canvas, ghost, ch, opt) {
     c.drawImage(pad.bg, 0, 0, s, h);
     pad.strokes.forEach(function (st) { pad.line(st); });
     if (pad.cur && !pad.cur.erase) pad.line(pad.cur, true);
+    c.globalAlpha = 1;
   };
   pad.clear = function () { pad.strokes.length = 0; pad.cur = null; pad.redraw(); };
   pad.undo = function () { pad.strokes.pop(); pad.redraw(); };
   pad.empty = function () { return !pad.strokes.length; };
 
-  /* 굵기 — 필압은 좁은 범위에서만, 급하게 바뀌지 않게 */
-  function baseW() { return (pad.note ? pad.lineH : pad.size) * 0.052; }
-  function width(ev, prev) {
-    var base = baseW();
-    if (ev.pointerType !== "pen" || !W.pressure) return base;
-    var pr = ev.pressure;
-    if (!(pr > 0)) pr = prev ? prev.pr : 0.35;
-    var x = Math.min(1, Math.max(0, (pr - 0.05) / 0.65));
-    x = Math.pow(x, 0.85);
-    var span = W.pressure === 1 ? 0.26 : 0.5;              /* 약하게 ±13% · 보통 ±25% */
-    var target = base * (1 - span / 2 + span * x);
-    if (!prev) return target;
-    var d = (target - prev.w) * 0.3, lim = base * 0.04;    /* 한 점에 4% 넘게 못 바뀐다 */
-    return prev.w + Math.max(-lim, Math.min(lim, d));
-  }
+  function unit() { return pad.note ? pad.lineH : pad.size; }
   /* 좌표 변환에 쓰는 사각형은 누를 때 한 번만 읽는다 — 매 점마다 읽으면 느려진다 */
   function pt(ev) {
     var r = pad.rect;
@@ -609,6 +708,8 @@ function makePad(canvas, ghost, ch, opt) {
     canvas.addEventListener(t, function (e) { if (e.cancelable) e.preventDefault(); }, { passive: false });
   });
 
+  if (opt.readonly) { pad.readonly = true; return pad; }    /* 본보기 칸 : 보기만 한다 */
+
   canvas.addEventListener("pointerdown", function (ev) {
     ev.preventDefault();
     if (!allowDraw(ev)) return;                             /* 손바닥 · 펜슬 전용일 때 손가락 */
@@ -618,17 +719,20 @@ function makePad(canvas, ghost, ch, opt) {
     pad.rect = canvas.getBoundingClientRect();
     pad.ink = ink("pen");
     var p = pt(ev);
-    p.pr = ev.pressure > 0 ? ev.pressure : 0.35;
-    p.w = width(ev, null);
     if (S.erase || ev.pointerType === "eraser" || ev.buttons === 32) {
       if (holdPid !== null) holdUsed = true;
+      p.w = 1; p.a = 1;
       pad.cur = { pts: [p], erase: true };
       if (!eraseAt(p)) pad.redraw();
       pad.eraseRing(p);
       return;
     }
-    pad.cur = { pts: [p], erase: false };
-    dot(p);
+    var st = { pts: [p], erase: false, pen: penType(), seed: (Math.random() * 1e9) | 0 };
+    st.base = penBase(unit(), st.pen);
+    var q0 = penPoint(st, { pointerType: ev.pointerType, pressure: ev.pressure, x: p.x, y: p.y }, null, st.base, 0);
+    p.w = q0.w; p.a = q0.a; p.pr = q0.pr;
+    pad.cur = st;
+    dot(st);
   }, { passive: false });
 
   canvas.addEventListener("pointermove", function (ev) {
@@ -655,10 +759,11 @@ function makePad(canvas, ghost, ch, opt) {
     for (var i = 0; i < list.length; i++) {
       var e = list[i], p = pt(e), prev = pts[pts.length - 1];
       if (Math.hypot(p.x - prev.x, p.y - prev.y) < 0.7) continue;
-      p.pr = e.pressure > 0 ? prev.pr + (e.pressure - prev.pr) * 0.35 : prev.pr;
-      p.w = width({ pointerType: e.pointerType, pressure: p.pr }, prev);
+      var sp = e.pressure > 0 ? prev.pr + (e.pressure - prev.pr) * 0.35 : prev.pr;
+      var q = penPoint(pad.cur, { pointerType: e.pointerType, pressure: sp, x: p.x, y: p.y }, prev, pad.cur.base, pts.length);
+      p.w = q.w; p.a = q.a; p.pr = q.pr;
       pts.push(p);
-      drawTail(pts);                                        /* 새 구간만 그린다 */
+      drawTail(pad.cur);                                    /* 새 구간만 그린다 */
     }
   }, { passive: false });
 
@@ -671,8 +776,15 @@ function makePad(canvas, ghost, ch, opt) {
     var st = pad.cur;
     pad.cur = null;
     if (st.erase) { pad.redraw(); return onDraw(pad); }
-    drawEnd(st.pts);
-    pad.strokes.push(st);
+    if (st.pen === "brush" && st.pts.length > 3) {
+      var n = st.pts.length, k = Math.min(6, n - 1);
+      for (var i = 0; i < k; i++) st.pts[n - 1 - i].w *= 0.28 + 0.72 * (i / k);
+      pad.strokes.push(st);
+      pad.redraw();
+    } else {
+      drawEnd(st);
+      pad.strokes.push(st);
+    }
     strokeLog.push(pad);                                  /* 되돌리기는 쓴 순서대로 */
     onDraw(pad);
   }
@@ -1048,7 +1160,7 @@ function buildStroke() {
   HW.demo.animateCharacter();
   HW.quiz = HanziWriter.create("hw-quiz", it.ch, Object.assign({}, common, {
     showCharacter: false, showOutline: S.outline !== false, showHintAfterMisses: 2,
-    highlightOnComplete: true, drawingWidth: Math.round(size * 0.05)
+    highlightOnComplete: true, drawingWidth: Math.max(4, Math.round(size * 0.025))
   }));
   S.qmiss = 0;
   HW.quiz.quiz({
@@ -1229,18 +1341,7 @@ function noteImage(pad, zh) {
   c.save();
   c.scale(k, k);
   c.lineCap = "round"; c.lineJoin = "round"; c.strokeStyle = "#111"; c.fillStyle = "#111";
-  pad.strokes.forEach(function (st) {
-    var p = st.pts;
-    if (p.length === 1) { c.beginPath(); c.arc(p[0].x, p[0].y, p[0].w / 2, 0, 6.2832); c.fill(); return; }
-    for (var i = 1; i < p.length; i++) {
-      c.beginPath();
-      c.lineWidth = (p[i - 1].w + p[i].w) / 2;
-      c.moveTo(p[i - 1].x, p[i - 1].y);
-      c.quadraticCurveTo(p[i - 1].x, p[i - 1].y, (p[i - 1].x + p[i].x) / 2, (p[i - 1].y + p[i].y) / 2);
-      c.lineTo(p[i].x, p[i].y);
-      c.stroke();
-    }
-  });
+  pad.strokes.forEach(function (st) { if (!st.pen) st.pen = "ball"; penAll(c, st, false, "#111"); });
   c.restore();
   c.strokeStyle = "#ccc"; c.beginPath();
   c.moveTo(0, H0 + .5); c.lineTo(W0, H0 + .5); c.stroke();
@@ -1447,7 +1548,9 @@ function headHTML() {
 /* ── 왼쪽 도구 레일 ── */
 function railHTML() {
   if (S.mode === "trace" || S.mode === "dict")
-    return '<button class="rbtn hold' + (S.erase ? " on" : "") + (S.eraseLock ? " lock" : "") + '" id="erasebtn">' + I.eraser
+    return '<button class="rbtn penbtn' + (palOpen ? " on" : "") + '" data-a="penpal" id="penbtn"><canvas id="penico"></canvas>'
+      + '<span id="penname">' + PENS[penType()].name + "</span></button>"
+      + '<button class="rbtn hold' + (S.erase ? " on" : "") + (S.eraseLock ? " lock" : "") + '" id="erasebtn">' + I.eraser
       + "지우개<small>" + eraseLabel() + "</small></button>"
       + '<span class="rgap"></span>'
       + '<button class="rbtn" data-a="undo">' + I.undo + "되돌리기</button>"
@@ -1584,7 +1687,7 @@ function buildCells() {
       wrap.appendChild(tag);
     }
     host.appendChild(wrap);
-    var pad = makePad(cv, i === 0 ? 1 : GHOST[i - 1], it.ch);
+    var pad = makePad(cv, i === 0 ? 1 : GHOST[i - 1], it.ch, i === 0 ? { readonly: true } : null);
     pad.resize();
     if (i > 0) pads.push(pad);
   }
@@ -1597,6 +1700,133 @@ function toast(msg) {
   n.textContent = msg; n.style.display = "block";
   clearTimeout(toastT); toastT = setTimeout(function () { n.style.display = "none"; }, 1800);
 }
+
+/* ── 펜 팔레트 ──
+   화면(#app)을 다시 그리지 않는 별도 층이다 — 열고 닫고 바꿔도 쓰던 칸은 그대로 남는다 */
+var palOpen = false, palEl = null;
+function unitNow() {
+  if (pads.length) return pads[0].note ? pads[0].lineH : pads[0].size;
+  return S.mode === "dict" ? 140 : 300;
+}
+/* 미리보기 획 : 가짜 필압을 실어 펜의 성격이 보이게 */
+function sampleStroke(t, v, w, h, amp) {
+  var st = { pen: t, seed: 777, pts: [] }, base = penBase(unitNow(), t, v), save = W.pressure;
+  W.pressure = W.pressure || 1;
+  var N = 26;
+  for (var i = 0; i < N; i++) {
+    var f = i / (N - 1), x = w * 0.1 + f * w * 0.8, y = h / 2 + Math.sin(f * 6.2832 * 0.9) * h * amp;
+    var pr = 0.18 + 0.7 * Math.sin(f * 3.1416);
+    var q = penPoint(st, { pointerType: "pen", pressure: pr, x: x, y: y }, st.pts[st.pts.length - 1], base, i);
+    st.pts.push({ x: x, y: y, w: q.w, a: q.a, pr: q.pr });
+  }
+  if (t === "brush") { var n = st.pts.length; for (var j = 0; j < 6; j++) st.pts[n - 1 - j].w *= 0.28 + 0.72 * (j / 6); }
+  W.pressure = save;
+  return st;
+}
+function prepCanvas(cv) {
+  var r = cv.getBoundingClientRect(), d = Math.min(2, window.devicePixelRatio || 1);
+  cv.width = Math.round(r.width * d); cv.height = Math.round(r.height * d);
+  var c = cv.getContext("2d"); c.setTransform(d, 0, 0, d, 0, 0); c.clearRect(0, 0, r.width, r.height);
+  return { c: c, w: r.width, h: r.height };
+}
+function paintSample(cv, t, v, amp) {
+  if (!cv) return;
+  var k = prepCanvas(cv);
+  penAll(k.c, sampleStroke(t, v, k.w, k.h, amp), false, ink("pen"));
+}
+function paintPenBtn() {
+  var cv = el("penico"), nm = el("penname");
+  if (nm) nm.textContent = PENS[penType()].name;
+  if (cv) paintSample(cv, penType(), penV(penType()), 0.22);
+  var b = el("penbtn"); if (b) b.classList.toggle("on", palOpen);
+}
+function palHTML() {
+  return '<div class="pp-types">' + PEN_ORDER.map(function (t) {
+      return '<button class="pp-type' + (t === penType() ? " on" : "") + '" data-a="pentype" data-v="' + t + '">'
+        + '<canvas data-pen="' + t + '"></canvas>' + PENS[t].name + "</button>"; }).join("") + "</div>"
+    + '<div class="pp-row"><span class="cap">굵기</span><b id="ppw"></b></div>'
+    + '<div class="pp-slider" id="ppslider"><canvas id="ppwedge"></canvas><span class="pp-thumb" id="ppthumb"></span></div>'
+    + '<div class="pp-ends"><span>가늘게</span><span>굵게</span></div>'
+    + '<canvas class="pp-preview" id="pppreview"></canvas>';
+}
+function paintPal() {
+  if (!palEl) return;
+  var t = penType(), v = penV(t);
+  palEl.querySelectorAll(".pp-type").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-v") === t); });
+  palEl.querySelectorAll(".pp-type canvas").forEach(function (cv) {
+    var tt = cv.getAttribute("data-pen"); paintSample(cv, tt, penV(tt), 0.2);
+  });
+  var wedge = el("ppwedge");
+  if (wedge) {
+    var k = prepCanvas(wedge), pad = 20, y = k.h / 2;
+    var lo = Math.max(1, penBase(unitNow(), t, 0)), hi = penBase(unitNow(), t, 1);
+    hi = Math.min(hi, k.h * 0.7);
+    k.c.fillStyle = cssv("--hair");
+    k.c.beginPath(); k.c.moveTo(pad, y - lo / 2); k.c.lineTo(k.w - pad, y - hi / 2);
+    k.c.arc(k.w - pad, y, hi / 2, -1.5708, 1.5708); k.c.lineTo(pad, y + lo / 2); k.c.closePath(); k.c.fill();
+    var x = pad + v * (k.w - 2 * pad);
+    k.c.fillStyle = cssv("--accent");
+    var cur = lo + (hi - lo) * v;
+    k.c.beginPath(); k.c.moveTo(pad, y - lo / 2); k.c.lineTo(x, y - cur / 2); k.c.lineTo(x, y + cur / 2);
+    k.c.lineTo(pad, y + lo / 2); k.c.closePath(); k.c.fill();
+    var th = el("ppthumb"); if (th) th.style.left = x + "px";
+  }
+  var lbl = el("ppw"); if (lbl) lbl.textContent = penBase(unitNow(), t).toFixed(1) + " px";
+  paintSample(el("pppreview"), t, v, 0.26);
+  paintPenBtn();
+}
+function openPal() {
+  if (!palEl) {
+    palEl = document.createElement("div");
+    palEl.className = "penpal"; palEl.id = "penpal";
+    document.body.appendChild(palEl);
+  }
+  palEl.innerHTML = palHTML();
+  var b = el("penbtn");
+  if (b) {
+    var r = b.getBoundingClientRect();
+    palEl.style.left = Math.round(r.right + 12) + "px";
+    palEl.style.top = Math.max(12, Math.min(window.innerHeight - 440, Math.round(r.top - 6))) + "px";
+  }
+  palEl.classList.add("open"); palOpen = true;
+  paintPal();
+}
+function closePal() {
+  if (!palOpen) return;
+  palOpen = false;
+  if (palEl) palEl.classList.remove("open");
+  paintPenBtn();
+}
+/* 팔레트 밖을 누르면 닫는다 — 쓰는 칸을 눌렀다면 닫으면서 그대로 쓴다 */
+document.addEventListener("pointerdown", function (ev) {
+  if (!palOpen) return;
+  if (ev.target.closest && ev.target.closest("#penpal,#penbtn")) return;
+  closePal();
+}, true);
+/* 굵기 슬라이더 : 펜슬·손가락 모두 끌어서 조절 */
+var slideId = null;
+function slideTo(ev) {
+  var s = el("ppslider"); if (!s) return;
+  var r = s.getBoundingClientRect(), pad = 20;
+  var v = Math.max(0, Math.min(1, (ev.clientX - r.left - pad) / (r.width - 2 * pad)));
+  if (!W.penW) W.penW = {};
+  W.penW[penType()] = Math.round(v * 100) / 100;
+  paintPal();
+}
+document.addEventListener("pointerdown", function (ev) {
+  var s = ev.target.closest && ev.target.closest("#ppslider");
+  if (!s) return;
+  ev.preventDefault();
+  slideId = ev.pointerId;
+  try { s.setPointerCapture(ev.pointerId); } catch (e) {}
+  slideTo(ev);
+}, { passive: false });
+document.addEventListener("pointermove", function (ev) {
+  if (ev.pointerId === slideId) { ev.preventDefault(); slideTo(ev); }
+}, { passive: false });
+function slideEnd(ev) { if (ev.pointerId === slideId) { slideId = null; save(); } }
+document.addEventListener("pointerup", slideEnd);
+document.addEventListener("pointercancel", slideEnd);
 
 /* ── 지우개 ──
    손가락 : 누르고 있는 동안만 지우개. 짧게 톡 치면 고정 ↔ 해제
@@ -1652,6 +1882,9 @@ function render() {
   if (S.mode === "trace") buildCells();
   else if (S.mode === "stroke") buildStroke();
   else if (S.mode === "dict") buildDictCells();
+  if (palOpen && !el("penbtn")) closePal();
+  paintPenBtn();
+  if (palOpen) paintPal();
 }
 
 function loadList() {
@@ -1708,6 +1941,8 @@ function act(t) {
   if (a === "dreveal") { S.reveal = true; return render(); }
   if (a === "doverlay") { S.overlay = !S.overlay; return render(); }
   if (a === "dko") { S.showKo = !S.showKo; return render(); }
+  if (a === "penpal") { if (palOpen) closePal(); else openPal(); return; }
+  if (a === "pentype") { W.pen = t.getAttribute("data-v"); save(); paintPal(); return; }
   if (a === "gear") { S.setOpen = !S.setOpen; S.listOpen = false; return render(); }
   if (a === "list") { S.listOpen = !S.listOpen; S.setOpen = false; return render(); }
   if (a === "closeov") { S.setOpen = false; S.listOpen = false; return render(); }
