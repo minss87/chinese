@@ -187,10 +187,16 @@ svg{display:block;}
 /* 받아쓰기 공책 */
 .notewrap{flex:1;min-height:0;display:flex;}
 .note{flex:1;display:block;border-radius:14px;touch-action:none;background:var(--sheet);border:1px solid var(--hair);box-shadow:var(--shadow);}
-.answer{display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:0 6px 14px;}
-.ans-ko{font-size:16px;font-weight:600;color:var(--ink2);}
-.ans-zh{font-size:30px;line-height:1.3;font-family:"HandZh","PingFang SC",serif;}
-.ans-py{font-size:15px;color:var(--accent2);}
+.answer{display:flex;flex-direction:column;align-items:flex-start;gap:1px;letter-spacing:0;}
+.answer>span{max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.ans-ko{font-size:13.5px;line-height:1.3;font-weight:600;color:var(--ink2);}
+.ans-zh{font-size:24px;line-height:1.2;font-weight:400;font-family:"HandZh","PingFang SC",serif;color:var(--ink);}
+.ans-py{font-size:13px;line-height:1.3;font-weight:500;color:var(--accent2);}
+.head.dict{height:84px;min-height:0;overflow:hidden;}
+.navtop{display:flex;flex-direction:column;gap:10px;margin-bottom:auto;}
+.navpair{display:flex;gap:8px;}
+.navpair .btn{flex:1;min-width:0;width:auto;padding:0 6px;}
+.nav .big{flex:0 1 196px;min-height:96px;}
 
 /* 읽기 */
 .textwrap{flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -1465,13 +1471,7 @@ function buildDictCells() {
 }
 
 function dictStage(it) {
-  var h = "";
-  if (S.reveal)
-    h += '<div class="answer"><span class="ans-ko">' + esc(koBody(it.ko)) + "</span>"
-      + '<span class="ans-zh">' + esc(it.zh) + "</span>"
-      + '<span class="ans-py">' + esc(it.pinyin) + "</span></div>";
-  h += '<div class="notewrap" id="cells"></div>';   /* 정답은 공책 위에 */
-  return h + gradeHTML();
+  return '<div class="notewrap" id="cells"></div>' + gradeHTML();   /* 정답은 머리줄에 — 공책 크기는 그대로 */
 }
 function paintWave() {}
 
@@ -1705,13 +1705,13 @@ function headHTML() {
   }
   if (S.mode === "dict") {
     if (!it) return "";
-    var ko = S.showKo && !S.reveal;   /* 정답을 펼치면 뜻은 정답 칸에 함께 나온다 */
+    var lead = S.reveal
+      ? '<span class="answer"><span class="ans-ko">' + esc(koBody(it.ko)) + "</span>"
+        + '<span class="ans-zh">' + esc(it.zh) + "</span>"
+        + '<span class="ans-py">' + esc(it.pinyin) + "</span></span>"
+      : (S.showKo ? esc(koBody(it.ko)) : "");
     return '<span class="muted">' + (S.idx + 1) + " / " + S.list.length + "</span>"
-      + '<span class="hlead">' + (ko ? esc(koBody(it.ko)) : "") + "</span>"
-      + '<button class="btn icon" data-a="say" data-t="' + esc(it.zh) + '" aria-label="듣기">' + I.sound + "</button>"
-      + '<button class="btn" data-a="slow" data-t="' + esc(it.zh) + '">느리게</button>'
-      + '<button class="btn' + (S.showKo ? " on" : "") + '" data-a="dko">뜻 보기</button>'
-      + '<button class="btn ' + (S.reveal ? "on" : "prim") + '" data-a="dreveal">정답 보기</button>'
+      + '<span class="hlead">' + lead + "</span>"
       + listBtn("문장 목록");
   }
   var t = S.text;
@@ -1755,8 +1755,14 @@ function navHTML() {
     return S.list.length ? prev + bigBtn("next", last ? "처음으로" : "다음 글자") : "";
   if (S.mode === "dict") {
     if (!S.list.length) return "";
-    if (!S.reveal) return prev + bigBtn("dnext", S.idx + 1 < S.list.length ? "다음 문장" : "처음으로");
-    return '<button class="btn' + (S.overlay ? " on" : "") + '" data-a="doverlay">겹쳐 보기</button>'
+    var it = S.list[S.idx];
+    var top = '<div class="navtop"><div class="navpair">'
+      + '<button class="btn icon" data-a="say" data-t="' + esc(it.zh) + '" aria-label="듣기">' + I.sound + "</button>"
+      + '<button class="btn" data-a="slow" data-t="' + esc(it.zh) + '">느리게</button></div>'
+      + (S.reveal ? "" : '<button class="btn' + (S.showKo ? " on" : "") + '" data-a="dko">뜻 보기</button>')
+      + '<button class="btn ' + (S.reveal ? "on" : "prim") + '" data-a="dreveal">' + (S.reveal ? "정답 닫기" : "정답 보기") + "</button></div>";
+    if (!S.reveal) return top + prev + bigBtn("dnext", S.idx + 1 < S.list.length ? "다음 문장" : "처음으로");
+    return top + '<button class="btn' + (S.overlay ? " on" : "") + '" data-a="doverlay">겹쳐 보기</button>'
       + '<button class="btn" data-a="dgrade">글씨 채점</button>'
       + '<button class="btn" data-a="dmark" data-s="0">틀렸어요</button>'
       + '<button class="btn big ok" data-a="dmark" data-s="2">' + I.check + "맞았어요</button>";
@@ -1845,7 +1851,7 @@ function overlayHTML() {
 function mainHTML() {
   var rail = railHTML();
   return tabsHTML() + epbarHTML()
-    + '<div class="head' + (rail ? "" : " norail") + '">' + headHTML() + "</div>"
+    + '<div class="head' + (rail ? "" : " norail") + (S.mode === "dict" ? " dict" : "") + '">' + headHTML() + "</div>"
     + '<div class="body">' + (rail ? '<div class="rail">' + rail + "</div>" : "")
     + '<div class="main">' + stageHTML() + '</div><div class="nav">' + navHTML() + "</div></div>"
     + overlayHTML();
