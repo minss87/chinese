@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#eceef4">
+<meta name="theme-color" content="#f4f6f9">
 <title>전화 중국어</title>
 <style>
 @font-face{font-family:"Pretendard";font-style:normal;font-weight:100 500;font-display:swap;
@@ -247,6 +247,133 @@ svg.ring{transform:rotate(-90deg);}
 .mic .spin{border-color:rgba(255,255,255,.42);border-top-color:#fff;}
 @keyframes sp{to{transform:rotate(360deg);}}
 button:focus-visible,input:focus-visible{outline:2px solid var(--blue);outline-offset:3px;}
+
+/* ════════ 스타일 B (파스텔 틴트) · 배경은 A ════════ */
+:root{--bg:#f4f6f9;--ink:#16181d;--ink2:#6b6f78;--ink3:#a1a5ad;--hair:#e8eaef;--line:#e8eaef;
+  --red:#ef4136;--blue:#3b73f5;--green:#1e9e57;--amber:#9a6400;
+  --tint-r:#ffe9e5;--tint-b:#e6eeff;--tint-g:#e2f5e9;
+  --shadow:0 1px 2px rgba(22,24,29,.05),0 6px 18px rgba(22,24,29,.05);}
+body{background:var(--bg);letter-spacing:-.012em;}
+.aurora{display:none;}
+.glass{background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none;border:0;box-shadow:var(--shadow);}
+.card{border-radius:24px;}
+.title{font-weight:800;letter-spacing:-.03em;}
+.chip,.wordchip,.reveal,.pill,.sc,.syl,.wk,.uc,.input{background:#fff;border:1px solid var(--hair);}
+.pill.solid{background:var(--red);border-color:transparent;}
+.row-n{background:#f1f2f5;}
+.tabbar{background:rgba(255,255,255,.94);box-shadow:0 8px 24px rgba(22,24,29,.1);border:0;}
+.tab.sel{background:var(--ink);color:#fff;box-shadow:none;}
+.seg{background:#eceef2;}
+.sheet.glass{background:#fff;}
+.mic.next{background:#fff;border:1px solid var(--hair);}
+.wk.on{background:var(--ink);}
+.spk{background:#fdeceb;}
+
+/* 홈 : 모드 타일 */
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+.mode{border:0;border-radius:24px;padding:16px;display:flex;flex-direction:column;gap:12px;position:relative;
+  min-height:128px;text-align:left;font:inherit;color:var(--ink);cursor:pointer;
+  transition:transform .18s cubic-bezier(.4,0,.2,1);}
+.mode:active{transform:scale(.97);}
+.mode.m1{grid-column:1/3;flex-direction:row;align-items:center;min-height:0;background:var(--tint-r);}
+.mode.m2{background:var(--tint-b);} .mode.m3{background:var(--tint-g);}
+.mode.off{opacity:.55;}
+.mic2{width:40px;height:40px;border-radius:13px;display:grid;place-items:center;background:#fff;flex:none;}
+.m1 .mic2{color:var(--red);} .m2 .mic2{color:var(--blue);} .m3 .mic2{color:var(--green);}
+.mb{flex:1;display:flex;flex-direction:column;gap:3px;min-width:0;}
+.mb b{font-size:17px;font-weight:700;letter-spacing:-.02em;}
+.mb span{font-size:12.5px;color:var(--ink2);line-height:1.35;}
+.go{position:absolute;right:14px;top:14px;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;color:#fff;}
+.go svg{width:11px;height:11px;margin-left:2px;}
+.m1 .go{position:static;width:44px;height:44px;} .m1 .go svg{width:14px;height:14px;}
+.go1{background:var(--red);} .go2{background:var(--blue);} .go3{background:var(--green);}
+.go.done{background:#fff;color:var(--green);}
+.mbar{height:4px;border-radius:9px;background:rgba(255,255,255,.75);overflow:hidden;margin-top:2px;}
+.mbar i{display:block;height:100%;border-radius:9px;}
+.m2 .mbar i{background:var(--blue);} .m3 .mbar i{background:var(--green);}
+
+/* 듣기·읽기 */
+.lrlab{font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px;margin:0 2px 12px;flex-wrap:wrap;}
+.lrlab .dot{width:8px;height:8px;border-radius:50%;}
+.lrlab .dot.L{background:var(--blue);} .lrlab .dot.R{background:var(--green);}
+.lrlab .zh{font-family:"PingFang SC","Noto Sans SC",sans-serif;}
+.lrlab .muted{color:var(--ink2);font-weight:500;}
+.voice{border-radius:26px;padding:16px;display:flex;align-items:center;gap:14px;background:var(--tint-b);
+  color:#c3d2f6;margin-bottom:12px;}
+.vplay{width:56px;height:56px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;
+  flex:none;border:0;cursor:pointer;box-shadow:0 6px 16px rgba(59,115,245,.28);transition:transform .15s;}
+.vplay:active{transform:scale(.94);}
+.vplay svg{width:20px;height:20px;margin-left:3px;}
+.vplay.on svg{margin-left:0;}
+.wave{display:flex;align-items:center;gap:3px;flex:1;height:32px;min-width:0;overflow:hidden;}
+.wave i{display:block;width:3px;border-radius:3px;background:currentColor;flex:none;}
+.wave.on i{animation:wv 1s ease-in-out infinite;}
+.wave i.hit{background:var(--blue);}
+@keyframes wv{0%,100%{transform:scaleY(1);}50%{transform:scaleY(.45);}}
+.vdur{font-size:13px;color:var(--blue);font-variant-numeric:tabular-nums;}
+.vwho{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink2);margin:0 0 6px 4px;}
+.speed{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:4px;}
+.speed button{border:0;font:inherit;font-size:13px;padding:8px 13px;border-radius:999px;background:#fff;color:var(--ink2);
+  box-shadow:0 1px 2px rgba(22,24,29,.06);cursor:pointer;}
+.speed button.on{background:var(--blue);color:#fff;font-weight:600;}
+.speed button.ln{min-width:38px;}
+.lrq{font-size:18px;font-weight:700;letter-spacing:-.02em;margin:20px 2px 12px;line-height:1.4;}
+.opts{display:flex;flex-direction:column;gap:8px;}
+.opt{display:flex;align-items:center;gap:12px;padding:15px 16px;border-radius:18px;background:#fff;border:0;width:100%;
+  box-shadow:var(--shadow);font:inherit;font-size:15.5px;font-weight:500;color:var(--ink);text-align:left;cursor:pointer;
+  transition:transform .15s,background .2s,opacity .2s;}
+.opt:active{transform:scale(.98);}
+.opt .k{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:700;flex:none;
+  background:#f1f2f5;color:var(--ink2);}
+.opt .ot{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;}
+.opt .zh{font-family:"PingFang SC","Noto Sans SC",sans-serif;font-size:16.5px;letter-spacing:.02em;}
+.opt .ok2{font-size:12.5px;color:var(--ink2);font-weight:500;}
+.opt.right{background:var(--tint-g);box-shadow:none;} .opt.right .k{background:var(--green);color:#fff;}
+.opt.wrong{background:#fff1ef;box-shadow:none;} .opt.wrong .k{background:var(--red);color:#fff;}
+.opt.dim{opacity:.5;}
+.opt[disabled]{cursor:default;}
+.lrhint{font-size:12.5px;color:var(--ink3);text-align:center;margin:14px 0 0;}
+.chat{display:flex;flex-direction:column;gap:10px;margin-bottom:6px;}
+.msg{display:flex;gap:9px;align-items:flex-end;}
+.msg.me{flex-direction:row-reverse;}
+.msg .av{width:34px;height:34px;border-radius:50%;flex:none;display:grid;place-items:center;font-size:14px;font-weight:700;
+  font-family:"PingFang SC","Noto Sans SC",sans-serif;}
+.msg .col{display:flex;flex-direction:column;gap:3px;max-width:78%;min-width:0;}
+.msg.me .col{align-items:flex-end;}
+.msg .nm{font-size:11.5px;color:var(--ink3);margin-left:4px;}
+.bub{padding:10px 14px;background:#fff;border-radius:6px 20px 20px 20px;box-shadow:var(--shadow);cursor:pointer;
+  font-size:17px;line-height:1.5;word-break:break-all;}
+.msg.me .bub{background:var(--tint-g);border-radius:20px 6px 20px 20px;box-shadow:none;}
+.bub .zh{font-family:"PingFang SC","Noto Sans SC",sans-serif;letter-spacing:.02em;}
+.bub .pinyin{margin:3px 0 0;font-size:12.5px;letter-spacing:0;}
+.bub .bko{font-size:12.5px;color:var(--ink2);margin-top:2px;line-height:1.45;}
+.bub .blank{display:inline-block;min-width:2.4em;border-bottom:2px solid var(--green);margin:0 3px;color:var(--green);
+  font-weight:700;text-align:center;}
+.bub .blank.L{border-color:var(--blue);color:var(--blue);}
+.msg.bad .bub{background:#fff1ef;text-decoration:line-through;color:var(--ink3);}
+.msg.new .bub{animation:pop .32s cubic-bezier(.3,1.4,.5,1);}
+@keyframes pop{from{transform:scale(.6) translateY(10px);opacity:0;}to{transform:none;opacity:1;}}
+.sysnote{align-self:center;font-size:12px;color:var(--ink2);background:#eceef2;padding:5px 11px;border-radius:999px;}
+.grouptitle{align-self:center;font-size:12px;color:var(--ink2);margin-bottom:2px;}
+.av0{background:var(--tint-b);color:var(--blue);} .av1{background:#fff0d6;color:#9a6400;} .av2{background:#f3e8ff;color:#7c3aed;}
+.av3{background:var(--tint-r);color:var(--red);} .av4{background:#e0f4f7;color:#0e7490;} .av5{background:#eceef2;color:#4b5563;}
+.replybar{margin-top:14px;border-radius:22px;background:#fff;box-shadow:var(--shadow);padding:10px;}
+.replybar .rtl{font-size:12px;color:var(--ink3);margin:2px 6px 8px;}
+.replybar .opt{box-shadow:none;background:#f5f6f8;padding:12px 14px;}
+.replybar .opt.right{background:var(--tint-g);} .replybar .opt.wrong{background:#fff1ef;}
+.lrverdict{display:flex;align-items:center;gap:10px;margin:16px 2px 0;font-size:15px;font-weight:700;}
+.lrverdict.ok{color:var(--green);} .lrverdict.no{color:var(--red);}
+.lrnext{margin-top:14px;width:100%;border:0;border-radius:18px;padding:16px;font:inherit;font-size:16px;font-weight:700;
+  color:#fff;cursor:pointer;background:var(--ink);}
+.lrnext.L{background:var(--blue);} .lrnext.R{background:var(--green);}
+.lrdone{text-align:center;padding:26px 20px;}
+.lrdone .big{font-size:44px;font-weight:800;letter-spacing:-.03em;margin:6px 0 2px;}
+.lrlist{display:flex;flex-direction:column;gap:6px;margin-top:14px;text-align:left;}
+.lrlist .li{display:flex;gap:10px;align-items:center;padding:10px 12px;border-radius:14px;background:#f5f6f8;font-size:14px;}
+.lrlist .li .zh{font-family:"PingFang SC","Noto Sans SC",sans-serif;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.lrlist .li b{font-size:12px;}
+.type-row .input{min-width:0;width:0;} .type-row>button{flex:none;margin-top:0;}
+
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;}}
 </style>
 </head>
@@ -274,6 +401,7 @@ var P = {
   gen: saved.gen || {},
   recall: saved.recall || {},
   recallRecent: saved.recallRecent || [],
+  lr: saved.lr || {},
   tint: typeof saved.tint === "number" ? saved.tint : 42,
   tone: saved.tone !== false
 };
@@ -285,7 +413,7 @@ function persist() {
   }
 }
 
-var BUILD = "2026-09-21 b8";
+var BUILD = "2026-09-30 lr1";
 var CURRICULUM = null;
 var S = { tab: "home", ph: 0, wk: 0, sheet: false, toast: "", sess: null, busy: "" };
 
@@ -1527,14 +1655,7 @@ function homeHTML() {
   if (!P.gmKey) h += '<p class="foot">Gemini 키가 없어 예문 생성과 2부 대화가 잠겨 있습니다.</p>';
   h += "</section>";
 
-  if (nextSi > -1) {
-    h += '<button class="glass card action" data-a="start" data-si="' + nextSi + '"><div>'
-      + '<p class="action-t">' + (nextSi + 1) + "회차 시작</p>"
-      + '<p class="sub">1부 발음 채점 → 2부 대화 8턴</p></div><span class="play"></span></button>';
-  } else {
-    h += '<div class="glass card"><p class="action-t">이번 주 완료</p>'
-      + '<p class="sub">주차를 넘겨 다음 어휘로 이어가세요.</p></div>';
-  }
+  h += modesHTML(nextSi);
   h += recallCardHTML();
   if (missed)
     h += '<button class="glass card action quiet" data-a="tab" data-tab="review"><div>'
@@ -1600,9 +1721,6 @@ function settingsHTML() {
     + '<span class="t3">mǎ</span><span class="t4">mà</span><span class="t5">ma</span></div>'
     + '<button class="toggle ' + (P.tone ? "on" : "") + '" data-a="tone"><i></i></button></div>'
 
-    + '<div class="glass card"><p class="action-t">유리 농도</p>'
-    + '<input class="slider" type="range" min="0" max="100" value="' + P.tint + '" id="tint">'
-    + '<div class="ends"><span class="sub">맑게</span><span class="sub">짙게</span></div></div>'
 
     + '<div class="glass card"><p class="action-t">데이터</p>'
     + '<p class="sub">진도, 복습 목록, 생성된 예문을 지웁니다. 키는 남습니다.</p>'
@@ -1641,6 +1759,8 @@ function render() {
     h = '<div class="screen"><div class="glass card center"><p class="action-t">'
       + '<span class="spin"></span>' + esc(S.busy) + "</p>"
       + '<p class="sub">이 회차에서 한 번만 만들고 저장합니다.</p></div></div>';
+  } else if (S.sess && S.sess.mode === "lr") {
+    h = lrHTML();
   } else if (S.sess) {
     h = S.sess.part === "preview" ? recallPreviewHTML()
       : S.sess.part === "done" ? recallDoneHTML()
@@ -1661,6 +1781,320 @@ function render() {
   }
 }
 
+/* ===================== 듣기 · 읽기 ===================== */
+var LR = null, lrLoading = false;
+var SPK_KO = { "我": "나", "王老师": "왕 선생님", "刘老师": "류 선생님", "校长": "교장", "小明": "샤오밍", "小丽": "샤오리",
+  "李阿姨": "리 아줌마", "妈妈": "엄마", "爸爸": "아빠", "小明爸爸": "샤오밍 아빠", "小明妈妈": "샤오밍 엄마",
+  "小明弟弟": "샤오밍 동생", "小丽妈妈": "샤오리 엄마", "小丽爸爸": "샤오리 아빠", "医生": "의사", "李阿姨儿子": "리 아줌마 아들",
+  "老奶奶": "할머니", "奶奶": "할머니", "爷爷": "할아버지", "教授": "교수님", "工作人员": "직원", "邻居": "이웃",
+  "王老师女儿": "왕 선생님 딸", "服务员": "종업원", "老板": "사장님", "警察": "경찰", "广播": "안내 방송", "班长": "반장",
+  "小张": "샤오장", "四中老师": "4중 선생님", "师傅": "기사님" };
+var SPK_MALE = { "刘老师": 1, "校长": 1, "小明": 1, "小明爸爸": 1, "小明弟弟": 1, "小丽爸爸": 1, "爸爸": 1, "李阿姨儿子": 1,
+  "爷爷": 1, "教授": 1, "老板": 1, "警察": 1, "师傅": 1, "班长": 1, "小张": 1 };
+var SPK_KID = { "小明": 1, "小丽": 1, "小明弟弟": 1, "王老师女儿": 1, "班长": 1 };
+var AV_CLS = { "王老师": 0, "刘老师": 4, "校长": 5, "小明": 1, "小丽": 2, "李阿姨": 3 };
+function spkKo(s) { return SPK_KO[s] || s; }
+function avChar(s) {
+  if (s === "小明") return "明"; if (s === "小丽") return "丽"; if (s === "校长") return "校";
+  return s.charAt(0);
+}
+function avCls(s) { return "av" + (s in AV_CLS ? AV_CLS[s] : 5); }
+
+function lrKey() { return S.ph + ":" + week().week; }
+function lrEp() { return LR && LR.eps[lrKey()]; }
+function lrStat(kind) {
+  var e = lrEp(); if (!e) return null;
+  var list = e[kind], ok = 0, seen = 0;
+  list.forEach(function (it, i) {
+    var r = P.lr[lrKey() + ":" + kind + ":" + i];
+    if (r != null) seen++; if (r === 1) ok++;
+  });
+  return { total: list.length, ok: ok, seen: seen };
+}
+function loadLR() {
+  if (LR || lrLoading) return;
+  lrLoading = true;
+  fetch("./data/listen_read.json").then(function (r) { if (!r.ok) throw 0; return r.json(); })
+    .then(function (d) { LR = d; lrLoading = false; render(); })
+    .catch(function () { lrLoading = false; });
+}
+
+/* ── 목소리 : 인물마다 높낮이를 조금씩 다르게 ── */
+var VOICES = { f: null, m: null };
+function pickVoices() {
+  if (!window.speechSynthesis) return;
+  var zh = window.speechSynthesis.getVoices().filter(function (v) { return /^zh(-|_)?(CN|Hans)?/i.test(v.lang || ""); });
+  if (!zh.length) return;
+  var male = zh.filter(function (v) { return /li-?mu|yu-?shu|kangkang|yunxi|yunyang|yunjian|male|男/i.test(v.name); });
+  var fem = zh.filter(function (v) { return male.indexOf(v) < 0; });
+  VOICES.f = fem[0] || zh[0]; VOICES.m = male[0] || null;
+}
+var lrSpeakGen = 0;
+function speakLines(lines, rate, done) {
+  if (!window.speechSynthesis || !lines.length) { if (done) done(); return; }
+  pickVoices();
+  window.speechSynthesis.cancel();
+  var gen = ++lrSpeakGen, i = 0;
+  function next() {
+    if (gen !== lrSpeakGen) return;
+    if (i >= lines.length) { if (done) done(); return; }
+    var l = lines[i++];
+    var u = new SpeechSynthesisUtterance(l.zh);
+    u.lang = "zh-CN"; u.rate = rate;
+    var male = !!SPK_MALE[l.s];
+    if (male && VOICES.m) { u.voice = VOICES.m; u.pitch = 1; }
+    else { if (VOICES.f) u.voice = VOICES.f; u.pitch = male ? 0.62 : SPK_KID[l.s] ? 1.3 : l.s === "我" ? 1.12 : 1; }
+    u.onend = function () { setTimeout(next, 380); };
+    u.onerror = function () { setTimeout(next, 100); };
+    lrOnLine(i - 1);
+    window.speechSynthesis.speak(u);
+  }
+  next();
+}
+function lrOnLine(k) {
+  var s = S.sess; if (!s || s.mode !== "lr") return;
+  s.playLine = k;
+  var w = document.querySelector(".wave");
+  if (w) {
+    var bars = w.children, n = bars.length, per = Math.ceil(n / s.cur.lines.length);
+    for (var b = 0; b < n; b++) bars[b].classList.toggle("hit", b < per * (k + 1));
+  }
+}
+function lrPlay(rate, only) {
+  var s = S.sess, it = s.cur;
+  var lines = only != null ? [it.lines[only]] : it.lines;
+  s.playing = true; s.plays++; setPlayUI(true);
+  speakLines(lines, rate || s.rate, function () { s.playing = false; setPlayUI(false); });
+}
+function setPlayUI(on) {
+  var b = document.querySelector(".vplay"), w = document.querySelector(".wave");
+  if (b) { b.classList.toggle("on", on); b.innerHTML = on ? I_STOP : I_PLAY; }
+  if (w) w.classList.toggle("on", on);
+}
+var I_PLAY = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15a1 1 0 001.5.86l12-7.5a1 1 0 000-1.72l-12-7.5A1 1 0 007 4.5z"/></svg>';
+var I_STOP = '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1.2"/><rect x="14" y="5" width="4" height="14" rx="1.2"/></svg>';
+var I_MIC = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0014 0M12 18v3"/></svg>';
+var I_EAR = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0118 0v6"/><path d="M21 19a2 2 0 01-2 2h-1v-6h3zM3 19a2 2 0 002 2h1v-6H3z"/></svg>';
+var I_CHAT = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>';
+var I_CHECK = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+
+function shuffle4(n) {
+  var a = []; for (var i = 0; i < n; i++) a.push(i);
+  for (var j = a.length - 1; j > 0; j--) { var k = Math.floor(Math.random() * (j + 1)); var t = a[j]; a[j] = a[k]; a[k] = t; }
+  return a;
+}
+
+/* ── 시작 : 아직 안 푼 것 → 틀린 것 순서. 다 맞혔으면 전체를 다시 ── */
+function startLR(kind) {
+  var e = lrEp(); if (!e) { loadLR(); return toast("듣기·읽기 자료를 불러오는 중입니다. 잠시 뒤 다시 누르세요."); }
+  var key = lrKey(), list = e[kind], fresh = [], wrong = [];
+  list.forEach(function (it, i) {
+    var r = P.lr[key + ":" + kind + ":" + i];
+    if (r == null) fresh.push(i); else if (r === 0) wrong.push(i);
+  });
+  var order = fresh.concat(wrong);
+  if (!order.length) order = list.map(function (_, i) { return i; });
+  S.sess = { mode: "lr", kind: kind, order: order, idx: 0, results: [], rate: 0.85 };
+  lrLoad();
+  render();
+  if (kind === "listen") setTimeout(function () { lrPlay(); }, 450);
+}
+function lrLoad() {
+  var s = S.sess, e = lrEp();
+  s.n = s.order[s.idx]; s.cur = e[s.kind][s.n];
+  s.shuf = shuffle4(s.cur.opts.length);
+  s.pick = null; s.peek = {}; s.plays = 0; s.playing = false; s.playLine = -1;
+}
+function lrAnswer(oi) {
+  var s = S.sess; if (s.pick != null) return;
+  s.pick = oi;
+  var ok = oi === 0 ? 1 : 0;
+  var k = lrKey() + ":" + s.kind + ":" + s.n;
+  P.lr[k] = ok; persist();
+  s.results.push({ n: s.n, ok: ok });
+  if (window.speechSynthesis) { lrSpeakGen++; window.speechSynthesis.cancel(); }
+  render();
+  var box = document.querySelector(".lrnext");
+  if (box) setTimeout(function () { box.scrollIntoView({ behavior: "smooth", block: "end" }); }, 60);
+  /* 답장을 보냈으면 상대 반응을 들려준다 */
+  if (s.cur.type === "reply" && s.cur.after && s.kind === "listen")
+    (function (af, cur) {
+      setTimeout(function () { if (S.sess === s && s.cur === cur) speakLines([af], s.rate); }, 700);
+    })(s.cur.after, s.cur);
+}
+function lrNext() {
+  var s = S.sess;
+  if (window.speechSynthesis) { lrSpeakGen++; window.speechSynthesis.cancel(); }
+  if (s.idx + 1 >= s.order.length) { s.done = true; window.scrollTo(0, 0); return render(); }
+  s.idx++; lrLoad(); window.scrollTo(0, 0); render();
+  if (s.kind === "listen") setTimeout(function () { lrPlay(); }, 350);
+}
+
+/* ── 그리기 ── */
+function waveHTML() {
+  var hs = [8, 14, 22, 12, 26, 18, 10, 24, 16, 28, 12, 20, 9, 17, 25, 13, 7, 19, 23, 11, 15, 8, 21, 12, 6, 18, 24, 10];
+  return '<div class="wave">' + hs.map(function (h) { return '<i style="height:' + h + 'px"></i>'; }).join("") + "</div>";
+}
+function lineZhHTML(it, li, blankCls) {
+  var zh = it.lines[li].zh, bl = it.blank, s = S.sess;
+  if (it.type === "cloze" && bl && bl.line === li) {
+    var at = zh.indexOf(bl.word);
+    var fill = s.pick == null ? "" : esc(bl.word);
+    return esc(zh.slice(0, at)) + '<span class="blank ' + blankCls + '">' + (fill || "&nbsp;") + "</span>" + esc(zh.slice(at + bl.word.length));
+  }
+  return esc(zh);
+}
+function msgHTML(l, opt) {
+  opt = opt || {};
+  var me = l.s === "我";
+  var h = '<div class="msg' + (me ? " me" : "") + (opt.bad ? " bad" : "") + (opt.isNew ? " new" : "") + '">';
+  if (!me) h += '<div class="av ' + avCls(l.s) + '">' + esc(avChar(l.s)) + "</div>";
+  h += '<div class="col">' + (!me && opt.name ? '<span class="nm">' + esc(spkKo(l.s)) + "</span>" : "")
+    + '<div class="bub" data-a="lrbub" data-i="' + (opt.i == null ? "" : opt.i) + '" data-t="' + esc(l.zh) + '">'
+    + '<div class="zh">' + (opt.zhHTML || esc(l.zh)) + "</div>";
+  if (opt.py) h += pinyinHTML(opt.maskPy ? maskPy(l, opt.maskPy) : l.py);
+  if (opt.ko) h += '<div class="bko">' + esc(l.ko) + "</div>";
+  return h + "</div></div></div>";
+}
+/* 빈칸 문장의 병음을 볼 때 빈칸 음절은 가린다 */
+function maskPy(l, word) {
+  var han = l.zh.replace(/[^\u4e00-\u9fff]/g, ""), at = han.indexOf(word.replace(/[^\u4e00-\u9fff]/g, ""));
+  if (at < 0) return l.py;
+  var syl = l.py.split(/\s+/), n = word.replace(/[^\u4e00-\u9fff]/g, "").length;
+  for (var i = at; i < at + n && i < syl.length; i++) syl[i] = "＿";
+  return syl.join(" ");
+}
+function optsHTML(it, s, zhOpts) {
+  var ans = s.pick != null;
+  return s.shuf.map(function (oi, pos) {
+    var cls = "";
+    if (ans) cls = oi === 0 ? " right" : oi === s.pick ? " wrong" : " dim";
+    var mark = ans && oi === 0 ? I_CHECK : ans && oi === s.pick ? "✕" : "ABCD".charAt(pos);
+    var body = zhOpts ? '<span class="zh">' + esc(it.opts[oi]) + "</span>" : esc(it.opts[oi]);
+    if (ans && zhOpts && it.optsKo) body += '<span class="ok2">' + esc(it.optsKo[oi]) + "</span>";
+    return '<button class="opt' + cls + '" data-a="lrpick" data-o="' + oi + '"' + (ans ? " disabled" : "") + ">"
+      + '<span class="k">' + mark + '</span><span class="ot">' + body + "</span></button>";
+  }).join("");
+}
+function lrThreadHTML(it, s, reveal) {
+  var h = '<div class="chat">';
+  if (it.form === "group") h += '<div class="grouptitle">' + esc(it.title) + " (" + (1 + new Set(it.lines.map(function (l) { return l.s; })).size) + ")</div>";
+  var multi = it.form === "group" || it.form === "dialog";
+  it.lines.forEach(function (l, i) {
+    h += msgHTML(l, { i: i, name: multi, py: reveal || s.peek[i], ko: reveal,
+      maskPy: !reveal && it.type === "cloze" && it.blank.line === i ? it.blank.word : null,
+      zhHTML: lineZhHTML(it, i, s.kind === "listen" ? "L" : "") });
+  });
+  if (it.type === "reply" && s.pick != null) {
+    var mine = function (oi) { return { s: "我", zh: it.opts[oi], py: it.optsPy[oi], ko: it.optsKo[oi] }; };
+    if (s.pick !== 0) {
+      h += msgHTML(mine(s.pick), { bad: true, py: true, ko: true });
+      h += '<div class="sysnote">흐름에 맞는 답장은 이거예요</div>';
+    }
+    h += msgHTML(mine(0), { py: true, ko: true, isNew: true });
+    if (it.after) h += msgHTML(it.after, { py: true, ko: true, name: multi, isNew: true });
+  }
+  return h + "</div>";
+}
+function lrHTML() {
+  var s = S.sess, e = lrEp();
+  if (s.done) return lrDoneHTML();
+  var it = s.cur, L = s.kind === "listen", ans = s.pick != null;
+  var total = s.order.length;
+  var h = '<div class="screen"><div class="dhead"><button class="ghost" data-a="exit">종료</button>'
+    + '<div class="bar"><div class="bar-fill" style="width:' + (100 * (s.idx + (ans ? 1 : 0)) / total) + '%;background:var(--' + (L ? "blue" : "green") + ')"></div></div>'
+    + '<span class="count">' + (s.idx + 1) + " / " + total + "</span></div>";
+  var who = it.lines[0].s === "我" && it.lines[1] ? it.lines[1].s : it.lines[0].s;
+  var kindLabel = L ? (it.form === "voice" ? "음성 메시지" : "대화 듣기") : (it.form === "group" ? "단체방" : "채팅");
+  h += '<p class="lrlab"><span class="dot ' + (L ? "L" : "R") + '"></span>' + kindLabel + " · "
+    + (it.form === "group" ? '<span class="zh">' + esc(it.title) + "</span>"
+      : '<span class="zh">' + esc(who) + '</span> <span class="muted">' + esc(spkKo(who)) + "</span>") + "</p>";
+
+  if (L) {
+    var secs = Math.max(2, Math.round(it.lines.reduce(function (a, l) { return a + l.zh.length; }, 0) / 3.2));
+    h += '<div class="voice"><button class="vplay" data-a="lrplay" aria-label="재생">' + I_PLAY + "</button>"
+      + waveHTML() + '<span class="vdur">0:' + (secs < 10 ? "0" : "") + secs + "</span></div>"
+      + '<div class="speed"><button class="' + (s.rate > 0.7 ? "on" : "") + '" data-a="lrrate" data-r="0.85">보통</button>'
+      + '<button class="' + (s.rate <= 0.7 ? "on" : "") + '" data-a="lrrate" data-r="0.6">느리게</button>';
+    if (it.lines.length > 1) it.lines.forEach(function (_, i) {
+      h += '<button class="ln" data-a="lrline" data-i="' + i + '">' + (i + 1) + "</button>"; });
+    h += "</div>";
+    /* 듣기 빈칸 : 빈칸이 있는 문장만 보여 준다 */
+    if (it.type === "cloze" && !ans) {
+      var bl = it.lines[it.blank.line];
+      h += '<div class="chat" style="margin-top:14px">' + msgHTML(bl, { i: it.blank.line, name: true,
+        zhHTML: lineZhHTML(it, it.blank.line, "L") }) + "</div>";
+    }
+    if (ans) h += '<div style="margin-top:16px">' + lrThreadHTML(it, s, true) + "</div>";
+  } else {
+    h += lrThreadHTML(it, s, ans);
+    if (!ans) h += '<p class="lrhint">말풍선을 누르면 병음이 보여요</p>';
+  }
+
+  /* 질문 */
+  var zhOpts = it.type === "pick" || it.type === "cloze" || it.type === "reply";
+  var q = it.type === "cloze" ? (L ? "빈칸에 들어간 말은?" : "빈칸에 알맞은 말은?")
+    : it.type === "reply" ? (it.q || "뭐라고 답장할까요?")
+    : it.type === "pick" ? (it.q || "들은 문장은?") : it.q;
+  if (it.type === "reply" && !ans) {
+    h += '<div class="replybar"><p class="rtl">답장 보내기 · ' + esc(q) + "</p><div class=\"opts\">" + optsHTML(it, s, true) + "</div></div>";
+  } else {
+    h += '<p class="lrq">' + esc(q) + '</p><div class="opts">' + optsHTML(it, s, zhOpts) + "</div>";
+  }
+  if (ans) {
+    var ok = s.pick === 0;
+    h += '<p class="lrverdict ' + (ok ? "ok" : "no") + '">' + (ok ? "정답이에요" : "아쉬워요 — 정답을 확인하세요") + "</p>"
+      + '<button class="lrnext ' + (L ? "L" : "R") + '" data-a="lrnext">' + (s.idx + 1 >= total ? "결과 보기" : "다음") + "</button>";
+    if (L) h += '<p class="lrhint">말풍선을 누르면 그 문장을 다시 들려줘요</p>';
+  } else if (L) {
+    h += '<p class="lrhint">답을 고르면 원문·병음·뜻이 나와요</p>';
+  }
+  return h + "</div>";
+}
+function lrDoneHTML() {
+  var s = S.sess, e = lrEp(), L = s.kind === "listen";
+  var ok = s.results.filter(function (r) { return r.ok; }).length;
+  var st = lrStat(s.kind);
+  var h = '<div class="screen"><div class="glass card lrdone">'
+    + '<p class="sub">' + (L ? "듣기" : "읽기") + " · " + epNo(S.ph, week()) + "화</p>"
+    + '<p class="big">' + ok + '<span class="hero-d">/' + s.results.length + "</span></p>"
+    + '<p class="sub">이 화 전체 ' + st.ok + "/" + st.total + " 맞힘</p>";
+  var wrong = s.results.filter(function (r) { return !r.ok; });
+  if (wrong.length) {
+    h += '<div class="lrlist">' + wrong.map(function (r) {
+      var it = e[s.kind][r.n], l = it.lines[it.type === "pick" ? it.target : it.type === "cloze" ? it.blank.line : it.lines.length - 1];
+      return '<div class="li" data-a="say" data-t="' + esc(l.zh) + '"><b style="color:var(--red)">✕</b><span class="zh">' + esc(l.zh) + "</span></div>";
+    }).join("") + "</div>";
+  }
+  h += '<button class="lrnext ' + (L ? "L" : "R") + '" data-a="lrhome">홈으로</button>';
+  if (wrong.length) h += '<button class="ghost wide" data-a="lragain" data-k="' + s.kind + '">틀린 것 다시</button>';
+  return h + "</div></div>";
+}
+function modesHTML(nextSi) {
+  loadLR();
+  var sL = lrStat("listen"), sR = lrStat("read");
+  var tile = function (cls, kind, icon, title, st, sub) {
+    var done = st && st.ok === st.total;
+    var pct = st ? Math.round(100 * st.ok / st.total) : 0;
+    return '<button class="mode ' + cls + (st ? "" : " off") + '" data-a="lr" data-k="' + kind + '">'
+      + '<span class="mic2">' + icon + '</span><span class="go go' + cls.slice(1) + (done ? " done" : "") + '">'
+      + (done ? I_CHECK : I_PLAY) + "</span>"
+      + '<span class="mb"><b>' + title + "</b><span>" + (st ? (done ? "모두 맞힘 · 다시 하기" : st.ok + "/" + st.total + " · " + sub) : "불러오는 중") + "</span>"
+      + '<span class="mbar"><i style="width:' + pct + '%"></i></span></span></button>';
+  };
+  var h = '<div class="modes">';
+  if (nextSi > -1)
+    h += '<button class="mode m1" data-a="start" data-si="' + nextSi + '"><span class="mic2">' + I_MIC + "</span>"
+      + '<span class="mb"><b>말하기 · ' + (nextSi + 1) + "회차</b><span>발음 채점 → 대화 8턴</span></span>"
+      + '<span class="go go1">' + I_PLAY + "</span></button>";
+  else
+    h += '<div class="mode m1"><span class="mic2">' + I_MIC + '</span><span class="mb"><b>말하기 완료</b>'
+      + "<span>주차를 넘겨 다음 어휘로 이어가세요</span></span></div>";
+  h += tile("m2", "listen", I_EAR, "듣기", sL, "음성 메시지")
+    + tile("m3", "read", I_CHAT, "읽기", sR, "채팅 · 소리 없이");
+  return h + "</div>";
+}
+
 /* ===================== 이벤트 ===================== */
 document.addEventListener("click", function (ev) {
   var t = ev.target.closest("[data-a]");
@@ -1675,6 +2109,29 @@ document.addEventListener("click", function (ev) {
   if (a === "ph") { S.ph = +t.getAttribute("data-i"); S.wk = 0; return render(); }
   if (a === "wk") { S.wk = +t.getAttribute("data-i"); S.sheet = false; return render(); }
   if (a === "start") return startSession(+t.getAttribute("data-si"));
+  if (a === "exit" && S.sess && S.sess.mode === "lr") {
+    lrSpeakGen++; if (window.speechSynthesis) window.speechSynthesis.cancel();
+    S.sess = null; window.scrollTo(0, 0); return render();
+  }
+  if (a === "lr") return startLR(t.getAttribute("data-k"));
+  if (a === "lragain") return startLR(t.getAttribute("data-k"));
+  if (a === "lrhome") { S.sess = null; S.tab = "home"; window.scrollTo(0, 0); return render(); }
+  if (a === "lrpick") return lrAnswer(+t.getAttribute("data-o"));
+  if (a === "lrnext") return lrNext();
+  if (a === "lrplay") {
+    if (S.sess.playing) { lrSpeakGen++; window.speechSynthesis && window.speechSynthesis.cancel(); S.sess.playing = false; return setPlayUI(false); }
+    return lrPlay();
+  }
+  if (a === "lrrate") { S.sess.rate = +t.getAttribute("data-r"); render(); return lrPlay(); }
+  if (a === "lrline") return lrPlay(null, +t.getAttribute("data-i"));
+  if (a === "lrbub") {
+    var ls = S.sess, li = t.getAttribute("data-i");
+    if (!ls || ls.mode !== "lr") return;
+    if (ls.kind === "read" && ls.pick == null) { if (li !== "") { ls.peek[li] = !ls.peek[li]; render(); } return; }
+    if (ls.kind === "listen" && ls.pick == null) return;   /* 답하기 전에는 원문 소리를 따로 주지 않는다 */
+    var ln = li !== "" ? ls.cur.lines[+li] : null;
+    return speakLines([ln || { s: "我", zh: t.getAttribute("data-t") }], ls.rate || 0.85);
+  }
   if (a === "exit") {
     holdAbort(""); stopRing(); micState = "idle";
     S.sess = null; micErr = ""; return render();
@@ -1696,7 +2153,7 @@ document.addEventListener("click", function (ev) {
   if (a === "finish") return finishSession();
   if (a === "retrytalk") return talkStep(null);
   if (a === "tone") { P.tone = !P.tone; persist(); return render(); }
-  if (a === "reset") { P.words = {}; P.missed = {}; P.log = []; P.gen = {}; P.recall = {}; P.recallRecent = []; persist(); return render(); }
+  if (a === "reset") { P.lr = {}; P.words = {}; P.missed = {}; P.log = []; P.gen = {}; P.recall = {}; P.recallRecent = []; persist(); return render(); }
 
   if (a === "savekeys") {
     var g = function (id) { var el = document.getElementById(id); return el ? el.value.trim() : ""; };
@@ -1755,7 +2212,7 @@ document.addEventListener("input", function (ev) {
 /* ===================== 시작 ===================== */
 if (window.speechSynthesis) {
   window.speechSynthesis.getVoices();
-  window.speechSynthesis.onvoiceschanged = function () { window.speechSynthesis.getVoices(); };
+  window.speechSynthesis.onvoiceschanged = function () { window.speechSynthesis.getVoices(); pickVoices(); };
 }
 
 Promise.all(["./data/hsk1-3_curriculum.json", "./data/hsk4_curriculum.json"].map(function (f) {
