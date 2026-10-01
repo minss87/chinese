@@ -429,6 +429,7 @@ var P = {
   recall: saved.recall || {},
   recallRecent: saved.recallRecent || [],
   lr: saved.lr || {},
+  last: saved.last || null,
   lrMiss: saved.lrMiss || {},
   missEver: saved.missEver || {},
   tint: typeof saved.tint === "number" ? saved.tint : 42,
@@ -917,7 +918,10 @@ async function ensureSentences(si) {
 }
 
 /* ===================== 회차 ===================== */
+/* 마지막으로 공부한 화를 기억 → 다음에 앱을 열면 그 화로 */
+function markLast() { P.last = { ph: S.ph, wk: S.wk }; persist(); }
 async function startSession(si) {
+  markLast();
   S.busy = "예문을 준비하는 중"; render();
   var fresh;
   try { fresh = await ensureSentences(si); }
@@ -1939,6 +1943,7 @@ function shuffle4(n) {
 
 /* ── 시작 : 아직 안 푼 것 → 틀린 것 순서. 다 맞혔으면 전체를 다시 ── */
 function startLR(kind) {
+  markLast();
   var e = lrEp(); if (!e) { loadLR(); return toast("듣기·읽기 자료를 불러오는 중입니다. 잠시 뒤 다시 누르세요."); }
   var key = lrKey(), list = e[kind], fresh = [], wrong = [];
   list.forEach(function (it, i) {
@@ -2291,6 +2296,8 @@ Promise.all(["./data/hsk1-3_curriculum.json", "./data/hsk4_curriculum.json"].map
   });
 })).then(function (phases) {
   CURRICULUM = { phases: phases };
+  var L = P.last;
+  if (L && phases[L.ph] && phases[L.ph].weeks[L.wk]) { S.ph = L.ph; S.wk = L.wk; }
   render();
 }).catch(function (e) {
   document.getElementById("app").innerHTML =
